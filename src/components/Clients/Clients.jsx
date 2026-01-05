@@ -112,10 +112,6 @@ const Clients = () => {
                                 alt="Cyber Compliance Portal Dashboard"
                                 className="showcase-image"
                             />
-                            <div className="showcase-badge">
-                                <span className="badge-icon">🛡️</span>
-                                <span className="badge-text">Live Demo</span>
-                            </div>
                         </div>
                     </div>
                 </div>
