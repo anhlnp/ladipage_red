@@ -14,6 +14,7 @@ import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
 import ThreeScene from './components/ThreeScene/ThreeScene'
 import CursorGlow from './components/CursorGlow'
+import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -59,6 +60,7 @@ function App() {
           <Contact />
         </main>
         <Footer />
+        <ScrollToTop />
       </SmoothScroll>
     </ThemeProvider>
   )
