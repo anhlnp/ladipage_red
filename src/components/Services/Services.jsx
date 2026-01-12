@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -56,35 +56,107 @@ const services = [
     }
 ]
 
-// Service Card Component with 3D Tilt and Spotlight effect
+// Service Card Component with Enhanced 3D Effects (GSAP-powered)
 const ServiceCard = ({ service }) => {
     const cardRef = useRef(null)
+    const iconRef = useRef(null)
+    const glowRef = useRef(null)
 
-    const handleMouseMove = useCallback((e) => {
+    useEffect(() => {
         const card = cardRef.current
+        const icon = iconRef.current
         if (!card) return
 
-        const rect = card.getBoundingClientRect()
-        const x = e.clientX - rect.left
-        const y = e.clientY - rect.top
+        // Set initial transform for better performance
+        gsap.set(card, { force3D: true, transformPerspective: 1000 })
+        if (icon) gsap.set(icon, { force3D: true })
 
-        // Spotlight effect
-        card.style.setProperty('--spotlight-x', `${x}px`)
-        card.style.setProperty('--spotlight-y', `${y}px`)
+        const handleMouseEnter = () => {
+            // Kill any ongoing animations for smoother transitions
+            gsap.killTweensOf([card, icon])
 
-        // 3D Tilt effect
-        const centerX = rect.width / 2
-        const centerY = rect.height / 2
-        const rotateX = ((y - centerY) / centerY) * -8
-        const rotateY = ((x - centerX) / centerX) * 8
+            // Lift card forward in 3D space with hardware acceleration
+            gsap.to(card, {
+                z: 40,
+                scale: 1.03,
+                y: -15,
+                duration: 0.3,
+                ease: 'power2.out',
+                force3D: true,
+            })
 
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px)`
-    }, [])
+            // Icon rotation with bounce
+            if (icon) {
+                gsap.to(icon, {
+                    rotationY: 360,
+                    scale: 1.15,
+                    duration: 0.5,
+                    ease: 'power2.out',
+                    force3D: true,
+                })
+            }
+        }
 
-    const handleMouseLeave = useCallback(() => {
-        const card = cardRef.current
-        if (!card) return
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)'
+        const handleMouseLeave = () => {
+            // Kill any ongoing animations
+            gsap.killTweensOf([card, icon])
+
+            gsap.to(card, {
+                z: 0,
+                scale: 1,
+                y: 0,
+                rotationX: 0,
+                rotationY: 0,
+                duration: 0.3,
+                ease: 'power2.out',
+                force3D: true,
+            })
+
+            if (icon) {
+                gsap.to(icon, {
+                    rotationY: 0,
+                    scale: 1,
+                    duration: 0.3,
+                    ease: 'power2.out',
+                    force3D: true,
+                })
+            }
+        }
+
+        const handleMouseMove = (e) => {
+            const rect = card.getBoundingClientRect()
+            const x = e.clientX - rect.left
+            const y = e.clientY - rect.top
+
+            // Spotlight effect
+            card.style.setProperty('--spotlight-x', `${x}px`)
+            card.style.setProperty('--spotlight-y', `${y}px`)
+
+            // 3D Tilt effect
+            const centerX = rect.width / 2
+            const centerY = rect.height / 2
+            const rotateX = ((y - centerY) / centerY) * -6
+            const rotateY = ((x - centerX) / centerX) * 6
+
+            gsap.to(card, {
+                rotationX: rotateX,
+                rotationY: rotateY,
+                duration: 0.2,
+                ease: 'power1.out',
+                force3D: true,
+            })
+        }
+
+        card.addEventListener('mouseenter', handleMouseEnter)
+        card.addEventListener('mouseleave', handleMouseLeave)
+        card.addEventListener('mousemove', handleMouseMove)
+
+        return () => {
+            card.removeEventListener('mouseenter', handleMouseEnter)
+            card.removeEventListener('mouseleave', handleMouseLeave)
+            card.removeEventListener('mousemove', handleMouseMove)
+            gsap.killTweensOf([card, icon])
+        }
     }, [])
 
     return (
@@ -92,10 +164,10 @@ const ServiceCard = ({ service }) => {
             ref={cardRef}
             className="service-card spotlight-card"
             data-service={service.id}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
+            style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
         >
-            <div className="service-icon icon-bounce">
+            <div ref={glowRef} className="service-card-glow" />
+            <div ref={iconRef} className="service-icon icon-bounce" style={{ transformStyle: 'preserve-3d' }}>
                 {service.icon}
             </div>
             <h3>{service.title}</h3>
@@ -114,6 +186,7 @@ const ServiceCard = ({ service }) => {
         </div>
     )
 }
+
 
 const Services = () => {
     const sectionRef = useRef(null)

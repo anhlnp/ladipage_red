@@ -328,6 +328,17 @@ a {
   pointer-events: none;
 }
 
+/* Stars Canvas Background */
+.stars-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
 /* Navigation */
 .navbar {
   position: fixed;
@@ -523,9 +534,56 @@ a {
 }
 
 .hero-content {
-  max-width: 700px;
+  max-width: 600px;
   position: relative;
   z-index: 2;
+  flex: 1;
+}
+
+.hero-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-cybermap {
+  flex: 0 0 500px;
+  height: 450px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.hero-cybermap iframe {
+  display: block;
+  border: none;
+}
+
+@media (max-width: 1200px) {
+  .hero-cybermap {
+    flex: 0 0 400px;
+    height: 380px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hero-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .hero-cybermap {
+    flex: none;
+    width: 100%;
+    max-width: 600px;
+    height: 350px;
+  }
 }
 
 .hero-badge {
@@ -775,13 +833,30 @@ a {
 }
 
 .service-card:hover {
-  transform: translateY(-8px);
+  /* Transform handled by GSAP */
   border-color: rgba(56, 189, 248, 0.4);
   box-shadow: 0 25px 50px rgba(56, 189, 248, 0.15);
 }
 
 .service-card:hover::before {
   opacity: 1;
+}
+
+/* Glow element for enhanced 3D effect */
+.service-card-glow {
+  position: absolute;
+  inset: -15px;
+  background: var(--gradient-hero);
+  opacity: 0;
+  filter: blur(20px);
+  border-radius: var(--border-radius);
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.service-card:hover .service-card-glow {
+  opacity: 0.4;
 }
 
 .service-icon {
@@ -1977,6 +2052,32 @@ a {
   padding: 60px 0;
   z-index: 10;
   background: var(--bg-primary);
+}
+
+.portal-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.portal-3d {
+  flex: 0 0 250px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .portal-wrapper {
+    flex-direction: column;
+  }
+  
+  .portal-3d {
+    width: 100%;
+    flex: none;
+    height: 180px;
+  }
 }
 
 .portal-card {

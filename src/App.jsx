@@ -12,7 +12,7 @@ import Portal from './components/Portal/Portal'
 import CTA from './components/CTA/CTA'
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
-import ThreeScene from './components/ThreeScene/ThreeScene'
+import StarBackground from './components/StarBackground/StarBackground'
 import CursorGlow from './components/CursorGlow'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 
@@ -48,7 +48,7 @@ function App() {
     <ThemeProvider>
       <SmoothScroll>
         <CursorGlow />
-        <ThreeScene />
+        <StarBackground />
         <Navbar />
         <main>
           <Hero />

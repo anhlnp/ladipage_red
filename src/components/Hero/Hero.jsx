@@ -110,6 +110,58 @@ const Hero = () => {
                     ease: 'power2.out'
                 })
             })
+
+            // Scroll-triggered parallax effects
+            const parallaxTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: '#hero',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 1.5,
+                }
+            })
+
+            // Title parallax - moves up faster
+            parallaxTl.to('.hero-title', {
+                y: -80,
+                opacity: 0.3,
+                ease: 'none',
+            }, 0)
+
+            // Description parallax
+            parallaxTl.to('.hero-description', {
+                y: -60,
+                opacity: 0.2,
+                ease: 'none',
+            }, 0)
+
+            // Stats parallax
+            parallaxTl.to('.hero-stats', {
+                y: -50,
+                opacity: 0.1,
+                ease: 'none',
+            }, 0)
+
+            // CTA parallax
+            parallaxTl.to('.hero-cta', {
+                y: -40,
+                opacity: 0,
+                ease: 'none',
+            }, 0)
+
+            // Badge parallax
+            parallaxTl.to('.hero-badge', {
+                y: -100,
+                opacity: 0,
+                ease: 'none',
+            }, 0)
+
+            // Scroll indicator fades out quickly
+            parallaxTl.to('.scroll-indicator', {
+                opacity: 0,
+                ease: 'none',
+            }, 0)
+
         }, heroRef)
 
         return () => ctx.revert()
@@ -124,63 +176,64 @@ const Hero = () => {
 
     return (
         <section id="hero" className="hero" ref={heroRef}>
-            <div className="hero-content">
-                <div className="hero-badge">
-                    <span className="pulse"></span>
-                    <span>Award Winning IT Solutions 2024</span>
-                </div>
-
-                <h1 className="hero-title">
-                    <span className="title-line">Next-Gen</span>
-                    <span className="title-line gradient-text">Cybersecurity</span>
-                    <span className="title-line">& IT Solutions</span>
-                </h1>
-
-                <p className="hero-description">
-                    Smart technologies for today's business needs. Whether you're at home,
-                    running a business, or on the go – we keep your systems running smoothly.
-                </p>
-
-                <div className="hero-stats">
-                    <div className="stat">
-                        <span className="stat-number" data-value="23">0</span>
-                        <span className="stat-label">Years Experience</span>
+           
+                <div className="hero-content">
+                    <div className="hero-badge">
+                        <span className="pulse"></span>
+                        <span>Award Winning IT Solutions 2024</span>
                     </div>
-                    <div className="stat-divider"></div>
-                    <div className="stat">
-                        <span className="stat-number" data-value="1000">0</span>
-                        <span className="stat-suffix">+</span>
-                        <span className="stat-label">Happy Clients</span>
-                    </div>
-                    <div className="stat-divider"></div>
-                    <div className="stat">
-                        <span className="stat-number" data-value="99">0</span>
-                        <span className="stat-suffix">%</span>
-                        <span className="stat-label">Uptime Guarantee</span>
-                    </div>
-                </div>
 
-                <div className="hero-cta">
-                    <MagneticButton
-                        className="btn-primary btn-shine glow-pulse"
-                        onClick={() => scrollToSection('contact')}
-                        strength={0.25}
-                    >
-                        <span>Schedule a Demo</span>
-                        <div className="btn-glow"></div>
-                    </MagneticButton>
-                    <MagneticButton
-                        className="btn-secondary"
-                        onClick={() => scrollToSection('services')}
-                        strength={0.2}
-                    >
-                        <span>Explore Services</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <polygon points="10 8 16 12 10 16 10 8" />
-                        </svg>
-                    </MagneticButton>
-                </div>
+                    <h1 className="hero-title">
+                        <span className="title-line">Next-Gen</span>
+                        <span className="title-line gradient-text">Cybersecurity</span>
+                        <span className="title-line">& IT Solutions</span>
+                    </h1>
+
+                    <p className="hero-description">
+                        Smart technologies for today's business needs. Whether you're at home,
+                        running a business, or on the go – we keep your systems running smoothly.
+                    </p>
+
+                    <div className="hero-stats">
+                        <div className="stat">
+                            <span className="stat-number" data-value="23">24</span>
+                            <span className="stat-label">Years Experience</span>
+                        </div>
+                        <div className="stat-divider"></div>
+                        <div className="stat">
+                            <span className="stat-number" data-value="1000">1000</span>
+                            <span className="stat-suffix">+</span>
+                            <span className="stat-label">Happy Clients</span>
+                        </div>
+                        <div className="stat-divider"></div>
+                        <div className="stat">
+                            <span className="stat-number" data-value="99">99</span>
+                            <span className="stat-suffix">%</span>
+                            <span className="stat-label">Uptime Guarantee</span>
+                        </div>
+                    </div>
+
+                    <div className="hero-cta">
+                        <MagneticButton
+                            className="btn-primary btn-shine glow-pulse"
+                            onClick={() => scrollToSection('contact')}
+                            strength={0.25}
+                        >
+                            <span>Schedule a Demo</span>
+                            <div className="btn-glow"></div>
+                        </MagneticButton>
+                        <MagneticButton
+                            className="btn-secondary"
+                            onClick={() => scrollToSection('services')}
+                            strength={0.2}
+                        >
+                            <span>Explore Services</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polygon points="10 8 16 12 10 16 10 8" />
+                            </svg>
+                        </MagneticButton>
+                    </div>
             </div>
 
             <div className="scroll-indicator">

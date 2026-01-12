@@ -1,6 +1,7 @@
 import { useRef, useMemo, useEffect, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import Hero3D from '../Hero/Hero3D'
 
 // Simplified Tech Grid - clear separation between dark/light
 const TechGrid = ({ isDark }) => {
@@ -286,6 +287,7 @@ const ThreeScene = () => {
                 <TechNodes isDark={isDark} />
                 <FloatingRing isDark={isDark} />
                 <BackgroundGlow isDark={isDark} />
+                <Hero3D />
 
                 <fog attach="fog" args={[isDark ? '#0f172a' : '#f8fafc', isDark ? 18 : 22, isDark ? 45 : 55]} />
             </Canvas>
