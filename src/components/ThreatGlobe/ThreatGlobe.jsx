@@ -1,7 +1,56 @@
-import { useRef, useMemo, useState, useEffect } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { useRef, useMemo, useState, useEffect, useCallback } from 'react'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { Sphere, Line, OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
+
+// Convert degree coordinates to radians
+const degToRad = (deg) => (deg / 180) * Math.PI
+
+// Parse GeoJSON polygon coordinates to 3D points
+const parseGeoJSONToLines = (geojson, radius = 1.012) => {
+    const lines = []
+    
+    if (!geojson?.features) return lines
+    
+    geojson.features.forEach(feature => {
+        if (feature.geometry?.type === 'Polygon') {
+            feature.geometry.coordinates.forEach(ring => {
+                // Sample every few points to reduce complexity
+                const sampledRing = ring.filter((_, i) => i % 3 === 0 || i === ring.length - 1)
+                if (sampledRing.length > 2) {
+                    const points = sampledRing.map(([lng, lat]) => {
+                        const latRad = degToRad(lat)
+                        const lngRad = degToRad(lng)
+                        const x = radius * Math.cos(latRad) * Math.cos(lngRad)
+                        const y = radius * Math.sin(latRad)
+                        const z = radius * Math.cos(latRad) * Math.sin(lngRad)
+                        return new THREE.Vector3(x, y, z)
+                    })
+                    lines.push(points)
+                }
+            })
+        } else if (feature.geometry?.type === 'MultiPolygon') {
+            feature.geometry.coordinates.forEach(polygon => {
+                polygon.forEach(ring => {
+                    const sampledRing = ring.filter((_, i) => i % 3 === 0 || i === ring.length - 1)
+                    if (sampledRing.length > 2) {
+                        const points = sampledRing.map(([lng, lat]) => {
+                            const latRad = degToRad(lat)
+                            const lngRad = degToRad(lng)
+                            const x = radius * Math.cos(latRad) * Math.cos(lngRad)
+                            const y = radius * Math.sin(latRad)
+                            const z = radius * Math.cos(latRad) * Math.sin(lngRad)
+                            return new THREE.Vector3(x, y, z)
+                        })
+                        lines.push(points)
+                    }
+                })
+            })
+        }
+    })
+    
+    return lines
+}
 
 // Color themes matching the app
 const THEME_COLORS = {
@@ -118,11 +167,23 @@ const ImpactPoint = ({ position, color, delay = 0 }) => {
 const Globe = ({ colorTheme, isDark }) => {
     const globeRef = useRef()
     const [attacks, setAttacks] = useState(() => generateAttacks(12))
+    const [geoLines, setGeoLines] = useState([])
     
     const colors = THEME_COLORS[colorTheme] || THEME_COLORS.cyan
     const globeColor = isDark ? '#1a1a2e' : '#e2e8f0'
     const wireColor = isDark ? colors.primary : colors.secondary
     const attackColor = colors.glow
+
+    // Fetch GeoJSON on mount
+    useEffect(() => {
+        fetch('/world-110m.json')
+            .then(res => res.json())
+            .then(data => {
+                const lines = parseGeoJSONToLines(data)
+                setGeoLines(lines)
+            })
+            .catch(err => console.error('Failed to load world map:', err))
+    }, [])
 
     useFrame((state, delta) => {
         if (globeRef.current) {
@@ -190,13 +251,25 @@ const Globe = ({ colorTheme, isDark }) => {
                 />
             </Sphere>
 
+            {/* Continent outlines from GeoJSON */}
+            {geoLines.map((points, idx) => (
+                <Line
+                    key={`land-${idx}`}
+                    points={points}
+                    color={colors.primary}
+                    lineWidth={0.8}
+                    transparent
+                    opacity={0.6}
+                />
+            ))}
+
             {/* Wireframe grid */}
             {wireframePoints.map((points, i) => (
                 <Line
                     key={i}
                     points={points}
                     color={wireColor}
-                    lineWidth={0.5}
+                    lineWidth={0.3}
                     transparent
                     opacity={0.3}
                 />
