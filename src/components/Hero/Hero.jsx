@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import ThreatGlobe from '../ThreatGlobe/ThreatGlobe'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -214,7 +215,7 @@ const Hero = () => {
 
     return (
         <section id="hero" className="hero" ref={heroRef}>
-           
+            <div className="hero-wrapper">
                 <div className="hero-content">
                     <div className="hero-badge">
                         <span className="pulse"></span>
@@ -272,6 +273,11 @@ const Hero = () => {
                             </svg>
                         </MagneticButton>
                     </div>
+                </div>
+
+                <div className="hero-globe">
+                    <ThreatGlobe />
+                </div>
             </div>
 
             <div className="scroll-indicator">

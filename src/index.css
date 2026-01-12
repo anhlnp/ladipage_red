@@ -711,6 +711,41 @@ a {
     max-width: 600px;
     height: 350px;
   }
+  
+  .hero-globe {
+    flex: none;
+    width: 100%;
+    height: 400px;
+  }
+}
+
+/* Threat Globe in Hero */
+.hero-globe {
+  flex: 0 0 550px;
+  height: 550px;
+  position: relative;
+  z-index: 2;
+  margin-left: auto;
+  margin-right: -60px;
+  overflow: visible;
+}
+
+.threat-globe {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: visible;
+}
+
+.threat-globe canvas {
+  outline: none;
+}
+
+@media (max-width: 1200px) {
+  .hero-globe {
+    flex: 0 0 400px;
+    height: 400px;
+  }
 }
 
 .hero-badge {
