@@ -1,8 +1,28 @@
-import { useRef, useMemo, useState, useEffect, useCallback, memo } from 'react'
+import { useRef, useMemo, useState, useEffect, useCallback, memo, startTransition } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { Sphere, Line, OrbitControls, Html } from '@react-three/drei'
 import * as THREE from 'three'
 import gsap from 'gsap'
+import { attackArcVertexShader, attackArcFragmentShader } from './shaders'
+import ImpactRipple from './ImpactRipple'
+
+// Throttle utility for pointer events
+const throttle = (fn, delay) => {
+    let lastCall = 0
+    return (...args) => {
+        const now = Date.now()
+        if (now - lastCall >= delay) {
+            lastCall = now
+            return fn(...args)
+        }
+    }
+}
+
+// Detect touch device
+const isTouchDevice = () => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window
+}
 
 const ATTACK_TYPES = [
     { name: 'DDoS', color: '#ef5350' }, // Red
@@ -276,6 +296,15 @@ const AttackArc = memo(({ attack, color }) => {
         }
     })
 
+    // Dispose geometry and material on unmount
+    useEffect(() => {
+        return () => {
+            if (materialRef.current) {
+                materialRef.current.dispose()
+            }
+        }
+    }, [])
+
     return (
         <mesh>
             <tubeGeometry args={[curve, 20, 0.002, 4, false]} />
@@ -284,65 +313,9 @@ const AttackArc = memo(({ attack, color }) => {
                 transparent
                 depthWrite={false}
                 uniforms={uniforms}
-                vertexShader={`
-                    varying vec2 vUv;
-                    void main() {
-                        vUv = uv;
-                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-                    }
-                `}
-                fragmentShader={`
-                    uniform vec3 uColor;
-                    uniform float uProgress;
-                    uniform float uTime;
-                    uniform float uSpawnOffset;
-                    varying vec2 vUv;
-                    void main() {
-                        float visible = step(vUv.x, uProgress);
-                        float tail = smoothstep(uProgress - 0.35, uProgress, vUv.x);
-                        
-                        // Fade in over 1 second after spawn
-                        float fadeIn = clamp(uTime + uSpawnOffset, 0.0, 1.0);
-                        
-                        if (visible < 0.5) discard;
-                        
-                        gl_FragColor = vec4(uColor, (0.3 + tail * 0.7) * fadeIn);
-                    }
-                `}
+                vertexShader={attackArcVertexShader}
+                fragmentShader={attackArcFragmentShader}
             />
-        </mesh>
-    )
-})
-
-// Impact Point Component with direct ref manipulation and fade-in
-const ImpactPoint = memo(({ position, color, delay = 0, spawnTime }) => {
-    const meshRef = useRef()
-    const materialRef = useRef()
-    const spawnOffset = useRef((Date.now() - (spawnTime || Date.now())) / 1000)
-    
-    // Update color via ref when prop changes (without causing re-render)
-    useEffect(() => {
-        if (materialRef.current) {
-            materialRef.current.color.set(color)
-        }
-    }, [color])
-    
-    useFrame((state) => {
-        if (!meshRef.current || !materialRef.current) return
-        const time = state.clock.elapsedTime + delay
-        const pulse = (Math.sin(time * 3) + 1) * 0.5
-        const s = 0.015 + pulse * 0.01
-        meshRef.current.scale.set(s, s, s)
-        
-        // Fade in over 1 second
-        const fadeIn = Math.min(1, state.clock.elapsedTime + spawnOffset.current)
-        materialRef.current.opacity = 0.8 * fadeIn
-    })
-
-    return (
-        <mesh ref={meshRef} position={position}>
-            <sphereGeometry args={[1, 6, 6]} />
-            <meshBasicMaterial ref={materialRef} color={color} transparent opacity={0} />
         </mesh>
     )
 })
@@ -403,31 +376,39 @@ const Globe = ({ colorTheme, isDark }) => {
     const [hoveredCountry, setHoveredCountry] = useState(null)
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
     const [isFocused, setIsFocused] = useState(false)
+    const [isTouch, setIsTouch] = useState(false)
+    
+    // Detect touch device on mount
+    useEffect(() => {
+        setIsTouch(isTouchDevice())
+    }, [])
     
     const colors = THEME_COLORS[colorTheme] || THEME_COLORS.cyan
-    const globeColor = isDark ? '#1a1a2e' : '#fef9f3' // Cream for light mode (Paper Map)
-    const wireColor = isDark ? colors.primary : '#94a3b8' // Light gray grid for light mode
+    const globeColor = isDark ? '#1a1a2e' : '#fef9f3'
+    const wireColor = isDark ? colors.primary : '#94a3b8'
     const attackColor = colors.glow
 
-    // Fetch GeoJSON on mount
+    // Fetch GeoJSON on mount - use startTransition to avoid blocking render
     useEffect(() => {
         fetch('/countries-110m.json')
             .then(res => res.json())
             .then(data => {
                 const parsed = parseCountriesGeoJSON(data)
-                // Keep raw opacity features for hit testing
                 const enriched = parsed.map((c, i) => ({
                     ...c,
-                    feature: data.features[i] // Assumes order is preserved, which it is
+                    feature: data.features[i]
                 }))
-                setCountries(enriched)
-                countriesRef.current = enriched
                 
-                // Immediately refresh attacks with continent data
-                setAttacks(generateAttacks(12, enriched).map(a => ({
-                    ...a,
-                    id: `${a.id}-${Date.now()}`
-                })))
+                // Use startTransition to defer state updates (non-blocking)
+                startTransition(() => {
+                    setCountries(enriched)
+                    countriesRef.current = enriched
+                    
+                    setAttacks(generateAttacks(12, enriched).map(a => ({
+                        ...a,
+                        id: `${a.id}-${Date.now()}`
+                    })))
+                })
             })
             .catch(err => console.error('Failed to load country data:', err))
     }, [])
@@ -477,28 +458,20 @@ const Globe = ({ colorTheme, isDark }) => {
         }
     }, [hoveredCountry])
 
-    // Handle mouse move on globe surface for hover detection
-    const onGlobePointerMove = useCallback((e) => {
+    // Handle mouse move on globe surface for hover detection (throttled, skip on touch)
+    const onGlobePointerMoveRaw = useCallback((e) => {
+        // Skip hover detection on touch devices
+        if (isTouch) return
+        
         e.stopPropagation()
         if (!globeRef.current) return
 
-        // Convert world intersection point to local object space
-        // This accounts for the globe's rotation and position
         const localPoint = globeRef.current.worldToLocal(e.point.clone())
-        
-        // Normalize to ensure it's on the unit sphere (radius 1) for math
         localPoint.normalize()
         
-        // Calculate Lat/Lng from local point
         const lat = Math.asin(localPoint.y) * 180 / Math.PI
+        const lng = Math.atan2(localPoint.z, -localPoint.x) * 180 / Math.PI
         
-        // NOTE: We flipped X in latLngToVector3 (x = -r*...), so we must account for it here.
-        // x = -cos * cos
-        // z = cos * sin
-        // So tan(lng) = z / -x
-        const lng = Math.atan2(localPoint.z, -localPoint.x) * 180 / Math.PI // -180 to 180
-        
-        // Find country
         const found = countries.find(c => geoContains(c.feature, [lng, lat]))
         
         if (found) {
@@ -509,7 +482,13 @@ const Globe = ({ colorTheme, isDark }) => {
             setHoveredCountry(null)
             document.body.style.cursor = 'default'
         }
-    }, [countries])
+    }, [countries, isTouch])
+    
+    // Throttled version - 16ms = 60fps max
+    const onGlobePointerMove = useMemo(
+        () => throttle(onGlobePointerMoveRaw, 16),
+        [onGlobePointerMoveRaw]
+    )
 
     const onGlobePointerOut = useCallback(() => {
         setHoveredCountry(null)
@@ -604,8 +583,8 @@ const Globe = ({ colorTheme, isDark }) => {
                 />
             ))}
             
-            {/* Tooltip */}
-            {hoveredCountry && (
+            {/* Tooltip - hide on touch devices */}
+            {hoveredCountry && !isTouch && (
                 <Html position={hoveredCountry.center} style={{ pointerEvents: 'none' }}>
                     <div style={{
                         background: 'rgba(0,0,0,0.8)',
@@ -647,13 +626,12 @@ const Globe = ({ colorTheme, isDark }) => {
                 />
             ))}
 
-            {/* Impact points */}
-            {attacks.map((attack, i) => (
-                <ImpactPoint
+            {/* Impact ripples */}
+            {attacks.map((attack) => (
+                <ImpactRipple
                     key={`impact-${attack.id}`}
                     position={latLngToVector3(attack.target.lat, attack.target.lng, 1.02)}
-                    color={attack.color}
-                    delay={i * 0.5}
+                    color={attackColor}
                     spawnTime={attack.spawnTime}
                 />
             ))}
@@ -665,6 +643,12 @@ const Globe = ({ colorTheme, isDark }) => {
 const ThreatGlobe = () => {
     const [colorTheme, setColorTheme] = useState('cyan')
     const [isDark, setIsDark] = useState(true)
+    const [isTouch, setIsTouch] = useState(false)
+
+    // Detect touch device on mount
+    useEffect(() => {
+        setIsTouch(isTouchDevice())
+    }, [])
 
     // Listen for theme changes
     useEffect(() => {
@@ -729,8 +713,9 @@ const ThreatGlobe = () => {
                     minDistance={3}
                     maxDistance={5}
                     autoRotate={false}
-                    rotateSpeed={0.5}
+                    rotateSpeed={isTouch ? 0.8 : 0.5}
                     zoomSpeed={0.3}
+                    touchRotate={true}
                 />
             </Canvas>
         </div>
