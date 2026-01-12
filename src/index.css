@@ -2184,12 +2184,17 @@ a {
 .portal-wrapper {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 60px;
+  justify-content: space-between;
+}
+
+.portal-card {
+  flex: 1;
 }
 
 .portal-3d {
-  flex: 0 0 250px;
-  height: 200px;
+  flex: 0 0 300px;
+  height: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2198,12 +2203,14 @@ a {
 @media (max-width: 900px) {
   .portal-wrapper {
     flex-direction: column;
+    gap: 30px;
   }
   
   .portal-3d {
     width: 100%;
     flex: none;
-    height: 180px;
+    height: 200px;
+    order: -1; /* Show 3D first on mobile */
   }
 }
 
