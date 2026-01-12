@@ -1,6 +1,10 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef, useCallback } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useTheme } from '../../context/ThemeContext'
 import ThemeToggle from '../ThemeToggle/ThemeToggle'
+
+gsap.registerPlugin(ScrollTrigger)
 
 // Magnetic Button for Nav CTA
 const NavButton = ({ children, className, onClick }) => {
@@ -40,16 +44,50 @@ const NavButton = ({ children, className, onClick }) => {
 }
 
 const Navbar = () => {
-    const [scrolled, setScrolled] = useState(false)
-    const { cycleColorTheme, getCurrentColorTheme, colorThemes, colorTheme } = useTheme()
+    const navRef = useRef(null)
+    const navInnerRef = useRef(null)
+    const { cycleColorTheme, colorTheme } = useTheme()
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50)
-        }
+        const nav = navRef.current
+        const navInner = navInnerRef.current
+        if (!nav || !navInner) return
 
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
+        // Set initial state for nav-inner
+        gsap.set(navInner, {
+            transformOrigin: 'top center',
+        })
+
+        const ctx = gsap.context(() => {
+            // Navbar drop-down animation timeline
+            const navTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: '200 top',
+                    scrub: 0.8,
+                    onUpdate: (self) => {
+                        // Add/remove class based on progress
+                        if (self.progress > 0.1) {
+                            navInner.classList.add('nav-glass-active')
+                        } else {
+                            navInner.classList.remove('nav-glass-active')
+                        }
+                    }
+                }
+            })
+
+            // Navbar drops down and transforms
+            navTl.to(navInner, {
+                y: 10,
+                scale: 0.92,
+                borderRadius: '999px',
+                ease: 'none',
+            }, 0)
+
+        }, nav)
+
+        return () => ctx.revert()
     }, [])
 
     const scrollToSection = (id) => {
@@ -59,55 +97,46 @@ const Navbar = () => {
         }
     }
 
-    // Handle logo click - cycle color theme
     const handleLogoClick = () => {
         cycleColorTheme()
     }
 
-    // Get next theme info for tooltip
-    const getNextTheme = () => {
-        const currentIndex = colorThemes.findIndex(t => t.name === colorTheme)
-        const nextIndex = (currentIndex + 1) % colorThemes.length
-        return colorThemes[nextIndex]
-    }
-
-    const currentTheme = getCurrentColorTheme()
-    const nextTheme = getNextTheme()
-
     return (
-        <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-            <div className="nav-container">
-                <div
-                    className={`nav-logo icon-bounce theme-trigger color-theme-${colorTheme}`}
-                    onClick={handleLogoClick}
-                >
-                    <span className="logo-icon">◆</span>
-                    SELECT<span className="accent">TECH</span>
-                </div>
+        <nav ref={navRef} className="navbar">
+            <div ref={navInnerRef} className="nav-inner">
+                <div className="nav-container">
+                    <div
+                        className={`nav-logo icon-bounce theme-trigger color-theme-${colorTheme}`}
+                        onClick={handleLogoClick}
+                    >
+                        <span className="logo-icon">◆</span>
+                        SELECT<span className="accent">TECH</span>
+                    </div>
 
-                <div className="nav-links">
-                    <span className="nav-link text-reveal" onClick={() => scrollToSection('services')}>
-                        Services
-                    </span>
-                    <span className="nav-link text-reveal" onClick={() => scrollToSection('features')}>
-                        Features
-                    </span>
-                    <span className="nav-link text-reveal" onClick={() => scrollToSection('clients')}>
-                        Clients
-                    </span>
-                    <span className="nav-link text-reveal" onClick={() => scrollToSection('contact')}>
-                        Contact
-                    </span>
-                </div>
+                    <div className="nav-links">
+                        <span className="nav-link text-reveal" onClick={() => scrollToSection('services')}>
+                            Services
+                        </span>
+                        <span className="nav-link text-reveal" onClick={() => scrollToSection('features')}>
+                            Features
+                        </span>
+                        <span className="nav-link text-reveal" onClick={() => scrollToSection('clients')}>
+                            Clients
+                        </span>
+                        <span className="nav-link text-reveal" onClick={() => scrollToSection('contact')}>
+                            Contact
+                        </span>
+                    </div>
 
-                <div className="nav-actions">
-                    <ThemeToggle />
-                    <NavButton className="nav-cta" onClick={() => scrollToSection('contact')}>
-                        <span>Get Started</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </NavButton>
+                    <div className="nav-actions">
+                        <ThemeToggle />
+                        <NavButton className="nav-cta" onClick={() => scrollToSection('contact')}>
+                            <span>Get Started</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </NavButton>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -115,3 +144,6 @@ const Navbar = () => {
 }
 
 export default Navbar
+
+
+

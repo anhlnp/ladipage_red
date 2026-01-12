@@ -1,34 +1,38 @@
 import { useEffect, useRef } from 'react'
 import Lenis from 'lenis'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const SmoothScroll = ({ children }) => {
     const lenisRef = useRef(null)
 
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 1.6, // Longer duration for more noticeable effect
-            easing: (t) => {
-                // Custom easing - more "elastic" feel
-                return t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
-            },
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: 'vertical',
             gestureOrientation: 'vertical',
             smoothWheel: true,
-            wheelMultiplier: 0.8, // Slower wheel for smoother feel
-            touchMultiplier: 1.5,
+            wheelMultiplier: 1,
+            touchMultiplier: 2,
             infinite: false,
         })
 
         lenisRef.current = lenis
 
-        function raf(time) {
-            lenis.raf(time)
-            requestAnimationFrame(raf)
-        }
+        // Sync Lenis scroll with GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update)
 
-        requestAnimationFrame(raf)
+        // Use GSAP ticker for Lenis raf
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000)
+        })
 
-        // Make lenis available globally for scroll-to functionality
+        gsap.ticker.lagSmoothing(0)
+
+        // Make lenis available globally
         window.lenis = lenis
 
         // Add smooth anchor scrolling
@@ -38,8 +42,8 @@ const SmoothScroll = ({ children }) => {
                 const target = document.querySelector(anchor.getAttribute('href'))
                 if (target) {
                     lenis.scrollTo(target, {
-                        offset: -80, // Account for fixed navbar
-                        duration: 2, // Longer scroll animation
+                        offset: -80,
+                        duration: 1.5,
                     })
                 }
             })
@@ -47,6 +51,7 @@ const SmoothScroll = ({ children }) => {
 
         return () => {
             lenis.destroy()
+            gsap.ticker.remove(lenis.raf)
             window.lenis = null
         }
     }, [])
@@ -55,3 +60,4 @@ const SmoothScroll = ({ children }) => {
 }
 
 export default SmoothScroll
+

@@ -111,54 +111,28 @@ const Hero = () => {
                 })
             })
 
-            // Scroll-triggered parallax effects
+            // Scroll-triggered parallax effects - fly right and fade out
             const parallaxTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: '#hero',
                     start: 'top top',
-                    end: 'bottom top',
-                    scrub: 1.5,
+                    end: '50% top', // Ends when hero is 50% scrolled
+                    scrub: 0.5,
+                    // markers: true, // Uncomment to debug
                 }
             })
 
-            // Title parallax - moves up faster
-            parallaxTl.to('.hero-title', {
-                y: -80,
-                opacity: 0.3,
-                ease: 'none',
-            }, 0)
-
-            // Description parallax
-            parallaxTl.to('.hero-description', {
-                y: -60,
-                opacity: 0.2,
-                ease: 'none',
-            }, 0)
-
-            // Stats parallax
-            parallaxTl.to('.hero-stats', {
-                y: -50,
-                opacity: 0.1,
-                ease: 'none',
-            }, 0)
-
-            // CTA parallax
-            parallaxTl.to('.hero-cta', {
-                y: -40,
+            // All hero content flies right and fades
+            parallaxTl.to('.hero-content', {
+                x: 300,
                 opacity: 0,
-                ease: 'none',
-            }, 0)
-
-            // Badge parallax
-            parallaxTl.to('.hero-badge', {
-                y: -100,
-                opacity: 0,
-                ease: 'none',
+                ease: 'power1.in',
             }, 0)
 
             // Scroll indicator fades out quickly
             parallaxTl.to('.scroll-indicator', {
                 opacity: 0,
+                y: 20,
                 ease: 'none',
             }, 0)
 
