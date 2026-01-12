@@ -111,34 +111,98 @@ const Hero = () => {
                 })
             })
 
-            // Scroll-triggered parallax effects - fly right and fade out
-            const parallaxTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: '#hero',
-                    start: 'top top',
-                    end: '50% top', // Ends when hero is 50% scrolled
-                    scrub: 0.5,
-                    // markers: true, // Uncomment to debug
-                }
-            })
-
-            // All hero content flies right and fades
-            parallaxTl.to('.hero-content', {
-                x: 300,
-                opacity: 0,
-                ease: 'power1.in',
-            }, 0)
-
-            // Scroll indicator fades out quickly
-            parallaxTl.to('.scroll-indicator', {
-                opacity: 0,
-                y: 20,
-                ease: 'none',
-            }, 0)
-
         }, heroRef)
 
-        return () => ctx.revert()
+        // Direct scroll-based animation for hero fly-out - staggered elements
+        const badge = document.querySelector('.hero-badge')
+        const titleLines = document.querySelectorAll('.title-line')
+        const description = document.querySelector('.hero-description')
+        const stats = document.querySelector('.hero-stats')
+        const cta = document.querySelector('.hero-cta')
+        const scrollIndicator = document.querySelector('.scroll-indicator')
+        
+        const handleScroll = () => {
+            const scrollY = window.scrollY || window.lenis?.scroll || 0
+            const heroHeight = window.innerHeight
+            const progress = Math.min(scrollY / (heroHeight * 0.6), 1)
+            
+            // Badge - flies up and left quickly
+            if (badge) {
+                const badgeProgress = Math.min(progress * 2, 1) // Faster
+                gsap.set(badge, {
+                    x: -badgeProgress * 150,
+                    y: -badgeProgress * 50,
+                    opacity: 1 - badgeProgress,
+                    scale: 1 - badgeProgress * 0.3,
+                })
+            }
+            
+            // Title lines - staggered fly right with rotation
+            titleLines.forEach((line, i) => {
+                const delay = i * 0.1 // Stagger delay
+                const lineProgress = Math.max(0, Math.min((progress - delay) * 1.5, 1))
+                gsap.set(line, {
+                    x: lineProgress * (200 + i * 50),
+                    y: lineProgress * (i % 2 === 0 ? -20 : 20), // Alternate up/down
+                    opacity: 1 - lineProgress,
+                    rotationZ: lineProgress * (i % 2 === 0 ? 3 : -3), // Slight rotation
+                })
+            })
+            
+            // Description - flies down-right
+            if (description) {
+                const descProgress = Math.max(0, Math.min((progress - 0.15) * 1.5, 1))
+                gsap.set(description, {
+                    x: descProgress * 250,
+                    y: descProgress * 30,
+                    opacity: 1 - descProgress,
+                })
+            }
+            
+            // Stats - flies down and scales down
+            if (stats) {
+                const statsProgress = Math.max(0, Math.min((progress - 0.2) * 1.5, 1))
+                gsap.set(stats, {
+                    y: statsProgress * 60,
+                    opacity: 1 - statsProgress,
+                    scale: 1 - statsProgress * 0.2,
+                })
+            }
+            
+            // CTA - flies up
+            if (cta) {
+                const ctaProgress = Math.max(0, Math.min((progress - 0.25) * 1.5, 1))
+                gsap.set(cta, {
+                    y: -ctaProgress * 80,
+                    opacity: 1 - ctaProgress,
+                    scale: 1 - ctaProgress * 0.1,
+                })
+            }
+            
+            // Scroll indicator fades out first
+            if (scrollIndicator) {
+                const indicatorProgress = Math.min(progress * 3, 1)
+                gsap.set(scrollIndicator, {
+                    opacity: 1 - indicatorProgress,
+                    y: indicatorProgress * 30,
+                })
+            }
+        }
+
+        // Listen to both native scroll and Lenis scroll
+        window.addEventListener('scroll', handleScroll, { passive: true })
+        
+        if (window.lenis) {
+            window.lenis.on('scroll', handleScroll)
+        }
+
+        return () => {
+            ctx.revert()
+            window.removeEventListener('scroll', handleScroll)
+            if (window.lenis) {
+                window.lenis.off('scroll', handleScroll)
+            }
+        }
     }, [])
 
     const scrollToSection = (id) => {

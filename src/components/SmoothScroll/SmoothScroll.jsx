@@ -32,6 +32,23 @@ const SmoothScroll = ({ children }) => {
 
         gsap.ticker.lagSmoothing(0)
 
+        // Set up ScrollTrigger scroller proxy for Lenis
+        ScrollTrigger.scrollerProxy(document.body, {
+            scrollTop(value) {
+                if (arguments.length) {
+                    lenis.scrollTo(value, { immediate: true })
+                }
+                return lenis.scroll
+            },
+            getBoundingClientRect() {
+                return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight }
+            },
+            pinType: document.body.style.transform ? 'transform' : 'fixed'
+        })
+
+        // Refresh ScrollTrigger after setup
+        ScrollTrigger.refresh()
+
         // Make lenis available globally
         window.lenis = lenis
 
@@ -52,6 +69,7 @@ const SmoothScroll = ({ children }) => {
         return () => {
             lenis.destroy()
             gsap.ticker.remove(lenis.raf)
+            ScrollTrigger.clearScrollMemory()
             window.lenis = null
         }
     }, [])
@@ -60,4 +78,5 @@ const SmoothScroll = ({ children }) => {
 }
 
 export default SmoothScroll
+
 
