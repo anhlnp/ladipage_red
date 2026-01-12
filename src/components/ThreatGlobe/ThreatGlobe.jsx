@@ -1,7 +1,60 @@
-import { useRef, useMemo, useState, useEffect, useCallback } from 'react'
+import { useRef, useMemo, useState, useEffect, useCallback, memo } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { Sphere, Line, OrbitControls, Html } from '@react-three/drei'
 import * as THREE from 'three'
+import gsap from 'gsap'
+
+const ATTACK_TYPES = [
+    { name: 'DDoS', color: '#ef5350' }, // Red
+    { name: 'Malware', color: '#ffa726' }, // Orange
+    { name: 'Phishing', color: '#ba68c8' }, // Purple
+    { name: 'Botnet', color: '#4fc3f7' }, // Blue
+    { name: 'Exploit', color: '#66bb6a' }, // Green
+]
+
+const Atmosphere = ({ color = '#4fc3f7' }) => {
+  const materialRef = useRef()
+  
+  // Create stable uniforms object
+  const uniforms = useMemo(() => ({
+    uColor: { value: new THREE.Color(color) }
+  }), []) // Empty deps - create once
+  
+  // Update color uniform when prop changes
+  useEffect(() => {
+    if (materialRef.current) {
+      materialRef.current.uniforms.uColor.value.set(color)
+    }
+  }, [color])
+  
+  return (
+    <mesh scale={[1.12, 1.12, 1.12]}>
+      <sphereGeometry args={[1, 64, 64]} />
+      <shaderMaterial
+        ref={materialRef}
+        transparent
+        side={THREE.BackSide}
+        blending={THREE.AdditiveBlending}
+        uniforms={uniforms}
+        vertexShader={`
+            varying vec3 vNormal;
+            void main() {
+                vNormal = normalize(normalMatrix * normal);
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `}
+        fragmentShader={`
+            uniform vec3 uColor;
+            varying vec3 vNormal;
+            void main() {
+                float intensity = pow(0.7 - dot(vNormal, vec3(0, 0, 1.0)), 6.0);
+                gl_FragColor = vec4(uColor, 1.0) * intensity * 1.5;
+            }
+        `}
+      />
+    </mesh>
+  )
+}
 
 // Convert degree coordinates to radians
 const degToRad = (deg) => (deg / 180) * Math.PI
@@ -58,19 +111,24 @@ const parseCountriesGeoJSON = (geojson, radius = 1.013) => {
         const code = props.ISO_A3 || props.ISO_A2 || ''
         
         const lines = []
-        let centerLat = 0, centerLng = 0, pointCount = 0
+        // Use 3D vector accumulation for accurate centroid (handles date line crossing)
+        let sumX = 0, sumY = 0, sumZ = 0, pointCount = 0
         
         const processRing = (ring) => {
             const sampledRing = ring.filter((_, i) => i % 2 === 0 || i === ring.length - 1)
             if (sampledRing.length > 2) {
                 const points = sampledRing.map(([lng, lat]) => {
-                    centerLat += lat
-                    centerLng += lng
-                    pointCount++
-                    
                     const latRad = degToRad(lat)
                     const lngRad = degToRad(lng)
-                    return latLngToVector3(latRad, lngRad, radius)
+                    const v = latLngToVector3(latRad, lngRad, radius)
+                    
+                    // Accumulate for centroid
+                    sumX += v.x
+                    sumY += v.y
+                    sumZ += v.z
+                    pointCount++
+                    
+                    return v
                 })
                 lines.push(points)
             }
@@ -85,12 +143,8 @@ const parseCountriesGeoJSON = (geojson, radius = 1.013) => {
         }
         
         if (lines.length > 0 && pointCount > 0) {
-            // Calculate center point for label
-            centerLat /= pointCount
-            centerLng /= pointCount
-            const latRad = degToRad(centerLat)
-            const lngRad = degToRad(centerLng)
-            const centerPos = latLngToVector3(latRad, lngRad, radius)
+            // Calculate center point from 3D average
+            const centerPos = new THREE.Vector3(sumX, sumY, sumZ).divideScalar(pointCount).normalize().multiplyScalar(radius)
             
             countries.push({
                 name,
@@ -114,23 +168,55 @@ const THEME_COLORS = {
 }
 
 // Generate random attack data
-const generateAttacks = (count = 15) => {
+const getRandomLatLon = (countries = []) => {
+    if (countries.length > 0) {
+        // Try to pick a valid point on a country border
+        try {
+            const country = countries[Math.floor(Math.random() * countries.length)]
+            const feature = country.feature
+            let ring = []
+            
+            if (feature?.geometry?.type === 'Polygon') {
+                ring = feature.geometry.coordinates[0]
+            } else if (feature?.geometry?.type === 'MultiPolygon') {
+                const poly = feature.geometry.coordinates[Math.floor(Math.random() * feature.geometry.coordinates.length)]
+                ring = poly[0]
+            }
+            
+            if (ring && ring.length > 0) {
+                const pt = ring[Math.floor(Math.random() * ring.length)]
+                // GeoJSON is [lng, lat] in degrees
+                return { lat: degToRad(pt[1]), lng: degToRad(pt[0]) }
+            }
+        } catch (e) {
+            console.warn('Error picking country point:', e)
+        }
+    }
+    
+    // Fallback to random point
+    const lat = (Math.random() - 0.5) * Math.PI
+    const lng = Math.random() * Math.PI * 2
+    return { lat, lng }
+}
+
+// Generate random attack data
+const generateAttacks = (count = 8, countries = []) => {
     const attacks = []
+    const now = Date.now()
     for (let i = 0; i < count; i++) {
-        // Random source point on globe
-        const srcLat = (Math.random() - 0.5) * Math.PI
-        const srcLng = Math.random() * Math.PI * 2
-        
-        // Random target point
-        const tgtLat = (Math.random() - 0.5) * Math.PI
-        const tgtLng = Math.random() * Math.PI * 2
+        const source = getRandomLatLon(countries)
+        const target = getRandomLatLon(countries)
+        const type = ATTACK_TYPES[Math.floor(Math.random() * ATTACK_TYPES.length)]
         
         attacks.push({
             id: i,
-            source: { lat: srcLat, lng: srcLng },
-            target: { lat: tgtLat, lng: tgtLng },
+            source,
+            target,
+            color: type.color,
+            type: type.name,
             progress: Math.random(), // Animation offset
-            speed: 0.3 + Math.random() * 0.5,
+            speed: 0.08 + Math.random() * 0.1, // Slower for smoothness
+            spawnTime: now - Math.random() * 2000, // Stagger initial spawns
             active: true,
         })
     }
@@ -145,75 +231,121 @@ const latLngToVector3 = (lat, lng, radius = 1) => {
     return new THREE.Vector3(x, y, z)
 }
 
-// Create arc between two points
-const createArc = (start, end, segments = 50, height = 0.3) => {
-    const points = []
-    for (let i = 0; i <= segments; i++) {
-        const t = i / segments
-        const point = new THREE.Vector3().lerpVectors(start, end, t)
-        // Add height curve
-        const arcHeight = Math.sin(t * Math.PI) * height * start.distanceTo(end)
-        point.normalize().multiplyScalar(1 + arcHeight)
-        points.push(point)
-    }
-    return points
-}
 
-// Attack Arc Component
-const AttackArc = ({ attack, color, glowColor }) => {
-    const lineRef = useRef()
-    const [progress, setProgress] = useState(attack.progress)
+
+// Attack Arc Component using TubeGeometry and ShaderMaterial for performance
+const AttackArc = memo(({ attack, color }) => {
+    const materialRef = useRef()
+    const spawnTimeRef = useRef(attack.spawnTime || Date.now())
     
-    const { points, visiblePoints } = useMemo(() => {
+    // Create static curve geometry once
+    const curve = useMemo(() => {
         const start = latLngToVector3(attack.source.lat, attack.source.lng)
         const end = latLngToVector3(attack.target.lat, attack.target.lng)
-        const allPoints = createArc(start, end, 40, 0.25)
-        return { points: allPoints, visiblePoints: allPoints }
-    }, [attack])
+        const mid = start.clone().add(end).multiplyScalar(0.5).normalize().multiplyScalar(1.4)
+        return new THREE.QuadraticBezierCurve3(start, mid, end)
+    }, [attack.source.lat, attack.source.lng, attack.target.lat, attack.target.lng])
 
+    // Calculate spawn offset for fade-in (in seconds from start)
+    const spawnOffset = useMemo(() => {
+        return (Date.now() - spawnTimeRef.current) / 1000
+    }, [])
+
+    // Create stable uniforms object once - prevents shader recompilation
+    const uniforms = useMemo(() => ({
+        uColor: { value: new THREE.Color(color) },
+        uProgress: { value: attack.progress || 0 },
+        uTime: { value: 0 },
+        uSpawnOffset: { value: spawnOffset }
+    }), []) // Empty deps - create once
+
+    // Update color uniform when prop changes (without recreating uniforms object)
+    useEffect(() => {
+        if (materialRef.current) {
+            materialRef.current.uniforms.uColor.value.set(color)
+        }
+    }, [color])
+
+    // Update uniform in loop without React re-renders
     useFrame((state, delta) => {
-        setProgress(prev => {
-            const next = prev + delta * attack.speed
-            return next > 1 ? 0 : next
-        })
+        if (materialRef.current) {
+            attack.progress += delta * attack.speed
+            if (attack.progress > 1) attack.progress = 0
+            materialRef.current.uniforms.uProgress.value = attack.progress
+            materialRef.current.uniforms.uTime.value = state.clock.elapsedTime
+        }
     })
 
-    // Calculate visible portion of arc
-    const visibleCount = Math.floor(progress * points.length)
-    const displayPoints = points.slice(0, Math.max(2, visibleCount))
-
-    if (displayPoints.length < 2) return null
-
     return (
-        <Line
-            ref={lineRef}
-            points={displayPoints}
-            color={color}
-            lineWidth={1.5}
-            transparent
-            opacity={0.8}
-        />
+        <mesh>
+            <tubeGeometry args={[curve, 20, 0.002, 4, false]} />
+            <shaderMaterial
+                ref={materialRef}
+                transparent
+                depthWrite={false}
+                uniforms={uniforms}
+                vertexShader={`
+                    varying vec2 vUv;
+                    void main() {
+                        vUv = uv;
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    }
+                `}
+                fragmentShader={`
+                    uniform vec3 uColor;
+                    uniform float uProgress;
+                    uniform float uTime;
+                    uniform float uSpawnOffset;
+                    varying vec2 vUv;
+                    void main() {
+                        float visible = step(vUv.x, uProgress);
+                        float tail = smoothstep(uProgress - 0.35, uProgress, vUv.x);
+                        
+                        // Fade in over 1 second after spawn
+                        float fadeIn = clamp(uTime + uSpawnOffset, 0.0, 1.0);
+                        
+                        if (visible < 0.5) discard;
+                        
+                        gl_FragColor = vec4(uColor, (0.3 + tail * 0.7) * fadeIn);
+                    }
+                `}
+            />
+        </mesh>
     )
-}
+})
 
-// Impact Point Component
-const ImpactPoint = ({ position, color, delay = 0 }) => {
+// Impact Point Component with direct ref manipulation and fade-in
+const ImpactPoint = memo(({ position, color, delay = 0, spawnTime }) => {
     const meshRef = useRef()
-    const [scale, setScale] = useState(0)
+    const materialRef = useRef()
+    const spawnOffset = useRef((Date.now() - (spawnTime || Date.now())) / 1000)
+    
+    // Update color via ref when prop changes (without causing re-render)
+    useEffect(() => {
+        if (materialRef.current) {
+            materialRef.current.color.set(color)
+        }
+    }, [color])
     
     useFrame((state) => {
+        if (!meshRef.current || !materialRef.current) return
         const time = state.clock.elapsedTime + delay
         const pulse = (Math.sin(time * 3) + 1) * 0.5
-        setScale(0.02 + pulse * 0.015)
+        const s = 0.015 + pulse * 0.01
+        meshRef.current.scale.set(s, s, s)
+        
+        // Fade in over 1 second
+        const fadeIn = Math.min(1, state.clock.elapsedTime + spawnOffset.current)
+        materialRef.current.opacity = 0.8 * fadeIn
     })
 
     return (
         <mesh ref={meshRef} position={position}>
-            <sphereGeometry args={[scale, 8, 8]} />
-            <meshBasicMaterial color={color} transparent opacity={0.9} />
+            <sphereGeometry args={[1, 6, 6]} />
+            <meshBasicMaterial ref={materialRef} color={color} transparent opacity={0} />
         </mesh>
     )
-}
+})
 
 // Check if point [lng, lat] is inside polygon rings
 const isPointInPolygon = (point, vs) => {
@@ -244,17 +376,37 @@ const geoContains = (feature, [lng, lat]) => {
     return false
 }
 
+// Memoized Country Group to avoid full globe re-renders on hover
+const CountryGroup = memo(({ country, isHovered, colors, isDark }) => {
+    return (
+        <group>
+            {country.lines.map((points, lineIdx) => (
+                <Line
+                    key={`line-${lineIdx}`}
+                    points={points}
+                    color={isHovered ? (isDark ? '#ffffff' : colors.secondary) : (isDark ? colors.primary : colors.secondary)}
+                    lineWidth={isHovered ? 1.5 : (isDark ? 0.5 : 0.8)}
+                    transparent
+                    opacity={isHovered ? 1 : (isDark ? 0.4 : 0.7)}
+                />
+            ))}
+        </group>
+    )
+})
+
 // Globe Component
 const Globe = ({ colorTheme, isDark }) => {
     const globeRef = useRef()
-    const [attacks, setAttacks] = useState(() => generateAttacks(12))
+    const countriesRef = useRef([])
+    const [attacks, setAttacks] = useState(() => generateAttacks(12, []))
     const [countries, setCountries] = useState([])
     const [hoveredCountry, setHoveredCountry] = useState(null)
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+    const [isFocused, setIsFocused] = useState(false)
     
     const colors = THEME_COLORS[colorTheme] || THEME_COLORS.cyan
-    const globeColor = isDark ? '#1a1a2e' : '#e2e8f0'
-    const wireColor = isDark ? colors.primary : colors.secondary
+    const globeColor = isDark ? '#1a1a2e' : '#fef9f3' // Cream for light mode (Paper Map)
+    const wireColor = isDark ? colors.primary : '#94a3b8' // Light gray grid for light mode
     const attackColor = colors.glow
 
     // Fetch GeoJSON on mount
@@ -269,16 +421,61 @@ const Globe = ({ colorTheme, isDark }) => {
                     feature: data.features[i] // Assumes order is preserved, which it is
                 }))
                 setCountries(enriched)
+                countriesRef.current = enriched
+                
+                // Immediately refresh attacks with continent data
+                setAttacks(generateAttacks(12, enriched).map(a => ({
+                    ...a,
+                    id: `${a.id}-${Date.now()}`
+                })))
             })
             .catch(err => console.error('Failed to load country data:', err))
     }, [])
+    
+    // ... useFrame ... (omitted from replace block to keep context simple if possible, but I need to start from 275)
 
     useFrame((state, delta) => {
-        if (globeRef.current && !hoveredCountry) {
-            // Slow auto-rotation only when not hovering a country
-            globeRef.current.rotation.y += delta * 0.03
+        if (globeRef.current && !isFocused) {
+            // Keep rotating, just slower when hovering
+            globeRef.current.rotation.y += delta * (hoveredCountry ? 0.005 : 0.03)
         }
     })
+
+    const onGlobeClick = useCallback((e) => {
+        e.stopPropagation()
+        if (hoveredCountry) {
+            setIsFocused(true)
+            
+            // Get country center in local space (normalized)
+            const p = hoveredCountry.center.clone().normalize()
+            
+            // Get camera direction from globe (camera position normalized)
+            const camDir = e.camera.position.clone().normalize()
+            
+            // Calculate quaternion to rotate P to face camera
+            const targetQuat = new THREE.Quaternion().setFromUnitVectors(p, camDir)
+            const targetEuler = new THREE.Euler().setFromQuaternion(targetQuat)
+            
+            gsap.to(globeRef.current.rotation, {
+                x: targetEuler.x,
+                y: targetEuler.y,
+                z: targetEuler.z,
+                duration: 1.5,
+                ease: 'power2.inOut'
+            })
+            
+        } else {
+            // Click outside to resume
+            setIsFocused(false)
+            gsap.to(globeRef.current.rotation, {
+                x: 0,
+                y: globeRef.current.rotation.y, // Keep current Y
+                z: 0,
+                duration: 1,
+                ease: 'power2.out'
+            })
+        }
+    }, [hoveredCountry])
 
     // Handle mouse move on globe surface for hover detection
     const onGlobePointerMove = useCallback((e) => {
@@ -319,11 +516,21 @@ const Globe = ({ colorTheme, isDark }) => {
         document.body.style.cursor = 'default'
     }, [])
 
-    // Regenerate attacks periodically
+    // Regenerate attacks periodically - staggered updates (slower)
     useEffect(() => {
         const interval = setInterval(() => {
-            setAttacks(generateAttacks(12))
-        }, 8000)
+            if (!countriesRef.current.length) return
+            
+            setAttacks(prev => {
+                const idx = Math.floor(Math.random() * prev.length)
+                const newAttack = {
+                    ...generateAttacks(1, countriesRef.current)[0],
+                    progress: 0,
+                    spawnTime: Date.now() // Fresh spawn time for fade-in
+                }
+                return prev.map((a, i) => i === idx ? { ...newAttack, id: a.id } : a)
+            })
+        }, 4000) // Replace 1 attack every 4s (slower)
         return () => clearInterval(interval)
     }, [])
 
@@ -364,6 +571,7 @@ const Globe = ({ colorTheme, isDark }) => {
                 args={[1, 32, 32]} 
                 onPointerMove={onGlobePointerMove}
                 onPointerLeave={onGlobePointerOut}
+                onClick={onGlobeClick}
             >
                 <meshPhongMaterial
                     color={globeColor}
@@ -372,6 +580,9 @@ const Globe = ({ colorTheme, isDark }) => {
                     shininess={10}
                 />
             </Sphere>
+            
+            {/* Atmosphere - hidden in light mode */}
+            {isDark && <Atmosphere color={colors.glow} />}
             
             {/* Inner glow */}
             <Sphere args={[0.98, 24, 24]}>
@@ -383,23 +594,15 @@ const Globe = ({ colorTheme, isDark }) => {
             </Sphere>
 
             {/* Interactive Country Outlines */}
-            {countries.map((country, idx) => {
-                const isHovered = hoveredCountry?.name === country.name
-                return (
-                    <group key={`country-${country.code}-${idx}`}>
-                        {country.lines.map((points, lineIdx) => (
-                            <Line
-                                key={`line-${lineIdx}`}
-                                points={points}
-                                color={isHovered ? '#ffffff' : colors.primary}
-                                lineWidth={isHovered ? 1.5 : 0.4}
-                                transparent
-                                opacity={isHovered ? 1 : 0.4}
-                            />
-                        ))}
-                    </group>
-                )
-            })}
+            {countries.map((country, idx) => (
+                <CountryGroup 
+                    key={`country-${country.code}-${idx}`}
+                    country={country}
+                    isHovered={hoveredCountry?.name === country.name}
+                    colors={colors}
+                    isDark={isDark}
+                />
+            ))}
             
             {/* Tooltip */}
             {hoveredCountry && (
@@ -422,7 +625,7 @@ const Globe = ({ colorTheme, isDark }) => {
                 </Html>
             )}
 
-            {/* Wireframe grid */}
+            {/* Wireframe grid - Latitude/Longitude lines */}
             {wireframePoints.map((points, i) => (
                 <Line
                     key={i}
@@ -430,7 +633,7 @@ const Globe = ({ colorTheme, isDark }) => {
                     color={wireColor}
                     lineWidth={0.3}
                     transparent
-                    opacity={0.3}
+                    opacity={0.2}
                 />
             ))}
 
@@ -449,8 +652,9 @@ const Globe = ({ colorTheme, isDark }) => {
                 <ImpactPoint
                     key={`impact-${attack.id}`}
                     position={latLngToVector3(attack.target.lat, attack.target.lng, 1.02)}
-                    color={attackColor}
+                    color={attack.color}
                     delay={i * 0.5}
+                    spawnTime={attack.spawnTime}
                 />
             ))}
         </group>
@@ -522,11 +726,11 @@ const ThreatGlobe = () => {
                 <OrbitControls 
                     enableZoom={true}
                     enablePan={false}
-                    minDistance={2.2}
-                    maxDistance={4}
+                    minDistance={3}
+                    maxDistance={5}
                     autoRotate={false}
                     rotateSpeed={0.5}
-                    zoomSpeed={0.5}
+                    zoomSpeed={0.3}
                 />
             </Canvas>
         </div>
