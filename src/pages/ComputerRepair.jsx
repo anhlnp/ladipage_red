@@ -1,0 +1,85 @@
+import PageLayout from '../components/PageLayout/PageLayout'
+import ServiceHero from '../components/ServiceHero/ServiceHero'
+import './ServicePage.css'
+
+const ComputerRepair = () => {
+    const services = [
+        { icon: '🔍', title: 'Diagnostics', desc: 'Comprehensive system analysis to identify issues' },
+        { icon: '💾', title: 'Data Services', desc: 'Transfer, backup, import, setup, and recovery' },
+        { icon: '🔧', title: 'Hardware Repairs', desc: 'Fixing physical components of Macs and PCs' },
+        { icon: '🚀', title: 'Optimization', desc: 'System tuning for better performance' },
+        { icon: '💿', title: 'OS Installation', desc: 'Operating system installation and repair' },
+        { icon: '🦠', title: 'Virus & Spyware', desc: 'Complete removal and cleanup (Spyware PC only)' },
+    ]
+
+    return (
+        <PageLayout>
+            <ServiceHero
+                tag="COMPUTER REPAIR"
+                title="Mac & PC"
+                gradientText="Repair Services"
+                description="Expert repair services for individuals and businesses. We partner with Malwarebytes to provide comprehensive protection against digital threats."
+            />
+            
+            <section className="service-content">
+                <div className="content-container">
+                    <div className="content-block glass-box" style={{ gridColumn: 'span 2' }}>
+                        <h3>Repair Services</h3>
+                        <p>
+                            At Select Tech Inc., we provide comprehensive solutions to meet all your digital security needs. 
+                            We offer Malwarebytes Premium partnerships for robust protection against malware, ransomware, 
+                            and phishing attempts.
+                        </p>
+                        <div className="service-cards">
+                            {services.map((service, idx) => (
+                                <div key={idx} className="service-card glass-box">
+                                    <div className="icon">{service.icon}</div>
+                                    <h4>{service.title}</h4>
+                                    <p>{service.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="content-block glass-box">
+                        <h3>On-Site Services</h3>
+                        <p>
+                            We perform on-site services in the convenience of your home or place of business. 
+                            We offer the same services as in-store repairs, plus additional on-site capabilities.
+                        </p>
+                        <ul className="feature-list" style={{ marginTop: '20px' }}>
+                            <li>PC Delivery and Setup</li>
+                            <li>Router and Wireless Installation</li>
+                            <li>Basic Networking</li>
+                            <li>Backup Solutions</li>
+                            <li>On-Site Troubleshooting</li>
+                        </ul>
+                    </div>
+
+                    <div className="content-block glass-box">
+                        <h3>Malwarebytes Partnership</h3>
+                        <p>
+                            With the ever-increasing threat of cyberattacks, we have curated a range of options 
+                            in partnership with Malwarebytes.
+                        </p>
+                        <br/>
+                        <p>
+                            <strong>Malwarebytes Premium:</strong> An all-in-one software designed to protect your personal devices. 
+                            Browse with confidence knowing you are protected against sophisticated threats.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section className="page-cta">
+                <div className="cta-container">
+                    <h2>Free Estimates Available</h2>
+                    <p>If you don't see your problem listed, please contact us. We offer same-day service for many repairs!</p>
+                    <a href="/contact" className="btn-primary">Schedule Repair</a>
+                </div>
+            </section>
+        </PageLayout>
+    )
+}
+
+export default ComputerRepair

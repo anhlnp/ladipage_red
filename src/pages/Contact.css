@@ -1,0 +1,9 @@
+.contact-page-wrapper {
+    padding-top: 80px;
+}
+
+@media (max-width: 768px) {
+    .contact-page-wrapper {
+        padding-top: 60px;
+    }
+}
