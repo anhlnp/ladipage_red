@@ -1,6 +1,6 @@
 import { useRef, useMemo, useState, useEffect, useCallback } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
-import { Sphere, Line, OrbitControls } from '@react-three/drei'
+import { Sphere, Line, OrbitControls, Html } from '@react-three/drei'
 import * as THREE from 'three'
 
 // Convert degree coordinates to radians
@@ -21,10 +21,7 @@ const parseGeoJSONToLines = (geojson, radius = 1.012) => {
                     const points = sampledRing.map(([lng, lat]) => {
                         const latRad = degToRad(lat)
                         const lngRad = degToRad(lng)
-                        const x = radius * Math.cos(latRad) * Math.cos(lngRad)
-                        const y = radius * Math.sin(latRad)
-                        const z = radius * Math.cos(latRad) * Math.sin(lngRad)
-                        return new THREE.Vector3(x, y, z)
+                        return latLngToVector3(latRad, lngRad, radius)
                     })
                     lines.push(points)
                 }
@@ -37,10 +34,7 @@ const parseGeoJSONToLines = (geojson, radius = 1.012) => {
                         const points = sampledRing.map(([lng, lat]) => {
                             const latRad = degToRad(lat)
                             const lngRad = degToRad(lng)
-                            const x = radius * Math.cos(latRad) * Math.cos(lngRad)
-                            const y = radius * Math.sin(latRad)
-                            const z = radius * Math.cos(latRad) * Math.sin(lngRad)
-                            return new THREE.Vector3(x, y, z)
+                            return latLngToVector3(latRad, lngRad, radius)
                         })
                         lines.push(points)
                     }
@@ -50,6 +44,64 @@ const parseGeoJSONToLines = (geojson, radius = 1.012) => {
     })
     
     return lines
+}
+
+// Parse countries GeoJSON with country names for interactivity
+const parseCountriesGeoJSON = (geojson, radius = 1.013) => {
+    const countries = []
+    
+    if (!geojson?.features) return countries
+    
+    geojson.features.forEach(feature => {
+        const props = feature.properties || {}
+        const name = props.ADMIN || props.NAME || props.name || 'Unknown'
+        const code = props.ISO_A3 || props.ISO_A2 || ''
+        
+        const lines = []
+        let centerLat = 0, centerLng = 0, pointCount = 0
+        
+        const processRing = (ring) => {
+            const sampledRing = ring.filter((_, i) => i % 2 === 0 || i === ring.length - 1)
+            if (sampledRing.length > 2) {
+                const points = sampledRing.map(([lng, lat]) => {
+                    centerLat += lat
+                    centerLng += lng
+                    pointCount++
+                    
+                    const latRad = degToRad(lat)
+                    const lngRad = degToRad(lng)
+                    return latLngToVector3(latRad, lngRad, radius)
+                })
+                lines.push(points)
+            }
+        }
+        
+        if (feature.geometry?.type === 'Polygon') {
+            feature.geometry.coordinates.forEach(processRing)
+        } else if (feature.geometry?.type === 'MultiPolygon') {
+            feature.geometry.coordinates.forEach(polygon => {
+                polygon.forEach(processRing)
+            })
+        }
+        
+        if (lines.length > 0 && pointCount > 0) {
+            // Calculate center point for label
+            centerLat /= pointCount
+            centerLng /= pointCount
+            const latRad = degToRad(centerLat)
+            const lngRad = degToRad(centerLng)
+            const centerPos = latLngToVector3(latRad, lngRad, radius)
+            
+            countries.push({
+                name,
+                code,
+                lines,
+                center: centerPos
+            })
+        }
+    })
+    
+    return countries
 }
 
 // Color themes matching the app
@@ -87,7 +139,7 @@ const generateAttacks = (count = 15) => {
 
 // Convert lat/lng to 3D position
 const latLngToVector3 = (lat, lng, radius = 1) => {
-    const x = radius * Math.cos(lat) * Math.cos(lng)
+    const x = -radius * Math.cos(lat) * Math.cos(lng) // Flip X to fix mirroring
     const y = radius * Math.sin(lat)
     const z = radius * Math.cos(lat) * Math.sin(lng)
     return new THREE.Vector3(x, y, z)
@@ -163,11 +215,42 @@ const ImpactPoint = ({ position, color, delay = 0 }) => {
     )
 }
 
+// Check if point [lng, lat] is inside polygon rings
+const isPointInPolygon = (point, vs) => {
+    // ray-casting algorithm based on
+    // https://github.com/substack/point-in-polygon
+    const x = point[0], y = point[1]
+    let inside = false
+    for (let i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+        const xi = vs[i][0], yi = vs[i][1]
+        const xj = vs[j][0], yj = vs[j][1]
+        const intersect = ((yi > y) !== (yj > y))
+            && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)
+        if (intersect) inside = !inside
+    }
+    return inside
+}
+
+// Simple point in GeoJSON feature check
+const geoContains = (feature, [lng, lat]) => {
+    const point = [lng, lat]
+    if (feature.geometry.type === 'Polygon') {
+        return isPointInPolygon(point, feature.geometry.coordinates[0])
+    } else if (feature.geometry.type === 'MultiPolygon') {
+        return feature.geometry.coordinates.some(polygon => 
+            isPointInPolygon(point, polygon[0])
+        )
+    }
+    return false
+}
+
 // Globe Component
 const Globe = ({ colorTheme, isDark }) => {
     const globeRef = useRef()
     const [attacks, setAttacks] = useState(() => generateAttacks(12))
-    const [geoLines, setGeoLines] = useState([])
+    const [countries, setCountries] = useState([])
+    const [hoveredCountry, setHoveredCountry] = useState(null)
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
     
     const colors = THEME_COLORS[colorTheme] || THEME_COLORS.cyan
     const globeColor = isDark ? '#1a1a2e' : '#e2e8f0'
@@ -176,21 +259,65 @@ const Globe = ({ colorTheme, isDark }) => {
 
     // Fetch GeoJSON on mount
     useEffect(() => {
-        fetch('/world-110m.json')
+        fetch('/countries-110m.json')
             .then(res => res.json())
             .then(data => {
-                const lines = parseGeoJSONToLines(data)
-                setGeoLines(lines)
+                const parsed = parseCountriesGeoJSON(data)
+                // Keep raw opacity features for hit testing
+                const enriched = parsed.map((c, i) => ({
+                    ...c,
+                    feature: data.features[i] // Assumes order is preserved, which it is
+                }))
+                setCountries(enriched)
             })
-            .catch(err => console.error('Failed to load world map:', err))
+            .catch(err => console.error('Failed to load country data:', err))
     }, [])
 
     useFrame((state, delta) => {
-        if (globeRef.current) {
-            // Slow auto-rotation (can be overridden by OrbitControls)
+        if (globeRef.current && !hoveredCountry) {
+            // Slow auto-rotation only when not hovering a country
             globeRef.current.rotation.y += delta * 0.03
         }
     })
+
+    // Handle mouse move on globe surface for hover detection
+    const onGlobePointerMove = useCallback((e) => {
+        e.stopPropagation()
+        if (!globeRef.current) return
+
+        // Convert world intersection point to local object space
+        // This accounts for the globe's rotation and position
+        const localPoint = globeRef.current.worldToLocal(e.point.clone())
+        
+        // Normalize to ensure it's on the unit sphere (radius 1) for math
+        localPoint.normalize()
+        
+        // Calculate Lat/Lng from local point
+        const lat = Math.asin(localPoint.y) * 180 / Math.PI
+        
+        // NOTE: We flipped X in latLngToVector3 (x = -r*...), so we must account for it here.
+        // x = -cos * cos
+        // z = cos * sin
+        // So tan(lng) = z / -x
+        const lng = Math.atan2(localPoint.z, -localPoint.x) * 180 / Math.PI // -180 to 180
+        
+        // Find country
+        const found = countries.find(c => geoContains(c.feature, [lng, lat]))
+        
+        if (found) {
+            setHoveredCountry(found)
+            setMousePos({ x: e.clientX, y: e.clientY })
+            document.body.style.cursor = 'pointer'
+        } else {
+            setHoveredCountry(null)
+            document.body.style.cursor = 'default'
+        }
+    }, [countries])
+
+    const onGlobePointerOut = useCallback(() => {
+        setHoveredCountry(null)
+        document.body.style.cursor = 'default'
+    }, [])
 
     // Regenerate attacks periodically
     useEffect(() => {
@@ -232,8 +359,12 @@ const Globe = ({ colorTheme, isDark }) => {
 
     return (
         <group ref={globeRef}>
-            {/* Main globe sphere */}
-            <Sphere args={[1, 32, 32]}>
+            {/* Main globe sphere with hit testing */}
+            <Sphere 
+                args={[1, 32, 32]} 
+                onPointerMove={onGlobePointerMove}
+                onPointerLeave={onGlobePointerOut}
+            >
                 <meshPhongMaterial
                     color={globeColor}
                     transparent
@@ -251,17 +382,45 @@ const Globe = ({ colorTheme, isDark }) => {
                 />
             </Sphere>
 
-            {/* Continent outlines from GeoJSON */}
-            {geoLines.map((points, idx) => (
-                <Line
-                    key={`land-${idx}`}
-                    points={points}
-                    color={colors.primary}
-                    lineWidth={0.8}
-                    transparent
-                    opacity={0.6}
-                />
-            ))}
+            {/* Interactive Country Outlines */}
+            {countries.map((country, idx) => {
+                const isHovered = hoveredCountry?.name === country.name
+                return (
+                    <group key={`country-${country.code}-${idx}`}>
+                        {country.lines.map((points, lineIdx) => (
+                            <Line
+                                key={`line-${lineIdx}`}
+                                points={points}
+                                color={isHovered ? '#ffffff' : colors.primary}
+                                lineWidth={isHovered ? 1.5 : 0.4}
+                                transparent
+                                opacity={isHovered ? 1 : 0.4}
+                            />
+                        ))}
+                    </group>
+                )
+            })}
+            
+            {/* Tooltip */}
+            {hoveredCountry && (
+                <Html position={hoveredCountry.center} style={{ pointerEvents: 'none' }}>
+                    <div style={{
+                        background: 'rgba(0,0,0,0.8)',
+                        color: colors.primary,
+                        padding: '4px 8px',
+                        borderRadius: '4px',
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                        border: `1px solid ${colors.primary}`,
+                        whiteSpace: 'nowrap',
+                        transform: 'translate3d(-50%, -150%, 0)',
+                        backdropFilter: 'blur(4px)',
+                        boxShadow: `0 0 10px ${colors.glow}`
+                    }}>
+                        {hoveredCountry.name}
+                    </div>
+                </Html>
+            )}
 
             {/* Wireframe grid */}
             {wireframePoints.map((points, i) => (
