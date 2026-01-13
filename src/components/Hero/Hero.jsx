@@ -235,18 +235,27 @@ const Hero = () => {
 
                     <div className="hero-stats">
                         <div className="stat">
-                            <span className="stat-number" data-value="23">24</span>
+                            <span
+                                className="stat-number"
+                                data-value="23"
+                            >24</span>
                             <span className="stat-label">Years Experience</span>
                         </div>
                         <div className="stat-divider"></div>
                         <div className="stat">
-                            <span className="stat-number" data-value="1000">1000</span>
+                            <span
+                                className="stat-number"
+                                data-value="1000"
+                            >1000</span>
                             <span className="stat-suffix">+</span>
                             <span className="stat-label">Happy Clients</span>
                         </div>
                         <div className="stat-divider"></div>
                         <div className="stat">
-                            <span className="stat-number" data-value="99">99</span>
+                            <span
+                                className="stat-number"
+                                data-value="99"
+                            >99</span>
                             <span className="stat-suffix">%</span>
                             <span className="stat-label">Uptime Guarantee</span>
                         </div>

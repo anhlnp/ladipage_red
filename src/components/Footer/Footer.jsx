@@ -53,7 +53,12 @@ const Footer = () => {
                 </div>
 
                 <div className="footer-bottom">
-                    <p>&copy; 2024 Select Tech Inc. All rights reserved.</p>
+                    <div className="footer-copyright">
+                        <p>&copy; 2024 Select Tech Inc. All rights reserved.</p>
+                        <a href="https://looperslab.com/" target="_blank" rel="noopener noreferrer" className="developer-link">
+                            Developed by Loopers Lab
+                        </a>
+                    </div>
                     <div className="footer-legal">
                         <a href="#">Privacy Policy</a>
                         <a href="#">Terms of Service</a>
