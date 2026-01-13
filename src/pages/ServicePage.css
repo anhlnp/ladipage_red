@@ -62,7 +62,7 @@
 .feature-list li {
     padding: 12px 0;
     color: var(--text-secondary);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -159,11 +159,11 @@
     .service-content {
         padding: 40px 20px 60px;
     }
-    
+
     .content-block {
         padding: 24px;
     }
-    
+
     .page-cta {
         padding: 60px 20px;
     }

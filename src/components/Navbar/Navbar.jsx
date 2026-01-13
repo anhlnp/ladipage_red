@@ -76,9 +76,9 @@ const NavButton = ({ children, className, onClick, to }) => {
 // Dropdown Component
 const NavDropdown = ({ label, items }) => {
     const [open, setOpen] = useState(false)
-    
+
     return (
-        <div 
+        <div
             className="nav-dropdown"
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}
@@ -92,11 +92,52 @@ const NavDropdown = ({ label, items }) => {
             {open && (
                 <div className="dropdown-menu">
                     {items.map((item, idx) => (
-                        <Link 
-                            key={idx} 
-                            to={item.path} 
+                        <Link
+                            key={idx}
+                            to={item.path}
                             className="dropdown-item"
                             onClick={() => setOpen(false)}
+                        >
+                            {item.label}
+                        </Link>
+                    ))}
+                </div>
+            )}
+        </div>
+    )
+}
+
+// Mobile Dropdown Component
+const MobileNavDropdown = ({ label, items, onLinkClick }) => {
+    const [open, setOpen] = useState(false)
+
+    return (
+        <div className="mobile-nav-dropdown">
+            <button
+                className="mobile-dropdown-trigger"
+                onClick={() => setOpen(!open)}
+            >
+                {label}
+                <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }}
+                >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            {open && (
+                <div className="mobile-dropdown-menu">
+                    {items.map((item, idx) => (
+                        <Link
+                            key={idx}
+                            to={item.path}
+                            className="mobile-dropdown-item"
+                            onClick={onLinkClick}
                         >
                             {item.label}
                         </Link>
@@ -111,6 +152,7 @@ const Navbar = () => {
     const navRef = useRef(null)
     const navInnerRef = useRef(null)
     const { cycleColorTheme, colorTheme } = useTheme()
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     useEffect(() => {
         const nav = navRef.current
@@ -150,8 +192,35 @@ const Navbar = () => {
         return () => ctx.revert()
     }, [])
 
+    // Close mobile menu on resize to desktop
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth > 768) {
+                setMobileMenuOpen(false)
+            }
+        }
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    // Prevent body scroll when mobile menu is open
+    useEffect(() => {
+        if (mobileMenuOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = ''
+        }
+        return () => {
+            document.body.style.overflow = ''
+        }
+    }, [mobileMenuOpen])
+
     const handleLogoClick = () => {
         cycleColorTheme()
+    }
+
+    const closeMobileMenu = () => {
+        setMobileMenuOpen(false)
     }
 
     return (
@@ -176,13 +245,48 @@ const Navbar = () => {
 
                     <div className="nav-actions">
                         <ThemeToggle />
-                        <NavButton className="nav-cta" to="/contact">
+                        <NavButton className="nav-cta nav-cta-desktop" to="/contact">
                             <span>Let's Talk</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
                         </NavButton>
+
+                        {/* Mobile Hamburger Button */}
+                        <button
+                            className={`mobile-menu-toggle ${mobileMenuOpen ? 'active' : ''}`}
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            aria-label="Toggle mobile menu"
+                        >
+                            <span className="hamburger-line"></span>
+                            <span className="hamburger-line"></span>
+                            <span className="hamburger-line"></span>
+                        </button>
                     </div>
+                </div>
+            </div>
+
+            {/* Mobile Menu Overlay */}
+            <div className={`mobile-menu-overlay ${mobileMenuOpen ? 'active' : ''}`} onClick={closeMobileMenu}></div>
+
+            {/* Mobile Menu */}
+            <div className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
+                <div className="mobile-menu-content">
+                    <Link to="/" className="mobile-nav-link" onClick={closeMobileMenu}>Home</Link>
+                    <MobileNavDropdown label="Services" items={servicesDropdown} onLinkClick={closeMobileMenu} />
+                    <MobileNavDropdown label="Cybersecurity" items={cybersecurityDropdown} onLinkClick={closeMobileMenu} />
+                    <Link to="/about" className="mobile-nav-link" onClick={closeMobileMenu}>About</Link>
+                    <a href="http://portal.selecttechinc.com/" target="_blank" rel="noopener noreferrer" className="mobile-nav-link" onClick={closeMobileMenu}>
+                        Customer Portal
+                    </a>
+                    <Link to="/contact" className="mobile-nav-link" onClick={closeMobileMenu}>Contact</Link>
+
+                    <NavButton className="nav-cta mobile-cta" to="/contact" onClick={closeMobileMenu}>
+                        <span>Let's Talk</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </NavButton>
                 </div>
             </div>
         </nav>

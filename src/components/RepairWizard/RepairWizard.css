@@ -3,8 +3,8 @@
     max-width: 900px;
     margin: 40px auto;
     padding: 30px;
-    background: rgba(20, 20, 35, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-color);
     border-radius: 20px;
     backdrop-filter: blur(10px);
 }
@@ -18,7 +18,7 @@
 .progress-track {
     width: 100%;
     height: 4px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--border-color);
     border-radius: 2px;
     position: absolute;
     top: 15px;
@@ -43,10 +43,10 @@
 .step-dot {
     width: 32px;
     height: 32px;
-    background: rgba(30, 30, 50, 1);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
     border-radius: 50%;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,7 +60,7 @@
     background: var(--accent-primary);
     border-color: var(--accent-primary);
     color: white;
-    box-shadow: 0 0 10px rgba(255, 12, 62, 0.5);
+    box-shadow: var(--accent-glow);
 }
 
 .step-label {
@@ -95,8 +95,8 @@
 
 /* Options */
 .wizard-option {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     padding: 20px;
     border-radius: 16px;
     cursor: pointer;
@@ -112,10 +112,10 @@
 }
 
 .wizard-option:hover {
-    background: rgba(255, 12, 62, 0.1);
+    background: rgba(var(--accent-primary), 0.1);
     border-color: var(--accent-primary);
     transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 20px var(--shadow-color);
 }
 
 /* Device Images */
@@ -132,13 +132,13 @@
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+    filter: drop-shadow(0 10px 15px var(--shadow-color));
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .wizard-option:hover .option-image {
     transform: scale(1.12) translateY(-8px);
-    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
+    filter: drop-shadow(0 15px 25px var(--shadow-color));
 }
 
 .option-icon {
@@ -148,21 +148,26 @@
 .option-label {
     font-size: 1.1rem;
     font-weight: 500;
+    color: var(--text-primary);
 }
 
 /* Summary */
 .wizard-summary {
     text-align: center;
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-card);
     padding: 40px;
     border-radius: 24px;
     width: 100%;
     max-width: 600px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-color);
+}
+
+.wizard-summary h3 {
+    color: var(--text-primary);
 }
 
 .summary-card {
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--bg-secondary);
     border-radius: 16px;
     padding: 30px;
     margin: 30px 0;
@@ -170,6 +175,7 @@
     align-items: center;
     gap: 30px;
     text-align: left;
+    border: 1px solid var(--border-color);
 }
 
 .summary-image {
@@ -211,13 +217,13 @@
 .summary-highlight {
     margin-top: 5px;
     padding-top: 10px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
 }
 
 .summary-highlight strong {
-    color: #4caf50;
+    color: var(--accent-tertiary);
     font-size: 1.3rem;
 }
 
@@ -230,9 +236,9 @@
 
 .btn-back {
     margin-top: 30px;
-    background: rgba(255, 255, 255, 0.05);
-    border: none;
-    color: rgba(255, 255, 255, 0.7);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
     cursor: pointer;
     font-size: 0.95rem;
     padding: 10px 20px;
@@ -241,23 +247,217 @@
 }
 
 .btn-back:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.wizard-summary .note {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* =============================================
+   LIGHT MODE SPECIFIC STYLES
+   ============================================= */
+[data-theme="light"] .repair-wizard {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .wizard-option {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .wizard-option:hover {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .step-dot {
+    background: var(--bg-tertiary);
+    border-color: rgba(0, 0, 0, 0.15);
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .step-dot.active {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
     color: white;
 }
 
-/* Mobile Responsive */
-@media (max-width: 600px) {
+[data-theme="light"] .wizard-summary {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .summary-card {
+    background: var(--bg-tertiary);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .btn-back {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .btn-back:hover {
+    background: var(--accent-primary);
+    color: white;
+}
+
+/* =============================================
+   RESPONSIVE DESIGN - Mobile First Improvements
+   ============================================= */
+
+/* Tablet and below */
+@media (max-width: 768px) {
+    .repair-wizard {
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    .wizard-progress {
+        margin-bottom: 30px;
+    }
+
+    .step-dot {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+    }
+
+    .step-label {
+        font-size: 1rem;
+    }
+
+    .wizard-content {
+        min-height: 350px;
+    }
+
+    .device-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .text-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .wizard-option {
+        padding: 15px 10px;
+        gap: 10px;
+    }
+
+    .option-image-container {
+        width: 80px;
+        height: 70px;
+        margin-bottom: 10px;
+    }
+
+    .option-label {
+        font-size: 0.9rem;
+    }
+
+    .wizard-summary {
+        padding: 25px 20px;
+    }
+
+    .summary-card {
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .summary-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .summary-item strong {
+        font-size: 1rem;
+    }
+
+    .summary-highlight strong {
+        font-size: 1.1rem;
+    }
+
+    .wizard-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .wizard-actions a,
+    .wizard-actions button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    .repair-wizard {
+        margin: 15px auto;
+        padding: 15px;
+    }
+
+    .step-dot {
+        width: 24px;
+        height: 24px;
+        font-size: 0.7rem;
+    }
+
+    .step-label {
+        font-size: 0.9rem;
+        margin-top: 12px;
+    }
+
+    .device-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .text-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .wizard-option {
+        padding: 12px 8px;
+    }
+
+    .option-image-container {
+        width: 60px;
+        height: 55px;
+        margin-bottom: 8px;
+    }
+
+    .option-label {
+        font-size: 0.8rem;
+    }
+
     .summary-card {
         flex-direction: column;
         text-align: center;
+        padding: 15px;
+        gap: 15px;
     }
-    
+
     .summary-text {
         width: 100%;
     }
-    
-    .option-image-container {
+
+    .summary-image {
         width: 100px;
         height: 100px;
+    }
+
+    .btn-back {
+        margin-top: 20px;
+        padding: 12px 24px;
     }
 }

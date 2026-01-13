@@ -664,7 +664,8 @@ a {
   align-items: center;
   padding: 120px 40px 80px;
   z-index: 10;
-  overflow-x: clip; /* Allow vertical scroll but clip horizontal overflow */
+  overflow-x: clip;
+  /* Allow vertical scroll but clip horizontal overflow */
   overflow-y: visible;
 }
 
@@ -723,14 +724,14 @@ a {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .hero-cybermap {
     flex: none;
     width: 100%;
     max-width: 600px;
     height: 350px;
   }
-  
+
   .hero-globe {
     flex: none;
     width: 100%;
@@ -774,13 +775,11 @@ a {
   width: 200%;
   height: 200%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(
-    circle at center,
-    var(--accent-primary-20, rgba(56, 189, 248, 0.15)) 0%,
-    var(--accent-primary-10, rgba(56, 189, 248, 0.08)) 25%,
-    var(--accent-primary-05, rgba(56, 189, 248, 0.03)) 45%,
-    transparent 65%
-  );
+  background: radial-gradient(circle at center,
+      var(--accent-primary-20, rgba(56, 189, 248, 0.15)) 0%,
+      var(--accent-primary-10, rgba(56, 189, 248, 0.08)) 25%,
+      var(--accent-primary-05, rgba(56, 189, 248, 0.03)) 45%,
+      transparent 65%);
   pointer-events: none;
   z-index: -1;
 }
@@ -800,7 +799,7 @@ a {
     margin-right: 0;
     margin-left: 0;
   }
-  
+
   .threat-globe {
     width: 120%;
     height: 120%;
@@ -811,7 +810,7 @@ a {
   .hero-globe {
     height: 280px;
   }
-  
+
   .threat-globe {
     width: 110%;
     height: 110%;
@@ -2310,12 +2309,13 @@ a {
     flex-direction: column;
     gap: 30px;
   }
-  
+
   .portal-3d {
     width: 100%;
     flex: none;
     height: 200px;
-    order: -1; /* Show 3D first on mobile */
+    order: -1;
+    /* Show 3D first on mobile */
   }
 }
 
@@ -2990,6 +2990,33 @@ a {
     grid-template-columns: 1fr;
     gap: 50px;
   }
+
+  .nav-links {
+    gap: 25px;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+  }
+}
+
+/* Tablet breakpoint - show hamburger earlier */
+@media (max-width: 1024px) {
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .nav-cta-desktop {
+    display: none;
+  }
+
+  .nav-inner {
+    padding: 14px 30px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -2998,11 +3025,27 @@ a {
   }
 
   .navbar {
-    padding: 15px 20px;
+    padding: 10px 15px;
+  }
+
+  .nav-inner {
+    padding: 12px 20px;
+  }
+
+  .nav-container {
+    gap: 10px;
+  }
+
+  .nav-logo {
+    font-size: 1.2rem;
   }
 
   .nav-links {
     display: none;
+  }
+
+  .nav-actions {
+    gap: 10px;
   }
 
   .hero {
