@@ -895,6 +895,7 @@ a {
   font-weight: 800;
   color: var(--text-primary);
   line-height: 1;
+  -webkit-text-fill-color: currentColor;
 }
 
 .stat-suffix {

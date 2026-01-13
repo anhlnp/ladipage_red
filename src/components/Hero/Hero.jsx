@@ -87,10 +87,10 @@ const Hero = () => {
                 { opacity: 1, y: 0, duration: 0.8, delay: 1 }
             )
 
-            // Animate stats
+            // Animate stats - faster appearance
             gsap.fromTo('.hero-stats',
                 { opacity: 0, y: 20 },
-                { opacity: 1, y: 0, duration: 0.8, delay: 1.2 }
+                { opacity: 1, y: 0, duration: 0.6, delay: 0.4 }
             )
 
             // Animate CTA
@@ -121,12 +121,12 @@ const Hero = () => {
         const stats = document.querySelector('.hero-stats')
         const cta = document.querySelector('.hero-cta')
         const scrollIndicator = document.querySelector('.scroll-indicator')
-        
+
         const handleScroll = () => {
             const scrollY = window.scrollY || window.lenis?.scroll || 0
             const heroHeight = window.innerHeight
             const progress = Math.min(scrollY / (heroHeight * 0.6), 1)
-            
+
             // Badge - flies up and left quickly
             if (badge) {
                 const badgeProgress = Math.min(progress * 2, 1) // Faster
@@ -137,7 +137,7 @@ const Hero = () => {
                     scale: 1 - badgeProgress * 0.3,
                 })
             }
-            
+
             // Title lines - staggered fly right with rotation
             titleLines.forEach((line, i) => {
                 const delay = i * 0.1 // Stagger delay
@@ -149,7 +149,7 @@ const Hero = () => {
                     rotationZ: lineProgress * (i % 2 === 0 ? 3 : -3), // Slight rotation
                 })
             })
-            
+
             // Description - flies down-right
             if (description) {
                 const descProgress = Math.max(0, Math.min((progress - 0.15) * 1.5, 1))
@@ -159,7 +159,7 @@ const Hero = () => {
                     opacity: 1 - descProgress,
                 })
             }
-            
+
             // Stats - flies down and scales down
             if (stats) {
                 const statsProgress = Math.max(0, Math.min((progress - 0.2) * 1.5, 1))
@@ -169,7 +169,7 @@ const Hero = () => {
                     scale: 1 - statsProgress * 0.2,
                 })
             }
-            
+
             // CTA - flies up
             if (cta) {
                 const ctaProgress = Math.max(0, Math.min((progress - 0.25) * 1.5, 1))
@@ -179,7 +179,7 @@ const Hero = () => {
                     scale: 1 - ctaProgress * 0.1,
                 })
             }
-            
+
             // Scroll indicator fades out first
             if (scrollIndicator) {
                 const indicatorProgress = Math.min(progress * 3, 1)
@@ -192,7 +192,7 @@ const Hero = () => {
 
         // Listen to both native scroll and Lenis scroll
         window.addEventListener('scroll', handleScroll, { passive: true })
-        
+
         if (window.lenis) {
             window.lenis.on('scroll', handleScroll)
         }
