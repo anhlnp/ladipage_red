@@ -1,4 +1,16 @@
 import { useEffect, useRef } from 'react'
+import {
+    Search,
+    KeyRound,
+    Lock,
+    Users,
+    Globe,
+    HardDrive,
+    Key,
+    ShieldCheck,
+    BarChart3,
+    ClipboardList
+} from 'lucide-react'
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
 import './ServicePage.css'
@@ -49,16 +61,16 @@ const MedicalDentalOffices = () => {
     }, [])
 
     const checklist = [
-        { icon: "🔍", title: "Conduct Risk Assessments", desc: "Identify vulnerabilities in your systems" },
-        { icon: "🔐", title: "Strong Access Controls", desc: "Limit access to sensitive patient data" },
-        { icon: "🔒", title: "Encrypt Data", desc: "Protect data at rest and in transit" },
-        { icon: "👥", title: "Train Employees", desc: "Security awareness training for all staff" },
-        { icon: "🌐", title: "Secure Network Infrastructure", desc: "Firewalls, VPNs, and network segmentation" },
-        { icon: "💾", title: "Regularly Backup Data", desc: "Automated backups with quick recovery" },
-        { icon: "🔑", title: "Strong Password Policies", desc: "Multi-factor authentication required" },
-        { icon: "🛡️", title: "Antivirus/Antimalware", desc: "Real-time threat detection and removal" },
-        { icon: "📊", title: "Monitor and Audit Systems", desc: "24/7 monitoring and compliance audits" },
-        { icon: "📋", title: "Incident Response Plan", desc: "Prepared for any security breach" }
+        { icon: <Search size={24} />, title: "Conduct Risk Assessments", desc: "Identify vulnerabilities in your systems" },
+        { icon: <KeyRound size={24} />, title: "Strong Access Controls", desc: "Limit access to sensitive patient data" },
+        { icon: <Lock size={24} />, title: "Encrypt Data", desc: "Protect data at rest and in transit" },
+        { icon: <Users size={24} />, title: "Train Employees", desc: "Security awareness training for all staff" },
+        { icon: <Globe size={24} />, title: "Secure Network Infrastructure", desc: "Firewalls, VPNs, and network segmentation" },
+        { icon: <HardDrive size={24} />, title: "Regularly Backup Data", desc: "Automated backups with quick recovery" },
+        { icon: <Key size={24} />, title: "Strong Password Policies", desc: "Multi-factor authentication required" },
+        { icon: <ShieldCheck size={24} />, title: "Antivirus/Antimalware", desc: "Real-time threat detection and removal" },
+        { icon: <BarChart3 size={24} />, title: "Monitor and Audit Systems", desc: "24/7 monitoring and compliance audits" },
+        { icon: <ClipboardList size={24} />, title: "Incident Response Plan", desc: "Prepared for any security breach" }
     ]
 
     return (

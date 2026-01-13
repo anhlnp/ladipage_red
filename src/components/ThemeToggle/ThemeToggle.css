@@ -39,6 +39,7 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1;
 }
 
 .toggle-track.dark .toggle-thumb {
@@ -61,22 +62,28 @@
 }
 
 .toggle-icons {
+    position: absolute;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
-    padding: 0 6px;
+    height: 100%;
+    padding: 0 8px;
     font-size: 12px;
     pointer-events: none;
+    z-index: 0;
 }
 
 .sun-icon {
-    opacity: 0.3;
+    opacity: 0.4;
     transition: opacity 0.3s ease;
+    color: rgba(251, 146, 60, 0.8);
 }
 
 .moon-icon {
-    opacity: 0.3;
+    opacity: 0.4;
     transition: opacity 0.3s ease;
+    color: rgba(56, 189, 248, 0.8);
 }
 
 .toggle-track.light .sun-icon {

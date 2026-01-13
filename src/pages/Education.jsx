@@ -1,4 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
+import {
+    BookOpen,
+    KeyRound,
+    Globe,
+    RefreshCw,
+    Wifi,
+    HardDrive,
+    Smartphone,
+    BarChart3,
+    ClipboardList,
+    Laptop,
+    UserCheck,
+    School as SchoolIcon,
+    ShieldCheck,
+    Lock
+} from 'lucide-react'
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
 import './ServicePage.css'
@@ -10,67 +26,46 @@ const Education = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
     useEffect(() => {
-        // Scroll-triggered reveal animation
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         }
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
+            entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate-in')
                 }
             })
         }, observerOptions)
 
-        const animatedElements = document.querySelectorAll('.bento-item, .feature-card, .checklist-row')
-        animatedElements.forEach(el => observer.observe(el))
+        // Observe bento items
+        const bentoItems = bentoRef.current?.querySelectorAll('.bento-item')
+        bentoItems?.forEach(item => observer.observe(item))
 
-        // 3D tilt effect on mouse move for bento cards
-        const handleMouseMove = (e) => {
-            if (bentoRef.current) {
-                const rect = bentoRef.current.getBoundingClientRect()
-                const x = (e.clientX - rect.left) / rect.width
-                const y = (e.clientY - rect.top) / rect.height
-                setMousePosition({ x, y })
-            }
-        }
+        // Observe orbit features
+        const orbitItems = document.querySelectorAll('.feature-card.orbit-item')
+        orbitItems.forEach(item => observer.observe(item))
 
-        // Parallax scroll effect
-        const handleScroll = () => {
-            if (sectionRef.current) {
-                const scrolled = window.scrollY
-                const parallaxElements = sectionRef.current.querySelectorAll('.parallax-layer')
-                parallaxElements.forEach((el, i) => {
-                    const speed = (i + 1) * 0.03
-                    el.style.transform = `translateY(${scrolled * speed}px)`
-                })
-            }
-        }
+        // Observe checklist rows
+        const checklistRows = document.querySelectorAll('.checklist-row')
+        checklistRows.forEach(row => observer.observe(row))
 
-        window.addEventListener('scroll', handleScroll)
-        window.addEventListener('mousemove', handleMouseMove)
-
-        return () => {
-            observer.disconnect()
-            window.removeEventListener('scroll', handleScroll)
-            window.removeEventListener('mousemove', handleMouseMove)
-        }
+        return () => observer.disconnect()
     }, [])
 
     const checklist = [
-        { icon: "📚", title: "Educate Students, Teachers, and Staff", desc: "Comprehensive cybersecurity awareness training" },
-        { icon: "🔐", title: "Implement Strong Access Controls", desc: "Role-based access to sensitive student data" },
-        { icon: "🌐", title: "Secure Network Infrastructure", desc: "Protected networks for safe digital learning" },
-        { icon: "🔄", title: "Keep Software and Systems Updated", desc: "Regular patches and security updates" },
-        { icon: "📶", title: "Secure Wi-Fi Networks", desc: "Protected wireless access for all devices" },
-        { icon: "💾", title: "Backup Data Regularly", desc: "Automated backups with quick recovery" },
-        { icon: "📱", title: "Implement a BYOD Policy", desc: "Secure bring-your-own-device guidelines" },
-        { icon: "📊", title: "Monitor Network Activity", desc: "Real-time threat detection and alerts" },
-        { icon: "📋", title: "Develop an Incident Response Plan", desc: "Be prepared for any security breach" },
-        { icon: "💻", title: "Secure Physical Devices", desc: "Protect hardware from theft and tampering" },
-        { icon: "👨‍💻", title: "Engage with Cybersecurity Professionals", desc: "Expert guidance and support" }
+        { icon: <BookOpen size={24} />, title: "Educate Students, Teachers, and Staff", desc: "Comprehensive cybersecurity awareness training" },
+        { icon: <KeyRound size={24} />, title: "Implement Strong Access Controls", desc: "Role-based access to sensitive student data" },
+        { icon: <Globe size={24} />, title: "Secure Network Infrastructure", desc: "Protected networks for safe digital learning" },
+        { icon: <RefreshCw size={24} />, title: "Keep Software and Systems Updated", desc: "Regular patches and security updates" },
+        { icon: <Wifi size={24} />, title: "Secure Wi-Fi Networks", desc: "Protected wireless access for all devices" },
+        { icon: <HardDrive size={24} />, title: "Backup Data Regularly", desc: "Automated backups with quick recovery" },
+        { icon: <Smartphone size={24} />, title: "Implement a BYOD Policy", desc: "Secure bring-your-own-device guidelines" },
+        { icon: <BarChart3 size={24} />, title: "Monitor Network Activity", desc: "Real-time threat detection and alerts" },
+        { icon: <ClipboardList size={24} />, title: "Develop an Incident Response Plan", desc: "Be prepared for any security breach" },
+        { icon: <Laptop size={24} />, title: "Secure Physical Devices", desc: "Protect hardware from theft and tampering" },
+        { icon: <UserCheck size={24} />, title: "Engage with Cybersecurity Professionals", desc: "Expert guidance and support" }
     ]
 
     return (
@@ -134,15 +129,15 @@ const Education = () => {
                             <div className="stat-block">
                                 <div className="stat-circle">
                                     <svg viewBox="0 0 100 100">
+                                        <defs>
+                                            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" stopColor="#8b5cf6" />
+                                                <stop offset="100%" stopColor="#ec4899" />
+                                            </linearGradient>
+                                        </defs>
                                         <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(139,92,246,0.2)" strokeWidth="8" />
                                         <circle cx="50" cy="50" r="45" fill="none" stroke="url(#gradient1)" strokeWidth="8" strokeDasharray="283" strokeDashoffset="28" strokeLinecap="round" className="stat-progress" />
                                     </svg>
-                                    <defs>
-                                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" stopColor="#8b5cf6" />
-                                            <stop offset="100%" stopColor="#ec4899" />
-                                        </linearGradient>
-                                    </defs>
                                 </div>
                                 <span className="stat-value">FERPA</span>
                                 <span className="stat-subtitle">Compliant</span>
@@ -175,9 +170,9 @@ const Education = () => {
                                 <p>Safeguarding sensitive student information with cutting-edge encryption</p>
                             </div>
                             <div className="security-icons">
-                                <div className="security-icon"><span>🔒</span></div>
-                                <div className="security-icon"><span>🛡️</span></div>
-                                <div className="security-icon"><span>🔑</span></div>
+                                <div className="security-icon"><span><Lock size={20} /></span></div>
+                                <div className="security-icon"><span><ShieldCheck size={20} /></span></div>
+                                <div className="security-icon"><span><KeyRound size={20} /></span></div>
                             </div>
                         </div>
                     </div>
@@ -205,14 +200,13 @@ const Education = () => {
 
                 <div className="features-orbit">
                     <div className="orbit-center">
-                        <div className="center-icon">🏫</div>
-                        <span>Education Security</span>
+                        <div className="center-icon"><SchoolIcon size={40} /></div>
                     </div>
                     {[
-                        { icon: "🔐", title: "Access Control", color: "#8b5cf6" },
-                        { icon: "📊", title: "Monitoring", color: "#ec4899" },
-                        { icon: "🛡️", title: "Protection", color: "#06b6d4" },
-                        { icon: "📚", title: "Training", color: "#f59e0b" }
+                        { icon: <KeyRound size={24} />, title: "Access Control", color: "#8b5cf6" },
+                        { icon: <BarChart3 size={24} />, title: "Monitoring", color: "#ec4899" },
+                        { icon: <ShieldCheck size={24} />, title: "Protection", color: "#06b6d4" },
+                        { icon: <BookOpen size={24} />, title: "Training", color: "#f59e0b" }
                     ].map((item, idx) => (
                         <div
                             key={idx}

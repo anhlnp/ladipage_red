@@ -1,4 +1,14 @@
 import { useEffect, useRef } from 'react'
+import {
+    HardDrive,
+    Rocket,
+    Globe,
+    Shield,
+    Wrench,
+    Cloud,
+    HeartPulse,
+    Smartphone
+} from 'lucide-react'
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
 import './ServicePage.css'
@@ -29,14 +39,14 @@ const ITSupport = () => {
     }, [])
 
     const services = [
-        { icon: '💾', title: 'Backup & Disaster Recovery', desc: 'Secure solutions to protect your critical business data' },
-        { icon: '🚀', title: 'Network Performance', desc: 'Cleanup and optimization for maximum speed and reliability' },
-        { icon: '🌐', title: 'Internet & Intranet', desc: 'Setup and support for your internal and external connectivity' },
-        { icon: '🛡️', title: 'Virus & Spyware Removal', desc: 'Detection, removal, and prevention of malicious software' },
-        { icon: '🔧', title: 'Hardware & Software', desc: 'Repair, installation, and upgrades for all your systems' },
-        { icon: '☁️', title: 'Cloud Services', desc: 'Office 365, Hosted Desktop, Exchange, and SharePoint solutions' },
-        { icon: '🏥', title: 'Medical/Dental IT', desc: 'Specialized EHR rollout and support specialists' },
-        { icon: '📱', title: 'Infrastructure', desc: 'Cabling, VOIP, and network installation services' },
+        { icon: <HardDrive size={28} />, title: 'Backup & Disaster Recovery', desc: 'Secure solutions to protect your critical business data' },
+        { icon: <Rocket size={28} />, title: 'Network Performance', desc: 'Cleanup and optimization for maximum speed and reliability' },
+        { icon: <Globe size={28} />, title: 'Internet & Intranet', desc: 'Setup and support for your internal and external connectivity' },
+        { icon: <Shield size={28} />, title: 'Virus & Spyware Removal', desc: 'Detection, removal, and prevention of malicious software' },
+        { icon: <Wrench size={28} />, title: 'Hardware & Software', desc: 'Repair, installation, and upgrades for all your systems' },
+        { icon: <Cloud size={28} />, title: 'Cloud Services', desc: 'Office 365, Hosted Desktop, Exchange, and SharePoint solutions' },
+        { icon: <HeartPulse size={28} />, title: 'Medical/Dental IT', desc: 'Specialized EHR rollout and support specialists' },
+        { icon: <Smartphone size={28} />, title: 'Infrastructure', desc: 'Cabling, VOIP, and network installation services' },
     ]
 
     const features = [

@@ -1,4 +1,12 @@
 import { useEffect, useRef } from 'react'
+import {
+    Search,
+    HardDrive,
+    Wrench,
+    Rocket,
+    Disc,
+    Bug
+} from 'lucide-react'
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
 import './ServicePage.css'
@@ -29,12 +37,12 @@ const ComputerRepair = () => {
     }, [])
 
     const services = [
-        { icon: '🔍', title: 'Diagnostics', desc: 'Comprehensive system analysis to identify issues' },
-        { icon: '💾', title: 'Data Services', desc: 'Transfer, backup, import, setup, and recovery' },
-        { icon: '🔧', title: 'Hardware Repairs', desc: 'Fixing physical components of Macs and PCs' },
-        { icon: '🚀', title: 'Optimization', desc: 'System tuning for better performance' },
-        { icon: '💿', title: 'OS Installation', desc: 'Operating system installation and repair' },
-        { icon: '🦠', title: 'Virus & Spyware', desc: 'Complete removal and cleanup (Spyware PC only)' },
+        { icon: <Search size={28} />, title: 'Diagnostics', desc: 'Comprehensive system analysis to identify issues' },
+        { icon: <HardDrive size={28} />, title: 'Data Services', desc: 'Transfer, backup, import, setup, and recovery' },
+        { icon: <Wrench size={28} />, title: 'Hardware Repairs', desc: 'Fixing physical components of Macs and PCs' },
+        { icon: <Rocket size={28} />, title: 'Optimization', desc: 'System tuning for better performance' },
+        { icon: <Disc size={28} />, title: 'OS Installation', desc: 'Operating system installation and repair' },
+        { icon: <Bug size={28} />, title: 'Virus & Spyware', desc: 'Complete removal and cleanup (Spyware PC only)' },
     ]
 
     return (

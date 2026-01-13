@@ -270,12 +270,12 @@
 
 /* Stats Grid */
 .stats-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 16px;
     height: 100%;
-    align-content: space-between;
+    justify-content: center;
 }
 
 .stat-block {
@@ -284,9 +284,9 @@
 }
 
 .stat-circle {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 8px;
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 6px;
     position: relative;
 }
 
@@ -309,16 +309,7 @@
 }
 
 .stat-value {
-    font-size: 0.9rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #8b5cf6, #ec4899);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.stat-big-number {
-    font-size: 2rem;
+    font-size: 0.85rem;
     font-weight: 800;
     background: linear-gradient(135deg, #8b5cf6, #ec4899);
     -webkit-background-clip: text;
@@ -327,18 +318,29 @@
     display: block;
 }
 
+.stat-big-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+    line-height: 1;
+}
+
 .stat-suffix {
-    font-size: 1rem;
+    font-size: 0.9rem;
     opacity: 0.8;
 }
 
 .stat-subtitle {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--text-secondary);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
     display: block;
-    margin-top: 4px;
+    margin-top: 3px;
 }
 
 /* Features Section - Orbital Design */
@@ -401,12 +403,28 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    z-index: 10;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.orbit-center:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    border-color: rgba(139, 92, 246, 0.6);
+    background: linear-gradient(145deg, rgba(139, 92, 246, 0.3), rgba(17, 17, 17, 0.95));
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.4), 0 0 60px rgba(139, 92, 246, 0.2);
 }
 
 .center-icon {
     font-size: 2.5rem;
     margin-bottom: 4px;
+    color: #8b5cf6;
+    transition: transform 0.3s ease;
+}
+
+.orbit-center:hover .center-icon {
+    transform: scale(1.1);
+    color: #a78bfa;
 }
 
 .orbit-center span {
@@ -414,12 +432,18 @@
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.orbit-center:hover span {
+    color: #fff;
 }
 
 .feature-card.orbit-item {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
+    padding: 12px 8px;
     background: linear-gradient(145deg, rgba(30, 30, 35, 0.9), rgba(20, 20, 25, 0.95));
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -427,57 +451,76 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 6px;
     animation: orbitRotate 20s linear infinite;
     animation-delay: var(--orbit-delay);
     opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .feature-card.orbit-item.animate-in {
     opacity: 1;
-    transform: scale(1);
 }
 
 .feature-card:nth-child(2) {
-    top: -20px;
+    top: -25px;
     left: 50%;
-    transform: translateX(-50%);
+    margin-left: -50px;
 }
 
 .feature-card:nth-child(3) {
     top: 50%;
-    right: -20px;
-    transform: translateY(-50%);
+    right: -25px;
+    margin-top: -50px;
 }
 
 .feature-card:nth-child(4) {
-    bottom: -20px;
+    bottom: -25px;
     left: 50%;
-    transform: translateX(-50%);
+    margin-left: -50px;
 }
 
 .feature-card:nth-child(5) {
     top: 50%;
-    left: -20px;
-    transform: translateY(-50%);
+    left: -25px;
+    margin-top: -50px;
 }
 
 .feature-card:hover {
     border-color: var(--feature-color);
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+    background: linear-gradient(145deg, rgba(40, 40, 45, 0.95), rgba(25, 25, 30, 0.98));
+    box-shadow: 0 0 30px var(--feature-color), 0 0 60px rgba(139, 92, 246, 0.2);
+    transform: scale(1.15) translateY(-5px);
 }
 
 .feature-icon {
-    font-size: 1.5rem;
-    margin-bottom: 4px;
+    font-size: 1.6rem;
+    line-height: 1;
+    flex-shrink: 0;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    color: var(--feature-color);
+    transform: scale(1.2);
 }
 
 .feature-title {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    text-align: center;
+    line-height: 1.2;
+    word-spacing: 100vw;
+    transition: color 0.3s ease;
+    /* Force line breaks between words */
+}
+
+.feature-card:hover .feature-title {
+    color: #fff;
 }
 
 /* Checklist Section - Timeline Style */
@@ -740,9 +783,39 @@
     }
 
     .feature-card.orbit-item {
-        width: 65px;
-        height: 65px;
+        width: 75px;
+        height: 75px;
         border-radius: 16px;
+        padding: 10px 6px;
+        gap: 4px;
+    }
+
+    .feature-card:nth-child(2) {
+        top: -20px;
+        margin-left: -37.5px;
+    }
+
+    .feature-card:nth-child(3) {
+        right: -20px;
+        margin-top: -37.5px;
+    }
+
+    .feature-card:nth-child(4) {
+        bottom: -20px;
+        margin-left: -37.5px;
+    }
+
+    .feature-card:nth-child(5) {
+        left: -20px;
+        margin-top: -37.5px;
+    }
+
+    .feature-icon {
+        font-size: 1.3rem;
+    }
+
+    .feature-title {
+        font-size: 0.6rem;
     }
 
     .checklist-timeline::before {
@@ -799,5 +872,59 @@
 
     .checklist-info strong {
         font-size: 0.9rem;
+    }
+
+    .features-orbit {
+        width: 220px;
+        height: 220px;
+    }
+
+    .orbit-center {
+        width: 80px;
+        height: 80px;
+    }
+
+    .center-icon {
+        font-size: 1.5rem;
+    }
+
+    .orbit-center span {
+        font-size: 0.6rem;
+    }
+
+    .feature-card.orbit-item {
+        width: 65px;
+        height: 65px;
+        padding: 8px 4px;
+        gap: 3px;
+    }
+
+    .feature-card:nth-child(2) {
+        top: -15px;
+        margin-left: -32.5px;
+    }
+
+    .feature-card:nth-child(3) {
+        right: -15px;
+        margin-top: -32.5px;
+    }
+
+    .feature-card:nth-child(4) {
+        bottom: -15px;
+        margin-left: -32.5px;
+    }
+
+    .feature-card:nth-child(5) {
+        left: -15px;
+        margin-top: -32.5px;
+    }
+
+    .feature-icon {
+        font-size: 1.1rem;
+    }
+
+    .feature-title {
+        font-size: 0.55rem;
+        line-height: 1.1;
     }
 }

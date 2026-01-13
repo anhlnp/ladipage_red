@@ -112,8 +112,15 @@
 }
 
 .service-card .icon {
-    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: rgba(var(--accent-primary-rgb, 56, 189, 248), 0.1);
+    border-radius: 12px;
     margin-bottom: 16px;
+    color: var(--accent-primary);
 }
 
 .service-card h4 {

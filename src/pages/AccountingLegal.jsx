@@ -1,4 +1,22 @@
 import { useEffect, useRef } from 'react'
+import {
+    Search,
+    KeyRound,
+    Lock,
+    FolderOpen,
+    Users,
+    Key,
+    Radio,
+    Home,
+    Mail,
+    RefreshCw,
+    HardDrive,
+    BarChart3,
+    DollarSign,
+    TrendingDown,
+    Scale,
+    Clock
+} from 'lucide-react'
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
 import './ServicePage.css'
@@ -40,25 +58,25 @@ const AccountingLegal = () => {
     }, [])
 
     const checklist = [
-        { icon: "🔍", title: "Risk Assessments", desc: "Identify vulnerabilities before they're exploited" },
-        { icon: "🔐", title: "Access Controls", desc: "Role-based access to sensitive data" },
-        { icon: "🔒", title: "Data Encryption", desc: "End-to-end encryption for all client data" },
-        { icon: "📁", title: "Document Management", desc: "Secure storage and sharing systems" },
-        { icon: "👥", title: "Employee Training", desc: "Security awareness for all staff" },
-        { icon: "🔑", title: "Password Policies", desc: "Multi-factor authentication required" },
-        { icon: "📡", title: "Secure Networks", desc: "Protected Wi-Fi and VPN access" },
-        { icon: "🏠", title: "Remote Access", desc: "Secure work-from-home solutions" },
-        { icon: "📧", title: "Email Security", desc: "Phishing protection and encryption" },
-        { icon: "🔄", title: "Software Updates", desc: "Automated patching and updates" },
-        { icon: "💾", title: "Data Backup", desc: "Automated daily backups with quick recovery" },
-        { icon: "📊", title: "System Monitoring", desc: "24/7 threat detection and response" }
+        { icon: <Search size={20} />, title: "Risk Assessments", desc: "Identify vulnerabilities before they're exploited" },
+        { icon: <KeyRound size={20} />, title: "Access Controls", desc: "Role-based access to sensitive data" },
+        { icon: <Lock size={20} />, title: "Data Encryption", desc: "End-to-end encryption for all client data" },
+        { icon: <FolderOpen size={20} />, title: "Document Management", desc: "Secure storage and sharing systems" },
+        { icon: <Users size={20} />, title: "Employee Training", desc: "Security awareness for all staff" },
+        { icon: <Key size={20} />, title: "Password Policies", desc: "Multi-factor authentication required" },
+        { icon: <Radio size={20} />, title: "Secure Networks", desc: "Protected Wi-Fi and VPN access" },
+        { icon: <Home size={20} />, title: "Remote Access", desc: "Secure work-from-home solutions" },
+        { icon: <Mail size={20} />, title: "Email Security", desc: "Phishing protection and encryption" },
+        { icon: <RefreshCw size={20} />, title: "Software Updates", desc: "Automated patching and updates" },
+        { icon: <HardDrive size={20} />, title: "Data Backup", desc: "Automated daily backups with quick recovery" },
+        { icon: <BarChart3 size={20} />, title: "System Monitoring", desc: "24/7 threat detection and response" }
     ]
 
     const risks = [
-        { icon: "💰", title: "Financial Theft", desc: "Direct monetary losses from breaches" },
-        { icon: "📉", title: "Reputation Damage", desc: "Loss of client confidence and trust" },
-        { icon: "⚖️", title: "Regulatory Fines", desc: "Penalties for non-compliance" },
-        { icon: "⏱️", title: "Operational Downtime", desc: "Business disruption and recovery costs" }
+        { icon: <DollarSign size={20} />, title: "Financial Theft", desc: "Direct monetary losses from breaches" },
+        { icon: <TrendingDown size={20} />, title: "Reputation Damage", desc: "Loss of client confidence and trust" },
+        { icon: <Scale size={20} />, title: "Regulatory Fines", desc: "Penalties for non-compliance" },
+        { icon: <Clock size={20} />, title: "Operational Downtime", desc: "Business disruption and recovery costs" }
     ]
 
     return (

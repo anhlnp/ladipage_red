@@ -1,3 +1,4 @@
+import { Sun, Moon } from 'lucide-react'
 import { useTheme } from '../../context/ThemeContext'
 import './ThemeToggle.css'
 
@@ -31,8 +32,8 @@ const ThemeToggle = () => {
                     )}
                 </div>
                 <span className="toggle-icons">
-                    <span className="sun-icon">☀️</span>
-                    <span className="moon-icon">🌙</span>
+                    <span className="sun-icon"><Sun size={14} /></span>
+                    <span className="moon-icon"><Moon size={14} /></span>
                 </span>
             </div>
         </button>
