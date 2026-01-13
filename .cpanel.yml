@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/lbb6fey2urjf/public_html/demo.selecttechinc.com/
+    - /bin/cp -R * $DEPLOYPATH
