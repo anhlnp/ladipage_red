@@ -3,7 +3,7 @@ name: Build and Deploy to cPanel Branch
 on:
   push:
     branches:
-      - main
+      - anh
 
 jobs:
   build-and-deploy:
