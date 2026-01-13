@@ -1,8 +1,33 @@
+import { useEffect, useRef } from 'react'
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
 import './ServicePage.css'
+import './ITSupport.css'
 
 const ITSupport = () => {
+    const imageLeftRef = useRef(null)
+    const imageRightRef = useRef(null)
+
+    useEffect(() => {
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in')
+                }
+            })
+        }, observerOptions)
+
+        if (imageLeftRef.current) observer.observe(imageLeftRef.current)
+        if (imageRightRef.current) observer.observe(imageRightRef.current)
+
+        return () => observer.disconnect()
+    }, [])
+
     const services = [
         { icon: '💾', title: 'Backup & Disaster Recovery', desc: 'Secure solutions to protect your critical business data' },
         { icon: '🚀', title: 'Network Performance', desc: 'Cleanup and optimization for maximum speed and reliability' },
@@ -29,14 +54,14 @@ const ITSupport = () => {
                 gradientText="IT Services"
                 description="We are your local IT support company invested in your success. Committed to keeping your PCs and servers up and running with practical solutions."
             />
-            
+
             <section className="service-content">
                 <div className="content-container">
                     <div className="content-block glass-box" style={{ gridColumn: 'span 2' }}>
                         <h3>Comprehensive IT Services</h3>
                         <p>
-                            Select Tech has over 15 years of experience providing IT support in North Carolina. 
-                            Our IT Department takes complete responsibility for your network, managing all day-to-day 
+                            Select Tech has over 15 years of experience providing IT support in North Carolina.
+                            Our IT Department takes complete responsibility for your network, managing all day-to-day
                             IT-related tasks allowing you to concentrate on your business.
                         </p>
                         <div className="service-cards">
@@ -53,7 +78,7 @@ const ITSupport = () => {
                     <div className="content-block glass-box">
                         <h3>Pay-As-You-Go Support</h3>
                         <p>
-                            We offer flexible support with no contract obligation. You can pay for support using 
+                            We offer flexible support with no contract obligation. You can pay for support using
                             our 'ticketed' prepayment system or agreed terms.
                         </p>
                         <ul className="feature-list" style={{ marginTop: '20px' }}>
@@ -80,7 +105,47 @@ const ITSupport = () => {
                     </div>
                 </div>
             </section>
-            
+
+            {/* Creative dual-image section with scroll animations */}
+            <section className="team-showcase">
+                <div className="team-showcase-content">
+                    <h2 className="team-title">
+                        Our Team is <span className="gradient-text">Your Team</span>
+                    </h2>
+                    <p className="team-subtitle">
+                        A dedicated team of IT professionals celebrating every success with you
+                    </p>
+                </div>
+                <div className="team-images-wrapper">
+                    <div
+                        ref={imageLeftRef}
+                        className="team-image-card slide-from-left"
+                    >
+                        <div className="image-glow"></div>
+                        <img
+                            src="/business+people+high+five.webp"
+                            alt="Business team high five"
+                        />
+                        <div className="image-overlay">
+                            <span>Success Together</span>
+                        </div>
+                    </div>
+                    <div
+                        ref={imageRightRef}
+                        className="team-image-card slide-from-right"
+                    >
+                        <div className="image-glow"></div>
+                        <img
+                            src="/business_high_five_generated.png"
+                            alt="Team collaboration celebration"
+                        />
+                        <div className="image-overlay">
+                            <span>Celebrate Wins</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section className="page-cta">
                 <div className="cta-container">
                     <h2>Need IT Help Today?</h2>

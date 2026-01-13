@@ -1,21 +1,64 @@
+import { useEffect, useRef } from 'react'
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
 import './ServicePage.css'
+import './AccountingLegal.css'
 
 const AccountingLegal = () => {
+    const timelineRef = useRef([])
+    const heroImageRef = useRef(null)
+
+    useEffect(() => {
+        // Timeline reveal animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible')
+                }
+            })
+        }, { threshold: 0.2 })
+
+        timelineRef.current.forEach(item => {
+            if (item) observer.observe(item)
+        })
+
+        // Floating animation for hero image
+        let animationFrame
+        const floatAnimation = () => {
+            if (heroImageRef.current) {
+                const time = Date.now() / 1000
+                heroImageRef.current.style.transform = `translateY(${Math.sin(time) * 10}px)`
+            }
+            animationFrame = requestAnimationFrame(floatAnimation)
+        }
+        floatAnimation()
+
+        return () => {
+            observer.disconnect()
+            cancelAnimationFrame(animationFrame)
+        }
+    }, [])
+
     const checklist = [
-        "Conduct Risk Assessments",
-        "Implement Strong Access Controls",
-        "Encrypt Data",
-        "Secure Document Management",
-        "Train Employees",
-        "Maintain Strong Password Policies",
-        "Use Secure Networks and Wi-Fi",
-        "Secure Remote Access",
-        "Implement Email Security Measures",
-        "Regularly Update Software and Systems",
-        "Backup Data Regularly",
-        "Monitor and Audit Systems"
+        { icon: "🔍", title: "Risk Assessments", desc: "Identify vulnerabilities before they're exploited" },
+        { icon: "🔐", title: "Access Controls", desc: "Role-based access to sensitive data" },
+        { icon: "🔒", title: "Data Encryption", desc: "End-to-end encryption for all client data" },
+        { icon: "📁", title: "Document Management", desc: "Secure storage and sharing systems" },
+        { icon: "👥", title: "Employee Training", desc: "Security awareness for all staff" },
+        { icon: "🔑", title: "Password Policies", desc: "Multi-factor authentication required" },
+        { icon: "📡", title: "Secure Networks", desc: "Protected Wi-Fi and VPN access" },
+        { icon: "🏠", title: "Remote Access", desc: "Secure work-from-home solutions" },
+        { icon: "📧", title: "Email Security", desc: "Phishing protection and encryption" },
+        { icon: "🔄", title: "Software Updates", desc: "Automated patching and updates" },
+        { icon: "💾", title: "Data Backup", desc: "Automated daily backups with quick recovery" },
+        { icon: "📊", title: "System Monitoring", desc: "24/7 threat detection and response" }
+    ]
+
+    const risks = [
+        { icon: "💰", title: "Financial Theft", desc: "Direct monetary losses from breaches" },
+        { icon: "📉", title: "Reputation Damage", desc: "Loss of client confidence and trust" },
+        { icon: "⚖️", title: "Regulatory Fines", desc: "Penalties for non-compliance" },
+        { icon: "⏱️", title: "Operational Downtime", desc: "Business disruption and recovery costs" }
     ]
 
     return (
@@ -26,48 +69,72 @@ const AccountingLegal = () => {
                 gradientText="Cybersecurity"
                 description="Cybersecurity is essential for accounting and legal offices protecting sensitive client data, financial records, and legal documents."
             />
-            
-            <section className="service-content">
-                <div className="content-container">
-                    <div className="content-block glass-box" style={{ gridColumn: 'span 2' }}>
-                        <h3>Protecting Client Trust</h3>
+
+            {/* Split-screen section with floating image */}
+            <section className="split-hero">
+                <div className="split-content">
+                    <div className="split-text">
+                        <span className="section-tag">TRUSTED BY PROFESSIONALS</span>
+                        <h2>Protecting <span className="gradient-text">Client Trust</span></h2>
                         <p>
-                            Protecting client data is critical to maintaining trust, complying with regulations, 
-                            and avoiding potential legal and financial repercussions. Regardless of business size, 
-                            cybersecurity must be a priority to safeguard sensitive information.
+                            Accounting and legal firms are prime targets for cyber criminals due to the
+                            high value of data they possess. We provide comprehensive security solutions
+                            tailored for professional services.
                         </p>
-                        
-                        <h4 style={{ marginTop: '30px', marginBottom: '20px', fontSize: '1.2rem', color: 'var(--text-primary)' }}>
-                            Let Select Tech Cybersecurity help you implement:
-                        </h4>
-                        
-                        <div className="service-cards" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
-                            {checklist.map((item, idx) => (
-                                <div key={idx} className="service-card glass-box-light" style={{ padding: '20px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-                                    <span style={{ color: 'var(--accent-primary)', fontSize: '1.2rem' }}>✓</span>
-                                    <span style={{ color: 'var(--text-primary)', fontWeight: '500' }}>{item}</span>
+                        <div className="risk-cards">
+                            {risks.map((risk, idx) => (
+                                <div key={idx} className="risk-card">
+                                    <span className="risk-icon">{risk.icon}</span>
+                                    <div>
+                                        <strong>{risk.title}</strong>
+                                        <span>{risk.desc}</span>
+                                    </div>
                                 </div>
                             ))}
                         </div>
                     </div>
-                    
-                    <div className="content-block glass-box">
-                        <h3>Why It Matters</h3>
-                        <p>
-                            Accounting and legal firms are prime targets for cyber criminals due to the high value 
-                            of data they possess. A breach can lead to:
-                        </p>
-                        <ul className="feature-list">
-                            <li>Financial Theft & Fraud</li>
-                            <li>Reputational Damage</li>
-                            <li>Regulatory Fines</li>
-                            <li>Loss of Client Trust</li>
-                            <li>Operational Downtime</li>
-                        </ul>
+                    <div className="split-image" ref={heroImageRef}>
+                        <div className="image-frame">
+                            <img src="/accounting_office.png" alt="Modern accounting office" />
+                            <div className="image-badge">
+                                <span className="badge-icon">🛡️</span>
+                                <span>Protected</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
-            
+
+            {/* Timeline-style checklist */}
+            <section className="timeline-section">
+                <div className="timeline-header">
+                    <h2>Our Security <span className="gradient-text">Checklist</span></h2>
+                    <p>Comprehensive protection for your practice</p>
+                </div>
+                <div className="timeline-grid">
+                    {checklist.map((item, idx) => (
+                        <div
+                            key={idx}
+                            className="timeline-item"
+                            ref={el => timelineRef.current[idx] = el}
+                            style={{ transitionDelay: `${idx * 50}ms` }}
+                        >
+                            <div className="timeline-connector">
+                                <div className="connector-dot"></div>
+                                {idx < checklist.length - 1 && <div className="connector-line"></div>}
+                            </div>
+                            <div className="timeline-content glass-box">
+                                <span className="timeline-icon">{item.icon}</span>
+                                <div className="timeline-text">
+                                    <strong>{item.title}</strong>
+                                    <span>{item.desc}</span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
             <section className="page-cta">
                 <div className="cta-container">
                     <h2>Secure Your Practice Today</h2>
@@ -80,3 +147,4 @@ const AccountingLegal = () => {
 }
 
 export default AccountingLegal
+

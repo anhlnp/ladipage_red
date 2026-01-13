@@ -1,8 +1,33 @@
+import { useEffect, useRef } from 'react'
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
 import './ServicePage.css'
+import './ComputerRepair.css'
 
 const ComputerRepair = () => {
+    const imageLeftRef = useRef(null)
+    const imageRightRef = useRef(null)
+
+    useEffect(() => {
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in')
+                }
+            })
+        }, observerOptions)
+
+        if (imageLeftRef.current) observer.observe(imageLeftRef.current)
+        if (imageRightRef.current) observer.observe(imageRightRef.current)
+
+        return () => observer.disconnect()
+    }, [])
+
     const services = [
         { icon: '🔍', title: 'Diagnostics', desc: 'Comprehensive system analysis to identify issues' },
         { icon: '💾', title: 'Data Services', desc: 'Transfer, backup, import, setup, and recovery' },
@@ -20,14 +45,14 @@ const ComputerRepair = () => {
                 gradientText="Repair Services"
                 description="Expert repair services for individuals and businesses. We partner with Malwarebytes to provide comprehensive protection against digital threats."
             />
-            
+
             <section className="service-content">
                 <div className="content-container">
                     <div className="content-block glass-box" style={{ gridColumn: 'span 2' }}>
                         <h3>Repair Services</h3>
                         <p>
-                            At Select Tech Inc., we provide comprehensive solutions to meet all your digital security needs. 
-                            We offer Malwarebytes Premium partnerships for robust protection against malware, ransomware, 
+                            At Select Tech Inc., we provide comprehensive solutions to meet all your digital security needs.
+                            We offer Malwarebytes Premium partnerships for robust protection against malware, ransomware,
                             and phishing attempts.
                         </p>
                         <div className="service-cards">
@@ -44,7 +69,7 @@ const ComputerRepair = () => {
                     <div className="content-block glass-box">
                         <h3>On-Site Services</h3>
                         <p>
-                            We perform on-site services in the convenience of your home or place of business. 
+                            We perform on-site services in the convenience of your home or place of business.
                             We offer the same services as in-store repairs, plus additional on-site capabilities.
                         </p>
                         <ul className="feature-list" style={{ marginTop: '20px' }}>
@@ -59,18 +84,58 @@ const ComputerRepair = () => {
                     <div className="content-block glass-box">
                         <h3>Malwarebytes Partnership</h3>
                         <p>
-                            With the ever-increasing threat of cyberattacks, we have curated a range of options 
+                            With the ever-increasing threat of cyberattacks, we have curated a range of options
                             in partnership with Malwarebytes.
                         </p>
-                        <br/>
+                        <br />
                         <p>
-                            <strong>Malwarebytes Premium:</strong> An all-in-one software designed to protect your personal devices. 
+                            <strong>Malwarebytes Premium:</strong> An all-in-one software designed to protect your personal devices.
                             Browse with confidence knowing you are protected against sophisticated threats.
                         </p>
                     </div>
                 </div>
             </section>
-            
+
+            {/* Creative dual-image section with scroll animations */}
+            <section className="repair-showcase">
+                <div className="repair-showcase-content">
+                    <h2 className="repair-title">
+                        Expert <span className="gradient-text">Technicians</span>
+                    </h2>
+                    <p className="repair-subtitle">
+                        Professional repair services with precision and care for all your devices
+                    </p>
+                </div>
+                <div className="repair-images-wrapper">
+                    <div
+                        ref={imageLeftRef}
+                        className="repair-image-card slide-from-left"
+                    >
+                        <div className="image-glow"></div>
+                        <img
+                            src="/unsplash-image-sMKUYIasyDM.webp"
+                            alt="Computer repair workspace"
+                        />
+                        <div className="image-overlay">
+                            <span>Professional Setup</span>
+                        </div>
+                    </div>
+                    <div
+                        ref={imageRightRef}
+                        className="repair-image-card slide-from-right"
+                    >
+                        <div className="image-glow"></div>
+                        <img
+                            src="/computer_repair_generated.png"
+                            alt="Tech repair in action"
+                        />
+                        <div className="image-overlay">
+                            <span>Precision Repair</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section className="page-cta">
                 <div className="cta-container">
                     <h2>Free Estimates Available</h2>
@@ -83,3 +148,4 @@ const ComputerRepair = () => {
 }
 
 export default ComputerRepair
+

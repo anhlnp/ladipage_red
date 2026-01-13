@@ -1,0 +1,803 @@
+/* Education Page - Creative Bento Grid Layout */
+
+/* Bento Section */
+.edu-bento-section {
+    padding: 40px 40px 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floating Glow Orbs */
+.bento-glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bento-orb-1 {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    top: -100px;
+    right: -100px;
+    animation: orbFloat1 15s ease-in-out infinite;
+}
+
+.bento-orb-2 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+    bottom: 0;
+    left: -100px;
+    animation: orbFloat2 18s ease-in-out infinite;
+}
+
+@keyframes orbFloat1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(-50px, 50px) scale(1.1);
+    }
+}
+
+@keyframes orbFloat2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(50px, -30px) scale(1.15);
+    }
+}
+
+/* Bento Grid Layout */
+.edu-bento-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 1fr;
+    grid-template-rows: 280px 280px;
+    gap: 20px;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Bento Items Base */
+.bento-item {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(30, 30, 35, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(60px) scale(0.9);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-item.animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.bento-item:hover {
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow:
+        0 0 0 1px rgba(139, 92, 246, 0.2),
+        0 25px 80px rgba(139, 92, 246, 0.15),
+        0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Bento Featured - Main Large Card */
+.bento-featured {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    transition: transform 0.2s ease-out, box-shadow 0.4s ease;
+    will-change: transform;
+}
+
+.bento-blur-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(139, 92, 246, 0.2), transparent 60%);
+    pointer-events: none;
+}
+
+/* Bento Vertical Card */
+.bento-vertical {
+    grid-column: 2;
+    grid-row: 1 / 3;
+}
+
+/* Bento Stats Card */
+.bento-stats {
+    grid-column: 3;
+    grid-row: 1;
+    background: linear-gradient(145deg, rgba(139, 92, 246, 0.15) 0%, rgba(30, 30, 35, 0.95) 100%);
+}
+
+/* Bento Wide Card */
+.bento-wide {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+/* Bento Text Card - Positioned via absolute in responsive */
+.bento-text {
+    display: none;
+}
+
+/* Image Wrapper */
+.bento-image-wrapper {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.bento-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-item:hover .bento-image-wrapper img {
+    transform: scale(1.08);
+}
+
+/* Shine Effect */
+.bento-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            transparent 40%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.8s ease;
+}
+
+.bento-item:hover .bento-shine {
+    transform: translateX(100%);
+}
+
+/* Bento Content */
+.bento-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.7) 50%,
+            transparent 100%);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-item:hover .bento-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.bento-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    color: #fff;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.bento-content h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.bento-content p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.5;
+}
+
+/* Wide Card Content Overlay */
+.bento-content-overlay {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.content-left {
+    flex: 1;
+}
+
+.security-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.security-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(139, 92, 246, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+.security-icon:nth-child(2) {
+    animation-delay: -1s;
+}
+
+.security-icon:nth-child(3) {
+    animation-delay: -2s;
+}
+
+@keyframes iconFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 24px;
+    height: 100%;
+    align-content: space-between;
+}
+
+.stat-block {
+    text-align: center;
+    position: relative;
+}
+
+.stat-circle {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 8px;
+    position: relative;
+}
+
+.stat-circle svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.stat-progress {
+    stroke-dashoffset: 283;
+    animation: progressFill 2s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes progressFill {
+    to {
+        stroke-dashoffset: 28;
+    }
+}
+
+.stat-value {
+    font-size: 0.9rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-big-number {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+}
+
+.stat-suffix {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.stat-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-top: 4px;
+}
+
+/* Features Section - Orbital Design */
+.edu-features-section {
+    padding: 80px 40px;
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #8b5cf6;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+}
+
+.section-header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.features-orbit {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    margin: 0 auto;
+}
+
+.orbit-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(145deg, rgba(139, 92, 246, 0.2), rgba(17, 17, 17, 0.95));
+    border-radius: 50%;
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.center-icon {
+    font-size: 2.5rem;
+    margin-bottom: 4px;
+}
+
+.orbit-center span {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.feature-card.orbit-item {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(145deg, rgba(30, 30, 35, 0.9), rgba(20, 20, 25, 0.95));
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: orbitRotate 20s linear infinite;
+    animation-delay: var(--orbit-delay);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.feature-card.orbit-item.animate-in {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.feature-card:nth-child(2) {
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.feature-card:nth-child(3) {
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+}
+
+.feature-card:nth-child(4) {
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.feature-card:nth-child(5) {
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+}
+
+.feature-card:hover {
+    border-color: var(--feature-color);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+.feature-title {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Checklist Section - Timeline Style */
+.edu-checklist-section {
+    padding: 80px 40px;
+    background: linear-gradient(to bottom, transparent, rgba(139, 92, 246, 0.02), transparent);
+}
+
+.checklist-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.checklist-header h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 50px;
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.checklist-timeline {
+    position: relative;
+}
+
+.checklist-timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #8b5cf6, #ec4899, transparent);
+}
+
+.checklist-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 0;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
+}
+
+.checklist-row.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.checklist-row:hover {
+    transform: translateX(10px);
+}
+
+.checklist-number {
+    min-width: 60px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: rgba(139, 92, 246, 0.4);
+    text-align: center;
+    z-index: 1;
+}
+
+.checklist-icon-box {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    background: linear-gradient(145deg, rgba(139, 92, 246, 0.15), rgba(17, 17, 17, 0.95));
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+}
+
+.checklist-row:hover .checklist-icon-box {
+    background: linear-gradient(145deg, rgba(139, 92, 246, 0.25), rgba(17, 17, 17, 0.95));
+    border-color: rgba(139, 92, 246, 0.4);
+    transform: scale(1.1) rotate(5deg);
+}
+
+.checklist-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.checklist-info strong {
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.checklist-info span {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.checklist-line {
+    position: absolute;
+    left: 31px;
+    top: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #8b5cf6, transparent);
+    transition: width 0.3s ease;
+}
+
+.checklist-row:hover .checklist-line {
+    width: 50px;
+}
+
+/* Priority Message */
+.priority-message {
+    margin-top: 60px;
+    padding: 30px 40px;
+    background: linear-gradient(145deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.05));
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 24px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.priority-icon {
+    font-size: 2rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+.priority-message p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+}
+
+/* Quick Features in Text Card */
+.bento-text {
+    padding: 24px;
+}
+
+.bento-text h4 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.quick-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quick-features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+.quick-features li:hover {
+    color: var(--text-primary);
+}
+
+.feature-dot {
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    border-radius: 50%;
+}
+
+/* Responsive Design */
+@media (max-width: 1100px) {
+    .edu-bento-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 300px 300px 250px;
+    }
+
+    .bento-featured {
+        grid-column: 1 / 3;
+        grid-row: 1;
+    }
+
+    .bento-vertical {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .bento-stats {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .bento-wide {
+        grid-column: 1 / 3;
+        grid-row: 3;
+    }
+}
+
+@media (max-width: 768px) {
+    .edu-bento-section {
+        padding: 20px 20px 60px;
+    }
+
+    .edu-bento-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 16px;
+    }
+
+    .bento-featured,
+    .bento-vertical,
+    .bento-stats,
+    .bento-wide {
+        grid-column: 1;
+        grid-row: auto;
+        min-height: 280px;
+    }
+
+    .bento-content {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .features-orbit {
+        width: 260px;
+        height: 260px;
+    }
+
+    .orbit-center {
+        width: 100px;
+        height: 100px;
+    }
+
+    .center-icon {
+        font-size: 2rem;
+    }
+
+    .feature-card.orbit-item {
+        width: 65px;
+        height: 65px;
+        border-radius: 16px;
+    }
+
+    .checklist-timeline::before {
+        display: none;
+    }
+
+    .checklist-row {
+        flex-wrap: wrap;
+    }
+
+    .checklist-number {
+        min-width: auto;
+        width: 40px;
+    }
+
+    .checklist-line {
+        display: none;
+    }
+
+    .priority-message {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .bento-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 16px;
+    }
+
+    .stat-circle {
+        width: 50px;
+        height: 50px;
+    }
+
+    .stat-big-number {
+        font-size: 1.4rem;
+    }
+
+    .security-icons {
+        display: none;
+    }
+
+    .checklist-info strong {
+        font-size: 0.9rem;
+    }
+}

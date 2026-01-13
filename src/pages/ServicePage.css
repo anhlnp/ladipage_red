@@ -1,4 +1,28 @@
 /* Shared Service Page Styles */
+
+/* Hero Image Section */
+.hero-image-section {
+    padding: 0 40px 40px;
+    position: relative;
+    z-index: 10;
+}
+
+.hero-image-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    max-height: 500px;
+}
+
 .service-content {
     padding: 60px 40px 80px;
     position: relative;
