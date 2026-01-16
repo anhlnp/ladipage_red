@@ -15,8 +15,8 @@ const servicesDropdown = [
     { label: 'Fiber & Data Center', path: '/fiber-data-center' },
     { label: 'Computer Repair', path: '/computer-repair' },
     { label: 'Phone/Tablet Repair', path: '/phone-tablet-repair' },
-    { label: 'Security', path: '/cybersecurity' },
-    { label: 'Medical/Dental IT', path: '/medical-dental-offices' },
+    { label: 'Security', path: 'https://selecttechsecurity.com' },
+    { label: 'Medical/Dental IT', path: 'https://www.selecttechmd.com' },
     { label: 'End-to-End Dealership Services', path: '/dealership-services' },
 ]
 
