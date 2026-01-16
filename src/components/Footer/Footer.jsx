@@ -32,7 +32,7 @@ const Footer = () => {
                             <h4>Services</h4>
                             <a href="#services">Cybersecurity</a>
                             <a href="#services">Managed IT</a>
-                            <a href="#services">Device Repair</a>
+                            <a href="#services">Mobile Repair</a>
                             <a href="#services">Infrastructure</a>
                         </div>
                         <div className="footer-col">

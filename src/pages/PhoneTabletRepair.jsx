@@ -20,13 +20,13 @@ const PhoneTabletRepair = () => {
                 </div>
 
                 <RepairWizard />
-                
+
                 <div className="content-container" style={{ marginTop: '80px' }}>
                     <div className="content-block glass-box" style={{ gridColumn: 'span 2' }}>
                         <h3>Cell Phone Repair Services</h3>
                         <p>
-                            Don’t let a broken screen ruin your day. Our expert technicians can repair screens, 
-                            batteries, cameras, charge ports and more! We know how important your device is, 
+                            Don’t let a broken screen ruin your day. Our expert technicians can repair screens,
+                            batteries, cameras, charge ports and more! We know how important your device is,
                             so most cell phone repairs can be completed same day.
                         </p>
                     </div>
@@ -34,18 +34,18 @@ const PhoneTabletRepair = () => {
                     <div className="content-block glass-box">
                         <h3>Tablet Repair Services</h3>
                         <p>
-                            Whether you use your device for work or play, we know how important it is to you. 
+                            Whether you use your device for work or play, we know how important it is to you.
                             Our expert technicians can repair screens, batteries, software issues and more!
                             Pricing varies by device model and size.
                         </p>
                     </div>
                 </div>
             </section>
-            
+
             <section className="page-cta">
                 <div className="cta-container">
                     <h2>Visit Us Today</h2>
-                    <p>Walk-ins welcome! 2155 N. Center Street Hickory, NC</p>
+                    <p>Walk-ins welcome! 2155 N. Center Street, Hickory, NC 28601</p>
                     <a href="/contact" className="btn-primary">Get Directions</a>
                 </div>
             </section>

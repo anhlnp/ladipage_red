@@ -46,6 +46,8 @@ const Contact = () => {
         return () => ctx.revert()
     }, [])
 
+    const [isSubmitting, setIsSubmitting] = useState(false)
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -53,18 +55,39 @@ const Contact = () => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('Form submitted:', formData)
-        // Handle form submission
-        alert('Thank you for your message! We will get back to you soon.')
-        setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            service: '',
-            message: ''
-        })
+        setIsSubmitting(true)
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+
+            const data = await response.json()
+
+            if (response.ok) {
+                alert('Thank you for your message! We will get back to you soon.')
+                setFormData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    service: '',
+                    message: ''
+                })
+            } else {
+                alert('Sorry, there was an error sending your message. Please try again or call us directly at (828) 328-4801.')
+            }
+        } catch (error) {
+            console.error('Submit error:', error)
+            alert('Sorry, there was an error sending your message. Please try again or call us directly at (828) 328-4801.')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (
@@ -87,9 +110,9 @@ const Contact = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h4>Locations</h4>
-                                    <p>1812 Hwy 70 SE, Hickory, NC 28602</p>
-                                    <p>2315 N Center St, Hickory, NC 28601</p>
+                                    <h4>Located at</h4>
+                                    <p>2155 N. Center Street</p>
+                                    <p>Hickory, North Carolina 28601</p>
                                 </div>
                             </div>
 
@@ -101,9 +124,9 @@ const Contact = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h4>Business Hours</h4>
-                                    <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
-                                    <p>Saturday: 11:00 AM - 5:00 PM</p>
+                                    <h4>Hours</h4>
+                                    <p>Monday — Friday</p>
+                                    <p>9:00 AM - 6:00 PM</p>
                                 </div>
                             </div>
 
@@ -116,7 +139,7 @@ const Contact = () => {
                                 <div>
                                     <h4>Contact</h4>
                                     <p>(828) 328-4801</p>
-                                    <p>help@selecttechinc.com</p>
+                                    <p>info@selecttech.com</p>
                                 </div>
                             </div>
                         </div>
@@ -175,7 +198,7 @@ const Contact = () => {
                                     <option value="" disabled></option>
                                     <option value="cybersecurity">Cybersecurity & Compliance</option>
                                     <option value="managed-it">Managed IT Services</option>
-                                    <option value="repair">Device Repair</option>
+                                    <option value="repair">Mobile Repair</option>
                                     <option value="infrastructure">Infrastructure</option>
                                     <option value="other">Other</option>
                                 </select>
@@ -194,8 +217,8 @@ const Contact = () => {
                                 <label htmlFor="message">Your Message</label>
                             </div>
 
-                            <button type="submit" className="btn-primary btn-full">
-                                <span>Send Message</span>
+                            <button type="submit" className="btn-primary btn-full" disabled={isSubmitting}>
+                                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <line x1="22" y1="2" x2="11" y2="13" />
                                     <polygon points="22 2 15 22 11 13 2 9 22 2" />

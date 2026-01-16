@@ -145,7 +145,7 @@
     background: var(--gradient-dark);
 }
 
-.cta-container {
+.page-cta .cta-container {
     max-width: 700px;
     margin: 0 auto;
 }

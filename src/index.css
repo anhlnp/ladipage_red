@@ -693,19 +693,21 @@ a {
 }
 
 .hero-content {
-  max-width: 600px;
+  max-width: 700px;
   position: relative;
   z-index: 2;
   flex: 1;
+  padding-left: 20px;
 }
 
 .hero-wrapper {
   display: flex;
   align-items: center;
-  gap: 40px;
-  max-width: var(--container-width);
+  gap: 80px;
+  max-width: 1400px;
   margin: 0 auto;
   width: 100%;
+  padding: 0 40px;
 }
 
 .hero-cybermap {
@@ -1849,12 +1851,12 @@ a {
 }
 
 .cta-container {
-  max-width: var(--container-width);
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 80px;
+  padding: 80px 100px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 100px;
   align-items: center;
   background: var(--gradient-hero);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1911,8 +1913,8 @@ a {
 
 .orbit-wrapper {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
 }
 
 .orbit {
@@ -1962,8 +1964,8 @@ a {
 }
 
 .orbit-3 {
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
   animation-duration: 20s;
 }
 

@@ -38,7 +38,7 @@ const services = [
                 <path d="M12 18h.01" />
             </svg>
         ),
-        title: 'Device Repair',
+        title: 'Mobile Repair',
         description: 'Same-day repairs for phones, tablets, computers, and laptops. Screen replacements, battery swaps & more.',
         features: ['Same Day', 'All Devices', 'Warranty']
     },
@@ -204,8 +204,8 @@ const Services = () => {
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: '.services-grid',
-                        start: 'top 80%',
-                        toggleActions: 'play none none reverse'
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
                     }
                 }
             )
