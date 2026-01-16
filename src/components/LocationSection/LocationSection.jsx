@@ -1,4 +1,86 @@
+import { useState, useEffect } from 'react'
+import Map, { NavigationControl, FullscreenControl, GeolocateControl, Marker } from 'react-map-gl/maplibre'
+import 'maplibre-gl/dist/maplibre-gl.css'
 import './LocationSection.css'
+
+// Hickory, NC coordinates (Plus Code: QM68+J9)
+const HICKORY_COORDS = {
+    longitude: -81.33406,
+    latitude: 35.76153
+}
+
+// Map styles for light and dark mode
+const MAP_STYLES = {
+    light: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+    dark: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
+}
+
+const LocationMap = () => {
+    const [isDark, setIsDark] = useState(true)
+
+    useEffect(() => {
+        // Check initial theme
+        const checkTheme = () => {
+            const theme = document.documentElement.getAttribute('data-theme')
+            setIsDark(theme !== 'light')
+        }
+        checkTheme()
+
+        // Listen for theme changes
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'data-theme') {
+                    checkTheme()
+                }
+            })
+        })
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        })
+
+        return () => observer.disconnect()
+    }, [])
+
+    return (
+        <div className="map-wrapper">
+            <Map
+                initialViewState={{
+                    longitude: HICKORY_COORDS.longitude,
+                    latitude: HICKORY_COORDS.latitude,
+                    zoom: 12
+                }}
+                style={{ width: '100%', height: '100%' }}
+                mapStyle={isDark ? MAP_STYLES.dark : MAP_STYLES.light}
+                attributionControl={false}
+                scrollZoom={true}
+            >
+                <NavigationControl position="bottom-right" />
+                <FullscreenControl position="bottom-right" />
+                <GeolocateControl position="bottom-right" />
+
+                {/* Custom Marker for Hickory Office */}
+                <Marker
+                    longitude={HICKORY_COORDS.longitude}
+                    latitude={HICKORY_COORDS.latitude}
+                    anchor="bottom"
+                >
+                    <div className="custom-marker">
+                        <div className="marker-pulse"></div>
+                        <div className="marker-pin">
+                            <span>📍</span>
+                        </div>
+                        <div className="marker-label">Select Tech Inc.</div>
+                    </div>
+                </Marker>
+            </Map>
+
+            {/* Map overlay with gradient */}
+            <div className="map-overlay"></div>
+        </div>
+    )
+}
 
 const LocationSection = () => {
     return (
@@ -36,42 +118,7 @@ const LocationSection = () => {
                     </div>
                 </div>
                 <div className="location-map">
-                    {/* North Carolina State SVG Map */}
-                    <div className="nc-map-container">
-                        <svg viewBox="0 0 500 200" className="nc-map-svg">
-                            <defs>
-                                <linearGradient id="ncGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stopColor="#F59E0B" />
-                                    <stop offset="100%" stopColor="#D97706" />
-                                </linearGradient>
-                                <filter id="glow">
-                                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                                    <feMerge>
-                                        <feMergeNode in="coloredBlur" />
-                                        <feMergeNode in="SourceGraphic" />
-                                    </feMerge>
-                                </filter>
-                            </defs>
-                            {/* North Carolina State Shape */}
-                            <path
-                                className="nc-state"
-                                fill="url(#ncGradient)"
-                                filter="url(#glow)"
-                                d="M10,100 L30,85 L50,90 L80,75 L110,80 L140,70 L170,75 L200,65 L230,70 L260,60 L290,65 L320,55 L350,60 L380,50 L410,55 L440,45 L470,50 L490,60 L485,80 L475,95 L460,105 L440,110 L420,120 L395,125 L370,130 L340,135 L310,140 L280,145 L250,150 L220,148 L190,145 L160,140 L130,135 L100,130 L70,125 L40,120 L20,115 L10,100 Z"
-                            />
-                            {/* Hickory Location Pin */}
-                            <g className="location-pin" transform="translate(180, 85)">
-                                <circle cx="0" cy="0" r="12" fill="#EF4444" className="pin-pulse" />
-                                <circle cx="0" cy="0" r="6" fill="#fff" />
-                                <text x="15" y="5" fill="#fff" fontSize="12" fontWeight="600">Hickory</text>
-                            </g>
-                        </svg>
-                        {/* NC Flag Colors Strip */}
-                        <div className="nc-flag-strip">
-                            <div className="flag-blue"></div>
-                            <div className="flag-red"></div>
-                        </div>
-                    </div>
+                    <LocationMap />
                 </div>
             </div>
         </section>
