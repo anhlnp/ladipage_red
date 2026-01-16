@@ -33,37 +33,37 @@ const ATTACK_TYPES = [
 ]
 
 const Atmosphere = ({ color = '#4fc3f7' }) => {
-  const materialRef = useRef()
-  
-  // Create stable uniforms object
-  const uniforms = useMemo(() => ({
-    uColor: { value: new THREE.Color(color) }
-  }), []) // Empty deps - create once
-  
-  // Update color uniform when prop changes
-  useEffect(() => {
-    if (materialRef.current) {
-      materialRef.current.uniforms.uColor.value.set(color)
-    }
-  }, [color])
-  
-  return (
-    <mesh scale={[1.12, 1.12, 1.12]}>
-      <sphereGeometry args={[1, 64, 64]} />
-      <shaderMaterial
-        ref={materialRef}
-        transparent
-        side={THREE.BackSide}
-        blending={THREE.AdditiveBlending}
-        uniforms={uniforms}
-        vertexShader={`
+    const materialRef = useRef()
+
+    // Create stable uniforms object
+    const uniforms = useMemo(() => ({
+        uColor: { value: new THREE.Color(color) }
+    }), []) // Empty deps - create once
+
+    // Update color uniform when prop changes
+    useEffect(() => {
+        if (materialRef.current) {
+            materialRef.current.uniforms.uColor.value.set(color)
+        }
+    }, [color])
+
+    return (
+        <mesh scale={[1.12, 1.12, 1.12]}>
+            <sphereGeometry args={[1, 64, 64]} />
+            <shaderMaterial
+                ref={materialRef}
+                transparent
+                side={THREE.BackSide}
+                blending={THREE.AdditiveBlending}
+                uniforms={uniforms}
+                vertexShader={`
             varying vec3 vNormal;
             void main() {
                 vNormal = normalize(normalMatrix * normal);
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
             }
         `}
-        fragmentShader={`
+                fragmentShader={`
             uniform vec3 uColor;
             varying vec3 vNormal;
             void main() {
@@ -71,9 +71,9 @@ const Atmosphere = ({ color = '#4fc3f7' }) => {
                 gl_FragColor = vec4(uColor, 1.0) * intensity * 1.5;
             }
         `}
-      />
-    </mesh>
-  )
+            />
+        </mesh>
+    )
 }
 
 // Convert degree coordinates to radians
@@ -82,9 +82,9 @@ const degToRad = (deg) => (deg / 180) * Math.PI
 // Parse GeoJSON polygon coordinates to 3D points
 const parseGeoJSONToLines = (geojson, radius = 1.012) => {
     const lines = []
-    
+
     if (!geojson?.features) return lines
-    
+
     geojson.features.forEach(feature => {
         if (feature.geometry?.type === 'Polygon') {
             feature.geometry.coordinates.forEach(ring => {
@@ -115,25 +115,25 @@ const parseGeoJSONToLines = (geojson, radius = 1.012) => {
             })
         }
     })
-    
+
     return lines
 }
 
 // Parse countries GeoJSON with country names for interactivity
 const parseCountriesGeoJSON = (geojson, radius = 1.013) => {
     const countries = []
-    
+
     if (!geojson?.features) return countries
-    
+
     geojson.features.forEach(feature => {
         const props = feature.properties || {}
         const name = props.ADMIN || props.NAME || props.name || 'Unknown'
         const code = props.ISO_A3 || props.ISO_A2 || ''
-        
+
         const lines = []
         // Use 3D vector accumulation for accurate centroid (handles date line crossing)
         let sumX = 0, sumY = 0, sumZ = 0, pointCount = 0
-        
+
         const processRing = (ring) => {
             const sampledRing = ring.filter((_, i) => i % 2 === 0 || i === ring.length - 1)
             if (sampledRing.length > 2) {
@@ -141,19 +141,19 @@ const parseCountriesGeoJSON = (geojson, radius = 1.013) => {
                     const latRad = degToRad(lat)
                     const lngRad = degToRad(lng)
                     const v = latLngToVector3(latRad, lngRad, radius)
-                    
+
                     // Accumulate for centroid
                     sumX += v.x
                     sumY += v.y
                     sumZ += v.z
                     pointCount++
-                    
+
                     return v
                 })
                 lines.push(points)
             }
         }
-        
+
         if (feature.geometry?.type === 'Polygon') {
             feature.geometry.coordinates.forEach(processRing)
         } else if (feature.geometry?.type === 'MultiPolygon') {
@@ -161,11 +161,11 @@ const parseCountriesGeoJSON = (geojson, radius = 1.013) => {
                 polygon.forEach(processRing)
             })
         }
-        
+
         if (lines.length > 0 && pointCount > 0) {
             // Calculate center point from 3D average
             const centerPos = new THREE.Vector3(sumX, sumY, sumZ).divideScalar(pointCount).normalize().multiplyScalar(radius)
-            
+
             countries.push({
                 name,
                 code,
@@ -174,7 +174,7 @@ const parseCountriesGeoJSON = (geojson, radius = 1.013) => {
             })
         }
     })
-    
+
     return countries
 }
 
@@ -195,14 +195,14 @@ const getRandomLatLon = (countries = []) => {
             const country = countries[Math.floor(Math.random() * countries.length)]
             const feature = country.feature
             let ring = []
-            
+
             if (feature?.geometry?.type === 'Polygon') {
                 ring = feature.geometry.coordinates[0]
             } else if (feature?.geometry?.type === 'MultiPolygon') {
                 const poly = feature.geometry.coordinates[Math.floor(Math.random() * feature.geometry.coordinates.length)]
                 ring = poly[0]
             }
-            
+
             if (ring && ring.length > 0) {
                 const pt = ring[Math.floor(Math.random() * ring.length)]
                 // GeoJSON is [lng, lat] in degrees
@@ -212,7 +212,7 @@ const getRandomLatLon = (countries = []) => {
             console.warn('Error picking country point:', e)
         }
     }
-    
+
     // Fallback to random point
     const lat = (Math.random() - 0.5) * Math.PI
     const lng = Math.random() * Math.PI * 2
@@ -227,7 +227,7 @@ const generateAttacks = (count = 8, countries = []) => {
         const source = getRandomLatLon(countries)
         const target = getRandomLatLon(countries)
         const type = ATTACK_TYPES[Math.floor(Math.random() * ATTACK_TYPES.length)]
-        
+
         attacks.push({
             id: i,
             source,
@@ -257,7 +257,7 @@ const latLngToVector3 = (lat, lng, radius = 1) => {
 const AttackArc = memo(({ attack, color }) => {
     const materialRef = useRef()
     const spawnTimeRef = useRef(attack.spawnTime || Date.now())
-    
+
     // Create static curve geometry once
     const curve = useMemo(() => {
         const start = latLngToVector3(attack.source.lat, attack.source.lng)
@@ -342,7 +342,7 @@ const geoContains = (feature, [lng, lat]) => {
     if (feature.geometry.type === 'Polygon') {
         return isPointInPolygon(point, feature.geometry.coordinates[0])
     } else if (feature.geometry.type === 'MultiPolygon') {
-        return feature.geometry.coordinates.some(polygon => 
+        return feature.geometry.coordinates.some(polygon =>
             isPointInPolygon(point, polygon[0])
         )
     }
@@ -367,6 +367,43 @@ const CountryGroup = memo(({ country, isHovered, colors, isDark }) => {
     )
 })
 
+// HQ Location Pin Component - Shows company headquarters label on globe
+const HQLocationPin = memo(({ lat, lng, label, colors }) => {
+    // Convert lat/lng in degrees to radians, then to 3D position
+    // Same transformation as GeoJSON countries - no offset needed
+    const position = useMemo(() => {
+        const latRad = degToRad(lat)
+        const lngRad = degToRad(lng)
+        return latLngToVector3(latRad, lngRad, 1.02)
+    }, [lat, lng])
+
+    return (
+        <group position={position}>
+            {/* Label only - no pin marker */}
+            <Html
+                style={{ pointerEvents: 'none' }}
+                center
+            >
+                <div style={{
+                    background: 'rgba(0,0,0,0.85)',
+                    color: '#F59E0B',
+                    padding: '6px 12px',
+                    borderRadius: '6px',
+                    fontSize: '11px',
+                    fontWeight: 'bold',
+                    border: '1px solid #F59E0B',
+                    whiteSpace: 'nowrap',
+                    backdropFilter: 'blur(4px)',
+                    boxShadow: '0 0 15px rgba(245, 158, 11, 0.5)',
+                    textAlign: 'center'
+                }}>
+                    📍 {label}
+                </div>
+            </Html>
+        </group>
+    )
+})
+
 // Globe Component
 const Globe = ({ colorTheme, isDark }) => {
     const globeRef = useRef()
@@ -377,12 +414,12 @@ const Globe = ({ colorTheme, isDark }) => {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
     const [isFocused, setIsFocused] = useState(false)
     const [isTouch, setIsTouch] = useState(false)
-    
+
     // Detect touch device on mount
     useEffect(() => {
         setIsTouch(isTouchDevice())
     }, [])
-    
+
     const colors = THEME_COLORS[colorTheme] || THEME_COLORS.cyan
     const globeColor = isDark ? '#1a1a2e' : '#fef9f3'
     const wireColor = isDark ? colors.primary : '#94a3b8'
@@ -398,12 +435,12 @@ const Globe = ({ colorTheme, isDark }) => {
                     ...c,
                     feature: data.features[i]
                 }))
-                
+
                 // Use startTransition to defer state updates (non-blocking)
                 startTransition(() => {
                     setCountries(enriched)
                     countriesRef.current = enriched
-                    
+
                     setAttacks(generateAttacks(12, enriched).map(a => ({
                         ...a,
                         id: `${a.id}-${Date.now()}`
@@ -412,7 +449,7 @@ const Globe = ({ colorTheme, isDark }) => {
             })
             .catch(err => console.error('Failed to load country data:', err))
     }, [])
-    
+
     // ... useFrame ... (omitted from replace block to keep context simple if possible, but I need to start from 275)
 
     useFrame((state, delta) => {
@@ -426,17 +463,17 @@ const Globe = ({ colorTheme, isDark }) => {
         e.stopPropagation()
         if (hoveredCountry) {
             setIsFocused(true)
-            
+
             // Get country center in local space (normalized)
             const p = hoveredCountry.center.clone().normalize()
-            
+
             // Get camera direction from globe (camera position normalized)
             const camDir = e.camera.position.clone().normalize()
-            
+
             // Calculate quaternion to rotate P to face camera
             const targetQuat = new THREE.Quaternion().setFromUnitVectors(p, camDir)
             const targetEuler = new THREE.Euler().setFromQuaternion(targetQuat)
-            
+
             gsap.to(globeRef.current.rotation, {
                 x: targetEuler.x,
                 y: targetEuler.y,
@@ -444,7 +481,7 @@ const Globe = ({ colorTheme, isDark }) => {
                 duration: 1.5,
                 ease: 'power2.inOut'
             })
-            
+
         } else {
             // Click outside to resume
             setIsFocused(false)
@@ -462,18 +499,18 @@ const Globe = ({ colorTheme, isDark }) => {
     const onGlobePointerMoveRaw = useCallback((e) => {
         // Skip hover detection on touch devices
         if (isTouch) return
-        
+
         e.stopPropagation()
         if (!globeRef.current) return
 
         const localPoint = globeRef.current.worldToLocal(e.point.clone())
         localPoint.normalize()
-        
+
         const lat = Math.asin(localPoint.y) * 180 / Math.PI
         const lng = Math.atan2(localPoint.z, -localPoint.x) * 180 / Math.PI
-        
+
         const found = countries.find(c => geoContains(c.feature, [lng, lat]))
-        
+
         if (found) {
             setHoveredCountry(found)
             setMousePos({ x: e.clientX, y: e.clientY })
@@ -483,7 +520,7 @@ const Globe = ({ colorTheme, isDark }) => {
             document.body.style.cursor = 'default'
         }
     }, [countries, isTouch])
-    
+
     // Throttled version - 16ms = 60fps max
     const onGlobePointerMove = useMemo(
         () => throttle(onGlobePointerMoveRaw, 16),
@@ -499,7 +536,7 @@ const Globe = ({ colorTheme, isDark }) => {
     useEffect(() => {
         const interval = setInterval(() => {
             if (!countriesRef.current.length) return
-            
+
             setAttacks(prev => {
                 const idx = Math.floor(Math.random() * prev.length)
                 const newAttack = {
@@ -517,7 +554,7 @@ const Globe = ({ colorTheme, isDark }) => {
     const wireframePoints = useMemo(() => {
         const lines = []
         const segments = 24
-        
+
         // Latitude lines
         for (let i = 1; i < 6; i++) {
             const lat = (i / 6) * Math.PI - Math.PI / 2
@@ -528,7 +565,7 @@ const Globe = ({ colorTheme, isDark }) => {
             }
             lines.push(points)
         }
-        
+
         // Longitude lines  
         for (let i = 0; i < 12; i++) {
             const lng = (i / 12) * Math.PI * 2
@@ -539,15 +576,15 @@ const Globe = ({ colorTheme, isDark }) => {
             }
             lines.push(points)
         }
-        
+
         return lines
     }, [])
 
     return (
         <group ref={globeRef}>
             {/* Main globe sphere with hit testing */}
-            <Sphere 
-                args={[1, 32, 32]} 
+            <Sphere
+                args={[1, 32, 32]}
                 onPointerMove={onGlobePointerMove}
                 onPointerLeave={onGlobePointerOut}
                 onClick={onGlobeClick}
@@ -559,10 +596,10 @@ const Globe = ({ colorTheme, isDark }) => {
                     shininess={10}
                 />
             </Sphere>
-            
+
             {/* Atmosphere - hidden in light mode */}
             {isDark && <Atmosphere color={colors.glow} />}
-            
+
             {/* Inner glow */}
             <Sphere args={[0.98, 24, 24]}>
                 <meshBasicMaterial
@@ -574,7 +611,7 @@ const Globe = ({ colorTheme, isDark }) => {
 
             {/* Interactive Country Outlines */}
             {countries.map((country, idx) => (
-                <CountryGroup 
+                <CountryGroup
                     key={`country-${country.code}-${idx}`}
                     country={country}
                     isHovered={hoveredCountry?.name === country.name}
@@ -582,7 +619,7 @@ const Globe = ({ colorTheme, isDark }) => {
                     isDark={isDark}
                 />
             ))}
-            
+
             {/* Tooltip - hide on touch devices */}
             {hoveredCountry && !isTouch && (
                 <Html position={hoveredCountry.center} style={{ pointerEvents: 'none' }}>
@@ -635,6 +672,14 @@ const Globe = ({ colorTheme, isDark }) => {
                     spawnTime={attack.spawnTime}
                 />
             ))}
+
+            {/* HQ Location Pin - Hickory, NC */}
+            <HQLocationPin
+                lat={35.7332}
+                lng={-81.3412}
+                label="Hickory, NC - HQ"
+                colors={colors}
+            />
         </group>
     )
 }
@@ -661,7 +706,7 @@ const ThreatGlobe = () => {
 
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
-                if (mutation.attributeName === 'data-theme' || 
+                if (mutation.attributeName === 'data-theme' ||
                     mutation.attributeName === 'data-color-theme') {
                     checkTheme()
                 }
@@ -676,27 +721,27 @@ const ThreatGlobe = () => {
 
     // Use ref to attach wheel event with { passive: false } to allow preventDefault
     const containerRef = useRef(null)
-    
+
     useEffect(() => {
         const container = containerRef.current
         if (!container) return
-        
+
         const handleWheel = (e) => {
             e.preventDefault()
             e.stopPropagation()
         }
-        
+
         container.addEventListener('wheel', handleWheel, { passive: false })
-        
+
         return () => {
             container.removeEventListener('wheel', handleWheel)
         }
     }, [])
 
     return (
-        <div 
+        <div
             ref={containerRef}
-            className="threat-globe" 
+            className="threat-globe"
         >
             <Canvas
                 camera={{ position: [0, 0, 2.8], fov: 45 }}
@@ -707,7 +752,7 @@ const ThreatGlobe = () => {
                 <pointLight position={[10, 10, 10]} intensity={0.6} />
                 <pointLight position={[-10, -10, -10]} intensity={0.3} />
                 <Globe colorTheme={colorTheme} isDark={isDark} />
-                <OrbitControls 
+                <OrbitControls
                     enableZoom={true}
                     enablePan={false}
                     minDistance={3}

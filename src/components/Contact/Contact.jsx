@@ -49,7 +49,6 @@ const Contact = () => {
         return () => ctx.revert()
     }, [])
 
-    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const handleChange = (e) => {
         setFormData({

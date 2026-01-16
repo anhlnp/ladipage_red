@@ -9,6 +9,7 @@ import Features from '../components/Features/Features'
 import Clients from '../components/Clients/Clients'
 import Portal from '../components/Portal/Portal'
 import CTA from '../components/CTA/CTA'
+import LocationSection from '../components/LocationSection/LocationSection'
 import Contact from '../components/Contact/Contact'
 import Footer from '../components/Footer/Footer'
 import StarBackground from '../components/StarBackground/StarBackground'
@@ -50,6 +51,7 @@ const HomePage = () => {
                 <Clients />
                 <Portal />
                 <CTA />
+                <LocationSection />
                 <Contact />
             </main>
             <Footer />

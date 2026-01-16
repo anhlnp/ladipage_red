@@ -30,7 +30,7 @@ const Cybersecurity = () => {
                 gradientText="Security Solutions"
                 description="Protect what is important to you. Select Tech offers comprehensive solutions effectively integrating people, processes, and technology."
             />
-            
+
             <section className="service-content">
                 <div className="content-container">
                     {/* Certifications - Full Width */}
@@ -80,7 +80,7 @@ const Cybersecurity = () => {
                     <div className="content-block glass-box" style={{ gridColumn: 'span 2' }}>
                         <h3>Penetration Testing Process</h3>
                         <p>
-                            We use the latest tools and techniques to simulate real-world attacks. 
+                            We use the latest tools and techniques to simulate real-world attacks.
                             Our process provides a thorough evaluation of your systems.
                         </p>
                         <div className="service-cards" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
@@ -98,19 +98,23 @@ const Cybersecurity = () => {
                         <h3>Additional Services</h3>
                         <h4 style={{ color: 'var(--text-primary)', marginTop: '15px' }}>Program Management</h4>
                         <p>Customized programs to ensure cybersecurity efforts are properly planned, implemented, and monitored.</p>
-                        
+
                         <h4 style={{ color: 'var(--text-primary)', marginTop: '15px' }}>Training Services</h4>
                         <p>Interactive sessions providing staff with skills to identify and prevent cyber threats.</p>
                     </div>
 
                 </div>
             </section>
-            
+
             <section className="page-cta">
-                <div className="cta-container">
-                    <h2>Secure Your Organization</h2>
-                    <p>Don't wait for a breach. Partner with Select Tech for proactive protection.</p>
-                    <a href="/contact" className="btn-primary">Get Security Audit</a>
+                <div className="cta-container glass-box">
+                    <div className="cta-content">
+                        <h2>Secure Your Organization</h2>
+                        <p>Don't wait for a breach. Partner with Select Tech for proactive protection.</p>
+                    </div>
+                    <div className="cta-action">
+                        <a href="/contact" className="btn-primary">Get Security Audit</a>
+                    </div>
                 </div>
             </section>
         </PageLayout>

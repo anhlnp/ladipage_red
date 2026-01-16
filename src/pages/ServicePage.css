@@ -29,13 +29,17 @@
     z-index: 10;
 }
 
+
 .content-container {
-    max-width: var(--container-width);
+    width: 100%;
+    max-width: 100%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    /* Fixed 3 columns */
     gap: 30px;
 }
+
 
 .content-block {
     padding: 32px;
@@ -139,27 +143,44 @@
 /* CTA Section */
 .page-cta {
     padding: 80px 40px;
-    text-align: center;
     position: relative;
     z-index: 10;
-    background: var(--gradient-dark);
 }
 
 .page-cta .cta-container {
-    max-width: 700px;
+    max-width: var(--container-width);
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 60px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    /* Fallback */
+}
+
+.page-cta .cta-content {
+    flex: 1;
+    text-align: left;
+}
+
+.page-cta .cta-action {
+    flex-shrink: 0;
 }
 
 .page-cta h2 {
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    color: var(--text-primary);
 }
 
 .page-cta p {
     font-size: 1.1rem;
     color: var(--text-secondary);
-    margin-bottom: 32px;
+    margin: 0;
+    max-width: 600px;
 }
 
 @media (max-width: 768px) {
@@ -167,11 +188,39 @@
         padding: 40px 20px 60px;
     }
 
+    .content-container {
+        grid-template-columns: 1fr;
+        /* Single column on mobile */
+    }
+
+    .content-container .content-block[style*="grid-column"] {
+        grid-column: 1 !important;
+        /* Override inline styles */
+    }
+
     .content-block {
         padding: 24px;
     }
 
     .page-cta {
-        padding: 60px 20px;
+        padding: 40px 20px;
+    }
+
+    .page-cta .cta-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 24px;
+        gap: 30px;
+    }
+
+    .page-cta .cta-content {
+        text-align: center;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .content-container {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 columns on tablet */
     }
 }

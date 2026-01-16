@@ -1,0 +1,210 @@
+.location-section {
+    padding: 100px 40px;
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.location-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.location-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #F59E0B;
+    margin-bottom: 20px;
+}
+
+.location-content h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.location-content>p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+
+.location-details {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    transition: var(--transition-fast);
+}
+
+.detail-item:hover {
+    transform: translateX(10px);
+    border-color: var(--accent-primary);
+}
+
+.detail-icon {
+    font-size: 2rem;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(245, 158, 11, 0.1);
+    border-radius: 12px;
+}
+
+.detail-item h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.detail-item p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* NC Map Container */
+.location-map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nc-map-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+}
+
+.nc-map-svg {
+    width: 100%;
+    height: auto;
+}
+
+.nc-state {
+    transition: all 0.3s ease;
+}
+
+.nc-map-container:hover .nc-state {
+    filter: url(#glow) drop-shadow(0 0 20px rgba(245, 158, 11, 0.5));
+}
+
+/* Location Pin Animation */
+.pin-pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+        r: 12;
+    }
+
+    50% {
+        opacity: 0.5;
+        r: 18;
+    }
+
+    100% {
+        opacity: 1;
+        r: 12;
+    }
+}
+
+.location-pin {
+    cursor: pointer;
+}
+
+/* NC Flag Strip */
+.nc-flag-strip {
+    display: flex;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 24px;
+}
+
+.flag-blue {
+    flex: 1;
+    background: #004B87;
+}
+
+.flag-red {
+    flex: 2;
+    background: #C8102E;
+}
+
+/* Light Mode */
+[data-theme="light"] .location-badge {
+    background: rgba(245, 158, 11, 0.15);
+}
+
+[data-theme="light"] .detail-item {
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .nc-map-container {
+    background: #fff;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .location-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .location-map {
+        order: -1;
+    }
+
+    .nc-map-container {
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .location-section {
+        padding: 60px 20px;
+    }
+
+    .detail-item {
+        padding: 16px;
+    }
+
+    .detail-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.5rem;
+    }
+}

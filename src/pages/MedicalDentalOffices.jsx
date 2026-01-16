@@ -145,7 +145,7 @@ const MedicalDentalOffices = () => {
 
             <section className="service-content">
                 <div className="content-container">
-                    <div className="content-block glass-box" style={{ gridColumn: 'span 2' }}>
+                    <div className="content-block glass-box" style={{ gridColumn: 'span 3' }}>
                         <h3>HIPAA & Patient Data Protection</h3>
                         <p>
                             Given the increasing number of cyber threats, it is essential to implement robust

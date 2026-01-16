@@ -96,6 +96,164 @@
   color: #0f172a;
 }
 
+/* Light mode form input fixes */
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group select,
+[data-theme="light"] .form-group textarea {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #0f172a;
+}
+
+[data-theme="light"] .form-group input::placeholder,
+[data-theme="light"] .form-group textarea::placeholder {
+  color: #64748b;
+}
+
+[data-theme="light"] .form-group input:focus,
+[data-theme="light"] .form-group select:focus,
+[data-theme="light"] .form-group textarea:focus {
+  border-color: var(--accent-primary);
+  background: rgba(14, 165, 233, 0.05);
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+}
+
+[data-theme="light"] .form-group label {
+  color: #64748b;
+}
+
+[data-theme="light"] .form-group input:focus~label,
+[data-theme="light"] .form-group input:not(:placeholder-shown)~label,
+[data-theme="light"] .form-group select:focus~label,
+[data-theme="light"] .form-group select:valid~label,
+[data-theme="light"] .form-group textarea:focus~label,
+[data-theme="light"] .form-group textarea:not(:placeholder-shown)~label {
+  background: var(--bg-primary);
+  color: var(--accent-primary);
+}
+
+[data-theme="light"] .form-group select option {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+/* Light mode contact form wrapper */
+[data-theme="light"] .contact-form-wrapper {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Light mode contact details */
+[data-theme="light"] .contact-item h4 {
+  color: #0f172a;
+}
+
+[data-theme="light"] .contact-item p {
+  color: #475569;
+}
+
+[data-theme="light"] .contact-desc {
+  color: #475569;
+}
+
+/* Light mode certifications */
+[data-theme="light"] .cert-badge {
+  background: rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.25);
+  color: #7c3aed;
+}
+
+/* Light mode CTA section */
+[data-theme="light"] .cta-container {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(139, 92, 246, 0.08) 50%, rgba(16, 185, 129, 0.08) 100%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .cta-title {
+  color: #0f172a;
+}
+
+[data-theme="light"] .cta-text {
+  color: #475569;
+}
+
+[data-theme="light"] .cta-badge {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #059669;
+}
+
+/* Light mode Footer fixes */
+[data-theme="light"] .footer {
+  background: #f8fafc;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .footer-main {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .footer-col h4 {
+  color: #0f172a;
+}
+
+[data-theme="light"] .footer-col a {
+  color: #475569;
+}
+
+[data-theme="light"] .footer-col a:hover {
+  color: var(--accent-primary);
+}
+
+[data-theme="light"] .footer-brand p {
+  color: #475569;
+}
+
+[data-theme="light"] .footer-bottom p,
+[data-theme="light"] .developer-link,
+[data-theme="light"] .footer-legal a {
+  color: #64748b;
+}
+
+/* Light mode general UI elements */
+[data-theme="light"] .showcase-badge,
+[data-theme="light"] .pill-badge {
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  color: #0284c7;
+}
+
+[data-theme="light"] .showcase-title,
+[data-theme="light"] .feature-card h3,
+[data-theme="light"] .service-card h3 {
+  color: #0f172a;
+}
+
+[data-theme="light"] .showcase-description,
+[data-theme="light"] .feature-card p,
+[data-theme="light"] .service-card p {
+  color: #475569;
+}
+
+/* Light mode service detail pages */
+[data-theme="light"] .service-hero h1 {
+  color: #0f172a;
+}
+
+[data-theme="light"] .service-hero p {
+  color: #475569;
+}
+
+[data-theme="light"] .feature-list li {
+  color: #334155;
+}
+
+/* Fix for industry leaders section */
+[data-theme="light"] .logo-opacity {
+  filter: grayscale(1) invert(0);
+  opacity: 0.7;
+}
+
 /* ========================================
    COLOR THEMES - Click logo to change
    ======================================== */
@@ -901,22 +1059,32 @@ a {
 
 .stat {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
 }
 
 .stat-number {
-  display: block;
+  display: inline;
   font-size: 2.5rem;
   font-weight: 800;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-primary) !important;
+  -webkit-text-fill-color: var(--accent-primary) !important;
+  background: none !important;
   line-height: 1;
 }
 
 .stat-suffix {
+  display: inline;
   font-size: 1.5rem;
   color: var(--accent-primary);
+  margin-left: 2px;
 }
 
 .stat-label {
@@ -1053,7 +1221,7 @@ a {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(4, 1fr) !important;
   gap: 30px;
 }
 
@@ -3258,5 +3426,12 @@ a {
 
   .contact-form-wrapper {
     padding: 30px 20px;
+  }
+}
+
+/* Tablet breakpoint for services grid */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
