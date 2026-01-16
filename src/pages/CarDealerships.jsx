@@ -10,7 +10,7 @@ const CarDealerships = () => {
                 tag="AUTO DEALERS"
                 title="Dealership"
                 gradientText="Compliance & Security"
-                description="Select Tech’s Custom Compliance Portal is a true ALL-IN-ONE solution for FTC Safeguards Regulation."
+                description="Select Tech's Custom Compliance Portal is a true ALL-IN-ONE solution for FTC Safeguards Regulation."
             />
 
             <section className="service-content">

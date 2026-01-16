@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { supabase } from '../../lib/supabase'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -13,6 +14,8 @@ const Contact = () => {
         service: '',
         message: ''
     })
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' })
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -51,20 +54,56 @@ const Contact = () => {
             ...formData,
             [e.target.id]: e.target.value
         })
+        // Clear status when user starts typing
+        if (submitStatus.message) {
+            setSubmitStatus({ type: '', message: '' })
+        }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('Form submitted:', formData)
-        // Handle form submission
-        alert('Thank you for your message! We will get back to you soon.')
-        setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            service: '',
-            message: ''
-        })
+        setIsSubmitting(true)
+        setSubmitStatus({ type: '', message: '' })
+
+        try {
+            if (!supabase) {
+                throw new Error('Database not configured')
+            }
+
+            const { error } = await supabase
+                .from('contacts')
+                .insert([{
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone || null,
+                    service: formData.service,
+                    message: formData.message,
+                    status: 'new',
+                    is_read: false
+                }])
+
+            if (error) throw error
+
+            setSubmitStatus({
+                type: 'success',
+                message: 'Thank you for your message! We will get back to you soon.'
+            })
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                service: '',
+                message: ''
+            })
+        } catch (error) {
+            console.error('Error submitting contact:', error)
+            setSubmitStatus({
+                type: 'error',
+                message: 'Something went wrong. Please try again or contact us directly.'
+            })
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (
@@ -129,6 +168,24 @@ const Contact = () => {
                     </div>
 
                     <div className="contact-form-wrapper">
+                        {submitStatus.message && (
+                            <div className={`submit-status ${submitStatus.type}`}>
+                                {submitStatus.type === 'success' && (
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                        <polyline points="22 4 12 14.01 9 11.01" />
+                                    </svg>
+                                )}
+                                {submitStatus.type === 'error' && (
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <line x1="15" y1="9" x2="9" y2="15" />
+                                        <line x1="9" y1="9" x2="15" y2="15" />
+                                    </svg>
+                                )}
+                                <span>{submitStatus.message}</span>
+                            </div>
+                        )}
                         <form className="contact-form" onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <input
@@ -138,6 +195,7 @@ const Contact = () => {
                                     onChange={handleChange}
                                     placeholder=" "
                                     required
+                                    disabled={isSubmitting}
                                 />
                                 <label htmlFor="name">Your Name</label>
                             </div>
@@ -150,6 +208,7 @@ const Contact = () => {
                                     onChange={handleChange}
                                     placeholder=" "
                                     required
+                                    disabled={isSubmitting}
                                 />
                                 <label htmlFor="email">Email Address</label>
                             </div>
@@ -161,6 +220,7 @@ const Contact = () => {
                                     value={formData.phone}
                                     onChange={handleChange}
                                     placeholder=" "
+                                    disabled={isSubmitting}
                                 />
                                 <label htmlFor="phone">Phone Number</label>
                             </div>
@@ -171,6 +231,7 @@ const Contact = () => {
                                     value={formData.service}
                                     onChange={handleChange}
                                     required
+                                    disabled={isSubmitting}
                                 >
                                     <option value="" disabled></option>
                                     <option value="cybersecurity">Cybersecurity & Compliance</option>
@@ -190,16 +251,26 @@ const Contact = () => {
                                     onChange={handleChange}
                                     placeholder=" "
                                     required
+                                    disabled={isSubmitting}
                                 ></textarea>
                                 <label htmlFor="message">Your Message</label>
                             </div>
 
-                            <button type="submit" className="btn-primary btn-full">
-                                <span>Send Message</span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <line x1="22" y1="2" x2="11" y2="13" />
-                                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                                </svg>
+                            <button
+                                type="submit"
+                                className={`btn-primary btn-full ${isSubmitting ? 'loading' : ''}`}
+                                disabled={isSubmitting}
+                            >
+                                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                                {!isSubmitting && (
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <line x1="22" y1="2" x2="11" y2="13" />
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                                    </svg>
+                                )}
+                                {isSubmitting && (
+                                    <div className="spinner"></div>
+                                )}
                                 <div className="btn-glow"></div>
                             </button>
                         </form>
