@@ -190,28 +190,40 @@ const ServiceCard = ({ service }) => {
 
 const Services = () => {
     const sectionRef = useRef(null)
+    const hasAnimated = useRef(false)
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.fromTo('.service-card',
-                { opacity: 0, y: 60, rotateX: 10 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    rotateX: 0,
-                    duration: 0.8,
-                    stagger: 0.15,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: '.services-grid',
-                        start: 'top 85%',
-                        toggleActions: 'play none none none'
-                    }
-                }
-            )
-        }, sectionRef)
+        // Small delay to ensure DOM elements are mounted
+        const timeout = setTimeout(() => {
+            if (hasAnimated.current) return
+            hasAnimated.current = true
 
-        return () => ctx.revert()
+            const cards = sectionRef.current?.querySelectorAll('.service-card')
+            if (!cards || cards.length === 0) return
+
+            const ctx = gsap.context(() => {
+                gsap.fromTo(cards,
+                    { opacity: 0, y: 60, rotateX: 10 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        rotateX: 0,
+                        duration: 0.8,
+                        stagger: 0.15,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: '.services-grid',
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                )
+            }, sectionRef)
+
+            return () => ctx.revert()
+        }, 100)
+
+        return () => clearTimeout(timeout)
     }, [])
 
     return (

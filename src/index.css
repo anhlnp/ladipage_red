@@ -94,6 +94,8 @@
 [data-theme="light"] h2,
 [data-theme="light"] h3 {
   color: #0f172a;
+  -webkit-text-fill-color: #0f172a;
+  background: none;
 }
 
 /* Light mode form input fixes */
@@ -153,6 +155,23 @@
 }
 
 [data-theme="light"] .contact-desc {
+  color: #475569;
+}
+
+/* Light mode hero section text fixes */
+[data-theme="light"] .stat-label {
+  color: #475569;
+}
+
+[data-theme="light"] .hero-description {
+  color: #475569;
+}
+
+[data-theme="light"] .showcase-description {
+  color: #475569;
+}
+
+[data-theme="light"] .showcase-features li {
   color: #475569;
 }
 
@@ -2656,7 +2675,6 @@ a {
 
 .portal-content {
   display: flex;
-  align-items: center;
   gap: 24px;
 }
 
