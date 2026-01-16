@@ -1,0 +1,283 @@
+/* ============================================
+   INDUSTRY PAGES LIGHT MODE STYLES
+   Shared light mode styles for all industry pages
+   ============================================ */
+
+/* Hero Section - Light Mode */
+[data-theme="light"] .dealership-hero,
+[data-theme="light"] .medical-hero,
+[data-theme="light"] .accounting-hero,
+[data-theme="light"] .education-hero,
+[data-theme="light"] .industry-hero {
+    background: linear-gradient(135deg, #e8f4fc 0%, #d0e8f8 40%, #c5e0f5 100%);
+}
+
+[data-theme="light"] .dealership-hero::before,
+[data-theme="light"] .medical-hero::before,
+[data-theme="light"] .accounting-hero::before,
+[data-theme="light"] .education-hero::before,
+[data-theme="light"] .industry-hero::before {
+    background:
+        radial-gradient(ellipse at 30% 50%, rgba(0, 122, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 30%, rgba(0, 200, 255, 0.05) 0%, transparent 40%);
+}
+
+[data-theme="light"] .dealership-hero-title,
+[data-theme="light"] .medical-hero-title,
+[data-theme="light"] .accounting-hero-title,
+[data-theme="light"] .education-hero-title,
+[data-theme="light"] .industry-hero-title {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .dealership-hero-description,
+[data-theme="light"] .medical-hero-description,
+[data-theme="light"] .accounting-hero-description,
+[data-theme="light"] .education-hero-description,
+[data-theme="light"] .industry-hero-description {
+    color: rgba(26, 26, 46, 0.8);
+}
+
+[data-theme="light"] .dealership-hero-tag,
+[data-theme="light"] .medical-hero-tag,
+[data-theme="light"] .accounting-hero-tag,
+[data-theme="light"] .education-hero-tag,
+[data-theme="light"] .industry-hero-tag {
+    background: rgba(0, 150, 255, 0.15);
+    border-color: rgba(0, 150, 255, 0.4);
+    color: #0077cc;
+}
+
+/* Hero Services Bar - Light Mode */
+[data-theme="light"] .hero-services-bar {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 150, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .hero-service-item h4 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .hero-service-item p {
+    color: #555;
+}
+
+[data-theme="light"] .hero-service-icon {
+    background: rgba(0, 150, 255, 0.1);
+    color: #0077cc;
+}
+
+/* What We Do Section - Light Mode */
+[data-theme="light"] .dealership-what-we-do,
+[data-theme="light"] .medical-what-we-do,
+[data-theme="light"] .accounting-what-we-do,
+[data-theme="light"] .education-what-we-do,
+[data-theme="light"] .industry-what-we-do {
+    background: #f8f9fa;
+}
+
+[data-theme="light"] .what-we-do-header h2 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .what-we-do-header p {
+    color: #555;
+}
+
+[data-theme="light"] .what-we-do-card {
+    background: #ffffff;
+    border-color: rgba(0, 150, 255, 0.15);
+}
+
+[data-theme="light"] .what-we-do-card h4 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .what-we-do-card p {
+    color: #555;
+}
+
+/* VPN/Network Section - Light Mode */
+[data-theme="light"] .dealership-vpn-section,
+[data-theme="light"] .medical-vpn-section,
+[data-theme="light"] .accounting-vpn-section,
+[data-theme="light"] .education-vpn-section,
+[data-theme="light"] .industry-vpn-section {
+    background: #ffffff;
+}
+
+[data-theme="light"] .vpn-header h2 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .vpn-header p {
+    color: #555;
+}
+
+[data-theme="light"] .vpn-card {
+    background: #f8f9fa;
+    border-color: rgba(0, 150, 255, 0.15);
+}
+
+[data-theme="light"] .vpn-card h3 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .vpn-card p,
+[data-theme="light"] .vpn-card li {
+    color: #555;
+}
+
+/* Services Section - Light Mode */
+[data-theme="light"] .dealership-services-section,
+[data-theme="light"] .medical-services-section,
+[data-theme="light"] .accounting-services-section,
+[data-theme="light"] .education-services-section,
+[data-theme="light"] .industry-services-section {
+    background: linear-gradient(180deg, #f0f4f8 0%, #e8ecf0 100%);
+}
+
+[data-theme="light"] .services-header h2 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .services-header p {
+    color: #555;
+}
+
+[data-theme="light"] .service-card-dealer,
+[data-theme="light"] .service-card-medical,
+[data-theme="light"] .service-card-accounting,
+[data-theme="light"] .service-card-education,
+[data-theme="light"] .service-card-industry {
+    background: #ffffff;
+    border-color: rgba(0, 150, 255, 0.15);
+}
+
+[data-theme="light"] .service-card-dealer h3,
+[data-theme="light"] .service-card-medical h3,
+[data-theme="light"] .service-card-accounting h3,
+[data-theme="light"] .service-card-education h3,
+[data-theme="light"] .service-card-industry h3 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .service-card-dealer p,
+[data-theme="light"] .service-card-medical p,
+[data-theme="light"] .service-card-accounting p,
+[data-theme="light"] .service-card-education p,
+[data-theme="light"] .service-card-industry p {
+    color: #555;
+}
+
+/* Compliance/Features Section - Light Mode */
+[data-theme="light"] .ftc-compliance-section,
+[data-theme="light"] .hipaa-compliance-section,
+[data-theme="light"] .compliance-section {
+    background: #ffffff;
+}
+
+[data-theme="light"] .ftc-header h2,
+[data-theme="light"] .compliance-header h2 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .ftc-header p,
+[data-theme="light"] .compliance-header p {
+    color: #555;
+}
+
+/* Advantages Section - Light Mode */
+[data-theme="light"] .advantages-section {
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+[data-theme="light"] .advantages-header h2 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .advantage-card {
+    background: #ffffff;
+    border-color: rgba(0, 150, 255, 0.15);
+}
+
+[data-theme="light"] .advantage-card h3 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .advantage-card p {
+    color: #555;
+}
+
+/* Portal Section - Light Mode */
+[data-theme="light"] .portal-section {
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+[data-theme="light"] .portal-content h2 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .portal-subtitle {
+    color: #0077cc;
+}
+
+[data-theme="light"] .portal-description {
+    color: #555;
+}
+
+[data-theme="light"] .portal-features li {
+    color: #333;
+}
+
+[data-theme="light"] .portal-features li strong {
+    color: #1a1a2e;
+}
+
+/* CTA Section - Light Mode (keep gradient for CTA) */
+[data-theme="light"] .dont-delay-section {
+    background: linear-gradient(135deg, #0077cc 0%, #00a8ff 100%);
+}
+
+[data-theme="light"] .dont-delay-container h2,
+[data-theme="light"] .dont-delay-container p {
+    color: #ffffff;
+}
+
+/* Generic Industry Cards - Light Mode */
+[data-theme="light"] .industry-card,
+[data-theme="light"] .feature-card,
+[data-theme="light"] .benefit-card {
+    background: #ffffff;
+    border-color: rgba(0, 150, 255, 0.15);
+}
+
+[data-theme="light"] .industry-card h3,
+[data-theme="light"] .feature-card h3,
+[data-theme="light"] .benefit-card h3 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .industry-card p,
+[data-theme="light"] .feature-card p,
+[data-theme="light"] .benefit-card p {
+    color: #555;
+}
+
+/* Section Backgrounds - Light Mode */
+[data-theme="light"] section[class*="section"] {
+    --section-bg-dark: #ffffff;
+    --section-bg-alt: #f8f9fa;
+}
+
+/* Text Colors Override - Light Mode */
+[data-theme="light"] .section-title,
+[data-theme="light"] .section-heading {
+    color: #1a1a2e !important;
+}
+
+[data-theme="light"] .section-subtitle,
+[data-theme="light"] .section-description {
+    color: #555 !important;
+}

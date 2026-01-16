@@ -1,0 +1,946 @@
+/* End-to-End Dealership Services Page Styles */
+
+/* Hero Section */
+.dealership-hero {
+    position: relative;
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 40px 80px;
+    background: linear-gradient(135deg, #0a1628 0%, #1a2744 40%, #0f1f3a 100%);
+    overflow: hidden;
+}
+
+.dealership-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(ellipse at 30% 50%, rgba(0, 122, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 30%, rgba(0, 200, 255, 0.1) 0%, transparent 40%);
+    z-index: 1;
+}
+
+.dealership-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.dealership-hero-text {
+    max-width: 600px;
+}
+
+.dealership-hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(0, 150, 255, 0.1);
+    border: 1px solid rgba(0, 150, 255, 0.3);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #00a8ff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+}
+
+.dealership-hero-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.dealership-hero-title .gradient-text {
+    background: linear-gradient(135deg, #00a8ff 0%, #00d4aa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dealership-hero-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.dealership-hero-cta {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-primary-dealer {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #00a8ff, #0088cc);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 168, 255, 0.3);
+}
+
+.btn-primary-dealer:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 168, 255, 0.4);
+}
+
+.dealership-hero-image {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.dealership-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.dealership-hero-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 168, 255, 0.1), transparent);
+    pointer-events: none;
+}
+
+/* Highlight Features Strip */
+.dealership-features-strip {
+    background: linear-gradient(90deg, #0066cc, #0088ff, #00a8ff);
+    padding: 50px 40px;
+}
+
+.features-strip-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.strip-feature {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #fff;
+}
+
+.strip-feature-icon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.strip-feature-icon svg {
+    color: #fff;
+}
+
+.strip-feature-content h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.strip-feature-content p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* Portal Section */
+.portal-section {
+    padding: 100px 80px;
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.portal-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 45% 55%;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.portal-content {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.portal-content h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1a1a2e;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.portal-subtitle {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #0099cc;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.portal-description {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.portal-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.portal-features li {
+    font-size: 0.88rem;
+    color: #333;
+    padding: 6px 0 6px 16px;
+    line-height: 1.5;
+    position: relative;
+}
+
+.portal-features li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #0099cc;
+    font-weight: bold;
+}
+
+.portal-features li strong {
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+.portal-image {
+    position: relative;
+}
+
+.portal-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* What We Do Section */
+.dealership-what-we-do {
+    padding: 100px 40px;
+    background: var(--bg-primary);
+}
+
+.what-we-do-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.what-we-do-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.what-we-do-header h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+}
+
+.what-we-do-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.what-we-do-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.what-we-do-card {
+    display: flex;
+    gap: 25px;
+    padding: 35px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    transition: all 0.4s ease;
+}
+
+.what-we-do-card:hover {
+    border-color: rgba(0, 168, 255, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0, 168, 255, 0.1);
+}
+
+.what-we-do-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(0, 168, 255, 0.15), rgba(0, 212, 170, 0.1));
+    border-radius: 16px;
+    color: #00a8ff;
+    flex-shrink: 0;
+}
+
+.what-we-do-content h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.what-we-do-content p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* VPN DMS Section */
+.dealership-vpn-section {
+    padding: 100px 40px;
+    background: var(--gradient-dark);
+    position: relative;
+    overflow: hidden;
+}
+
+.dealership-vpn-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(0, 168, 255, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.vpn-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.vpn-content h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 25px;
+}
+
+.vpn-content p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.vpn-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.vpn-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.vpn-list li svg {
+    color: #00d4aa;
+    flex-shrink: 0;
+}
+
+.vpn-image {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+
+.vpn-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Our Services Section */
+.dealership-services-section {
+    padding: 100px 40px;
+    background: var(--bg-primary);
+}
+
+.services-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.services-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.services-header h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+}
+
+.services-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.service-item {
+    padding: 35px 30px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.service-item:hover {
+    border-color: rgba(0, 168, 255, 0.3);
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0, 168, 255, 0.12);
+}
+
+.service-item-icon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(0, 168, 255, 0.15), rgba(0, 212, 170, 0.1));
+    border-radius: 20px;
+    color: #00a8ff;
+    margin: 0 auto 20px;
+}
+
+.service-item h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.service-item p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* FTC Compliance Section */
+.ftc-compliance-section {
+    padding: 100px 40px;
+    background: var(--gradient-dark);
+    position: relative;
+}
+
+.ftc-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.ftc-image {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+
+.ftc-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.ftc-content h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 25px;
+}
+
+.ftc-content>p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.ftc-requirements {
+    display: grid;
+    gap: 15px;
+}
+
+.ftc-requirement {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(0, 168, 255, 0.05);
+    border: 1px solid rgba(0, 168, 255, 0.15);
+    border-radius: 16px;
+}
+
+.ftc-requirement svg {
+    color: #00d4aa;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.ftc-requirement div h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.ftc-requirement div p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Don't Delay Section */
+.dont-delay-section {
+    padding: 80px 40px;
+    background: linear-gradient(90deg, #ff6b35, #f7931e);
+    text-align: center;
+}
+
+.dont-delay-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.dont-delay-container h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.dont-delay-container p {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.dont-delay-container .btn-white {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: #fff;
+    color: #f7931e;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.dont-delay-container .btn-white:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Advantages Section */
+.advantages-section {
+    padding: 100px 40px;
+    background: var(--bg-primary);
+}
+
+.advantages-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.advantages-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.advantages-header h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+}
+
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.advantage-card {
+    text-align: center;
+    padding: 35px 25px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    transition: all 0.4s ease;
+}
+
+.advantage-card:hover {
+    border-color: rgba(0, 168, 255, 0.3);
+    transform: translateY(-5px);
+}
+
+.advantage-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(0, 168, 255, 0.15), rgba(0, 212, 170, 0.1));
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    color: #00a8ff;
+}
+
+.advantage-card h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.advantage-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .dealership-hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .dealership-hero-image {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .dealership-hero-cta {
+        justify-content: center;
+    }
+
+    .features-strip-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .vpn-container,
+    .ftc-container,
+    .portal-container {
+        grid-template-columns: 1fr;
+    }
+
+    .portal-container {
+        text-align: center;
+    }
+
+    .portal-features {
+        text-align: left;
+        display: inline-block;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .advantages-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .dealership-hero {
+        padding: 100px 20px 60px;
+        min-height: auto;
+    }
+
+    .dealership-hero-title {
+        font-size: 2rem;
+    }
+
+    .dealership-what-we-do,
+    .dealership-vpn-section,
+    .dealership-services-section,
+    .ftc-compliance-section,
+    .advantages-section {
+        padding: 60px 20px;
+    }
+
+    .what-we-do-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .advantages-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .what-we-do-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .what-we-do-icon {
+        margin: 0 auto;
+    }
+
+    .dont-delay-container h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* ============================================
+   LIGHT MODE STYLES
+   ============================================ */
+
+[data-theme="light"] .dealership-hero {
+    background: linear-gradient(135deg, #e8f4fc 0%, #d0e8f8 40%, #c5e0f5 100%);
+}
+
+[data-theme="light"] .dealership-hero::before {
+    background:
+        radial-gradient(ellipse at 30% 50%, rgba(0, 122, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 30%, rgba(0, 200, 255, 0.05) 0%, transparent 40%);
+}
+
+[data-theme="light"] .dealership-hero-title {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .dealership-hero-description {
+    color: rgba(26, 26, 46, 0.8);
+}
+
+[data-theme="light"] .dealership-hero-tag {
+    background: rgba(0, 150, 255, 0.15);
+    border-color: rgba(0, 150, 255, 0.4);
+    color: #0077cc;
+}
+
+[data-theme="light"] .hero-services-bar {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 150, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .hero-service-item h4 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .hero-service-item p {
+    color: #555;
+}
+
+[data-theme="light"] .hero-service-icon {
+    background: rgba(0, 150, 255, 0.1);
+    color: #0077cc;
+}
+
+/* What We Do Section - Light Mode */
+[data-theme="light"] .dealership-what-we-do {
+    background: #f8f9fa;
+}
+
+[data-theme="light"] .what-we-do-header h2 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .what-we-do-header p {
+    color: #555;
+}
+
+[data-theme="light"] .what-we-do-card {
+    background: #ffffff;
+    border-color: rgba(0, 150, 255, 0.15);
+}
+
+[data-theme="light"] .what-we-do-card h4 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .what-we-do-card p {
+    color: #555;
+}
+
+/* VPN Section - Light Mode */
+[data-theme="light"] .dealership-vpn-section {
+    background: #ffffff;
+}
+
+[data-theme="light"] .vpn-header h2 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .vpn-header p {
+    color: #555;
+}
+
+[data-theme="light"] .vpn-card {
+    background: #f8f9fa;
+    border-color: rgba(0, 150, 255, 0.15);
+}
+
+[data-theme="light"] .vpn-card h3 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .vpn-card p,
+[data-theme="light"] .vpn-card li {
+    color: #555;
+}
+
+/* Services Section - Light Mode */
+[data-theme="light"] .dealership-services-section {
+    background: linear-gradient(180deg, #f0f4f8 0%, #e8ecf0 100%);
+}
+
+[data-theme="light"] .services-header h2 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .services-header p {
+    color: #555;
+}
+
+[data-theme="light"] .service-card-dealer {
+    background: #ffffff;
+    border-color: rgba(0, 150, 255, 0.15);
+}
+
+[data-theme="light"] .service-card-dealer h3 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .service-card-dealer p {
+    color: #555;
+}
+
+/* FTC Compliance Section - Light Mode */
+[data-theme="light"] .ftc-compliance-section {
+    background: #ffffff;
+}
+
+[data-theme="light"] .ftc-header h2 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .ftc-header p {
+    color: #555;
+}
+
+/* Advantages Section - Light Mode */
+[data-theme="light"] .advantages-section {
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+[data-theme="light"] .advantages-header h2 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .advantage-card {
+    background: #ffffff;
+    border-color: rgba(0, 150, 255, 0.15);
+}
+
+[data-theme="light"] .advantage-card h3 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .advantage-card p {
+    color: #555;
+}
+
+/* Don't Delay Section - Light Mode */
+[data-theme="light"] .dont-delay-section {
+    background: linear-gradient(135deg, #0077cc 0%, #00a8ff 100%);
+}
+
+[data-theme="light"] .dont-delay-container h2,
+[data-theme="light"] .dont-delay-container p {
+    color: #ffffff;
+}
