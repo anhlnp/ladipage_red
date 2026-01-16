@@ -11,10 +11,13 @@ gsap.registerPlugin(ScrollTrigger)
 // Dropdown menu items for Services
 const servicesDropdown = [
     { label: 'IT Support', path: '/it-support' },
+    { label: 'IT Consulting', path: '/it-consulting' },
+    { label: 'Fiber & Data Center', path: '/fiber-data-center' },
     { label: 'Computer Repair', path: '/computer-repair' },
     { label: 'Phone/Tablet Repair', path: '/phone-tablet-repair' },
     { label: 'Security', path: '/cybersecurity' },
     { label: 'Medical/Dental IT', path: '/medical-dental-offices' },
+    { label: 'End-to-End Dealership Services', path: '/dealership-services' },
 ]
 
 // Dropdown menu items for Cybersecurity
@@ -76,12 +79,29 @@ const NavButton = ({ children, className, onClick, to }) => {
 // Dropdown Component
 const NavDropdown = ({ label, items }) => {
     const [open, setOpen] = useState(false)
+    const timeoutRef = useRef(null)
+
+    const handleMouseEnter = () => {
+        // Clear any pending close timeout
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current)
+            timeoutRef.current = null
+        }
+        setOpen(true)
+    }
+
+    const handleMouseLeave = () => {
+        // Delay closing to give user time to move mouse to dropdown
+        timeoutRef.current = setTimeout(() => {
+            setOpen(false)
+        }, 300) // 300ms delay
+    }
 
     return (
         <div
             className="nav-dropdown"
-            onMouseEnter={() => setOpen(true)}
-            onMouseLeave={() => setOpen(false)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
         >
             <span className="nav-link text-reveal dropdown-trigger">
                 {label}
