@@ -61,6 +61,87 @@ const Contact = () => {
         }
     }
 
+    const sendEmail = async () => {
+        const apiKey = import.meta.env.VITE_SMTP2GO_API_KEY
+        const senderEmail = import.meta.env.VITE_SMTP2GO_SENDER || 'noreply@selecttech.com'
+        const recipientEmail = import.meta.env.VITE_SMTP2GO_RECIPIENT || 'info@selecttech.com'
+
+        // Skip email sending if SMTP2GO is not configured
+        if (!apiKey || apiKey === 'your_api_key') {
+            console.log('SMTP2GO not configured, skipping email send')
+            return { success: true, skipped: true }
+        }
+
+        const serviceLabel = {
+            'cybersecurity': 'Cybersecurity & Compliance',
+            'managed-it': 'Managed IT Services',
+            'repair': 'Mobile Repair',
+            'infrastructure': 'Infrastructure',
+            'other': 'Other'
+        }[formData.service] || formData.service || 'General Inquiry'
+
+        const emailBody = `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                <h2 style="color: #0ea5e9; border-bottom: 2px solid #0ea5e9; padding-bottom: 10px;">
+                    Select Tech Inc. - Web Inquiry Notifications
+                </h2>
+                
+                <div style="margin: 20px 0;">
+                    <p><strong>Name:</strong> ${formData.name}</p>
+                    <p><strong>Email:</strong> ${formData.email}</p>
+                    <p><strong>Phone:</strong> ${formData.phone || 'Not provided'}</p>
+                    <p><strong>Service Needed:</strong> ${serviceLabel}</p>
+                </div>
+                
+                <div style="background: #f3f4f6; padding: 20px; border-radius: 8px;">
+                    <h3 style="margin-top: 0; color: #374151;">Message:</h3>
+                    <p style="white-space: pre-wrap;">${formData.message}</p>
+                </div>
+                
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 12px;">
+                    <p>This email was sent from the Select Tech website contact form.</p>
+                    <p>© ${new Date().getFullYear()} Select Tech Inc.</p>
+                </div>
+            </div>
+        `
+
+        try {
+            const response = await fetch('https://api.smtp2go.com/v3/email/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    api_key: apiKey,
+                    to: [recipientEmail],
+                    sender: senderEmail,
+                    subject: `New Request: ${serviceLabel} - ${formData.name}`,
+                    html_body: emailBody,
+                    text_body: `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'Not provided'}\nService: ${serviceLabel}\n\nMessage:\n${formData.message}`
+                })
+            })
+
+            const data = await response.json()
+
+            // Log full response for debugging
+            console.log('SMTP2GO Response:', JSON.stringify(data, null, 2))
+
+            if (data.data?.succeeded > 0) {
+                console.log('Email sent successfully via SMTP2GO:', data)
+                return { success: true }
+            } else {
+                // Extract detailed error message
+                const errorDetails = data.data?.failures?.[0] || data.data?.error || data.data || 'Unknown error'
+                console.error('SMTP2GO email failed:', errorDetails)
+                console.error('Full response:', data)
+                return { success: false, error: errorDetails }
+            }
+        } catch (error) {
+            console.error('Failed to send email:', error)
+            return { success: false, error: error.message }
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setIsSubmitting(true)
@@ -71,6 +152,7 @@ const Contact = () => {
                 throw new Error('Database not configured')
             }
 
+            // Save to database
             const { error } = await supabase
                 .from('contacts')
                 .insert([{
@@ -84,6 +166,12 @@ const Contact = () => {
                 }])
 
             if (error) throw error
+
+            // Try to send email notification
+            const emailResult = await sendEmail()
+            if (!emailResult.success && !emailResult.skipped) {
+                console.warn('Email notification failed, but contact was saved:', emailResult.error)
+            }
 
             setSubmitStatus({
                 type: 'success',

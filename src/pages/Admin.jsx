@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import AdminPriceManager from '../components/AdminPriceManager/AdminPriceManager'
 import AdminDashboard from '../components/AdminDashboard/AdminDashboard'
+import AdminContactManager from '../components/AdminContactManager/AdminContactManager'
 import './Admin.css'
 
 const Admin = () => {
@@ -132,13 +133,7 @@ const Admin = () => {
                     )}
 
                     {activeTab === 'contacts' && (
-                        <div className="welcome-card">
-                            <h2>📬 Contact Management</h2>
-                            <p>View and manage customer inquiries from the contact form.</p>
-                            <p style={{ color: 'rgba(255,255,255,0.5)', marginTop: '10px' }}>
-                                Coming soon: Contact list with filtering and status management.
-                            </p>
-                        </div>
+                        <AdminContactManager />
                     )}
 
                     {activeTab === 'settings' && (
