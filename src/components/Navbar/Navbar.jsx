@@ -13,12 +13,13 @@ const servicesDropdown = [
     { label: 'IT Support', path: '/it-support' },
     { label: 'IT Consulting', path: '/it-consulting' },
     { label: 'Fiber & Data Center', path: '/fiber-data-center' },
-    { label: 'Cloud Based SOC Monitoring', path: '/cloud-soc-monitoring' },
     { label: 'Computer Repair', path: '/computer-repair' },
     { label: 'Phone/Tablet Repair', path: '/phone-tablet-repair' },
     { label: 'Security', path: 'https://selecttechsecurity.com' },
     { label: 'Medical/Dental IT', path: 'https://www.selecttechmd.com' },
     { label: 'End-to-End Dealership Services', path: '/dealership-services' },
+    { label: 'Cloud Based SOC Monitoring', path: '/cloud-soc-monitoring' },
+    { label: 'Cyber Training', path: '/cyber-training' },
 ]
 
 // Dropdown menu items for Cybersecurity

@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import Contact from './pages/Contact'
 import About from './pages/About'
+import OurTeam from './pages/OurTeam'
 // Services pages
 import ITSupport from './pages/ITSupport'
 import ITConsulting from './pages/ITConsulting'
@@ -11,6 +12,8 @@ import Cybersecurity from './pages/Cybersecurity'
 import MedicalDentalOffices from './pages/MedicalDentalOffices'
 import FiberDataCenter from './pages/FiberDataCenter'
 import CloudSOCMonitoring from './pages/CloudSOCMonitoring'
+import CyberTraining from './pages/CyberTraining'
+import OurTeam from './pages/OurTeam'
 // Cybersecurity industry pages
 import AccountingLegal from './pages/AccountingLegal'
 import Education from './pages/Education'
@@ -36,6 +39,10 @@ export const router = createBrowserRouter([
     {
         path: '/about',
         element: <About />,
+    },
+    {
+        path: '/our-team',
+        element: <OurTeam />,
     },
     // Services
     {
@@ -69,6 +76,10 @@ export const router = createBrowserRouter([
     {
         path: '/cloud-soc-monitoring',
         element: <CloudSOCMonitoring />,
+    },
+    {
+        path: '/cyber-training',
+        element: <CyberTraining />,
     },
     // Cybersecurity industries
     {

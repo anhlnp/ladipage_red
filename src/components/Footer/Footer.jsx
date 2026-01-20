@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const Footer = () => {
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -30,24 +32,24 @@ const Footer = () => {
                     <div className="footer-links">
                         <div className="footer-col">
                             <h4>Services</h4>
-                            <a href="#services">Cybersecurity</a>
-                            <a href="#services">Managed IT</a>
-                            <a href="#services">Mobile Repair</a>
-                            <a href="#services">Infrastructure</a>
+                            <Link to="/cybersecurity">Cybersecurity</Link>
+                            <Link to="/it-support">Managed IT</Link>
+                            <Link to="/phone-tablet-repair">Mobile Repair</Link>
+                            <Link to="/fiber-data-center">Infrastructure</Link>
                         </div>
                         <div className="footer-col">
                             <h4>Company</h4>
-                            <a href="#hero">About Us</a>
-                            <a href="#features">Our Team</a>
-                            <a href="#contact">Careers</a>
-                            <a href="#contact">Contact</a>
+                            <Link to="/about">About Us</Link>
+                            <Link to="/our-team">Our Team</Link>
+                            <Link to="/contact">Careers</Link>
+                            <Link to="/contact">Contact</Link>
                         </div>
                         <div className="footer-col">
                             <h4>Resources</h4>
-                            <a href="#">Blog</a>
-                            <a href="#clients">Case Studies</a>
+                            <Link to="/blog">Blog</Link>
+                            <Link to="/about">Case Studies</Link>
                             <a href="#">FAQ</a>
-                            <a href="#contact">Support</a>
+                            <Link to="/contact">Support</Link>
                         </div>
                     </div>
                 </div>
