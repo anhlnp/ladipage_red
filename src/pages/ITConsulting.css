@@ -19,11 +19,31 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg,
-            rgba(0, 100, 180, 0.75) 0%,
-            rgba(0, 150, 220, 0.6) 50%,
-            rgba(0, 100, 180, 0.7) 100%);
+    background: linear-gradient(to bottom,
+            rgba(0, 100, 180, 0.7) 0%,
+            rgba(0, 120, 200, 0.6) 30%,
+            rgba(0, 80, 150, 0.7) 60%,
+            rgba(26, 26, 46, 0.85) 85%,
+            #1a1a2e 100%);
     z-index: 1;
+}
+
+/* Gradient at bottom of hero for smooth transition to stats bar */
+.it-consulting-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 80px;
+    /* Position above stats bar */
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            rgba(0, 50, 100, 0.3) 30%,
+            rgba(26, 26, 46, 0.6) 60%,
+            rgba(26, 26, 46, 0.9) 100%);
+    z-index: 2;
+    pointer-events: none;
 }
 
 .hero-content-wrapper {
@@ -163,6 +183,24 @@
     max-width: var(--container-width);
     margin: 40px auto 0;
     width: 100%;
+    padding-bottom: 100px;
+}
+
+/* Gradient overlay for smooth transition from hero to stats bar */
+.founder-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -100%;
+    right: -100%;
+    height: 120px;
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            rgba(26, 26, 46, 0.3) 40%,
+            rgba(26, 26, 46, 0.7) 70%,
+            #1a1a2e 100%);
+    pointer-events: none;
+    z-index: -1;
 }
 
 .founder-content {
@@ -212,9 +250,25 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: #1a1a2e;
+    background: linear-gradient(to bottom,
+            rgba(26, 26, 46, 0.8) 0%,
+            #1a1a2e 30%,
+            #0f172a 100%);
     z-index: 3;
-    padding: 25px 40px;
+    padding: 35px 40px 50px;
+}
+
+/* Smooth transition gradient from stats bar to next section */
+.stats-bar::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom, #0f172a 0%, var(--bg-primary) 100%);
+    pointer-events: none;
+    z-index: 4;
 }
 
 .stats-bar-content {
@@ -244,8 +298,22 @@
 
 /* Additional Services Section */
 .consulting-services-section {
-    padding: 80px 40px;
+    padding: 60px 40px 80px;
     background: var(--bg-primary);
+    position: relative;
+    margin-top: -40px;
+    z-index: 5;
+}
+
+.consulting-services-section::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent 0%, var(--bg-primary) 100%);
+    pointer-events: none;
 }
 
 .consulting-services-grid {

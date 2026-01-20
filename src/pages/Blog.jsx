@@ -7,16 +7,16 @@ import './Blog.css'
 // Blog posts data
 export const blogPostsData = [
     {
-        id: 'fiber-optics-400g-future',
+        id: 'fiber-optics-100g-enterprise',
         image: '/blog_fiber_cables.png',
         category: 'Technology',
         date: 'January 15, 2026',
         author: 'Select Tech Team',
         authorRole: 'Technical Experts',
         readTime: '8 min read',
-        title: 'The Future of Fiber Optics: 400G and Beyond',
-        excerpt: 'Explore how next-generation fiber optic technology is revolutionizing data center connectivity with speeds exceeding 400 Gbps.',
-        tags: ['Fiber Optics', '400G', 'Data Center', 'Technology', 'Bandwidth']
+        title: 'Enterprise Fiber Optics: 10G to 100G Solutions',
+        excerpt: 'Explore how modern fiber optic technology is revolutionizing data center connectivity with speeds from 10 Gbps to 100 Gbps.',
+        tags: ['Fiber Optics', '100G', 'Data Center', 'Technology', 'Bandwidth']
     },
     {
         id: 'data-center-cable-management',

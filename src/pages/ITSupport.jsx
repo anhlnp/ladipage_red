@@ -101,7 +101,7 @@ const ITSupport = () => {
                         </ul>
                     </div>
 
-                    <div className="content-block glass-box">
+                    <div className="content-block glass-box why-choose-block">
                         <h3>Why Choose Select Tech?</h3>
                         <p>
                             We make the transition easy! We fully manage the transfer of services from your existing IT supplier.

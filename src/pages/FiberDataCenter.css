@@ -181,7 +181,7 @@
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: 600;
-    color: #00d9ff;
+    color: var(--accent-primary);
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 24px;
@@ -212,7 +212,7 @@
 }
 
 .fiber-hero-title .gradient-text {
-    background: linear-gradient(135deg, #00d9ff 0%, #8a2be2 50%, #00d9ff 100%);
+    background: var(--accent-gradient);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -253,7 +253,7 @@
     display: block;
     font-size: 2.2rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #00d9ff, #8a2be2);
+    background: var(--accent-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -276,7 +276,7 @@
     align-items: center;
     gap: 10px;
     padding: 16px 32px;
-    background: linear-gradient(135deg, #00d9ff, #0099cc);
+    background: var(--accent-primary);
     color: #000;
     font-weight: 700;
     font-size: 1rem;
@@ -307,8 +307,8 @@
 }
 
 .btn-secondary-fiber:hover {
-    border-color: #00d9ff;
-    color: #00d9ff;
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
 }
 
 /* Hero Illustration */
@@ -478,7 +478,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #00d9ff, #8a2be2);
+    background: var(--accent-gradient);
     transform: scaleX(0);
     transition: transform 0.4s ease;
 }
@@ -502,7 +502,7 @@
     background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(138, 43, 226, 0.1));
     border-radius: 20px;
     margin-bottom: 25px;
-    color: #00d9ff;
+    color: var(--accent-primary);
 }
 
 .fiber-service-card h3 {
@@ -536,7 +536,7 @@
 }
 
 .service-features li svg {
-    color: #00ff88;
+    color: var(--accent-primary);
     flex-shrink: 0;
 }
 
@@ -621,7 +621,7 @@
     background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(138, 43, 226, 0.1));
     border-radius: 50%;
     margin: 0 auto 20px;
-    color: #00d9ff;
+    color: var(--accent-primary);
 }
 
 .benefit-item h4 {
@@ -712,7 +712,7 @@
     justify-content: center;
     background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(138, 43, 226, 0.1));
     border-radius: 16px;
-    color: #00d9ff;
+    color: var(--accent-primary);
     flex-shrink: 0;
 }
 
@@ -918,7 +918,7 @@
     top: 20px;
     left: 20px;
     padding: 6px 14px;
-    background: rgba(0, 217, 255, 0.9);
+    background: var(--accent-primary);
     color: #000;
     font-size: 0.75rem;
     font-weight: 700;
@@ -948,7 +948,7 @@
 }
 
 .blog-meta svg {
-    color: #00d9ff;
+    color: var(--accent-primary);
 }
 
 .blog-card-content h3 {
@@ -961,7 +961,7 @@
 }
 
 .blog-card:hover .blog-card-content h3 {
-    color: #00d9ff;
+    color: var(--accent-primary);
 }
 
 .blog-card-content p {
@@ -975,7 +975,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #00d9ff;
+    color: var(--accent-primary);
     font-weight: 600;
     font-size: 0.9rem;
     text-decoration: none;

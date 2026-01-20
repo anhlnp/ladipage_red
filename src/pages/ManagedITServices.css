@@ -206,20 +206,20 @@
         padding: 120px 20px 60px;
         min-height: 70vh;
     }
-    
+
     .value-container {
         flex-direction: column;
         gap: 24px;
     }
-    
+
     .services-section {
         padding: 60px 20px;
     }
-    
+
     .why-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .why-choose {
         padding: 60px 20px;
     }

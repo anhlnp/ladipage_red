@@ -16,6 +16,13 @@ const CarDealerships = () => {
             <section className="service-content">
                 <div className="content-container">
                     <div className="content-block glass-box" style={{ gridColumn: 'span 2' }}>
+                        <div className="block-image-container" style={{ marginBottom: '25px', borderRadius: '12px', overflow: 'hidden', height: '300px' }}>
+                            <img
+                                src="/pexels-thisisengineering-3862618.jpg"
+                                alt="Car Dealership Engineering"
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                        </div>
                         <h3>FTC Safeguards Solution</h3>
                         <p>
                             At Select Tech, we offer comprehensive cybersecurity services including penetration testing,
@@ -42,6 +49,13 @@ const CarDealerships = () => {
                     </div>
 
                     <div className="content-block glass-box">
+                        <div className="block-image-container" style={{ marginBottom: '25px', borderRadius: '12px', overflow: 'hidden', height: '200px' }}>
+                            <img
+                                src="/pexels-kindelmedia-9799743.jpg"
+                                alt="Automotive Data Security"
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                        </div>
                         <h3>Don't Wait</h3>
                         <p>
                             Our team of experts stays up-to-date on the latest threats and trends to provide
@@ -52,6 +66,14 @@ const CarDealerships = () => {
                             <li>FTC Safeguards Rule Ready</li>
                             <li>Expert Support Team</li>
                         </ul>
+                    </div>
+
+                    <div className="content-block glass-box" style={{ padding: 0, overflow: 'hidden', display: 'flex', gridColumn: '1 / -1' }}>
+                        <img
+                            src="/pexels-shkrabaanthony-7144176.jpg"
+                            alt="Car Dealership Showroom"
+                            style={{ width: '100%', height: '100%', objectFit: 'cover', maxHeight: '400px' }}
+                        />
                     </div>
                 </div>
             </section>

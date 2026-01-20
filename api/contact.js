@@ -26,8 +26,8 @@ export default async function handler(req, res) {
 
     // Email content
     const mailOptions = {
-        from: process.env.SMTP_FROM || 'info@selecttech.com',
-        to: process.env.SMTP_TO || 'info@selecttech.com',
+        from: process.env.SMTP_FROM || 'info@selecttechinc.com',
+        to: process.env.SMTP_TO || 'info@selecttechinc.com',
         subject: `New Contact Form Submission - ${service || 'General Inquiry'}`,
         html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

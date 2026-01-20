@@ -1,0 +1,83 @@
+/* Phone Tablet Repair Page Specific Styles */
+
+/* Block Icon */
+.block-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(var(--accent-primary-rgb, 56, 189, 248), 0.15), rgba(var(--accent-primary-rgb, 56, 189, 248), 0.05));
+    border-radius: 16px;
+    margin-bottom: 20px;
+    color: var(--accent-primary);
+}
+
+/* Price Guide Block - Full width and centered */
+.service-content .content-container .content-block.price-guide-block {
+    grid-column: 1 / -1;
+    max-width: 800px;
+    justify-self: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.price-guide-block .block-icon {
+    margin: 0 auto 20px;
+}
+
+/* Why Choose Us Block - Full width and centered */
+.service-content .content-container .content-block.why-choose-block {
+    grid-column: 1 / -1;
+    max-width: 900px;
+    justify-self: center;
+    text-align: center;
+}
+
+.why-choose-list {
+    list-style: none;
+    padding: 0 !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.why-choose-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: rgba(var(--accent-primary-rgb, 56, 189, 248), 0.1);
+    border: 1px solid rgba(var(--accent-primary-rgb, 56, 189, 248), 0.2);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.why-choose-list li svg {
+    color: var(--accent-primary);
+    flex-shrink: 0;
+}
+
+.why-choose-list li:hover {
+    background: rgba(var(--accent-primary-rgb, 56, 189, 248), 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(var(--accent-primary-rgb, 56, 189, 248), 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .why-choose-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .why-choose-list li {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}

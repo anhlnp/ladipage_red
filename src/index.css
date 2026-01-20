@@ -1056,10 +1056,11 @@ a {
 }
 
 .gradient-text {
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: var(--accent-gradient) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
 }
 
 .hero-description {
@@ -1093,16 +1094,21 @@ a {
   display: inline;
   font-size: 2.5rem;
   font-weight: 800;
-  color: var(--accent-primary) !important;
-  -webkit-text-fill-color: var(--accent-primary) !important;
-  background: none !important;
+  background: var(--accent-gradient) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
   line-height: 1;
 }
 
 .stat-suffix {
   display: inline;
   font-size: 1.5rem;
-  color: var(--accent-primary);
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-left: 2px;
 }
 
@@ -2208,7 +2214,23 @@ a {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
-  align-items: start;
+  align-items: stretch;
+}
+
+.contact-info,
+.contact-form-wrapper {
+  margin-top: 0;
+}
+
+/* Add contact link styles */
+.contact-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  color: var(--accent-primary);
 }
 
 .contact-info .section-title {
@@ -3419,7 +3441,7 @@ a {
   }
 
   .services-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 
   .contact-form {
@@ -3450,6 +3472,6 @@ a {
 /* Tablet breakpoint for services grid */
 @media (min-width: 769px) and (max-width: 1200px) {
   .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }

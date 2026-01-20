@@ -78,6 +78,13 @@ const Cybersecurity = () => {
 
                     {/* Penetration Testing */}
                     <div className="content-block glass-box" style={{ gridColumn: 'span 2' }}>
+                        <div className="block-image-container" style={{ marginBottom: '25px', borderRadius: '12px', overflow: 'hidden', height: '300px' }}>
+                            <img
+                                src="/pexels-tima-miroshnichenko-5380792.jpg"
+                                alt="Advanced Penetration Testing"
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                        </div>
                         <h3>Penetration Testing Process</h3>
                         <p>
                             We use the latest tools and techniques to simulate real-world attacks.
@@ -95,6 +102,13 @@ const Cybersecurity = () => {
                     </div>
 
                     <div className="content-block glass-box">
+                        <div className="block-image-container" style={{ marginBottom: '25px', borderRadius: '12px', overflow: 'hidden', height: '200px' }}>
+                            <img
+                                src="/pexels-divinetechygirl-1181354.jpg"
+                                alt="Cybersecurity Expert Team"
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                        </div>
                         <h3>Additional Services</h3>
                         <h4 style={{ color: 'var(--text-primary)', marginTop: '15px' }}>Program Management</h4>
                         <p>Customized programs to ensure cybersecurity efforts are properly planned, implemented, and monitored.</p>

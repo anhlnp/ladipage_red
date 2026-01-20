@@ -1,5 +1,13 @@
 /* IT Support Page Specific Styles */
 
+/* Why Choose Section - Override grid to center */
+.service-content .content-container .content-block.why-choose-block {
+    grid-column: 1 / -1;
+    max-width: 800px;
+    justify-self: center;
+    text-align: center;
+}
+
 /* Team Showcase Section */
 .team-showcase {
     padding: 80px 40px;

@@ -16,6 +16,13 @@ const Business = () => {
             <section className="service-content">
                 <div className="content-container">
                     <div className="content-block glass-box">
+                        <div className="block-image-container" style={{ marginBottom: '20px', borderRadius: '12px', overflow: 'hidden', height: '200px' }}>
+                            <img
+                                src="/pexels-scottwebb-3052682.jpg"
+                                alt="Large Business Infrastructure"
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                        </div>
                         <h3>Large Businesses</h3>
                         <p>
                             Large businesses face the need for strong cybersecurity measures due to the vast amount of data
@@ -25,12 +32,27 @@ const Business = () => {
                     </div>
 
                     <div className="content-block glass-box">
+                        <div className="block-image-container" style={{ marginBottom: '20px', borderRadius: '12px', overflow: 'hidden', height: '200px' }}>
+                            <img
+                                src="/pexels-georgemorina-4960341.jpg"
+                                alt="SMB Office Team"
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                        </div>
                         <h3>SMBs</h3>
                         <p>
                             Cybersecurity is equally important for SMBs as they are often targeted due to perceived vulnerabilities.
                             SMBs must protect sensitive data, customer information, and maintain business continuity just as strictly
                             as larger corporations.
                         </p>
+                    </div>
+
+                    <div className="content-block glass-box" style={{ padding: 0, overflow: 'hidden', display: 'flex' }}>
+                        <img
+                            src="/pexels-fauxels-3183183.jpg"
+                            alt="Business Team Collaboration"
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
                     </div>
 
                     <div className="content-block glass-box" style={{ gridColumn: '1 / -1' }}>

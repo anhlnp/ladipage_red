@@ -64,7 +64,7 @@ const Contact = () => {
     const sendEmail = async () => {
         const apiKey = import.meta.env.VITE_SMTP2GO_API_KEY
         const senderEmail = import.meta.env.VITE_SMTP2GO_SENDER || 'noreply@selecttech.com'
-        const recipientEmail = import.meta.env.VITE_SMTP2GO_RECIPIENT || 'info@selecttech.com'
+        const recipientEmail = import.meta.env.VITE_SMTP2GO_RECIPIENT || 'info@selecttechinc.com'
 
         // Skip email sending if SMTP2GO is not configured
         if (!apiKey || apiKey === 'your_api_key') {
@@ -216,8 +216,15 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h4>Located at</h4>
-                                    <p>2155 N. Center Street</p>
-                                    <p>Hickory, North Carolina 28601</p>
+                                    <a
+                                        href="https://www.google.com/maps/search/?api=1&query=2155+N.+Center+Street,+Hickory,+North+Carolina+28601"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="contact-link"
+                                    >
+                                        <p>2155 N. Center Street</p>
+                                        <p>Hickory, North Carolina 28601</p>
+                                    </a>
                                 </div>
                             </div>
 
@@ -243,8 +250,8 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h4>Contact</h4>
-                                    <p>(828) 328-4801</p>
-                                    <p>info@selecttech.com</p>
+                                    <p><a href="tel:8283284801" className="contact-link">(828) 328-4801</a></p>
+                                    <p><a href="mailto:info@selecttechinc.com" className="contact-link">info@selecttechinc.com</a></p>
                                 </div>
                             </div>
                         </div>

@@ -7,61 +7,60 @@ import './Blog.css'
 
 // Full blog content for each post
 const blogContent = {
-    'fiber-optics-400g-future': {
+    'fiber-optics-100g-enterprise': {
         content: `
-            <p>The data center industry is experiencing an unprecedented demand for bandwidth. With the rise of artificial intelligence, machine learning, and big data analytics, traditional network speeds are no longer sufficient. Enter 400G fiber optic technology – the next frontier in data center connectivity.</p>
+            <p>Modern data centers rely on high-speed fiber optic connectivity to support business operations. With speeds ranging from 10 Gbps to 100 Gbps, today's enterprise fiber solutions provide the bandwidth and reliability businesses need for their critical applications.</p>
 
-            <h2>The Evolution of Data Center Speeds</h2>
-            <p>Over the past decade, we've witnessed a remarkable evolution in data center speeds. What started with 1G connections has rapidly progressed through 10G, 40G, and 100G. Today, 400G is becoming the new standard for hyperscale data centers and enterprises with demanding workloads.</p>
+            <h2>The Evolution of Enterprise Fiber</h2>
+            <p>Over the past decade, we've witnessed significant growth in enterprise network speeds. What started with 1G connections has progressed to 10G, 40G, and now 100G as the standard for high-performance enterprise environments. These speeds adequately serve the vast majority of business applications including cloud connectivity, data replication, and unified communications.</p>
             
-            <p>This exponential growth isn't just a nice-to-have – it's a necessity. Modern applications like real-time AI inference, 8K video streaming, and autonomous vehicle data processing require unprecedented amounts of bandwidth.</p>
+            <p>For most small and medium businesses, 10G connectivity provides excellent performance. Larger enterprises with demanding workloads benefit from 40G or 100G solutions.</p>
 
-            <h2>What Makes 400G Different?</h2>
-            <p>400G Ethernet represents more than just a speed increase. It introduces several technological innovations:</p>
+            <h2>Choosing the Right Speed for Your Business</h2>
+            <p>Selecting the appropriate fiber speed depends on several factors:</p>
             
             <ul>
-                <li><strong>PAM4 Modulation:</strong> Unlike traditional NRZ (Non-Return to Zero) signaling, PAM4 (Pulse Amplitude Modulation 4-level) doubles the data rate by encoding two bits per symbol instead of one.</li>
-                <li><strong>Higher Lane Counts:</strong> 400G solutions utilize 8x50G or 4x100G lane configurations, providing flexibility in deployment options.</li>
-                <li><strong>Advanced Forward Error Correction (FEC):</strong> Enhanced FEC algorithms ensure reliable transmission even at these unprecedented speeds.</li>
-                <li><strong>New Connector Types:</strong> QSFP-DD and OSFP connectors have emerged to support the higher power and thermal requirements.</li>
+                <li><strong>10G Solutions:</strong> Ideal for small to medium businesses, branch offices, and standard enterprise applications. Cost-effective and widely supported.</li>
+                <li><strong>40G Solutions:</strong> Perfect for growing businesses with increasing bandwidth demands, server clusters, and high-traffic applications.</li>
+                <li><strong>100G Solutions:</strong> Best suited for large enterprises, data centers, and organizations with heavy data transfer requirements.</li>
             </ul>
 
             <h2>Implementation Considerations</h2>
-            <p>Deploying 400G infrastructure requires careful planning. Here are key factors to consider:</p>
+            <p>Deploying fiber infrastructure requires careful planning. Here are key factors to consider:</p>
 
             <h3>Fiber Type Selection</h3>
-            <p>Single-mode fiber (SMF) remains the preferred choice for 400G deployments, especially for distances beyond 100 meters. For shorter reaches within data centers, multimode fiber with OM4 or OM5 specifications can be cost-effective.</p>
+            <p>Single-mode fiber (SMF) remains the preferred choice for longer distances, especially beyond 300 meters. For shorter reaches within buildings, multimode fiber with OM3 or OM4 specifications offers a cost-effective solution.</p>
 
             <h3>Structured Cabling Requirements</h3>
-            <p>Your existing cabling infrastructure may need upgrades. 400G demands pristine fiber connections with minimal insertion loss and return loss. Pre-terminated, factory-tested cable assemblies are recommended to ensure optimal performance.</p>
+            <p>Your cabling infrastructure should be designed for current needs plus future growth. Quality fiber connections with minimal insertion loss ensure optimal performance and longevity.</p>
 
             <blockquote>
-                "The transition to 400G isn't just about speed – it's about building an infrastructure that can scale with your business for the next decade."
+                "Investing in quality fiber infrastructure today means your network will be ready for tomorrow's demands without costly upgrades."
             </blockquote>
 
-            <h2>The Road to 800G and Beyond</h2>
-            <p>While 400G is still being widely adopted, the industry is already developing 800G solutions. IEEE 802.3df is working on standards that will eventually lead to 1.6T Ethernet. Forward-thinking organizations should design their infrastructure with these future speeds in mind.</p>
+            <h2>Planning for Growth</h2>
+            <p>While 10G to 100G speeds serve current enterprise needs well, forward-thinking organizations should design their infrastructure with growth in mind. This means installing fiber pathways that can accommodate future upgrades without major reconstructive work.</p>
 
             <h3>Key Recommendations</h3>
             <ul>
-                <li>Invest in high-quality single-mode fiber infrastructure</li>
+                <li>Assess your current bandwidth usage and project 3-5 year growth</li>
+                <li>Invest in high-quality single-mode fiber for backbone connections</li>
                 <li>Choose cable management systems that allow for easy upgrades</li>
-                <li>Plan for increased power and cooling requirements</li>
-                <li>Work with certified installers who understand 400G requirements</li>
+                <li>Work with certified installers who understand enterprise requirements</li>
                 <li>Implement comprehensive testing and documentation practices</li>
             </ul>
 
             <h2>How Select Tech Can Help</h2>
-            <p>At Select Tech, we specialize in designing and implementing next-generation fiber optic infrastructure. Our certified engineers have extensive experience with 400G deployments and can help you:</p>
+            <p>At Select Tech, we specialize in designing and implementing enterprise fiber optic infrastructure. Our certified engineers have extensive experience with 10G through 100G deployments and can help you:</p>
             
             <ul>
-                <li>Assess your current infrastructure and identify upgrade paths</li>
+                <li>Assess your current infrastructure and identify the right solution</li>
                 <li>Design optimized cable pathways and layouts</li>
                 <li>Install and certify high-performance fiber systems</li>
                 <li>Provide ongoing maintenance and support</li>
             </ul>
 
-            <p>Ready to future-proof your data center? Contact our team today to discuss your 400G migration strategy.</p>
+            <p>Ready to upgrade your network infrastructure? Contact our team today to discuss your fiber connectivity needs.</p>
         `
     },
     'data-center-cable-management': {

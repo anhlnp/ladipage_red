@@ -1,5 +1,13 @@
 /* Computer Repair Page Specific Styles */
 
+/* Malwarebytes Section - Full width and centered */
+.service-content .content-container .content-block.malwarebytes-block {
+    grid-column: 1 / -1;
+    max-width: 800px;
+    justify-self: center;
+    text-align: center;
+}
+
 /* Repair Showcase Section */
 .repair-showcase {
     padding: 80px 40px;

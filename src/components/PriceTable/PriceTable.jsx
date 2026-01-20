@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
+import { Smartphone, Tablet } from 'lucide-react'
 import './PriceTable.css'
 
 const PriceTable = () => {
@@ -83,7 +84,7 @@ const PriceTable = () => {
             {/* iPhone Price Table */}
             <div className="price-table-wrapper">
                 <h3 className="price-table-title">
-                    <span className="icon">📱</span>
+                    <Smartphone size={24} className="title-icon" />
                     iPhone Repair Prices
                 </h3>
                 <div className="price-table-container">
@@ -118,7 +119,7 @@ const PriceTable = () => {
             {/* iPad Price Table */}
             <div className="price-table-wrapper">
                 <h3 className="price-table-title">
-                    <span className="icon">📟</span>
+                    <Tablet size={24} className="title-icon" />
                     iPad Repair Prices
                 </h3>
                 <div className="price-table-container">

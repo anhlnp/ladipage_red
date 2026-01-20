@@ -26,8 +26,9 @@
     color: var(--text-primary);
 }
 
-.price-table-title .icon {
-    font-size: 1.75rem;
+.price-table-title .title-icon {
+    color: var(--accent-primary);
+    flex-shrink: 0;
 }
 
 .price-table-container {

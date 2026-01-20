@@ -202,22 +202,36 @@ const Services = () => {
             if (!cards || cards.length === 0) return
 
             const ctx = gsap.context(() => {
-                gsap.fromTo(cards,
-                    { opacity: 0, y: 60, rotateX: 10 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        rotateX: 0,
-                        duration: 0.8,
-                        stagger: 0.15,
-                        ease: 'power3.out',
-                        scrollTrigger: {
-                            trigger: '.services-grid',
-                            start: 'top 85%',
-                            toggleActions: 'play none none none'
+                // Set initial state
+                gsap.set(cards, { opacity: 0, y: 60, rotateX: 10 })
+
+                // Animate on scroll
+                gsap.to(cards, {
+                    opacity: 1,
+                    y: 0,
+                    rotateX: 0,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: '.services-grid',
+                        start: 'top 85%',
+                        toggleActions: 'play none none none',
+                        onEnter: () => {
+                            // Ensure cards are visible after animation
+                            gsap.set(cards, { opacity: 1 })
                         }
                     }
-                )
+                })
+
+                // Fallback: Make cards visible after 2 seconds if animation hasn't triggered
+                setTimeout(() => {
+                    cards.forEach(card => {
+                        if (parseFloat(getComputedStyle(card).opacity) < 1) {
+                            gsap.to(card, { opacity: 1, y: 0, rotateX: 0, duration: 0.5 })
+                        }
+                    })
+                }, 2000)
             }, sectionRef)
 
             return () => ctx.revert()

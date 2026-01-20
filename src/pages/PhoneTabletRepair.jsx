@@ -1,9 +1,29 @@
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
 import PriceTable from '../components/PriceTable/PriceTable'
+import {
+    Smartphone,
+    Tablet,
+    Clock,
+    Award,
+    Wrench,
+    DollarSign,
+    ShieldCheck,
+    MapPin,
+    Receipt
+} from 'lucide-react'
 import './ServicePage.css'
+import './PhoneTabletRepair.css'
 
 const PhoneTabletRepair = () => {
+    const whyChooseUs = [
+        { icon: <Clock size={18} />, text: 'Same-day repairs available' },
+        { icon: <Award size={18} />, text: 'High-quality replacement parts' },
+        { icon: <Wrench size={18} />, text: 'Experienced technicians' },
+        { icon: <DollarSign size={18} />, text: 'Competitive pricing' },
+        { icon: <ShieldCheck size={18} />, text: 'Warranty on all repairs' },
+    ]
+
     return (
         <PageLayout>
             <ServiceHero
@@ -15,7 +35,7 @@ const PhoneTabletRepair = () => {
 
             <section className="service-content">
                 <div className="content-container">
-                    <div className="content-block glass-box" style={{ gridColumn: 'span 2', textAlign: 'center', marginBottom: '20px' }}>
+                    <div className="content-block glass-box price-guide-block">
                         <h3>Repair Price Guide</h3>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
                             All prices include labor. Actual price depends on specific model and condition.
@@ -44,14 +64,15 @@ const PhoneTabletRepair = () => {
                         </p>
                     </div>
 
-                    <div className="content-block glass-box">
+                    <div className="content-block glass-box why-choose-block">
                         <h3>Why Choose Us?</h3>
-                        <ul style={{ color: 'var(--text-secondary)', paddingLeft: '20px' }}>
-                            <li>Same-day repairs available</li>
-                            <li>High-quality replacement parts</li>
-                            <li>Experienced technicians</li>
-                            <li>Competitive pricing</li>
-                            <li>Warranty on all repairs</li>
+                        <ul className="why-choose-list">
+                            {whyChooseUs.map((item, idx) => (
+                                <li key={idx}>
+                                    {item.icon}
+                                    <span>{item.text}</span>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
@@ -60,8 +81,15 @@ const PhoneTabletRepair = () => {
             <section className="page-cta">
                 <div className="cta-container">
                     <h2>Visit Us Today</h2>
-                    <p>Walk-ins welcome! 2155 N. Center Street, Hickory, NC 28601</p>
-                    <a href="/contact" className="btn-primary">Get Directions</a>
+                    <p><MapPin size={18} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '8px' }} />Walk-ins welcome! 2155 N. Center Street, Hickory, NC 28601</p>
+                    <a
+                        href="https://www.google.com/maps/place/Select+Tech+Inc./@35.761537,-81.3546604,14z/data=!4m6!3m5!1s0x8851301bfcdd1787:0x3da4b3b1c4dd04a3!8m2!3d35.761537!4d-81.334061!16s%2Fg%2F1hbpws8t_?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D"
+                        className="btn-primary"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Get Directions
+                    </a>
                 </div>
             </section>
         </PageLayout>

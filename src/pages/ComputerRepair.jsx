@@ -89,7 +89,7 @@ const ComputerRepair = () => {
                         </ul>
                     </div>
 
-                    <div className="content-block glass-box">
+                    <div className="content-block glass-box malwarebytes-block">
                         <h3>Malwarebytes Partnership</h3>
                         <p>
                             With the ever-increasing threat of cyberattacks, we have curated a range of options

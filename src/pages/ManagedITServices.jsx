@@ -101,7 +101,7 @@ const ManagedITServices = () => {
                     </div>
                 </div>
             </section>
-            
+
             {/* Value Props */}
             <section className="value-props">
                 <div className="value-container">
@@ -119,7 +119,7 @@ const ManagedITServices = () => {
                     </div>
                 </div>
             </section>
-            
+
             {/* Pricing Table */}
             <section className="pricing-section">
                 <div className="section-header">
@@ -128,7 +128,7 @@ const ManagedITServices = () => {
                 </div>
                 <PricingTable plans={pricingPlans} features={pricingFeatures} />
             </section>
-            
+
             {/* Services Grid */}
             <section className="services-section">
                 <div className="section-header">
@@ -147,13 +147,13 @@ const ManagedITServices = () => {
                     ))}
                 </div>
             </section>
-            
+
             {/* Testimonials */}
-            <Testimonials 
+            <Testimonials
                 testimonials={testimonials}
                 title="What Select Tech Partners Are Saying"
             />
-            
+
             {/* Why Choose Us */}
             <section className="why-choose">
                 <div className="why-container">
