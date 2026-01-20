@@ -20,6 +20,7 @@ const servicesDropdown = [
     { label: 'End-to-End Dealership Services', path: '/dealership-services' },
     { label: 'Cloud Based SOC Monitoring', path: '/cloud-soc-monitoring' },
     { label: 'Cyber Training', path: '/cyber-training' },
+    { label: 'Software Development', path: '/software-development' },
 ]
 
 // Dropdown menu items for Cybersecurity

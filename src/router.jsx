@@ -14,6 +14,7 @@ import MedicalDentalOffices from './pages/MedicalDentalOffices'
 import FiberDataCenter from './pages/FiberDataCenter'
 import CloudSOCMonitoring from './pages/CloudSOCMonitoring'
 import CyberTraining from './pages/CyberTraining'
+import SoftwareDevelopment from './pages/SoftwareDevelopment'
 // Cybersecurity industry pages
 import AccountingLegal from './pages/AccountingLegal'
 import Education from './pages/Education'
@@ -92,6 +93,10 @@ export const router = createBrowserRouter([
             {
                 path: '/cyber-training',
                 element: <CyberTraining />,
+            },
+            {
+                path: '/software-development',
+                element: <SoftwareDevelopment />,
             },
             // Cybersecurity industries
             {
