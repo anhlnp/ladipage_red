@@ -10,6 +10,7 @@ import PhoneTabletRepair from './pages/PhoneTabletRepair'
 import Cybersecurity from './pages/Cybersecurity'
 import MedicalDentalOffices from './pages/MedicalDentalOffices'
 import FiberDataCenter from './pages/FiberDataCenter'
+import CloudSOCMonitoring from './pages/CloudSOCMonitoring'
 // Cybersecurity industry pages
 import AccountingLegal from './pages/AccountingLegal'
 import Education from './pages/Education'
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
     {
         path: '/fiber-data-center',
         element: <FiberDataCenter />,
+    },
+    {
+        path: '/cloud-soc-monitoring',
+        element: <CloudSOCMonitoring />,
     },
     // Cybersecurity industries
     {
