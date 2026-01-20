@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
+
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -15,8 +17,10 @@ const services = [
         ),
         title: 'Cybersecurity & Compliance',
         description: 'FTC Safeguards, PCI, HIPAA compliance with pen testing, cyber training, and ethical hacking services.',
-        features: ['Pen Testing', 'Training', 'Monitoring']
+        features: ['Pen Testing', 'Training', 'Monitoring'],
+        link: '/cybersecurity'
     },
+
     {
         id: 'managed',
         icon: (
@@ -28,8 +32,10 @@ const services = [
         ),
         title: 'Managed IT Services',
         description: 'Proactive MSP solutions with regular updates, patches, and strategic partnership for your business.',
-        features: ['24/7 Support', 'Updates', 'Monitoring']
+        features: ['24/7 Support', 'Updates', 'Monitoring'],
+        link: '/it-support'
     },
+
     {
         id: 'repair',
         icon: (
@@ -40,8 +46,10 @@ const services = [
         ),
         title: 'Mobile Repair',
         description: 'Same-day repairs for phones, tablets, computers, and laptops. Screen replacements, battery swaps & more.',
-        features: ['Same Day', 'All Devices', 'Warranty']
+        features: ['Same Day', 'All Devices', 'Warranty'],
+        link: '/phone-tablet-repair'
     },
+
     {
         id: 'infrastructure',
         icon: (
@@ -52,8 +60,10 @@ const services = [
         ),
         title: 'Infrastructure',
         description: 'Enterprise-grade Cat5/6/7 & Fiber installation with complete network infrastructure solutions.',
-        features: ['Fiber', 'Cabling', 'Networks']
+        features: ['Fiber', 'Cabling', 'Networks'],
+        link: '/fiber-data-center'
     }
+
 ]
 
 // Service Card Component with Enhanced 3D Effects (GSAP-powered)
@@ -177,12 +187,13 @@ const ServiceCard = ({ service }) => {
                     <span key={i}>{feature}</span>
                 ))}
             </div>
-            <span className="service-link text-reveal">
+            <Link to={service.link} className="service-link text-reveal">
                 <span>Learn More</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
-            </span>
+            </Link>
+
         </div>
     )
 }
