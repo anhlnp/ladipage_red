@@ -3475,3 +3475,46 @@ a {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
+
+/* Fix for Service Page CTA Horizontal Alignment (Single Line) on Desktop */
+@media (min-width: 1201px) {
+  .page-cta .cta-container {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 30px;
+    align-items: center;
+    text-align: left;
+    padding: 60px 80px;
+    /* Adjust padding for single line look */
+  }
+
+  .page-cta .cta-container>h2 {
+    grid-column: 1;
+    margin-bottom: 0;
+    white-space: nowrap;
+    /* Prevent heading wrapping if possible */
+    font-size: 2rem;
+    /* Slightly smaller to fit */
+  }
+
+  .page-cta .cta-container>p {
+    grid-column: 2;
+    margin-bottom: 0;
+    text-align: left;
+    padding: 0 20px;
+    /* Add breathing room */
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    /* Optional separator */
+  }
+
+  .page-cta .cta-container>a,
+  .page-cta .cta-container>button,
+  .page-cta .cta-container>.btn-primary {
+    grid-column: 3;
+    margin-top: 0;
+    /* Reset margins */
+    justify-self: end;
+    white-space: nowrap;
+    /* Prevent button text from wrapping */
+  }
+}

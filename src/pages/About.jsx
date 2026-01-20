@@ -61,6 +61,14 @@ const About = () => {
                     </div>
                 </div>
             </section>
+
+            <section className="page-cta">
+                <div className="cta-container">
+                    <h2>Ready to Work With Us?</h2>
+                    <p>Contact our team today to discuss your IT and cybersecurity needs.</p>
+                    <a href="/contact" className="btn-primary">Get in Touch</a>
+                </div>
+            </section>
         </PageLayout>
     )
 }

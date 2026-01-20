@@ -121,14 +121,10 @@ const Cybersecurity = () => {
             </section>
 
             <section className="page-cta">
-                <div className="cta-container glass-box">
-                    <div className="cta-content">
-                        <h2>Secure Your Organization</h2>
-                        <p>Don't wait for a breach. Partner with Select Tech for proactive protection.</p>
-                    </div>
-                    <div className="cta-action">
-                        <a href="/contact" className="btn-primary">Get Security Audit</a>
-                    </div>
+                <div className="cta-container">
+                    <h2>Secure Your Organization</h2>
+                    <p>Don't wait for a breach. Partner with Select Tech for proactive protection.</p>
+                    <a href="/contact" className="btn-primary">Get Security Audit</a>
                 </div>
             </section>
         </PageLayout>

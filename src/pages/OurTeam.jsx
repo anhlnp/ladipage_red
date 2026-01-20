@@ -70,6 +70,14 @@ const OurTeam = () => {
                     </div>
                 </div>
             </section>
+
+            <section className="page-cta">
+                <div className="cta-container">
+                    <h2>Join Our Team</h2>
+                    <p>Interested in a career in IT or cybersecurity? We are always looking for talent.</p>
+                    <a href="/contact" className="btn-primary">View Careers</a>
+                </div>
+            </section>
         </PageLayout>
     )
 }
