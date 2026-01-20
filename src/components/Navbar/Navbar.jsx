@@ -258,7 +258,11 @@ const Navbar = () => {
                         <Link to="/" className="nav-link text-reveal">Home</Link>
                         <NavDropdown label="Services" items={servicesDropdown} />
                         <NavDropdown label="Cybersecurity" items={cybersecurityDropdown} />
-                        <Link to="/about" className="nav-link text-reveal">About</Link>
+                        <NavDropdown label="Company" items={[
+                            { label: 'About Us', path: '/about' },
+                            { label: 'Our Team', path: '/our-team' },
+                            { label: 'Careers', path: '/contact' }
+                        ]} />
                         <a href="http://portal.selecttechinc.com/" target="_blank" rel="noopener noreferrer" className="nav-link text-reveal">
                             Customer Portal
                         </a>
@@ -297,7 +301,11 @@ const Navbar = () => {
                     <Link to="/" className="mobile-nav-link" onClick={closeMobileMenu}>Home</Link>
                     <MobileNavDropdown label="Services" items={servicesDropdown} onLinkClick={closeMobileMenu} />
                     <MobileNavDropdown label="Cybersecurity" items={cybersecurityDropdown} onLinkClick={closeMobileMenu} />
-                    <Link to="/about" className="mobile-nav-link" onClick={closeMobileMenu}>About</Link>
+                    <MobileNavDropdown label="Company" items={[
+                        { label: 'About Us', path: '/about' },
+                        { label: 'Our Team', path: '/our-team' },
+                        { label: 'Careers', path: '/contact' }
+                    ]} onLinkClick={closeMobileMenu} />
                     <a href="http://portal.selecttechinc.com/" target="_blank" rel="noopener noreferrer" className="mobile-nav-link" onClick={closeMobileMenu}>
                         Customer Portal
                     </a>

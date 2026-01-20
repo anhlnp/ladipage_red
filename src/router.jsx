@@ -13,7 +13,6 @@ import MedicalDentalOffices from './pages/MedicalDentalOffices'
 import FiberDataCenter from './pages/FiberDataCenter'
 import CloudSOCMonitoring from './pages/CloudSOCMonitoring'
 import CyberTraining from './pages/CyberTraining'
-import OurTeam from './pages/OurTeam'
 // Cybersecurity industry pages
 import AccountingLegal from './pages/AccountingLegal'
 import Education from './pages/Education'
