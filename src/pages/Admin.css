@@ -21,6 +21,9 @@
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
+    position: relative;
+    /* Ensure sidebar is above main content overlaps */
+    z-index: 10;
 }
 
 .sidebar-header {
@@ -108,6 +111,8 @@
     cursor: pointer;
     font-weight: 500;
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 20;
 }
 
 .signout-btn svg {
