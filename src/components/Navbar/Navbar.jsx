@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 // Dropdown menu items for Services
 const servicesDropdown = [
-    { label: 'IT Support', path: '/it-support' },
+    { label: 'Managed IT Services', path: '/managed-it-services' },
     { label: 'IT Consulting', path: '/it-consulting' },
     { label: 'Fiber & Data Center', path: '/fiber-data-center' },
     { label: 'Computer Repair', path: '/computer-repair' },

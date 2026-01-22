@@ -1,17 +1,20 @@
 import './ServiceHero.css'
 
 // Reusable hero section for service pages
-const ServiceHero = ({ 
-    tag, 
-    title, 
-    gradientText, 
-    description, 
-    ctaText, 
+const ServiceHero = ({
+    tag,
+    title,
+    gradientText,
+    description,
+    ctaText,
     onCtaClick,
-    children 
+    children,
+    variant // 'default' | 'extended' - use 'extended' for long descriptions
 }) => {
+    const heroClass = `service-hero ${variant === 'extended' ? 'service-hero--extended' : ''}`
+
     return (
-        <section className="service-hero">
+        <section className={heroClass}>
             <div className="service-hero-container">
                 <div className="service-hero-content">
                     {tag && <span className="service-hero-tag">{tag}</span>}

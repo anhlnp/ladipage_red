@@ -5,7 +5,7 @@ import About from './pages/About'
 import OurTeam from './pages/OurTeam'
 import ScrollReset from './components/ScrollReset'
 // Services pages
-import ITSupport from './pages/ITSupport'
+import ManagedITServices from './pages/ManagedITServices'
 import ITConsulting from './pages/ITConsulting'
 import ComputerRepair from './pages/ComputerRepair'
 import PhoneTabletRepair from './pages/PhoneTabletRepair'
@@ -59,8 +59,8 @@ export const router = createBrowserRouter([
             },
             // Services
             {
-                path: '/it-support',
-                element: <ITSupport />,
+                path: '/managed-it-services',
+                element: <ManagedITServices />,
             },
             {
                 path: '/it-consulting',

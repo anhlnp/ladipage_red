@@ -28,7 +28,12 @@ const Cybersecurity = () => {
                 tag="CYBERSECURITY"
                 title="Proactive"
                 gradientText="Security Solutions"
-                description="Protect what is important to you. Select Tech offers comprehensive solutions effectively integrating people, processes, and technology."
+                variant="extended"
+                description="Protect what is important to you. Select Tech, your trusted proactive cybersecurity partner, offers comprehensive solutions to mitigate the ever-present risk of cybercrime. By leveraging our expertise in strategic security planning, cybersecurity program development, and meticulous security assessments, we empower your organization to enhance its cyber awareness and maturity.
+
+To achieve robust cybersecurity, a harmonious interplay of three vital components is indispensable: people, processes, and technology. At Select Tech, we emphasize the seamless integration of these pillars, enabling you to optimize your security posture effectively. By investing in the development of your workforce, implementing efficient processes, and harnessing cutting-edge technologies, we empower you to build a formidable cybersecurity framework.
+
+Count on Select Tech as your dedicated partner, committed to safeguarding your organization from the perils of cybercrime. Together, we can establish a resilient defense mechanism that ensures your continued success in an increasingly digital landscape."
             />
 
             <section className="service-content">

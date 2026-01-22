@@ -33,7 +33,7 @@ const services = [
         title: 'Managed IT Services',
         description: 'Proactive MSP solutions with regular updates, patches, and strategic partnership for your business.',
         features: ['24/7 Support', 'Updates', 'Monitoring'],
-        link: '/it-support'
+        link: '/managed-it-services'
     },
 
     {
