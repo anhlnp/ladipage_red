@@ -236,13 +236,17 @@
     justify-content: center;
 }
 
-/* Hide desktop CTA on mobile, show hamburger */
-@media (max-width: 768px) {
+/* Hide desktop CTA on mobile/tablet, show hamburger */
+@media (max-width: 1024px) {
     .mobile-menu-toggle {
         display: flex;
     }
 
     .nav-cta-desktop {
+        display: none;
+    }
+
+    .nav-links {
         display: none;
     }
 }

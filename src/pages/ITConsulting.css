@@ -511,7 +511,7 @@
 
 @media (max-width: 600px) {
     .it-consulting-hero {
-        padding: 90px 15px 120px;
+        padding: 90px 15px 180px;
         min-height: auto;
     }
 
@@ -535,15 +535,29 @@
         font-size: 0.85rem;
     }
 
+    .founder-section {
+        padding-bottom: 150px;
+    }
+
     .founder-content {
         padding: 20px;
     }
 
     .founder-text p {
         font-size: 0.85rem;
+        line-height: 1.6;
     }
 
     .stats-bar {
         padding: 20px 15px;
+        position: relative;
+    }
+
+    .stat-box h4 {
+        font-size: 1.1rem;
+    }
+
+    .stat-box p {
+        font-size: 0.8rem;
     }
 }
