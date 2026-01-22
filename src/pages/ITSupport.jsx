@@ -1,13 +1,19 @@
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import {
-    HardDrive,
-    Rocket,
-    Globe,
+    Monitor,
     Shield,
-    Wrench,
-    Cloud,
-    HeartPulse,
-    Smartphone
+    FileCheck,
+    Smartphone,
+    Phone,
+    Headphones,
+    Database,
+    Cable,
+    CheckCircle2,
+    Star,
+    Clock,
+    TrendingUp,
+    DollarSign
 } from 'lucide-react'
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
@@ -39,118 +45,299 @@ const ITSupport = () => {
     }, [])
 
     const services = [
-        { icon: <HardDrive size={28} />, title: 'Backup & Disaster Recovery', desc: 'Secure solutions to protect your critical business data' },
-        { icon: <Rocket size={28} />, title: 'Network Performance', desc: 'Cleanup and optimization for maximum speed and reliability' },
-        { icon: <Globe size={28} />, title: 'Internet & Intranet', desc: 'Setup and support for your internal and external connectivity' },
-        { icon: <Shield size={28} />, title: 'Virus & Spyware Removal', desc: 'Detection, removal, and prevention of malicious software' },
-        { icon: <Wrench size={28} />, title: 'Hardware & Software', desc: 'Repair, installation, and upgrades for all your systems' },
-        { icon: <Cloud size={28} />, title: 'Cloud Services', desc: 'Office 365, Hosted Desktop, Exchange, and SharePoint solutions' },
-        { icon: <HeartPulse size={28} />, title: 'Medical/Dental IT', desc: 'Specialized EHR rollout and support specialists' },
-        { icon: <Smartphone size={28} />, title: 'Infrastructure', desc: 'Cabling, VOIP, and network installation services' },
+        {
+            icon: <Monitor size={28} />,
+            title: 'Proactive System Monitoring',
+            features: ['Real-Time Alerts', 'Regular Maintenance', 'Performance Metrics', 'Root Cause Analysis', 'Growth/Capacity Planning']
+        },
+        {
+            icon: <Shield size={28} />,
+            title: 'Cybersecurity Services',
+            features: ['Antivirus/EDR Management', 'Firewall Configuration', 'Security Awareness Training', 'MFA & Conditional Access', 'Vulnerability Scan/Pen Testing', 'Dark Web Awareness']
+        },
+        {
+            icon: <FileCheck size={28} />,
+            title: 'Compliance & Audits',
+            features: ['HIPAA, PCI-DSS, FTC Safeguards', 'Auto Dealership Compliance', 'Policy Creation & Audits', 'Risk Assessments', 'WISP & NIST Documentation']
+        },
+        {
+            icon: <Smartphone size={28} />,
+            title: 'PC/MAC/Smartphone Repair',
+            features: ['Screen Repairs/Replacements', 'Battery & Charging Issues', 'Virus & Malware Removal', 'Custom Gaming Rigs', 'Data Recovery & Backup']
+        },
+        {
+            icon: <Phone size={28} />,
+            title: 'VoIP/Unified Communications',
+            features: ['Cloud Phone Systems (3CX, Zoom, Teams)', 'Call Flows & Auto Attendants', 'Voicemail-to-Email', 'Headset & Hardware Setup']
+        },
+        {
+            icon: <Headphones size={28} />,
+            title: 'On-site & Remote IT Support',
+            features: ['Help Desk Support', '24/7 Monitoring', 'Rapid Response Times', 'Customizable Support Plans', 'Proactive Maintenance']
+        },
+        {
+            icon: <Database size={28} />,
+            title: 'Backup & Disaster Recovery',
+            features: ['Local & Cloud Image-based Backups', 'Microsoft 365/Google Backup', 'Disaster Recovery Testing', 'Ransomware Protection & Rollback']
+        },
+        {
+            icon: <Cable size={28} />,
+            title: 'CAT5/6/7 & Fiber Installation',
+            features: ['Network Racks/Infrastructure', 'NC Low Voltage License', 'Access Control & Alarm Systems', 'Full Office Audio/Messaging']
+        }
     ]
 
-    const features = [
-        { title: 'Cost-Effective Support', desc: 'No contract obligation ticketed system or agreed terms. Charged in 30-minute increments.' },
-        { title: 'High Standard Service', desc: 'Ad-hoc clients receive the same high-level support as contracted clients.' },
-        { title: 'Emergency Services', desc: 'Emergency IT support and consultation available to all customers.' },
-        { title: 'Expert Team', desc: 'Invested in your success with 15+ years of experience in North Carolina.' },
+    const pricingPlans = [
+        {
+            name: 'Office Protect / Basic',
+            price: '$499',
+            highlight: false,
+            features: [
+                { name: '24/7 Monitoring & Alerts', included: true },
+                { name: 'Patch Management', included: true },
+                { name: 'EDR / Huntress', value: 'Basic' },
+                { name: 'DNS Filtering', included: false },
+                { name: 'Firewall & Network Security', included: false },
+                { name: 'Microsoft 365 Security', value: 'Basic' },
+                { name: 'Backup & Recovery', included: false },
+                { name: 'Asset Monitoring', included: true },
+                { name: 'Cybersecurity Training', included: false },
+                { name: 'Onsite Hours / Month', value: 'Remote' },
+                { name: 'Incident Response', value: 'Emergency' }
+            ]
+        },
+        {
+            name: 'Silver Managed IT',
+            price: '$899',
+            highlight: true,
+            features: [
+                { name: '24/7 Monitoring & Alerts', included: true },
+                { name: 'Patch Management', included: true },
+                { name: 'EDR / Huntress', value: 'MDR' },
+                { name: 'DNS Filtering', included: true },
+                { name: 'Firewall & Network Security', included: true },
+                { name: 'Microsoft 365 Security', value: 'Defender P1' },
+                { name: 'Backup & Recovery', value: 'Local Backup' },
+                { name: 'Asset Monitoring', included: true },
+                { name: 'Cybersecurity Training', included: true },
+                { name: 'Onsite Hours / Month', value: '2 hrs' },
+                { name: 'Incident Response', value: 'Priority' }
+            ]
+        },
+        {
+            name: 'Gold MSSP Elite',
+            price: '$1,499',
+            highlight: false,
+            features: [
+                { name: '24/7 Monitoring & Alerts', included: true },
+                { name: 'Patch Management', included: true },
+                { name: 'EDR / Huntress', value: 'ITDR' },
+                { name: 'DNS Filtering', included: true },
+                { name: 'Firewall & Network Security', value: 'Advanced' },
+                { name: 'Microsoft 365 Security', value: 'Defender P2 + DLP' },
+                { name: 'Backup & Recovery', value: 'Axcient Cloud' },
+                { name: 'Asset Monitoring', included: true },
+                { name: 'Cybersecurity Training', value: 'AI-Driven' },
+                { name: 'Onsite Hours / Month', value: '4 hrs' },
+                { name: 'Incident Response', value: '24/7' }
+            ]
+        }
+    ]
+
+    const testimonials = [
+        {
+            quote: "Select Tech has been supporting us since 2012. We have received A+ service from everyone in their team. Chris has been a delight to handle all of our PCs and servers. Dave, the owner has built a great team that genuinely cares about their customers. Give them 10 out of 10.",
+            author: "Shelly M.",
+            title: "Managed IT Support"
+        },
+        {
+            quote: "Michael was awesome. He confirmed it was a phishing attempt and his team updated the DMARC records in our email. Select Tech switched us to a managed IT plan to better protect us and save us money. Five Stars guys - Thank you.",
+            author: "Wayne R.",
+            title: "Phishing Email Protection"
+        },
+        {
+            quote: "Our outside sales rep needed a laptop and iPad repaired when he was in town for the weekend and dropped it off at your Hickory, NC office. Both items were repaired the same day. That's awesome.",
+            author: "CEO",
+            title: "Fast Laptop and iPad Repair"
+        }
+    ]
+
+    const whyChooseUs = [
+        '#1 Ranked IT Security Provider in Hickory, NC',
+        'Certified Ethical Hackers On Staff',
+        'Veteran-Owned, 20+ Years Experience',
+        'Local Support + National-Level Cybersecurity Stack'
     ]
 
     return (
         <PageLayout>
             <ServiceHero
-                tag="IT SUPPORT"
-                title="Professional"
-                gradientText="IT Services"
-                description="We are your local IT support company invested in your success. Committed to keeping your PCs and servers up and running with practical solutions."
+                tag="MANAGED IT SERVICES"
+                title="Managed IT Services in"
+                gradientText="North Carolina"
+                description="Trusted IT Support for 23+ Years. All work 100% satisfaction guaranteed. We deliver fast, reliable IT support to protect your business and staff."
             />
 
             <section className="service-content">
                 <div className="content-container">
-                    <div className="content-block glass-box" style={{ gridColumn: 'span 2' }}>
-                        <h3>Comprehensive IT Services</h3>
-                        <p>
-                            Select Tech has over 15 years of experience providing IT support in North Carolina.
-                            Our IT Department takes complete responsibility for your network, managing all day-to-day
-                            IT-related tasks allowing you to concentrate on your business.
-                        </p>
-                        <div className="service-cards">
-                            {services.map((service, idx) => (
-                                <div key={idx} className="service-card glass-box">
-                                    <div className="icon">{service.icon}</div>
-                                    <h4>{service.title}</h4>
-                                    <p>{service.desc}</p>
-                                </div>
-                            ))}
+                    {/* Key Benefits - Full Width */}
+                    <div className="content-block glass-box" style={{ gridColumn: '1 / -1' }}>
+                        <div className="benefits-grid">
+                            <div className="benefit-item">
+                                <Clock size={48} className="benefit-icon" />
+                                <h4>Reduce Downtime</h4>
+                                <p>24/7 monitoring and rapid response keeps your systems running smoothly</p>
+                            </div>
+                            <div className="benefit-item">
+                                <TrendingUp size={48} className="benefit-icon" />
+                                <h4>Grow Your Business</h4>
+                                <p>Focus on what you do best while we handle all your IT needs</p>
+                            </div>
+                            <div className="benefit-item">
+                                <DollarSign size={48} className="benefit-icon" />
+                                <h4>Control Costs</h4>
+                                <p>Predictable monthly pricing with no surprise fees or hidden charges</p>
+                            </div>
+                        </div>
+                        <div className="tagline-box">
+                            <p className="tagline">Stay with us because you're happy - not because you're locked in</p>
+                            <div className="trust-badges">
+                                <span>✓ No Long-Term Contracts</span>
+                                <span>✓ 100% Satisfaction Guaranteed</span>
+                                <span>✓ 23+ Years Trusted Service</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="content-block glass-box">
-                        <h3>Pay-As-You-Go Support</h3>
-                        <p>
-                            We offer flexible support with no contract obligation. You can pay for support using
-                            our 'ticketed' prepayment system or agreed terms.
+
+                    {/* Section Title - Services */}
+                    <div style={{ gridColumn: '1 / -1', textAlign: 'center', marginTop: '40px' }}>
+                        <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.2rem)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '12px' }}>
+                            Services We Provide
+                        </h2>
+                        <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
+                            Managed IT Services to Hickory, NC & Surrounding Areas
                         </p>
-                        <ul className="feature-list" style={{ marginTop: '20px' }}>
-                            {features.map((feature, idx) => (
-                                <li key={idx} style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
-                                    <strong style={{ color: 'var(--text-primary)' }}>{feature.title}</strong>
-                                    <span style={{ fontSize: '0.9rem' }}>{feature.desc}</span>
-                                </li>
-                            ))}
-                        </ul>
                     </div>
 
-                    <div className="content-block glass-box why-choose-block">
+                    {/* Services Grid - 8 Cards */}
+                    {services.map((service, idx) => (
+                        <div key={idx} className="content-block glass-box service-item">
+                            <div className="service-icon-wrapper">
+                                {service.icon}
+                            </div>
+                            <h3>{service.title}</h3>
+                            <ul className="feature-list compact">
+                                {service.features.map((feature, fidx) => (
+                                    <li key={fidx}>{feature}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+
+                    {/* Full-width image banner */}
+                    <div className="image-banner" style={{ gridColumn: '1 / -1' }}>
+                        <img
+                            src="/pexels-cookiecutter-19226354.jpg"
+                            alt="IT Support Team"
+                        />
+                        <div className="image-banner-overlay">
+                            <h3 className="gradient-text">Professional IT Support You Can Trust</h3>
+                            <p>Serving businesses across North Carolina</p>
+                        </div>
+                    </div>
+
+                    {/* Why Choose Us */}
+                    <div className="content-block glass-box" style={{ gridColumn: '1 / -1', textAlign: 'center' }}>
                         <h3>Why Choose Select Tech?</h3>
-                        <p>
-                            We make the transition easy! We fully manage the transfer of services from your existing IT supplier.
-                            A recent audit showed our support costs saved customers over 24% compared to others.
-                        </p>
-                        <br />
-                        <p>
-                            We are not a one-man show. We offer a team approach of technicians supporting your business.
-                            Most service calls are performed on the same or next day.
-                        </p>
+                        <ul className="why-choose-list">
+                            {whyChooseUs.map((item, idx) => (
+                                <li key={idx}><CheckCircle2 size={20} /> {item}</li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
             </section>
 
-            {/* Creative dual-image section with scroll animations */}
-            <section className="team-showcase">
-                <div className="team-showcase-content">
-                    <h2 className="team-title">
-                        Our Team is <span className="gradient-text">Your Team</span>
-                    </h2>
-                    <p className="team-subtitle">
-                        A dedicated team of IT professionals celebrating every success with you
-                    </p>
-                </div>
-                <div className="team-images-wrapper">
-                    <div
-                        ref={imageLeftRef}
-                        className="team-image-card slide-from-left"
-                    >
-                        <div className="image-glow"></div>
-                        <img
-                            src="/business+people+high+five.webp"
-                            alt="Business team high five"
-                        />
-                        <div className="image-overlay">
-                            <span>Success Together</span>
-                        </div>
+            {/* Pricing Section */}
+            <section className="pricing-section">
+                <div className="pricing-container">
+                    <div className="pricing-header">
+                        <span className="section-tag">MSSP Services & Pricing</span>
+                        <h2>Choose Your Protection Plan</h2>
+                        <p>Your Trusted Local Cybersecurity & Compliance Experts</p>
                     </div>
-                    <div
-                        ref={imageRightRef}
-                        className="team-image-card slide-from-right"
-                    >
-                        <div className="image-glow"></div>
-                        <img
-                            src="/business_high_five_generated.png"
-                            alt="Team collaboration celebration"
-                        />
-                        <div className="image-overlay">
-                            <span>Celebrate Wins</span>
+                    <div className="pricing-cards">
+                        {pricingPlans.map((plan, idx) => (
+                            <div key={idx} className={`pricing-card glass-box ${plan.highlight ? 'highlighted' : ''}`}>
+                                {plan.highlight && <span className="popular-badge">Most Popular</span>}
+                                <h3>{plan.name}</h3>
+                                <div className="price">
+                                    <span className="amount">{plan.price}</span>
+                                    <span className="period">/month</span>
+                                </div>
+                                <ul className="pricing-features">
+                                    {plan.features.map((feature, fidx) => (
+                                        <li key={fidx}>
+                                            {feature.included === true ? (
+                                                <><CheckCircle2 size={16} className="check" /> {feature.name}</>
+                                            ) : feature.included === false ? (
+                                                <><span className="x">✘</span> {feature.name}</>
+                                            ) : (
+                                                <><CheckCircle2 size={16} className="check" /> {feature.name}: <strong>{feature.value}</strong></>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <Link to="/contact" className="btn-primary">Get Started</Link>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Add-Ons Section */}
+            <section className="addons-section">
+                <div className="addons-container">
+                    <div className="addons-header">
+                        <h2>Add-Ons & Enhancements</h2>
+                        <p>Customize your IT support package with these premium add-ons</p>
+                    </div>
+                    <div className="addons-list glass-box">
+                        <div className="addon-row">
+                            <div className="addon-info">
+                                <FileCheck size={20} />
+                                <span>HIPAA & FTC Compliance Toolkit</span>
+                            </div>
+                            <span className="addon-price">$199<small>/mo</small></span>
+                        </div>
+                        <div className="addon-row">
+                            <div className="addon-info">
+                                <FileCheck size={20} />
+                                <span>Onsite Compliance Audit</span>
+                            </div>
+                            <span className="addon-price">$799<small> one-time</small></span>
+                        </div>
+                        <div className="addon-row">
+                            <div className="addon-info">
+                                <Database size={20} />
+                                <span>Disaster Recovery Appliance</span>
+                            </div>
+                            <span className="addon-price">Starting at $1,299</span>
+                        </div>
+                        <div className="addon-row">
+                            <div className="addon-info">
+                                <Shield size={20} />
+                                <span>Advanced Endpoint Response Team</span>
+                            </div>
+                            <span className="addon-price accent">Custom Quote</span>
+                        </div>
+                        <div className="addon-row">
+                            <div className="addon-info">
+                                <Monitor size={20} />
+                                <span>Workforce Security Training Portal</span>
+                            </div>
+                            <span className="addon-price">$99<small>/mo</small></span>
                         </div>
                     </div>
                 </div>
@@ -158,9 +345,9 @@ const ITSupport = () => {
 
             <section className="page-cta">
                 <div className="cta-container">
-                    <h2>Need IT Help Today?</h2>
-                    <p>Contact us for a consultation. We can help with phone repair, cabling, VOIP, and network infrastructure too.</p>
-                    <a href="/contact" className="btn-primary">Get Support</a>
+                    <h2>Schedule a Free Cybersecurity Assessment</h2>
+                    <p>Contact Select Tech today to protect your business with trusted, local IT support.</p>
+                    <Link to="/contact" className="btn-primary">Contact Us</Link>
                 </div>
             </section>
         </PageLayout>
