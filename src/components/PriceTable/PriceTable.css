@@ -42,14 +42,14 @@
     min-width: 600px;
 }
 
-/* iPhone Table - Cyan/Teal theme */
+/* iPhone Table - Accent theme */
 .iphone-table thead {
-    background: linear-gradient(135deg, #0891b2, #06b6d4);
+    background: var(--accent-gradient);
 }
 
 /* iPad Table - Green/Olive theme */
 .ipad-table thead {
-    background: linear-gradient(135deg, #84a13e, #9bb34b);
+    background: var(--accent-gradient);
 }
 
 .price-table th {
@@ -64,6 +64,7 @@
 .price-table th.service-header {
     text-align: left;
     min-width: 180px;
+    background: var(--accent-gradient);
 }
 
 .price-table tbody tr {

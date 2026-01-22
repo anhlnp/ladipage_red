@@ -20,7 +20,6 @@ const servicesDropdown = [
     { label: 'End-to-End Dealership Services', path: '/dealership-services' },
     { label: 'Cloud Based SOC Monitoring', path: '/cloud-soc-monitoring' },
     { label: 'Cyber Training', path: '/cyber-training' },
-    { label: 'Software Development', path: '/software-development' },
 ]
 
 // Dropdown menu items for Cybersecurity
@@ -30,7 +29,7 @@ const cybersecurityDropdown = [
     { label: 'Accounting/Legal Offices', path: '/accounting-legal' },
     { label: 'Schools/Education', path: '/education' },
     { label: 'Small/Medium/Large Business', path: '/business' },
-    { label: 'Car Dealerships', path: '/car-dealerships' },
+    { label: 'Car Dealership Complaince', path: '/car-dealerships' },
 ]
 
 // Magnetic Button for Nav CTA
@@ -264,20 +263,20 @@ const Navbar = () => {
                             { label: 'Our Team', path: '/our-team' },
                             { label: 'Careers', path: '/contact' }
                         ]} />
-                        <a href="http://portal.selecttechinc.com/" target="_blank" rel="noopener noreferrer" className="nav-link text-reveal">
-                            Customer Portal
-                        </a>
+                        <Link to="/software-development" className="nav-link text-reveal">
+                            Software Development
+                        </Link>
                         <Link to="/contact" className="nav-link text-reveal">Contact</Link>
                     </div>
 
                     <div className="nav-actions">
                         <ThemeToggle />
-                        <NavButton className="nav-cta nav-cta-desktop" to="/contact">
-                            <span>Let's Talk</span>
+                        <a href="http://portal.selecttechinc.com/" target="_blank" rel="noopener noreferrer" className="nav-cta nav-cta-desktop magnetic-btn btn-shine">
+                            <span>Customer Portal</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
-                        </NavButton>
+                        </a>
 
                         {/* Mobile Hamburger Button */}
                         <button
@@ -307,17 +306,17 @@ const Navbar = () => {
                         { label: 'Our Team', path: '/our-team' },
                         { label: 'Careers', path: '/contact' }
                     ]} onLinkClick={closeMobileMenu} />
-                    <a href="http://portal.selecttechinc.com/" target="_blank" rel="noopener noreferrer" className="mobile-nav-link" onClick={closeMobileMenu}>
-                        Customer Portal
-                    </a>
+                    <Link to="/software-development" className="mobile-nav-link" onClick={closeMobileMenu}>
+                        Software Development
+                    </Link>
                     <Link to="/contact" className="mobile-nav-link" onClick={closeMobileMenu}>Contact</Link>
 
-                    <NavButton className="nav-cta mobile-cta" to="/contact" onClick={closeMobileMenu}>
-                        <span>Let's Talk</span>
+                    <a href="http://portal.selecttechinc.com/" target="_blank" rel="noopener noreferrer" className="nav-cta mobile-cta magnetic-btn btn-shine" onClick={closeMobileMenu}>
+                        <span>Customer Portal</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
-                    </NavButton>
+                    </a>
                 </div>
             </div>
         </nav>

@@ -45,35 +45,43 @@ const PhoneTabletRepair = () => {
 
                 <PriceTable />
 
-                <div className="content-container" style={{ marginTop: '60px' }}>
-                    <div className="content-block glass-box" style={{ gridColumn: 'span 2' }}>
-                        <h3>Cell Phone Repair Services</h3>
-                        <p>
-                            Don't let a broken screen ruin your day. Our expert technicians can repair screens,
-                            batteries, cameras, charge ports and more! We know how important your device is,
-                            so most cell phone repairs can be completed same day.
-                        </p>
+                <div className="content-container repair-layout">
+                    {/* Left Column: Service Boxes Stacked */}
+                    <div className="repair-services-column">
+                        <div className="content-block glass-box service-box">
+                            <div className="service-box-icon">
+                                <Smartphone size={32} />
+                            </div>
+                            <h3>Cell Phone Repair</h3>
+                            <p>
+                                Don't let a broken screen ruin your day. Our expert technicians can repair screens,
+                                batteries, cameras, charge ports and more! Most repairs completed same day.
+                            </p>
+                        </div>
+
+                        <div className="content-block glass-box service-box">
+                            <div className="service-box-icon">
+                                <Tablet size={32} />
+                            </div>
+                            <h3>Tablet Repair</h3>
+                            <p>
+                                Whether you use your device for work or play, we know how important it is to you.
+                                We repair screens, batteries, software issues and more!
+                            </p>
+                        </div>
                     </div>
 
-                    <div className="content-block glass-box">
-                        <h3>Tablet Repair Services</h3>
-                        <p>
-                            Whether you use your device for work or play, we know how important it is to you.
-                            Our expert technicians can repair screens, batteries, software issues and more!
-                            Pricing varies by device model and size.
-                        </p>
-                    </div>
-
-                    <div className="content-block glass-box why-choose-block">
+                    {/* Right Column: Why Choose Us */}
+                    <div className="content-block glass-box why-choose-panel">
                         <h3>Why Choose Us?</h3>
-                        <ul className="why-choose-list">
+                        <div className="why-choose-grid">
                             {whyChooseUs.map((item, idx) => (
-                                <li key={idx}>
-                                    {item.icon}
+                                <div key={idx} className="why-choose-item">
+                                    <div className="why-choose-icon">{item.icon}</div>
                                     <span>{item.text}</span>
-                                </li>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </section>
