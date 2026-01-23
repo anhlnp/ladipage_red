@@ -237,7 +237,7 @@
 }
 
 /* Hide desktop CTA on mobile/tablet, show hamburger */
-@media (max-width: 1024px) {
+@media (max-width: 1250px) {
     .mobile-menu-toggle {
         display: flex;
     }

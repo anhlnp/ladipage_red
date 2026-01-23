@@ -299,9 +299,8 @@
 /* Additional Services Section */
 .consulting-services-section {
     padding: 60px 40px 80px;
-    background: var(--bg-primary);
     position: relative;
-    margin-top: -40px;
+    margin-top: 40px;
     z-index: 5;
 }
 
@@ -312,7 +311,6 @@
     left: 0;
     right: 0;
     height: 80px;
-    background: linear-gradient(to bottom, transparent 0%, var(--bg-primary) 100%);
     pointer-events: none;
 }
 
@@ -472,7 +470,7 @@
 
 @media (max-width: 900px) {
     .it-consulting-hero {
-        padding: 100px 20px 80px;
+        padding: 100px 20px 20px;
     }
 
     .hero-title-section h1 {
@@ -499,9 +497,59 @@
         height: 190px;
     }
 
+    .founder-section {
+        padding-bottom: 40px;
+    }
+
+    .stats-bar {
+        position: relative;
+        bottom: auto;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin: 0 -20px;
+        padding: 40px 20px 30px;
+        width: calc(100% + 40px);
+        background: linear-gradient(to bottom,
+                rgba(26, 26, 46, 0.9) 0%,
+                #1a1a2e 40%,
+                #0f172a 100%);
+    }
+
+    .stats-bar::before {
+        content: '';
+        position: absolute;
+        top: -60px;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(to bottom,
+                transparent 0%,
+                rgba(26, 26, 46, 0.6) 60%,
+                rgba(26, 26, 46, 0.9) 100%);
+        pointer-events: none;
+    }
+
+    .stats-bar::after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: -40px;
+        left: 0;
+        right: 0;
+        height: 50px;
+        background: linear-gradient(to bottom, #0f172a 0%, var(--bg-primary) 100%);
+        z-index: 4;
+    }
+
     .stats-bar-content {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .stat-box h4 {
+        font-size: 1.3rem;
     }
 
     .consulting-services-grid {
@@ -549,8 +597,38 @@
     }
 
     .stats-bar {
-        padding: 20px 15px;
+        padding: 40px 15px 30px;
         position: relative;
+        margin: -80px -15px 0;
+        width: calc(100% + 30px);
+        background: linear-gradient(to bottom,
+                rgba(26, 26, 46, 0.9) 0%,
+                #1a1a2e 40%,
+                #0f172a 100%);
+    }
+
+    .stats-bar::before {
+        content: '';
+        position: absolute;
+        top: -60px;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(to bottom,
+                transparent 0%,
+                rgba(26, 26, 46, 0.6) 60%,
+                rgba(26, 26, 46, 0.9) 100%);
+        pointer-events: none;
+    }
+
+    .stats-bar::after {
+        content: '';
+        position: absolute;
+        bottom: -40px;
+        left: 0;
+        right: 0;
+        height: 50px;
+        background: #0f172a;
     }
 
     .stat-box h4 {
@@ -559,5 +637,25 @@
 
     .stat-box p {
         font-size: 0.8rem;
+    }
+
+    .consulting-services-section {
+        margin-top: -30px;
+        padding-top: 120px;
+        position: relative;
+        z-index: 10;
+        background: var(--bg-primary);
+    }
+
+    .consulting-services-section::before {
+        content: '';
+        position: absolute;
+        top: -120px;
+        left: 0;
+        right: 0;
+        height: 140px;
+        background: linear-gradient(to bottom, #0f172a 0%, var(--bg-primary) 100%);
+        pointer-events: none;
+        z-index: -1;
     }
 }
