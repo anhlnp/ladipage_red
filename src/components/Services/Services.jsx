@@ -54,8 +54,17 @@ const services = [
         id: 'infrastructure',
         icon: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                <path d="M22 6l-10 7L2 6" />
+                {/* Server/Network Rack */}
+                <rect x="2" y="2" width="20" height="6" rx="1" />
+                <rect x="2" y="10" width="20" height="6" rx="1" />
+                <circle cx="6" cy="5" r="1" fill="currentColor" />
+                <circle cx="6" cy="13" r="1" fill="currentColor" />
+                <path d="M10 5h8" />
+                <path d="M10 13h8" />
+                {/* Cable connections */}
+                <path d="M6 18v4" />
+                <path d="M12 18v4" />
+                <path d="M18 18v4" />
             </svg>
         ),
         title: 'Infrastructure',
