@@ -7,6 +7,8 @@
     border: 1px solid var(--border-color);
     border-radius: 20px;
     backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 20;
 }
 
 .wizard-progress {
@@ -109,6 +111,8 @@
     color: var(--text-primary);
     position: relative;
     overflow: hidden;
+    z-index: 100;
+    pointer-events: auto;
 }
 
 .wizard-option:hover {

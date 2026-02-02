@@ -82,6 +82,30 @@ const MedicalDentalOffices = () => {
                 description="Protecting sensitive information is a critical aspect of healthcare. We help you comply with HIPAA and maintain patient trust."
             />
 
+            {/* North Carolina Header */}
+            <section style={{
+                padding: '30px 20px',
+                textAlign: 'center',
+                background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%)',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+            }}>
+                <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                    <h2 style={{
+                        fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
+                        marginBottom: '10px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '12px'
+                    }}>
+                        🏥 <span className="gradient-text">North Carolina</span> Healthcare IT
+                    </h2>
+                    <p style={{ color: 'var(--text-secondary)' }}>
+                        Serving medical and dental practices throughout North Carolina with HIPAA-compliant cybersecurity solutions.
+                    </p>
+                </div>
+            </section>
+
             {/* Image showcase with staggered layout */}
             <section className="healthcare-showcase" ref={sectionRef}>
                 <div className="showcase-grid">

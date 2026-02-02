@@ -19,8 +19,8 @@ const CyberTraining = () => {
                     <div className="content-block glass-box" style={{ gridColumn: '1 / -1' }}>
                         <div className="block-image-container" style={{ marginBottom: '30px', borderRadius: '12px', overflow: 'hidden', height: '400px' }}>
                             <img
-                                src="/ai-generated-8686283.jpg"
-                                alt="Cybersecurity Training"
+                                src="/cyber_classroom_training.png"
+                                alt="Cybersecurity Classroom Training"
                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />
                         </div>
@@ -41,8 +41,8 @@ const CyberTraining = () => {
                         </p>
                         <div style={{ marginTop: '20px', marginBottom: '20px', borderRadius: '12px', overflow: 'hidden', height: '250px' }}>
                             <img
-                                src="/computer-1591018.jpg"
-                                alt="Individual Learning"
+                                src="/one_on_one_training.png"
+                                alt="One-on-One Cyber Training"
                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />
                         </div>

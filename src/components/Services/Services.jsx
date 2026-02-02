@@ -183,8 +183,14 @@ const ServiceCard = ({ service }) => {
             ref={cardRef}
             className="service-card spotlight-card"
             data-service={service.id}
-            style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
+            style={{ transformStyle: 'preserve-3d', willChange: 'transform', position: 'relative' }}
         >
+            {/* Full card clickable overlay */}
+            <Link
+                to={service.link}
+                className="service-card-link-overlay"
+                aria-label={`Learn more about ${service.title}`}
+            />
             <div ref={glowRef} className="service-card-glow" />
             <div ref={iconRef} className="service-icon icon-bounce" style={{ transformStyle: 'preserve-3d' }}>
                 {service.icon}
@@ -196,12 +202,12 @@ const ServiceCard = ({ service }) => {
                     <span key={i}>{feature}</span>
                 ))}
             </div>
-            <Link to={service.link} className="service-link text-reveal">
+            <div className="service-link text-reveal">
                 <span>Learn More</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
-            </Link>
+            </div>
 
         </div>
     )

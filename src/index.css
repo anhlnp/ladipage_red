@@ -1375,6 +1375,21 @@ a {
   gap: 12px;
 }
 
+/* Clickable card overlay - makes entire card clickable */
+.service-card-link-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.service-card:hover {
+  cursor: pointer;
+}
+
 /* Features Section */
 .features {
   position: relative;

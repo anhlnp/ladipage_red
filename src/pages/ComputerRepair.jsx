@@ -101,6 +101,38 @@ const ComputerRepair = () => {
                             Browse with confidence knowing you are protected against sophisticated threats.
                         </p>
                     </div>
+
+                    {/* Service Note */}
+                    <div className="content-block glass-box" style={{ gridColumn: '1 / -1' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '30px', flexWrap: 'wrap' }}>
+                            <div style={{ flex: '1', minWidth: '300px' }}>
+                                <img
+                                    src="/senior_couple_it_support.png"
+                                    alt="Senior couple receiving IT support"
+                                    style={{ width: '100%', height: '300px', objectFit: 'cover', borderRadius: '12px' }}
+                                />
+                            </div>
+                            <div style={{ flex: '1', minWidth: '300px' }}>
+                                <h3>Personal & Business Services</h3>
+                                <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '20px' }}>
+                                    Whether you're a senior needing help with your home computer or a business requiring
+                                    professional IT support, our experienced technicians are here to help.
+                                </p>
+                                <div className="service-note glass-box-light" style={{
+                                    padding: '20px',
+                                    borderLeft: '4px solid var(--accent-primary)',
+                                    marginTop: '15px'
+                                }}>
+                                    <p style={{ fontWeight: '600', color: 'var(--text-primary)', marginBottom: '8px' }}>
+                                        📋 Free estimates available.
+                                    </p>
+                                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
+                                        Minimum service charge: $40
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 

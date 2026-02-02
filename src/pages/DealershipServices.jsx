@@ -166,7 +166,7 @@ const DealershipServices = () => {
                     </div>
 
                     <div className="dealership-hero-image">
-                        <img src="/dealership_hero.png" alt="Modern Car Dealership" />
+                        <img src="/american_car_dealership.png" alt="American Car Dealership" />
                     </div>
                 </div>
             </section>

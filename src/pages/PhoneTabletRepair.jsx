@@ -1,16 +1,13 @@
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
-import PriceTable from '../components/PriceTable/PriceTable'
+import RepairWizard from '../components/RepairWizard/RepairWizard'
 import {
-    Smartphone,
-    Tablet,
     Clock,
     Award,
     Wrench,
     DollarSign,
     ShieldCheck,
-    MapPin,
-    Receipt
+    MapPin
 } from 'lucide-react'
 import './ServicePage.css'
 import './PhoneTabletRepair.css'
@@ -27,52 +24,26 @@ const PhoneTabletRepair = () => {
     return (
         <PageLayout>
             <ServiceHero
-                tag="QUICK REPAIR"
+                tag="GET A QUOTE"
                 title="Phone & Tablet"
-                gradientText="Repair Services"
-                description="Expert repair using only high-quality parts. Most repairs are done same-day!"
+                gradientText="Repair Pricing"
+                description="Select your device below to see repair pricing. Most repairs completed same-day!"
             />
 
-            <section className="service-content">
-                <div className="content-container">
-                    <div className="content-block glass-box price-guide-block">
-                        <h3>Repair Price Guide</h3>
-                        <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
-                            All prices include labor. Actual price depends on specific model and condition.
-                        </p>
+            <section className="wizard-section">
+                <div className="wizard-container">
+                    <div className="wizard-header">
+                        <h2>Select Your <span className="gradient-text">Device</span></h2>
+                        <p>Choose your device type to see available repair services and pricing</p>
                     </div>
+                    <RepairWizard />
                 </div>
+            </section>
 
-                <PriceTable />
-
+            <section className="service-content">
                 <div className="content-container repair-layout">
-                    {/* Left Column: Service Boxes Stacked */}
-                    <div className="repair-services-column">
-                        <div className="content-block glass-box service-box">
-                            <div className="service-box-icon">
-                                <Smartphone size={32} />
-                            </div>
-                            <h3>Cell Phone Repair</h3>
-                            <p>
-                                Don't let a broken screen ruin your day. Our expert technicians can repair screens,
-                                batteries, cameras, charge ports and more! Most repairs completed same day.
-                            </p>
-                        </div>
-
-                        <div className="content-block glass-box service-box">
-                            <div className="service-box-icon">
-                                <Tablet size={32} />
-                            </div>
-                            <h3>Tablet Repair</h3>
-                            <p>
-                                Whether you use your device for work or play, we know how important it is to you.
-                                We repair screens, batteries, software issues and more!
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Right Column: Why Choose Us */}
-                    <div className="content-block glass-box why-choose-panel">
+                    {/* Why Choose Us Panel */}
+                    <div className="content-block glass-box why-choose-panel full-width">
                         <h3>Why Choose Us?</h3>
                         <div className="why-choose-grid">
                             {whyChooseUs.map((item, idx) => (
@@ -105,4 +76,3 @@ const PhoneTabletRepair = () => {
 }
 
 export default PhoneTabletRepair
-

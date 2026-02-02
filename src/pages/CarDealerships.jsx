@@ -13,6 +13,45 @@ const CarDealerships = () => {
                 description="Select Tech's Custom Compliance Portal is a true ALL-IN-ONE solution for FTC Safeguards Regulation."
             />
 
+            {/* Portal Section - Near Top */}
+            <section className="portal-cta-section" style={{
+                padding: '40px 20px',
+                background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%)',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+            }}>
+                <div style={{
+                    maxWidth: '900px',
+                    margin: '0 auto',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '30px',
+                    flexWrap: 'wrap'
+                }}>
+                    <div style={{ textAlign: 'center', flex: '1', minWidth: '280px' }}>
+                        <h3 style={{ fontSize: '1.5rem', marginBottom: '10px', color: 'var(--text-primary)' }}>
+                            Access Your Compliance Portal
+                        </h3>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '20px' }}>
+                            Track FTC Safeguards compliance, training modules, and security assessments all in one place.
+                        </p>
+                        <a
+                            href="https://portal.selecttechinc.com/login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-primary"
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                            </svg>
+                            Access Portal
+                        </a>
+                    </div>
+                </div>
+            </section>
+
             <section className="service-content">
                 <div className="content-container">
                     <div className="content-block glass-box" style={{ gridColumn: 'span 2' }}>

@@ -9,6 +9,7 @@ import ManagedITServices from './pages/ManagedITServices'
 import ITConsulting from './pages/ITConsulting'
 import ComputerRepair from './pages/ComputerRepair'
 import PhoneTabletRepair from './pages/PhoneTabletRepair'
+import RepairPricing from './pages/RepairPricing'
 import Cybersecurity from './pages/Cybersecurity'
 import MedicalDentalOffices from './pages/MedicalDentalOffices'
 import FiberDataCenter from './pages/FiberDataCenter'
@@ -21,6 +22,8 @@ import Education from './pages/Education'
 import Business from './pages/Business'
 import CarDealerships from './pages/CarDealerships'
 import DealershipServices from './pages/DealershipServices'
+import Careers from './pages/Careers'
+import MedicalDentalIT from './pages/MedicalDentalIT'
 // Admin pages (hidden routes - no UI links)
 import AdminLogin from './pages/AdminLogin'
 import Admin from './pages/Admin'
@@ -75,6 +78,10 @@ export const router = createBrowserRouter([
                 element: <PhoneTabletRepair />,
             },
             {
+                path: '/repair-pricing',
+                element: <RepairPricing />,
+            },
+            {
                 path: '/cybersecurity',
                 element: <Cybersecurity />,
             },
@@ -118,6 +125,14 @@ export const router = createBrowserRouter([
             {
                 path: '/dealership-services',
                 element: <DealershipServices />,
+            },
+            {
+                path: '/careers',
+                element: <Careers />,
+            },
+            {
+                path: '/medical-dental-it',
+                element: <MedicalDentalIT />,
             },
             // Blog routes
             {

@@ -1,0 +1,265 @@
+/* Our Team Page Styles */
+
+.team-content {
+    padding: 60px 20px;
+}
+
+.team-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.team-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px;
+}
+
+.team-intro p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Featured Member (David Willis) */
+.featured-member {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 50px;
+    padding: 50px;
+    margin-bottom: 60px;
+    border: 2px solid var(--accent-primary);
+}
+
+.featured-image {
+    width: 280px;
+    height: 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+.featured-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(139, 92, 246, 0.2));
+    z-index: 1;
+    pointer-events: none;
+}
+
+.featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.featured-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    width: fit-content;
+    margin-bottom: 20px;
+}
+
+.featured-info h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.featured-role {
+    font-size: 1.1rem;
+    color: var(--accent-primary);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.featured-bio {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.featured-specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Team Grid */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.team-card {
+    padding: 0;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.team-card-image {
+    height: 200px;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(139, 92, 246, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.team-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 2px solid var(--accent-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+}
+
+.team-card-info {
+    padding: 25px;
+}
+
+.team-card-info h3 {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.team-card-role {
+    font-size: 0.95rem;
+    color: var(--accent-primary);
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.team-card-bio {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.team-card-specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Specialty Tags */
+.specialty-tag {
+    padding: 6px 14px;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--accent-primary);
+}
+
+.specialty-tag.small {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+}
+
+/* Team Values Section */
+.team-values {
+    padding: 60px 20px;
+    background: var(--bg-card);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.team-values .values-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.team-values .value-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.team-values .value-item svg {
+    color: var(--accent-primary);
+    flex-shrink: 0;
+}
+
+.team-values .value-item h4 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.team-values .value-item p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .featured-member {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .featured-image {
+        margin: 0 auto;
+    }
+
+    .featured-specialties {
+        justify-content: center;
+    }
+
+    .featured-badge {
+        margin: 0 auto 20px;
+    }
+
+    .team-values .values-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .featured-image {
+        width: 200px;
+        height: 200px;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}

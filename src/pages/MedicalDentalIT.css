@@ -1,0 +1,519 @@
+/* Medical/Dental IT Support Page Styles */
+
+/* NC Header Section */
+.nc-header-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nc-header-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.nc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    color: var(--accent-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+.nc-header-container h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin-bottom: 15px;
+}
+
+.nc-header-container p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Medical Services Section */
+.medical-services-section {
+    padding: 60px 20px;
+}
+
+.medical-services-section .services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.medical-services-section h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+}
+
+.medical-services-section .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.medical-services-section .service-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 25px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.medical-services-section .service-item.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.medical-services-section .service-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(139, 92, 246, 0.15));
+    border-radius: 12px;
+    color: var(--accent-primary);
+}
+
+.medical-services-section .service-text h4 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.medical-services-section .service-text p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Pricing Section */
+.medical-pricing-section {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.03) 0%, rgba(139, 92, 246, 0.03) 100%);
+}
+
+.medical-pricing-section .pricing-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.medical-pricing-section .pricing-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.medical-pricing-section .pricing-header h2 {
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
+    margin-bottom: 10px;
+}
+
+.medical-pricing-section .pricing-header p {
+    color: var(--text-secondary);
+}
+
+.medical-pricing-section .pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.medical-pricing-section .pricing-card {
+    padding: 35px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+}
+
+.medical-pricing-section .pricing-card.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.medical-pricing-section .pricing-card.highlighted {
+    border: 2px solid var(--accent-primary);
+    transform: scale(1.02);
+}
+
+.medical-pricing-section .pricing-card.highlighted.reveal {
+    transform: scale(1.02);
+}
+
+.medical-pricing-section .popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.medical-pricing-section .pricing-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.medical-pricing-section .price {
+    margin-bottom: 25px;
+}
+
+.medical-pricing-section .price .amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.medical-pricing-section .price .period {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 5px;
+}
+
+.medical-pricing-section .pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.medical-pricing-section .pricing-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.medical-pricing-section .pricing-features .check {
+    color: var(--accent-primary);
+}
+
+.medical-pricing-section .pricing-features .x {
+    color: #666;
+}
+
+.medical-pricing-section .pricing-note {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* HIPAA Section */
+.hipaa-section {
+    padding: 60px 20px;
+}
+
+.hipaa-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 50px;
+}
+
+.hipaa-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.hipaa-icon {
+    flex-shrink: 0;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(139, 92, 246, 0.2));
+    border-radius: 20px;
+    color: var(--accent-primary);
+}
+
+.hipaa-text h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.hipaa-text p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.compliance-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.compliance-badges .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.compliance-badges .badge svg {
+    color: var(--accent-primary);
+}
+
+/* Why Choose List */
+.why-choose-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px 40px;
+    margin-top: 25px;
+}
+
+.why-choose-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.why-choose-list li svg {
+    color: var(--accent-primary);
+}
+
+/* Add-Ons Section */
+.addons-section {
+    padding: 60px 20px;
+}
+
+.addons-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.addons-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.addons-header h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    margin-bottom: 10px;
+}
+
+.addons-header p {
+    color: var(--text-secondary);
+}
+
+.addons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.addon-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    gap: 15px;
+}
+
+.addon-name {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.addon-price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent-primary);
+    white-space: nowrap;
+}
+
+.addon-price small {
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.addon-price em {
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--accent-secondary);
+}
+
+/* Support Rates Section */
+.support-rates-section {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.03) 0%, rgba(139, 92, 246, 0.03) 100%);
+}
+
+.rates-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.rates-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.rates-header h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    margin-bottom: 10px;
+}
+
+.rates-header p {
+    color: var(--text-secondary);
+}
+
+.rates-table {
+    overflow: hidden;
+}
+
+.rates-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 2fr;
+    padding: 15px 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    align-items: center;
+}
+
+.rates-row:last-child {
+    border-bottom: none;
+}
+
+.rates-row.header {
+    background: rgba(255, 255, 255, 0.03);
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.rates-row span {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.rates-row .strikethrough {
+    text-decoration: line-through;
+    color: #666;
+}
+
+.rates-row .discounted {
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.rates-row .hours {
+    font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .medical-services-section .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .medical-pricing-section .pricing-cards {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .medical-pricing-section .pricing-card.highlighted {
+        transform: none;
+    }
+
+    .addons-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .medical-services-section .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hipaa-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hipaa-icon {
+        margin: 0 auto;
+    }
+
+    .compliance-badges {
+        justify-content: center;
+    }
+
+    .why-choose-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .addons-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .addon-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .rates-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .rates-row.header {
+        display: none;
+    }
+
+    .rates-row span::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--text-primary);
+        display: block;
+        margin-bottom: 3px;
+        font-size: 0.8rem;
+    }
+}
