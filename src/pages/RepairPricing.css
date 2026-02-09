@@ -121,6 +121,85 @@
     font-size: 1rem;
 }
 
+/* Why Choose Us Section */
+.why-choose-section {
+    padding: 4rem 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(220, 38, 38, 0.02) 50%, transparent 100%);
+}
+
+.why-choose-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.why-choose-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.why-choose-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.why-choose-header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.why-choose-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .why-choose-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .why-choose-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.why-choose-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.why-choose-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(220, 38, 38, 0.4);
+    box-shadow: 0 10px 30px rgba(220, 38, 38, 0.15);
+}
+
+.why-choose-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.2) 0%, rgba(220, 38, 38, 0.1) 100%);
+    border-radius: 12px;
+    color: #ef4444;
+}
+
+.why-choose-card span {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
 /* Pricing Info Section */
 .pricing-info {
     padding: 3rem 0;

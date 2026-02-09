@@ -261,7 +261,7 @@ const Navbar = () => {
                         <NavDropdown label="Company" items={[
                             { label: 'About Us', path: '/about' },
                             { label: 'Our Team', path: '/our-team' },
-                            { label: 'Careers', path: '/contact' }
+                            { label: 'Careers', path: '/careers' }
                         ]} />
                         <Link to="/software-development" className="nav-link text-reveal">
                             Software Development
@@ -304,7 +304,7 @@ const Navbar = () => {
                     <MobileNavDropdown label="Company" items={[
                         { label: 'About Us', path: '/about' },
                         { label: 'Our Team', path: '/our-team' },
-                        { label: 'Careers', path: '/contact' }
+                        { label: 'Careers', path: '/careers' }
                     ]} onLinkClick={closeMobileMenu} />
                     <Link to="/software-development" className="mobile-nav-link" onClick={closeMobileMenu}>
                         Software Development

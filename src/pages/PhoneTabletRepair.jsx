@@ -40,19 +40,16 @@ const PhoneTabletRepair = () => {
                 </div>
             </section>
 
-            <section className="service-content">
-                <div className="content-container repair-layout">
-                    {/* Why Choose Us Panel */}
-                    <div className="content-block glass-box why-choose-panel full-width">
-                        <h3>Why Choose Us?</h3>
-                        <div className="why-choose-grid">
-                            {whyChooseUs.map((item, idx) => (
-                                <div key={idx} className="why-choose-item">
-                                    <div className="why-choose-icon">{item.icon}</div>
-                                    <span>{item.text}</span>
-                                </div>
-                            ))}
-                        </div>
+            <section className="why-choose-section-phone">
+                <div className="why-choose-wrapper">
+                    <h3>Why Choose Us?</h3>
+                    <div className="why-choose-items">
+                        {whyChooseUs.map((item, idx) => (
+                            <div key={idx} className="why-item">
+                                <div className="why-item-icon">{item.icon}</div>
+                                <span>{item.text}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>

@@ -1,7 +1,7 @@
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
 import RepairWizard from '../components/RepairWizard/RepairWizard'
-import { Smartphone, Tablet, Laptop, Gamepad2, Watch, Package } from 'lucide-react'
+import { Smartphone, Tablet, Laptop, Gamepad2, Watch, Package, Clock, Award, Wrench, DollarSign, ShieldCheck, Stethoscope } from 'lucide-react'
 import './ServicePage.css'
 import './RepairPricing.css'
 
@@ -13,6 +13,15 @@ const RepairPricing = () => {
         { icon: <Gamepad2 size={24} />, label: 'Gaming', desc: 'PlayStation, Xbox, Nintendo' },
         { icon: <Watch size={24} />, label: 'Wearables', desc: 'Apple Watch, Galaxy Watch' },
         { icon: <Package size={24} />, label: 'Other', desc: 'Drones, Cameras, Speakers' },
+    ]
+
+    const whyChooseUs = [
+        { icon: <Clock size={20} />, text: 'Same-day repairs available' },
+        { icon: <Award size={20} />, text: 'High-quality replacement parts' },
+        { icon: <Wrench size={20} />, text: 'Experienced technicians' },
+        { icon: <DollarSign size={20} />, text: 'Competitive pricing' },
+        { icon: <ShieldCheck size={20} />, text: 'Warranty on all repairs' },
+        { icon: <Stethoscope size={20} />, text: 'Free diagnosis' },
     ]
 
     return (
@@ -48,6 +57,23 @@ const RepairPricing = () => {
                         <p>Follow the steps below to select your device and see repair pricing</p>
                     </div>
                     <RepairWizard />
+                </div>
+            </section>
+
+            <section className="why-choose-section">
+                <div className="why-choose-container">
+                    <div className="why-choose-header">
+                        <h2>Why Choose <span className="gradient-text">Us?</span></h2>
+                        <p>Linh kiện thay thế chất lượng cao</p>
+                    </div>
+                    <div className="why-choose-grid">
+                        {whyChooseUs.map((item, idx) => (
+                            <div key={idx} className="why-choose-card glass-box">
+                                <div className="why-choose-icon">{item.icon}</div>
+                                <span>{item.text}</span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
 

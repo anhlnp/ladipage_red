@@ -1,5 +1,213 @@
 /* Careers Page Styles */
 
+/* AI Talent Banner - Prominent Call-out */
+.ai-talent-banner {
+    padding: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.ai-banner-container {
+    position: relative;
+    max-width: 100%;
+    margin: 0;
+    padding: 50px 40px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(56, 189, 248, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%);
+    border-top: 1px solid rgba(139, 92, 246, 0.3);
+    border-bottom: 1px solid rgba(56, 189, 248, 0.3);
+    overflow: hidden;
+}
+
+.ai-banner-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(139, 92, 246, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.ai-banner-content {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.ai-banner-icon {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+    border-radius: 20px;
+    color: white;
+    flex-shrink: 0;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 50px rgba(139, 92, 246, 0.7);
+    }
+}
+
+.ai-banner-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.ai-banner-text h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    margin-bottom: 10px;
+}
+
+.gradient-text-alt {
+    background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 50%, #34d399 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.ai-banner-text p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+.ai-banner-text strong {
+    color: var(--text-primary);
+}
+
+.ai-banner-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.ai-banner-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+}
+
+.ai-banner-cta svg {
+    transition: transform 0.3s ease;
+}
+
+.ai-banner-cta:hover svg {
+    transform: translateX(5px);
+}
+
+/* Life at Select Tech Section */
+.life-at-company {
+    padding: 80px 20px;
+    background: linear-gradient(180deg, transparent 0%, rgba(139, 92, 246, 0.03) 50%, transparent 100%);
+}
+
+.life-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.life-container .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.life-container .section-header h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin-bottom: 12px;
+}
+
+.life-container .section-header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.life-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.life-card {
+    padding: 30px 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.life-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.life-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(56, 189, 248, 0.15));
+    color: #a78bfa;
+    margin-bottom: 18px;
+}
+
+.life-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.life-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Featured Position Card */
+.position-card.featured {
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(56, 189, 248, 0.05) 100%);
+    position: relative;
+}
+
+.position-card.featured::before {
+    content: '🔥 HOT';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 4px 10px;
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 20px;
+}
+
 /* Highlight Banner */
 .careers-highlight {
     padding: 60px 20px;
@@ -222,7 +430,7 @@
     color: var(--text-secondary);
 }
 
-.position-card > p {
+.position-card>p {
     color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.6;
@@ -300,6 +508,24 @@
     .why-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .life-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ai-banner-content {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .ai-banner-text {
+        text-align: center;
+    }
+
+    .ai-banner-text p {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 @media (max-width: 768px) {
@@ -320,5 +546,23 @@
     .highlight-stats {
         flex-direction: column;
         align-items: center;
+    }
+
+    .life-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-banner-container {
+        padding: 40px 20px;
+    }
+
+    .ai-banner-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .ai-banner-cta {
+        width: 100%;
+        justify-content: center;
     }
 }

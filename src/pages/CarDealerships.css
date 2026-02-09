@@ -1,0 +1,27 @@
+/* Car Dealerships Page Specific Styles */
+
+/* Ensure hero is visible */
+.service-hero {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Fix for clickable portal button */
+.portal-cta-section {
+    position: relative;
+    z-index: 20;
+    margin-top: 0;
+}
+
+.portal-cta-section * {
+    position: relative;
+    z-index: inherit;
+}
+
+.portal-cta-section .btn-primary {
+    position: relative;
+    z-index: 30;
+    cursor: pointer;
+    pointer-events: auto !important;
+}

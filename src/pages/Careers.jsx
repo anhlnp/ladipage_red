@@ -55,7 +55,16 @@ const Careers = () => {
             type: "Full-time",
             location: "Hickory, NC / Remote",
             tags: ["AI", "Machine Learning", "Python"],
-            description: "Build intelligent security systems using machine learning to detect and respond to threats in real-time."
+            description: "Build intelligent security systems using machine learning to detect and respond to threats in real-time.",
+            featured: true
+        },
+        {
+            title: "Senior AI Security Researcher",
+            type: "Full-time",
+            location: "Remote",
+            tags: ["AI", "Security Research", "LLM"],
+            description: "Research and develop AI-powered threat detection systems and automated security responses.",
+            featured: true
         },
         {
             title: "Cybersecurity Analyst",
@@ -87,26 +96,74 @@ const Careers = () => {
         { icon: <Cpu size={24} />, text: "AI-Powered Solutions" }
     ]
 
+    const lifeAtSelectTech = [
+        {
+            icon: <Heart size={28} />,
+            title: "Looking Out for You",
+            description: "Comprehensive health coverage and wellness programs to take care of you and your family."
+        },
+        {
+            icon: <TrendingUp size={28} />,
+            title: "Fueling Your Ambition",
+            description: "Certification reimbursement, training opportunities, and clear paths for advancement."
+        },
+        {
+            icon: <Zap size={28} />,
+            title: "Flexible Work",
+            description: "Remote and hybrid options available. We trust you to do great work, wherever you are."
+        },
+        {
+            icon: <Users size={28} />,
+            title: "Team Culture",
+            description: "From team events to daily collaboration, we build relationships that last."
+        }
+    ]
+
     return (
         <PageLayout>
             <ServiceHero
-                tag="JOIN OUR TEAM"
-                title="Build the Future of"
-                gradientText="Cybersecurity"
-                description="We're looking for highly motivated individuals who want to make a difference. Whether you're an AI engineer, security specialist, or IT professional, there's a place for you at Select Tech."
+                tag="WE'RE HIRING"
+                title="Join Our Team of"
+                gradientText="Innovators"
+                description="We're seeking highly motivated individuals who want to solve the world's toughest cybersecurity challenges. If you're driven, curious, and ready to make an impact – we want to meet you."
             />
 
-            {/* Highlight Banner */}
+            {/* AI Talent Call-out Banner */}
+            <section className="ai-talent-banner">
+                <div className="ai-banner-container">
+                    <div className="ai-banner-glow"></div>
+                    <div className="ai-banner-content">
+                        <div className="ai-banner-icon">
+                            <Brain size={48} />
+                        </div>
+                        <div className="ai-banner-text">
+                            <h2>
+                                <span className="gradient-text-alt">Calling All AI Engineers</span>
+                            </h2>
+                            <p>
+                                We're building the future of AI-powered cybersecurity. If you're passionate about
+                                machine learning, threat detection, and pushing the boundaries of what's possible –
+                                <strong> we're actively looking for talent like you.</strong>
+                            </p>
+                        </div>
+                        <Link to="/contact" className="ai-banner-cta">
+                            Apply for AI Roles
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            {/* Highlight Banner - Stats */}
             <section className="careers-highlight">
                 <div className="highlight-container">
                     <div className="highlight-content">
-                        <h2>
-                            <span className="gradient-text">Seeking AI Engineering Talent</span>
-                        </h2>
+                        <h2>Why <span className="gradient-text">Select Tech?</span></h2>
                         <p>
-                            We're actively building our AI and machine learning capabilities.
-                            If you're passionate about using AI to solve real-world security challenges,
-                            we want to hear from you.
+                            Our strong values and supportive environment empower us to solve our clients'
+                            toughest cybersecurity challenges and make the world a safer place.
                         </p>
                     </div>
                     <div className="highlight-stats">
@@ -122,6 +179,25 @@ const Careers = () => {
                             <span className="stat-number">100%</span>
                             <span className="stat-label">Satisfaction</span>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Life at Select Tech */}
+            <section className="life-at-company">
+                <div className="life-container">
+                    <div className="section-header">
+                        <h2>Life at <span className="gradient-text">Select Tech</span></h2>
+                        <p>More than a job – a place to grow, contribute, and belong</p>
+                    </div>
+                    <div className="life-grid">
+                        {lifeAtSelectTech.map((item, idx) => (
+                            <div key={idx} className="life-card glass-box">
+                                <div className="life-icon">{item.icon}</div>
+                                <h3>{item.title}</h3>
+                                <p>{item.description}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -166,7 +242,7 @@ const Careers = () => {
                     </div>
                     <div className="positions-grid">
                         {openPositions.map((position, idx) => (
-                            <div key={idx} className="position-card glass-box">
+                            <div key={idx} className={`position-card glass-box ${position.featured ? 'featured' : ''}`}>
                                 <div className="position-header">
                                     <h3>{position.title}</h3>
                                     <div className="position-meta">

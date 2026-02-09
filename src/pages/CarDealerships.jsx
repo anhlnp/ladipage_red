@@ -2,6 +2,7 @@ import { ShieldCheck, ClipboardList, GraduationCap } from 'lucide-react'
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
 import './ServicePage.css'
+import './CarDealerships.css'
 
 const CarDealerships = () => {
     return (
@@ -17,7 +18,9 @@ const CarDealerships = () => {
             <section className="portal-cta-section" style={{
                 padding: '40px 20px',
                 background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%)',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+                borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                position: 'relative',
+                zIndex: 20
             }}>
                 <div style={{
                     maxWidth: '900px',
@@ -40,7 +43,7 @@ const CarDealerships = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-primary"
-                            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', position: 'relative', zIndex: 30 }}
                         >
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -59,7 +62,7 @@ const CarDealerships = () => {
                             <img
                                 src="/pexels-thisisengineering-3862618.jpg"
                                 alt="Car Dealership Engineering"
-                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
                             />
                         </div>
                         <h3>FTC Safeguards Solution</h3>
