@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
     Shield, Eye, Lock, Activity, Users, AlertTriangle, FileText,
-    Search, Bell, MapPin, Crosshair, Zap, MonitorCheck,
+    Search, Bell, MapPin, Zap, MonitorCheck,
     CheckCircle2, Building2, Stethoscope, Scale, Factory, Car, Pill,
-    ArrowRight, Send
+    ArrowRight, Send, Target, RefreshCw, Globe, Server, Cpu
 } from 'lucide-react'
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
@@ -13,7 +13,7 @@ import './CloudSOCMonitoring.css'
 
 const CloudSOCMonitoring = () => {
     const [formData, setFormData] = useState({
-        name: '', company: '', email: '', phone: '', endpoints: '', message: ''
+        name: '', company: '', email: '', phone: '', endpoints: '', industry: '', message: ''
     })
 
     const handleChange = (e) => {
@@ -22,65 +22,49 @@ const CloudSOCMonitoring = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // Submit logic here
         alert('Thank you! We will be in touch shortly.')
-        setFormData({ name: '', company: '', email: '', phone: '', endpoints: '', message: '' })
+        setFormData({ name: '', company: '', email: '', phone: '', endpoints: '', industry: '', message: '' })
     }
 
-    /* ---- Data ---- */
-    const socFeatures = [
-        {
-            icon: <Shield size={22} />,
-            title: 'CEH-Led SOC Oversight',
-            desc: 'Your environment is monitored and guided by a Certified Ethical Hacker (CEH)–led security team that thinks like attackers and defends like professionals.'
-        },
-        {
-            icon: <Eye size={22} />,
-            title: '24/7 Threat Monitoring & Response',
-            desc: 'Continuous monitoring of endpoints, identities, and network activity with rapid response to suspicious or malicious behavior.'
-        },
-        {
-            icon: <Activity size={22} />,
-            title: 'Behavior-Based Threat Detection',
-            desc: 'We detect attacks based on how systems behave, not just signatures—stopping ransomware, fileless malware, and living-off-the-land attacks early.'
-        },
-        {
-            icon: <Zap size={22} />,
-            title: 'Immediate Incident Containment',
-            desc: 'Isolate compromised systems, terminate malicious processes, and block further execution before damage spreads.'
-        },
-        {
-            icon: <Users size={22} />,
-            title: 'Identity & Privilege Abuse Monitoring',
-            desc: 'Detect abnormal login behavior, credential misuse, lateral movement, and unauthorized access attempts.'
-        },
-        {
-            icon: <Search size={22} />,
-            title: 'Proactive Threat Hunting',
-            desc: 'Our SOC actively searches for hidden threats that automated tools may miss—before they become incidents.'
-        },
-        {
-            icon: <FileText size={22} />,
-            title: 'Forensic Evidence Preservation',
-            desc: 'Capture logs, timelines, and artifacts to support insurance claims, legal review, and compliance audits.'
-        },
-        {
-            icon: <Lock size={22} />,
-            title: 'Compliance-Ready Documentation',
-            desc: 'Detailed incident records aligned with HIPAA, FTC Safeguards, NIST, and cyber-insurance requirements.'
-        },
-        {
-            icon: <Bell size={22} />,
-            title: 'Real-Time Alerts & Executive Reporting',
-            desc: 'Clear, actionable alerts for your team and plain-language reports for leadership—no security jargon.'
-        },
-        {
-            icon: <MapPin size={22} />,
-            title: 'Local SOC. Real Accountability.',
-            desc: 'A North Carolina-based SOC with real engineers you can call—not an offshore call center.'
-        }
+    /* ---- VM Capabilities ---- */
+    const vmCapabilities = [
+        'Continuous asset discovery across cloud, on-prem, and hybrid environments',
+        'Risk-based prioritization using exploit activity, threat intelligence, and asset criticality',
+        'Cloud posture monitoring for misconfigurations, identity risk, and security drift',
+        'Faster remediation cycles aligned with IT operations and change control',
+        'Zero Trust alignment, validating device, identity, and workload posture continuously',
+        'Audit-ready reporting supporting HIPAA, FTC Safeguards, NIST, PCI, and cyber-insurance',
+        'Reduced ransomware and breach risk through proactive exposure reduction'
     ]
 
+    /* ---- VM Result ---- */
+    const vmResults = [
+        'Fewer exploitable weaknesses',
+        'Stronger cloud governance',
+        'Faster response to emerging threats',
+        'Lower compliance and insurance friction',
+        'Zero Trust environment'
+    ]
+
+    /* ---- ZT Includes ---- */
+    const ztIncludes = [
+        'Approved-only application execution',
+        'Blocking of unauthorized scripts, macros, and PowerShell activity',
+        'Restrictions on application access to sensitive files and systems',
+        'Protection against fileless and "living-off-the-land" attacks',
+        'Audit logs and reporting for compliance and cyber insurance'
+    ]
+
+    /* ---- ZT Reduces ---- */
+    const ztReduces = [
+        'Ransomware attacks',
+        'Credential theft and account abuse',
+        'Fileless malware',
+        'Insider misuse',
+        'Insurance and compliance exposure'
+    ]
+
+    /* ---- Industries ---- */
     const industries = [
         {
             icon: <Stethoscope size={20} />,
@@ -109,19 +93,12 @@ const CloudSOCMonitoring = () => {
         }
     ]
 
+    /* ---- Why Choose ---- */
     const whyChoose = [
         'Preventive security, not reactive cleanup',
         'Policies managed by experienced cybersecurity professionals',
         'Reduced risk for cyber insurance and regulatory reviews',
         'Enterprise-level protection without operational complexity'
-    ]
-
-    const ztIncludes = [
-        'Approved-only application execution',
-        'Blocking of unauthorized scripts, macros, and PowerShell activity',
-        'Restrictions on application access to sensitive files and systems',
-        'Protection against fileless and "living-off-the-land" attacks',
-        'Full audit logs and reporting for compliance and cyber insurance'
     ]
 
     return (
@@ -131,57 +108,21 @@ const CloudSOCMonitoring = () => {
                 tag="SOC MONITORING"
                 title="Cloud Based"
                 gradientText="SOC Monitoring"
-                description="Select Tech as Your Security Operations Center (SOC). Providing 24×7 threat monitoring, identity threat detection, behavior-based response, and compliance-aligned reporting—led by Certified Ethical Hackers."
+                description="24/7 SOC monitoring by real cybersecurity professionals — not just alerts, but action."
             />
 
-            {/* ============ Hero Banner Image ============ */}
+            {/* ============ Hero Image ============ */}
             <section className="hero-image-section">
                 <div className="hero-image-container">
                     <img
                         src="/cloud-computing-electronic-chip-board-cloud-computer-is-system-transfer-data-information-upload-download-application-technology-transformation-concept.jpg"
-                        alt="Cloud Computing Circuit Board"
+                        alt="Cloud SOC Monitoring"
                         className="hero-image"
                     />
                 </div>
             </section>
 
-            {/* ============ SECTION 1: SOC Overview ============ */}
-            <section className="soc-section">
-                <div className="section-inner">
-                    <div className="soc-section-header">
-                        <span className="soc-section-tag">Security Operations Center</span>
-                        <h2 className="soc-section-title">
-                            Comprehensive Cybersecurity &{' '}
-                            <span className="gradient-text">Network Monitoring</span>
-                        </h2>
-                        <p className="soc-section-subtitle">
-                            Select Tech delivers a risk-focused approach to monitoring and managing critical IT systems.
-                            Our integrated SOC operates continuously to identify abnormal activity, detect emerging threats,
-                            and maintain the stability and performance of your network.
-                        </p>
-                    </div>
-
-                    <div className="soc-overview-grid">
-                        <div className="soc-overview-card glass-box">
-                            <div className="card-icon"><Eye size={28} /></div>
-                            <h4>Proactive Threat Detection</h4>
-                            <p>Continuous monitoring of network performance and security events with real-time response coordination.</p>
-                        </div>
-                        <div className="soc-overview-card glass-box">
-                            <div className="card-icon"><Users size={28} /></div>
-                            <h4>Identity Oversight</h4>
-                            <p>Safeguarding user accounts, privileged access monitoring, and credential abuse detection.</p>
-                        </div>
-                        <div className="soc-overview-card glass-box">
-                            <div className="card-icon"><FileText size={28} /></div>
-                            <h4>Compliance Aligned</h4>
-                            <p>Logging, alerting, and reporting aligned with HIPAA, FTC Safeguards, NIST, and cyber-insurance requirements.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ============ SECTION 2: Why Choose Select Tech ============ */}
+            {/* ============ SECTION 1: Why Choose Select Tech ============ */}
             <section className="soc-section">
                 <div className="section-inner">
                     <div className="soc-section-header">
@@ -192,118 +133,266 @@ const CloudSOCMonitoring = () => {
                         </h2>
                     </div>
 
-                    <div className="soc-features-grid">
-                        {socFeatures.map((feature, idx) => (
-                            <div key={idx} className="soc-feature-card glass-box">
-                                <div className="soc-feature-icon">{feature.icon}</div>
-                                <div className="soc-feature-content">
-                                    <h4>{feature.title}</h4>
-                                    <p>{feature.desc}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Attack Flow Diagram */}
-                    <div className="attack-flow-section">
-                        <div className="soc-section-header">
-                            <h2 className="soc-section-title">
-                                How Select Tech{' '}
-                                <span className="gradient-text">Stops Malicious Attacks</span>
-                            </h2>
-                            <div className="attack-flow-pills">
-                                <span className="flow-pill">Behavior-based threat detection</span>
-                                <span className="flow-pill">Cloud identity threat monitoring</span>
-                                <span className="flow-pill">Continuous SOC monitoring & response</span>
-                            </div>
+                    <div className="soc-overview-with-image">
+                        <div className="soc-overview-text">
+                            <h3>SOC-as-a-Service That Stops Problems Early</h3>
+                            <p>
+                                Security issues don't start with alarms — they start with small warning signs
+                                that are easy to miss. Like a vehicle's check engine light, those signals often
+                                go unnoticed until something breaks.
+                            </p>
+                            <p>
+                                Select Tech Inc. provides SOC-as-a-Service, delivering continuous monitoring,
+                                early threat detection, and rapid response to help businesses avoid downtime,
+                                data loss, and compliance issues. We act as an extension of your IT team,
+                                watching your environment so problems are addressed before they escalate.
+                            </p>
+                            <p>
+                                Our clients range from small organizations with as few as <strong>5 endpoints</strong> to
+                                complex environments with <strong>1,000+ devices</strong>. Our SOC is architected to support
+                                distributed organizations across multiple offices, campuses, and geographic regions.
+                            </p>
+                            <p>
+                                By combining identity-first threat detection, endpoint and network visibility,
+                                SaaS activity monitoring, and compliance-ready incident response workflows,
+                                Select Tech delivers centralized security oversight that scales seamlessly—from
+                                single-site businesses to sophisticated enterprise infrastructures.
+                            </p>
                         </div>
-
-                        <div className="attack-flow-grid">
-                            {/* Card 1: Detection */}
-                            <div className="attack-flow-card glass-box">
-                                <span className="flow-card-badge detect">Advanced Endpoint Behavior</span>
-                                <h4>Behavior Analysis</h4>
-                                <ul className="flow-card-list">
-                                    <li>Behavior analyzed</li>
-                                    <li>Hidden execution detected</li>
-                                    <li>Unusual parent process</li>
-                                </ul>
-                                <p className="flow-card-footer">
-                                    Cylerian watches how PowerShell behaves, not what it says.
-                                </p>
-                            </div>
-
-                            {/* Card 2: SOC Response */}
-                            <div className="attack-flow-card glass-box">
-                                <span className="flow-card-badge respond">Select Tech SOC</span>
-                                <h4>Detection & Response</h4>
-                                <ul className="flow-card-list">
-                                    <li>Isolate endpoint</li>
-                                    <li>Terminate process</li>
-                                    <li>Disable execution</li>
-                                    <li>Preserve evidence</li>
-                                </ul>
-                                <div className="flow-card-result alert">
-                                    Attack Detected & Stopped
-                                </div>
-                            </div>
-
-                            {/* Card 3: Cloud Identity */}
-                            <div className="attack-flow-card glass-box">
-                                <span className="flow-card-badge monitor">Cloud Identity Monitoring</span>
-                                <h4>Credential & Cloud Watch</h4>
-                                <ul className="flow-card-list">
-                                    <li>Identity & app access monitored</li>
-                                    <li>Unusual mass file access</li>
-                                    <li>Suspicious mailbox activity</li>
-                                </ul>
-                                <p className="flow-card-footer">
-                                    Reco.ai watches credentials and cloud behavior.
-                                </p>
-                                <div className="flow-card-result success">
-                                    Threats neutralized in minutes
-                                </div>
-                            </div>
+                        <div className="soc-overview-image glass-box">
+                            <img
+                                src="/Comprehensive-Guide-to-Security-Operations.jpg"
+                                alt="Security Operations Overview"
+                            />
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* ============ Image Break: Two Side-by-Side ============ */}
-            <section className="soc-image-break">
-                <div className="soc-image-break-inner">
-                    <div className="soc-image-card glass-box">
-                        <img
-                            src="/cloud-system-tablet-background-smart-technology-remixed-media.jpg"
-                            alt="Cloud Security Monitoring"
-                        />
-                        <div className="soc-image-overlay">
-                            <span>Cloud Security Monitoring</span>
+            {/* ============ SECTION 2: Real-World SOC Saves ============ */}
+            <section className="soc-section soc-saves-section">
+                <div className="section-inner">
+                    <div className="soc-section-header">
+                        <span className="soc-section-tag">Case Studies</span>
+                        <h2 className="soc-section-title">
+                            Recent Real-World{' '}
+                            <span className="gradient-text">SOC Saves</span>
+                        </h2>
+                    </div>
+
+                    <div className="soc-cases-row">
+                        <div className="soc-case-card glass-box">
+                            <div className="case-card-image">
+                                <img src="/dental_clinic.png" alt="Dental Practice SOC Case" />
+                            </div>
+                            <div className="case-card-body">
+                                <span className="case-badge dental">Large Dental Practice</span>
+                                <h4>17 Dental Operatories</h4>
+                                <p>
+                                    Our SOC detected a cloud email account accessed through a VPN connection
+                                    from Germany, while the employee was working in the U.S. — an impossible
+                                    travel scenario. Access was immediately secured, preventing data exposure
+                                    and helping the practice maintain HIPAA compliance.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="soc-case-card glass-box">
+                            <div className="case-card-image">
+                                <div className="soc-img-placeholder">
+                                    <Factory size={40} />
+                                    <span>Image Placeholder</span>
+                                </div>
+                            </div>
+                            <div className="case-card-body">
+                                <span className="case-badge manufacturing">NC Manufacturing</span>
+                                <h4>North Carolina Manufacturing Company</h4>
+                                <p>
+                                    Overnight monitoring revealed abnormal system behavior that bypassed
+                                    traditional antivirus tools. Our SOC isolated the system within minutes,
+                                    stopping a potential ransomware event before operations were disrupted.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div className="soc-image-card glass-box">
-                        <img
-                            src="/futuristic-business-scene-with-ultra-modern-ambiance.jpg"
-                            alt="Modern SOC Environment"
-                        />
-                        <div className="soc-image-overlay">
-                            <span>Modern SOC Environment</span>
+
+                    {/* Co-managed block */}
+                    <div className="soc-comanaged glass-box">
+                        <div className="comanaged-content">
+                            <h3>Real Analysts, Not Just Software</h3>
+                            <p>
+                                We work alongside some of the area's largest employers and internal IT departments
+                                using a co-managed IT support and SOC model. Outsourcing your SOC is smarter,
+                                more cost-effective, and consistently delivers better protection and documentation
+                                than building a 24/7 SOC internally.
+                            </p>
+                            <p className="comanaged-highlight">
+                                You keep control. We provide the monitoring, expertise, and audit-ready records
+                                insurers and regulators expect.
+                            </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* ============ Transition Banner ============ */}
+            {/* ============ CTA Banner ============ */}
             <div className="soc-transition-banner">
                 <div className="banner-inner glass-box">
-                    <p>
-                        For Ultimate Protection, Select Tech recommends adopting a{' '}
-                        <span className="gradient-text">Zero Trust</span> environment.
+                    <p>Don't wait for a failure to find the problem.</p>
+                    <Link to="/contact" className="btn-primary" style={{ marginTop: '16px', display: 'inline-flex', alignItems: 'center' }}>
+                        Schedule a SOC Readiness Review <ArrowRight size={18} style={{ marginLeft: '8px' }} />
+                    </Link>
+                    <p className="banner-disclaimer">
+                        Disclaimer: Examples are anonymized and summarized for illustrative purposes.
+                        Outcomes vary by environment and response timing.
                     </p>
                 </div>
             </div>
 
-            {/* ============ SECTION 3: Zero Trust ============ */}
+            {/* ============ SECTION 3: Compliance ============ */}
+            <section className="soc-section soc-compliance-section">
+                <div className="section-inner">
+                    <div className="soc-section-header">
+                        <span className="soc-section-tag">Compliance</span>
+                        <h2 className="soc-section-title">
+                            FDA, FTC Safeguards, HIPAA,{' '}
+                            <span className="gradient-text">PCI Compliance</span>
+                        </h2>
+                    </div>
+
+                    <div className="soc-compliance-layout">
+                        <div className="soc-compliance-text">
+                            <p className="compliance-lead">
+                                When something happens, it's not enough to "fix it." You need to prove what
+                                happened, when it happened, and how it was handled.
+                            </p>
+                            <p>
+                                Our SOC captures timelines, activity records, and supporting evidence that
+                                align with HIPAA, FTC Safeguards, NIST, and cyber-insurance expectations—without
+                                adding work for your staff. Leadership receives clear, plain-language summaries,
+                                while technical teams have the detail they need when it matters.
+                            </p>
+                            <p>
+                                And because our SOC is based in <strong>North Carolina</strong>, accountability
+                                is real. You're working with engineers who know your environment—not an offshore
+                                call center reading from a script.
+                            </p>
+                            <div className="compliance-advantage glass-box">
+                                <CheckCircle2 size={20} className="check-icon" />
+                                <span>
+                                    Advantage of having a Cloud Native SOC for your FDA, FTC Safeguards, HIPAA,
+                                    and other compliance documentation requirements.
+                                </span>
+                            </div>
+                        </div>
+                        <div className="soc-compliance-image glass-box">
+                            <img
+                                src="/Satisfied _FTC_Safeguards _Audit_photo_Jan_2026.png"
+                                alt="FTC Safeguards Audit Compliance"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="soc-quote-block">
+                        <blockquote>
+                            "We don't just monitor threats — we reduce the weaknesses attackers rely on."
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
+
+            {/* ============ SECTION 4: Vulnerability Management ============ */}
+            <section className="soc-section soc-vm-section">
+                <div className="section-inner">
+                    <div className="soc-section-header">
+                        <span className="soc-section-tag">Vulnerability Management</span>
+                        <h2 className="soc-section-title">
+                            Vulnerability Management as Part of{' '}
+                            <span className="gradient-text">SOC Cloud Monitoring</span>
+                        </h2>
+                    </div>
+
+                    <div className="soc-vm-layout">
+                        <div className="soc-vm-image glass-box">
+                            <img
+                                src="/futuristic-business-scene-with-ultra-modern-ambiance.jpg"
+                                alt="SOC Dashboard"
+                            />
+                        </div>
+                        <div className="soc-vm-text">
+                            <p>
+                                Modern cyber incidents don't start with alarms — they begin with small,
+                                overlooked weaknesses. Cloud services evolve daily, applications change
+                                constantly, identities sprawl, and misconfigurations quietly expand the
+                                attack surface.
+                            </p>
+                            <p>
+                                Select Tech's SOC integrates continuous Vulnerability Management directly
+                                into our 24/7 cloud monitoring operations, aligned with Zero Trust principles.
+                                This approach provides ongoing visibility into exposure across cloud, hybrid,
+                                and distributed environments.
+                            </p>
+                            <p>
+                                We continuously discover assets across cloud platforms, endpoints, networks,
+                                identities, SaaS applications, and workloads. Vulnerabilities are validated,
+                                prioritized, and tracked based on real-world exploitability, active threat
+                                intelligence, and business impact—not just severity scores.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* How VM Strengthens SOC */}
+                    <div className="soc-vm-capabilities">
+                        <h3>How Vulnerability Management Strengthens Our SOC</h3>
+                        <div className="vm-caps-grid">
+                            {vmCapabilities.map((cap, idx) => (
+                                <div key={idx} className="vm-cap-item glass-box">
+                                    <CheckCircle2 size={18} className="check-icon" />
+                                    <span>{cap}</span>
+                                </div>
+                            ))}
+                        </div>
+                        <p className="vm-note">
+                            This approach moves organizations from reactive patching to measurable,
+                            risk-driven vulnerability reduction.
+                        </p>
+                    </div>
+
+                    {/* SOC + VM */}
+                    <div className="soc-vm-combined glass-box">
+                        <h3>SOC + Vulnerability Management = <span className="gradient-text">Real Protection</span></h3>
+                        <p>
+                            Unlike standalone vulnerability tools, Select Tech's SOC correlates vulnerability
+                            data with live threat activity. When exploitation attempts occur, our analysts
+                            already understand:
+                        </p>
+                        <ul className="vm-understand-list">
+                            <li><Target size={16} /> Which assets are exposed</li>
+                            <li><AlertTriangle size={16} /> Which vulnerabilities matter most</li>
+                            <li><Shield size={16} /> What business impact is at risk</li>
+                        </ul>
+                        <p>
+                            This allows our SOC to respond faster, contain threats sooner, and document
+                            every action clearly for leadership, auditors, and insurers.
+                        </p>
+                    </div>
+
+                    {/* The Result */}
+                    <div className="soc-vm-results">
+                        <h3>The Result</h3>
+                        <div className="vm-results-grid">
+                            {vmResults.map((item, idx) => (
+                                <div key={idx} className="vm-result-pill glass-box">
+                                    <CheckCircle2 size={18} className="check-icon" />
+                                    <span>{item}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ============ SECTION 5: Zero Trust ============ */}
             <section className="soc-section zero-trust-section">
                 <div className="section-inner">
                     <div className="soc-section-header">
@@ -313,8 +402,7 @@ const CloudSOCMonitoring = () => {
                             <span className="gradient-text">Application Control</span>
                         </h2>
                         <p className="soc-section-subtitle">
-                            Stop zero-day exploits before they wreck your business. Select Tech partners with ThreatLocker,
-                            the industry leader in Zero-Trust security, to stop threats at the source.
+                            Stop zero-day exploits before they wreck your business.
                         </p>
                     </div>
 
@@ -322,16 +410,18 @@ const CloudSOCMonitoring = () => {
                     <div className="zt-intro-block glass-box">
                         <h3>What Is Zero Trust Security?</h3>
                         <p>
-                            Zero Trust operates on a simple rule: only approved applications and actions are allowed to run.
-                            Anything unapproved is blocked by default. Unlike traditional antivirus that reacts too late,
-                            Zero Trust prevents malicious activity by allowing only approved applications and actions to execute.
+                            Today's cyberattacks hide in plain sight, using trusted tools already on your systems.
+                            Select Tech partners with ThreatLocker, the industry leader in Zero-Trust security,
+                            to stop these threats at the source.
+                        </p>
+                        <p>
+                            Zero Trust operates on a simple rule: if it isn't approved, it doesn't run.
+                            This stops ransomware, fileless malware, credential abuse, and insider misuse at the source.
                         </p>
                         <div className="zt-reduces-grid">
-                            <span className="zt-pill">Ransomware attacks</span>
-                            <span className="zt-pill">Credential theft</span>
-                            <span className="zt-pill">Fileless malware</span>
-                            <span className="zt-pill">Insider misuse</span>
-                            <span className="zt-pill">Compliance exposure</span>
+                            {ztReduces.map((item, idx) => (
+                                <span key={idx} className="zt-pill">{item}</span>
+                            ))}
                         </div>
                     </div>
 
@@ -348,20 +438,20 @@ const CloudSOCMonitoring = () => {
                                 ))}
                             </ul>
                             <p style={{ marginTop: '16px', fontSize: '0.88rem' }}>
-                                All policies are monitored and maintained by Select Tech to ensure security never disrupts operations.
+                                All policies are deployed, monitored, and maintained by Select Tech to ensure
+                                security without disrupting operations.
                             </p>
                         </div>
 
                         <div className="zt-feature-block glass-box">
-                            <h4>Beyond Basic Allowlisting</h4>
+                            <h4>More Than Basic Allowlisting</h4>
                             <p>
-                                Allowlisting alone is not enough. Select Tech enforces controls on <strong>how applications behave</strong>,
-                                not just whether they exist.
+                                Security isn't just about what runs—it's about what applications are <strong>allowed to do</strong>.
                             </p>
                             <p>
-                                Approved software is limited to its intended purpose. If an application attempts to access restricted files,
-                                credentials, or system components, the action is blocked—stopping ransomware and misuse even when threats
-                                originate from trusted tools.
+                                Select Tech limits approved software to its intended purpose, blocking unauthorized
+                                access to files, credentials, and system components. This prevents ransomware and
+                                misuse even when threats originate from trusted tools.
                             </p>
                             <h4 style={{ marginTop: '24px' }}>Key Capabilities</h4>
                             <ul className="zt-check-list">
@@ -431,17 +521,6 @@ const CloudSOCMonitoring = () => {
                                 <span><strong>No surprises:</strong> Full transparency on scope and pricing from day one—no last-minute changes.</span>
                             </li>
                         </ul>
-
-                        <div className="soc-pricing-preview">
-                            <div className="pricing-tier glass-box">
-                                <h4>Essentials</h4>
-                                <p>Core SOC monitoring & Zero Trust baseline</p>
-                            </div>
-                            <div className="pricing-tier glass-box featured">
-                                <h4>Complete</h4>
-                                <p>Full SOC + Zero Trust + compliance reporting</p>
-                            </div>
-                        </div>
                     </div>
 
                     {/* Intake Form */}
@@ -484,19 +563,36 @@ const CloudSOCMonitoring = () => {
                                     onChange={handleChange}
                                 />
                             </div>
-                            <select
-                                name="endpoints"
-                                value={formData.endpoints}
-                                onChange={handleChange}
-                                required
-                            >
-                                <option value="">Estimated Endpoint Count</option>
-                                <option value="1-25">1 – 25 endpoints</option>
-                                <option value="26-50">26 – 50 endpoints</option>
-                                <option value="51-100">51 – 100 endpoints</option>
-                                <option value="101-250">101 – 250 endpoints</option>
-                                <option value="250+">250+ endpoints</option>
-                            </select>
+                            <div className="form-row">
+                                <select
+                                    name="endpoints"
+                                    value={formData.endpoints}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">Estimated Endpoint Count</option>
+                                    <option value="1-25">1 – 25 endpoints</option>
+                                    <option value="26-50">26 – 50 endpoints</option>
+                                    <option value="51-100">51 – 100 endpoints</option>
+                                    <option value="101-250">101 – 250 endpoints</option>
+                                    <option value="250+">250+ endpoints</option>
+                                </select>
+                                <select
+                                    name="industry"
+                                    value={formData.industry}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">Industry</option>
+                                    <option value="healthcare">Healthcare / Dental</option>
+                                    <option value="legal">Legal / Accounting</option>
+                                    <option value="manufacturing">Manufacturing</option>
+                                    <option value="automotive">Automotive Dealership</option>
+                                    <option value="pharmaceutical">Pharmaceutical</option>
+                                    <option value="education">Education</option>
+                                    <option value="government">Government / Agency</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
                             <textarea
                                 name="message"
                                 placeholder="Tell us about your environment and security needs..."
