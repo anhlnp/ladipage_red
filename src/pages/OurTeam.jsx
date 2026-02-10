@@ -11,7 +11,7 @@ const OurTeam = () => {
             id: 1,
             name: 'David Willis',
             role: 'Founder & CEO',
-            image: '/Willis_Retired_Navy.png',
+            image: '/David Willis.png',
             bio: 'US Navy Veteran with 23+ years of IT experience. Founded Select Tech in 2002 with a mission to bring military-grade professionalism to IT services.',
             specialties: ['IT Consulting', 'Strategic Planning', 'Cybersecurity'],
             featured: true

@@ -17,11 +17,11 @@ const CyberTraining = () => {
                 <div className="content-container">
                     {/* Introduction */}
                     <div className="content-block glass-box" style={{ gridColumn: '1 / -1' }}>
-                        <div className="block-image-container" style={{ marginBottom: '30px', borderRadius: '12px', overflow: 'hidden', height: '400px' }}>
+                        <div className="block-image-container" style={{ marginBottom: '30px', borderRadius: '12px', overflow: 'hidden' }}>
                             <img
                                 src="/cyber_classroom_training.png"
                                 alt="Cybersecurity Classroom Training"
-                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                style={{ width: '100%', maxHeight: '500px', objectFit: 'cover', objectPosition: 'center center', display: 'block' }}
                             />
                         </div>
                         <h3>Empower Your Workforce, Secure Your Future</h3>
@@ -39,11 +39,11 @@ const CyberTraining = () => {
                             Personalized learning paths for employees at all levels. Our self-paced modules ensure that every team member
                             understands their role in maintaining cybersecurity.
                         </p>
-                        <div style={{ marginTop: '20px', marginBottom: '20px', borderRadius: '12px', overflow: 'hidden', height: '250px' }}>
+                        <div style={{ marginTop: '20px', marginBottom: '20px', borderRadius: '12px', overflow: 'hidden' }}>
                             <img
                                 src="/one_on_one_training.png"
                                 alt="One-on-One Cyber Training"
-                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                style={{ width: '100%', maxHeight: '350px', objectFit: 'cover', objectPosition: 'center 30%', display: 'block' }}
                             />
                         </div>
                         <ul className="feature-list" style={{ listStyle: 'none', padding: 0 }}>
@@ -63,14 +63,12 @@ const CyberTraining = () => {
                     </div>
 
                     {/* Side Image Column */}
-                    <div className="content-block glass-box" style={{ padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                        <div style={{ flex: 1 }}>
-                            <img
-                                src="/internet-3589685.jpg"
-                                alt="Cyber Awareness"
-                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                            />
-                        </div>
+                    <div className="content-block glass-box" style={{ padding: 0, overflow: 'hidden' }}>
+                        <img
+                            src="/internet-3589685.jpg"
+                            alt="Cyber Awareness"
+                            style={{ width: '100%', height: '100%', minHeight: '300px', objectFit: 'cover', objectPosition: 'center center', display: 'block' }}
+                        />
                     </div>
 
                     {/* Group Training */}

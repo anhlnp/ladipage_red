@@ -1,51 +1,105 @@
 import { Link } from 'react-router-dom'
 import {
-    Rocket,
     Brain,
     Shield,
     Users,
     Zap,
     Heart,
     Award,
-    TrendingUp,
-    Code,
-    Cpu
+    HeartPulse,
+    Briefcase,
+    Globe,
+    Quote,
+    MapPin,
+    ChevronRight,
+    Star,
+    GraduationCap,
+    Coffee,
+    Target,
+    Sparkles
 } from 'lucide-react'
 import PageLayout from '../components/PageLayout/PageLayout'
-import ServiceHero from '../components/ServiceHero/ServiceHero'
 import './Careers.css'
 
 const Careers = () => {
-    const whyWorkWithUs = [
+
+    const lifeAtSelectTech = [
         {
-            icon: <Rocket size={32} />,
-            title: "Shape the Future",
-            description: "Work on cutting-edge AI and cybersecurity solutions that protect businesses from emerging threats."
+            icon: <HeartPulse size={28} />,
+            title: "Looking Out for Your Health",
+            description: "Comprehensive health coverage and wellness programs to take care of you and your family – because your well-being matters to us."
         },
         {
-            icon: <Brain size={32} />,
-            title: "AI-First Approach",
-            description: "We're actively investing in AI engineering talent to build next-generation security tools."
+            icon: <GraduationCap size={28} />,
+            title: "Fueling Your Ambition",
+            description: "There are no limits to what you can accomplish. Certification reimbursement, training opportunities, and clear paths for career advancement."
         },
         {
-            icon: <Shield size={32} />,
-            title: "Make an Impact",
-            description: "Your work directly protects businesses and their customers from cyber threats every day."
+            icon: <Zap size={28} />,
+            title: "Striking the Right Balance",
+            description: "Life's not all about work, even when you love it. Find the balance you need with flexible PTO and remote work opportunities."
         },
         {
-            icon: <Users size={32} />,
-            title: "Collaborative Culture",
-            description: "Join a veteran-owned team that values expertise, integrity, and mutual respect."
+            icon: <Heart size={28} />,
+            title: "Caring for the Whole You",
+            description: "From wellness initiatives and fitness challenges to mental health support, you'll find resources for your complete well-being."
         },
         {
-            icon: <TrendingUp size={32} />,
-            title: "Growth Opportunities",
-            description: "Continuous learning, certifications, and career advancement in a growing industry."
+            icon: <Coffee size={28} />,
+            title: "Turning Coworkers into Friends",
+            description: "The work we do is serious, but we build lasting friendships through team events, celebrations, and collaborative culture."
         },
         {
-            icon: <Heart size={32} />,
-            title: "Work-Life Balance",
-            description: "Flexible arrangements and a supportive environment that values your wellbeing."
+            icon: <Globe size={28} />,
+            title: "Making the World Safer",
+            description: "By solving our clients' toughest cybersecurity challenges, we help them become more secure and successful. That's something to be proud of."
+        }
+    ]
+
+    const teamQuotes = [
+        {
+            question: "Why are you working in cybersecurity?",
+            quote: "Cybersecurity keeps evolving with ever-expanding scope. You're constantly faced with new challenges, new learning opportunities, and always presented with opportunities if you're willing to push yourself.",
+            name: "Security Analyst",
+            role: "3 years at Select Tech"
+        },
+        {
+            question: "How has Select Tech helped advance your career?",
+            quote: "Thanks to the amazing leaders and mentors I've been lucky to work with, I've advanced from a junior technician to a senior engineer. I genuinely learn something new every day, whether from collaborating with teammates or tackling new responsibilities.",
+            name: "Senior Engineer",
+            role: "5 years at Select Tech"
+        },
+    ]
+
+    const spiritStats = [
+        {
+            number: "50+",
+            label: "Certifications held by our team"
+        },
+        {
+            number: "#1",
+            label: "Rated IT services in Hickory, NC"
+        },
+        {
+            number: "23+",
+            label: "Years of trusted excellence"
+        },
+        {
+            number: "100%",
+            label: "Client satisfaction rate"
+        }
+    ]
+
+    const coreValues = [
+        {
+            icon: <Shield size={24} />,
+            title: "Stronger Together",
+            description: "Everyone at Select Tech has something to contribute. Our differences broaden our perspectives and fuel innovation."
+        },
+        {
+            icon: <Users size={24} />,
+            title: "A Culture of Integrity",
+            description: "As a veteran-owned company, integrity isn't just a value – it's the foundation of everything we do and how we serve our clients."
         }
     ]
 
@@ -89,196 +143,272 @@ const Careers = () => {
         }
     ]
 
-    const values = [
-        { icon: <Award size={24} />, text: "Veteran-Owned & Operated" },
-        { icon: <Zap size={24} />, text: "23+ Years of Excellence" },
-        { icon: <Code size={24} />, text: "Innovation-Driven" },
-        { icon: <Cpu size={24} />, text: "AI-Powered Solutions" }
-    ]
-
-    const lifeAtSelectTech = [
-        {
-            icon: <Heart size={28} />,
-            title: "Looking Out for You",
-            description: "Comprehensive health coverage and wellness programs to take care of you and your family."
-        },
-        {
-            icon: <TrendingUp size={28} />,
-            title: "Fueling Your Ambition",
-            description: "Certification reimbursement, training opportunities, and clear paths for advancement."
-        },
-        {
-            icon: <Zap size={28} />,
-            title: "Flexible Work",
-            description: "Remote and hybrid options available. We trust you to do great work, wherever you are."
-        },
-        {
-            icon: <Users size={28} />,
-            title: "Team Culture",
-            description: "From team events to daily collaboration, we build relationships that last."
-        }
-    ]
-
     return (
         <PageLayout>
-            <ServiceHero
-                tag="WE'RE HIRING"
-                title="Join Our Team of"
-                gradientText="Innovators"
-                description="We're seeking highly motivated individuals who want to solve the world's toughest cybersecurity challenges. If you're driven, curious, and ready to make an impact – we want to meet you."
-            />
+            {/* Hero Section */}
+            <section className="careers-hero">
+                <div className="careers-hero-bg">
+                    <div className="careers-hero-glow careers-hero-glow--1"></div>
+                    <div className="careers-hero-glow careers-hero-glow--2"></div>
+                    <div className="careers-hero-grid-pattern"></div>
+                </div>
+                <div className="careers-hero-container">
+                    <span className="careers-hero-tag">
+                        <Sparkles size={14} />
+                        CAREERS AT SELECT TECH
+                    </span>
+                    <h1 className="careers-hero-title">
+                        Elevate Your Career.
+                        <br />
+                        <span className="gradient-text">Shape an Industry.</span>
+                    </h1>
+                    <p className="careers-hero-description">
+                        Our strong values and supportive environment empower us to solve our clients'
+                        toughest cybersecurity challenges and make the world a safer place. If you're
+                        looking to grow your career, help define what's next, and be part of a
+                        community that truly makes a difference – welcome to Select Tech.
+                    </p>
+                    <div className="careers-hero-actions">
+                        <Link to="/contact" className="careers-hero-btn careers-hero-btn--primary">
+                            <Briefcase size={18} />
+                            View Open Positions
+                        </Link>
+                        <Link to="/about" className="careers-hero-btn careers-hero-btn--secondary">
+                            Learn About Our Values
+                            <ChevronRight size={18} />
+                        </Link>
+                    </div>
 
-            {/* AI Talent Call-out Banner */}
-            <section className="ai-talent-banner">
-                <div className="ai-banner-container">
-                    <div className="ai-banner-glow"></div>
-                    <div className="ai-banner-content">
-                        <div className="ai-banner-icon">
+                    {/* Hero Banner Image */}
+                    <div className="careers-hero-banner">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=400&fit=crop&crop=faces" alt="Select Tech team collaborating" />
+                    </div>
+                </div>
+            </section>
+
+            {/* Life at Select Tech Section */}
+            <section className="careers-life">
+                <div className="careers-life-container">
+                    <div className="careers-section-header">
+                        <span className="careers-section-tag">BENEFITS & CULTURE</span>
+                        <h2>Life at <span className="gradient-text">Select Tech</span></h2>
+                        <p>More than a job – a place to grow, contribute, and belong</p>
+                    </div>
+                    <div className="careers-life-layout">
+                        <div className="careers-life-grid">
+                            {lifeAtSelectTech.map((item, idx) => (
+                                <div key={idx} className="careers-life-card">
+                                    <div className="careers-life-card-icon">
+                                        {item.icon}
+                                    </div>
+                                    <h3>{item.title}</h3>
+                                    <p>{item.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="careers-life-photo">
+                            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=750&fit=crop&crop=faces" alt="Happy team members together" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Our Team Voices Section */}
+            <section className="careers-voices">
+                <div className="careers-voices-container">
+                    <div className="careers-section-header">
+                        <span className="careers-section-tag">OUR TEAM</span>
+                        <h2>Hear From <span className="gradient-text">Our People</span></h2>
+                        <p>Real stories from the team that powers Select Tech</p>
+                    </div>
+
+                    {/* Team photo strip */}
+                    <div className="careers-voices-photo-strip">
+                        <div className="voices-photo">
+                            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=250&fit=crop" alt="Tech workspace" />
+                        </div>
+                        <div className="voices-photo">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=250&fit=crop" alt="Team discussion" />
+                        </div>
+                        <div className="voices-photo">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=250&fit=crop" alt="Office work" />
+                        </div>
+                    </div>
+                    <div className="careers-voices-grid">
+                        {teamQuotes.map((item, idx) => (
+                            <div key={idx} className="careers-voice-card glass-box">
+                                <div className="voice-question">
+                                    <Target size={18} />
+                                    {item.question}
+                                </div>
+                                <div className="voice-quote">
+                                    <Quote size={32} className="voice-quote-icon" />
+                                    <p>{item.quote}</p>
+                                </div>
+                                <div className="voice-author">
+                                    <div className="voice-avatar">
+                                        <Users size={20} />
+                                    </div>
+                                    <div>
+                                        <span className="voice-name">{item.name}</span>
+                                        <span className="voice-role">{item.role}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Core Values Subsection */}
+                    <div className="careers-core-values">
+                        {coreValues.map((item, idx) => (
+                            <div key={idx} className="core-value-card">
+                                <div className="core-value-icon">{item.icon}</div>
+                                <div>
+                                    <h4>{item.title}</h4>
+                                    <p>{item.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Spirit / Stats Section */}
+            <section className="careers-spirit">
+                <div className="careers-spirit-bg-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1400&h=600&fit=crop" alt="Team celebration" />
+                </div>
+                <div className="careers-spirit-container">
+                    <div className="careers-spirit-header">
+                        <h2>In the Spirit of <span className="gradient-text">Select Tech</span></h2>
+                    </div>
+                    <div className="careers-spirit-stats">
+                        {spiritStats.map((stat, idx) => (
+                            <div key={idx} className="spirit-stat">
+                                <span className="spirit-stat-number">{stat.number}</span>
+                                <span className="spirit-stat-label">{stat.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="careers-spirit-badges">
+                        <div className="spirit-badge">
+                            <Award size={20} />
+                            <span>Veteran-Owned & Operated</span>
+                        </div>
+                        <div className="spirit-badge">
+                            <Star size={20} />
+                            <span>Top Rated Since 2002</span>
+                        </div>
+                        <div className="spirit-badge">
+                            <Shield size={20} />
+                            <span>Military-Grade Professionalism</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* AI Talent Call-out */}
+            <section className="careers-ai-banner">
+                <div className="careers-ai-container">
+                    <div className="careers-ai-glow"></div>
+                    <div className="careers-ai-content">
+                        <div className="careers-ai-icon">
                             <Brain size={48} />
                         </div>
-                        <div className="ai-banner-text">
+                        <div className="careers-ai-text">
                             <h2>
                                 <span className="gradient-text-alt">Calling All AI Engineers</span>
                             </h2>
                             <p>
                                 We're building the future of AI-powered cybersecurity. If you're passionate about
-                                machine learning, threat detection, and pushing the boundaries of what's possible –
+                                machine learning, threat detection, and pushing boundaries –
                                 <strong> we're actively looking for talent like you.</strong>
                             </p>
                         </div>
-                        <Link to="/contact" className="ai-banner-cta">
+                        <Link to="/contact" className="careers-ai-cta">
                             Apply for AI Roles
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
+                            <ChevronRight size={20} />
                         </Link>
                     </div>
                 </div>
             </section>
 
-            {/* Highlight Banner - Stats */}
-            <section className="careers-highlight">
-                <div className="highlight-container">
-                    <div className="highlight-content">
-                        <h2>Why <span className="gradient-text">Select Tech?</span></h2>
-                        <p>
-                            Our strong values and supportive environment empower us to solve our clients'
-                            toughest cybersecurity challenges and make the world a safer place.
-                        </p>
-                    </div>
-                    <div className="highlight-stats">
-                        <div className="stat">
-                            <span className="stat-number">23+</span>
-                            <span className="stat-label">Years Strong</span>
-                        </div>
-                        <div className="stat">
-                            <span className="stat-number">#1</span>
-                            <span className="stat-label">Rated in Hickory</span>
-                        </div>
-                        <div className="stat">
-                            <span className="stat-number">100%</span>
-                            <span className="stat-label">Satisfaction</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Life at Select Tech */}
-            <section className="life-at-company">
-                <div className="life-container">
-                    <div className="section-header">
-                        <h2>Life at <span className="gradient-text">Select Tech</span></h2>
-                        <p>More than a job – a place to grow, contribute, and belong</p>
-                    </div>
-                    <div className="life-grid">
-                        {lifeAtSelectTech.map((item, idx) => (
-                            <div key={idx} className="life-card glass-box">
-                                <div className="life-icon">{item.icon}</div>
-                                <h3>{item.title}</h3>
-                                <p>{item.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Why Work With Us */}
-            <section className="careers-why">
-                <div className="why-container">
-                    <div className="section-header">
-                        <h2>Why <span className="gradient-text">Select Tech?</span></h2>
-                        <p>Join a team that values innovation, integrity, and impact</p>
-                    </div>
-                    <div className="why-grid">
-                        {whyWorkWithUs.map((item, idx) => (
-                            <div key={idx} className="why-card glass-box">
-                                <div className="why-icon">{item.icon}</div>
-                                <h3>{item.title}</h3>
-                                <p>{item.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Values Strip */}
-            <section className="careers-values">
-                <div className="values-container">
-                    {values.map((value, idx) => (
-                        <div key={idx} className="value-item">
-                            {value.icon}
-                            <span>{value.text}</span>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
             {/* Open Positions */}
             <section className="careers-positions">
-                <div className="positions-container">
-                    <div className="section-header">
+                <div className="careers-positions-container">
+                    <div className="careers-section-header">
+                        <span className="careers-section-tag">OPPORTUNITIES</span>
                         <h2>Open <span className="gradient-text">Positions</span></h2>
                         <p>Take the next step in your career</p>
                     </div>
-                    <div className="positions-grid">
+                    <div className="careers-positions-list">
                         {openPositions.map((position, idx) => (
-                            <div key={idx} className={`position-card glass-box ${position.featured ? 'featured' : ''}`}>
-                                <div className="position-header">
-                                    <h3>{position.title}</h3>
-                                    <div className="position-meta">
-                                        <span className="position-type">{position.type}</span>
-                                        <span className="position-location">{position.location}</span>
+                            <div key={idx} className={`careers-position-card ${position.featured ? 'featured' : ''}`}>
+                                {position.featured && (
+                                    <span className="position-hot-badge">
+                                        <Sparkles size={12} />
+                                        HOT
+                                    </span>
+                                )}
+                                <div className="position-main">
+                                    <div className="position-info">
+                                        <h3>{position.title}</h3>
+                                        <div className="position-meta">
+                                            <span className="position-type">
+                                                <Briefcase size={14} />
+                                                {position.type}
+                                            </span>
+                                            <span className="position-location">
+                                                <MapPin size={14} />
+                                                {position.location}
+                                            </span>
+                                        </div>
+                                        <p className="position-desc">{position.description}</p>
+                                    </div>
+                                    <div className="position-actions">
+                                        <div className="position-tags">
+                                            {position.tags.map((tag, tidx) => (
+                                                <span key={tidx} className="position-tag">{tag}</span>
+                                            ))}
+                                        </div>
+                                        <Link to="/contact" className="position-apply-btn">
+                                            Apply Now
+                                            <ChevronRight size={16} />
+                                        </Link>
                                     </div>
                                 </div>
-                                <p>{position.description}</p>
-                                <div className="position-tags">
-                                    {position.tags.map((tag, tidx) => (
-                                        <span key={tidx} className="tag">{tag}</span>
-                                    ))}
-                                </div>
-                                <Link to="/contact" className="position-apply">
-                                    Apply Now
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M5 12h14M12 5l7 7-7 7" />
-                                    </svg>
-                                </Link>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Don't See Your Role CTA */}
-            <section className="careers-cta">
-                <div className="cta-container glass-box">
-                    <h2>Don't See Your Role?</h2>
-                    <p>
-                        We're always looking for highly motivated individuals with unique skills and perspectives.
-                        Send us your resume and let's start a conversation.
-                    </p>
-                    <Link to="/contact" className="btn-primary">
-                        Get in Touch
-                    </Link>
+            {/* Apply Today CTA */}
+            <section className="careers-apply-cta">
+                <div className="careers-apply-container">
+                    <div className="careers-apply-glow"></div>
+                    <div className="careers-apply-layout">
+                        <div className="careers-apply-content">
+                            <h2>Don't See Your Role?</h2>
+                            <p>
+                                Grow your career by joining a team of the cybersecurity industry's best and brightest.
+                                We're always looking for highly motivated individuals with unique skills and perspectives.
+                            </p>
+                            <div className="careers-apply-actions">
+                                <Link to="/contact" className="careers-hero-btn careers-hero-btn--primary">
+                                    <Briefcase size={18} />
+                                    Get in Touch
+                                </Link>
+                                <Link to="/our-team" className="careers-hero-btn careers-hero-btn--secondary">
+                                    Meet Our Team
+                                    <ChevronRight size={18} />
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="careers-apply-photo">
+                            <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400&h=350&fit=crop&crop=faces" alt="Professional at work" />
+                        </div>
+                    </div>
                 </div>
             </section>
         </PageLayout>
