@@ -19,6 +19,7 @@ const servicesDropdown = [
     { label: 'Medical/Dental IT', path: 'https://www.selecttechmd.com' },
     { label: 'End-to-End Dealership Services', path: '/dealership-services' },
     { label: 'Cloud Based SOC Monitoring', path: '/cloud-soc-monitoring' },
+    { label: 'Vulnerability & Pen Testing', path: '/vulnerability-testing' },
     { label: 'Cyber Training', path: '/cyber-training' },
 ]
 

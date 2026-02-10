@@ -16,6 +16,7 @@ import FiberDataCenter from './pages/FiberDataCenter'
 import CloudSOCMonitoring from './pages/CloudSOCMonitoring'
 import CyberTraining from './pages/CyberTraining'
 import SoftwareDevelopment from './pages/SoftwareDevelopment'
+import VulnerabilityTesting from './pages/VulnerabilityTesting'
 // Cybersecurity industry pages
 import AccountingLegal from './pages/AccountingLegal'
 import Education from './pages/Education'
@@ -133,6 +134,10 @@ export const router = createBrowserRouter([
             {
                 path: '/medical-dental-it',
                 element: <MedicalDentalIT />,
+            },
+            {
+                path: '/vulnerability-testing',
+                element: <VulnerabilityTesting />,
             },
             // Blog routes
             {
