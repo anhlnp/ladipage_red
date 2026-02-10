@@ -40,12 +40,11 @@ const MedicalDentalIT = () => {
         return () => observer.disconnect()
     }, [])
 
-    const pricingTiers = [
+    const planLevels = [
         {
-            name: 'Office Protect Essentials',
-            price: '$55',
-            perUnit: '/endpoint/month',
-            highlight: false,
+            level: 'Office Protect Essentials',
+            badge: 'ESSENTIALS',
+            subtitle: 'Core Protection for Healthcare Practices',
             features: [
                 { name: 'Device Monitoring & Alerts', included: true },
                 { name: 'Endpoint Protection (Webroot/Bitdefender)', included: true },
@@ -54,51 +53,61 @@ const MedicalDentalIT = () => {
                 { name: '24/7 Network Monitoring', included: true },
                 { name: 'Firewall Logs Archived', included: true },
                 { name: 'Remote Login Access', included: true },
-                { name: 'MDR/Identity Protection', included: false },
-                { name: 'On-site support hours', included: false },
+                { name: 'Support: 2 hrs Remote/Month', included: true },
+            ],
+            tiers: [
+                { price: '$399', period: '/mo', workstations: 5, note: 'Workstations' },
             ]
         },
         {
-            name: 'Professional Healthcare IT',
-            price: '$75',
-            perUnit: '/endpoint/month',
-            highlight: true,
+            level: 'Professional Healthcare IT',
+            badge: 'PROFESSIONAL',
+            subtitle: 'HIPAA-Ready Managed IT & Security',
             features: [
                 { name: 'All Office Protect features', included: true },
-                { name: 'Managed Detection & Response (MDR)', value: '$6/user' },
-                { name: 'Identity Threat Detection', value: '$3/user' },
+                { name: 'Managed Detection & Response (MDR)', included: true },
+                { name: 'Identity Threat Detection', included: true },
                 { name: 'HIPAA Compliance Tools', included: true },
                 { name: 'Cybersecurity Awareness Training', included: true },
-                { name: '2 hrs On-site Support/month', included: true },
                 { name: 'Microsoft 365 Management', included: true },
                 { name: 'Priority Phone & Email Support', included: true },
+                { name: 'Support: 2 hrs On-site & Remote/Month', included: true },
+            ],
+            tiers: [
+                { price: '$599', period: '/mo', workstations: 5, note: 'Workstations' },
+                { price: '$999', period: '/mo', workstations: 10, note: 'Workstations' },
+                { price: '$1,399', period: '/mo', workstations: 15, note: 'Workstations' },
             ]
         },
         {
-            name: 'Enterprise Healthcare',
-            price: '$110',
-            perUnit: '/endpoint/month',
-            highlight: false,
+            level: 'Enterprise Healthcare',
+            badge: 'ENTERPRISE',
+            subtitle: 'Full-Stack Healthcare IT & Compliance',
             features: [
                 { name: 'All Professional features', included: true },
                 { name: '24/7 SOC Monitoring & Support', included: true },
                 { name: 'Advanced ITDR Protection', included: true },
                 { name: 'Human-Led Threat Hunting', included: true },
-                { name: 'Unlimited On-site Visits', included: true },
-                { name: 'Complete HIPAA Audit & Docs', included: true },
-                { name: 'Cloud Backup & Disaster Recovery', included: true },
+                { name: 'Unlimited On-site & Remote Support', included: true },
+                { name: 'Complete HIPAA Audit & Documentation', included: true },
+                { name: 'Server Cloud Backup & Disaster Recovery', included: true },
                 { name: 'Dedicated Account Manager', included: true },
+            ],
+            tiers: [
+                { price: '$749', period: '/mo', workstations: 5, note: 'Workstations' },
+                { price: '$1,299', period: '/mo', workstations: 10, note: 'Workstations' },
+                { price: '$1,799', period: '/mo', workstations: 15, note: 'Workstations' },
+                { price: '$2,199', period: '/mo', workstations: 20, note: 'Workstations (price is less if under 20)' },
             ]
         }
     ]
 
     const addOns = [
-        { name: 'Server Data Backup/Recovery (x360 Recover)', price: '$119', unit: '/month' },
-        { name: 'Desktop Cloud Backup (Axcient Cloudfinder)', price: '$13', unit: '/PC/month' },
-        { name: 'Microsoft 365 Email Backup', price: '$3', unit: '/email/month' },
-        { name: 'Managed Detection & Response (MDR)', price: '$6', unit: '/user/month' },
-        { name: 'Identity Threat Detection & Response', price: '$3', unit: '/user/month' },
-        { name: 'Axcient 8TB Data Recovery Server', price: '$999', unit: ' one-time', note: '(Reg. $1,299)' },
+        { name: 'PC Cloud Backup', price: '$13', unit: '/device/month', desc: 'Encrypted off-site cloud backup for workstations' },
+        { name: 'Cloud Server Backup', price: '$129', unit: '/server/month', desc: 'Secure cloud backup for physical or virtual servers' },
+        { name: 'Microsoft 365 Outlook Protection', price: '$3.50', unit: '/user/month', desc: 'Enhanced Outlook email protection' },
+        { name: 'Managed Detection & Response (MDR)', price: '$6', unit: '/user/month', desc: 'Human-led threat hunting & analysis' },
+        { name: 'Identity Threat Detection & Response', price: '$3', unit: '/user/month', desc: 'Credential theft & BEC protection' },
     ]
 
     const supportRates = [
@@ -182,33 +191,40 @@ const MedicalDentalIT = () => {
                         <h2>Healthcare IT Support Plans</h2>
                         <p>Flexible per-endpoint pricing designed for medical and dental practices</p>
                     </div>
-                    <div className="pricing-cards">
-                        {pricingTiers.map((plan, idx) => (
-                            <div
-                                key={idx}
-                                className={`pricing-card glass-box ${plan.highlight ? 'highlighted' : ''}`}
-                                ref={el => cardsRef.current[idx + services.length] = el}
-                            >
-                                {plan.highlight && <span className="popular-badge">Most Popular</span>}
-                                <h3>{plan.name}</h3>
-                                <div className="price">
-                                    <span className="amount">{plan.price}</span>
-                                    <span className="period">{plan.perUnit}</span>
+                    <div className="dh-plan-cards">
+                        {planLevels.map((plan, idx) => (
+                            <div key={idx} className="dh-plan-card">
+                                <span className="dh-plan-badge">{plan.badge}</span>
+                                <div className="dh-plan-features">
+                                    <h3>{plan.level}</h3>
+                                    <p className="plan-subtitle">{plan.subtitle}</p>
+                                    <ul className="dh-feature-list">
+                                        {plan.features.map((feature, fidx) => (
+                                            <li key={fidx}>
+                                                {feature.included ? (
+                                                    <CheckCircle2 size={20} className="check-icon" />
+                                                ) : (
+                                                    <span className="x-icon">✘</span>
+                                                )}
+                                                <span>{feature.name}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <Link to="/contact" className="dh-plan-cta">Get In Touch</Link>
                                 </div>
-                                <ul className="pricing-features">
-                                    {plan.features.map((feature, fidx) => (
-                                        <li key={fidx}>
-                                            {feature.included === true ? (
-                                                <><CheckCircle2 size={16} className="check" /> {feature.name}</>
-                                            ) : feature.included === false ? (
-                                                <><span className="x">✘</span> {feature.name}</>
-                                            ) : (
-                                                <><CheckCircle2 size={16} className="check" /> {feature.name}: <strong>{feature.value}</strong></>
-                                            )}
-                                        </li>
+                                <div className="dh-plan-tiers">
+                                    {plan.tiers.map((tier, tidx) => (
+                                        <div key={tidx} className="dh-tier">
+                                            <div className="dh-tier-price">
+                                                {tier.price}<small>{tier.period}</small>
+                                            </div>
+                                            <div className="dh-tier-info">
+                                                <div className="dh-ws-badge">{tier.workstations}</div>
+                                                <span className="dh-ws-label">{tier.note}</span>
+                                            </div>
+                                        </div>
                                     ))}
-                                </ul>
-                                <Link to="/contact" className="btn-primary">Get Started</Link>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -229,9 +245,9 @@ const MedicalDentalIT = () => {
                         {addOns.map((addon, idx) => (
                             <div key={idx} className="addon-item glass-box">
                                 <span className="addon-name">{addon.name}</span>
+                                {addon.desc && <small style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.75rem', marginTop: '4px' }}>{addon.desc}</small>}
                                 <span className="addon-price">
                                     {addon.price}<small>{addon.unit}</small>
-                                    {addon.note && <em> {addon.note}</em>}
                                 </span>
                             </div>
                         ))}

@@ -87,61 +87,76 @@ const ManagedITServices = () => {
         }
     ]
 
-    const pricingPlans = [
+    const planLevels = [
         {
-            name: 'Office Protect / Basic',
-            price: '$499',
-            highlight: false,
+            level: 'Office Protect',
+            badge: 'ESSENTIALS',
+            subtitle: 'Basic Protection for Small Offices',
             features: [
                 { name: '24/7 Monitoring & Alerts', included: true },
                 { name: 'Patch Management', included: true },
-                { name: 'EDR / Huntress', value: 'Basic' },
-                { name: 'DNS Filtering', included: false },
-                { name: 'Firewall & Network Security', included: false },
-                { name: 'Microsoft 365 Security', value: 'Basic' },
-                { name: 'Backup & Recovery', included: false },
+                { name: 'EDR / Huntress: Basic', included: true },
                 { name: 'Asset Monitoring', included: true },
-                { name: 'Cybersecurity Training', included: false },
-                { name: 'Onsite Hours / Month', value: 'Remote' },
-                { name: 'Incident Response', value: 'Emergency' }
+                { name: 'Support: 2 hrs Remote/Month', included: true },
+                { name: 'Emergency Incident Response', included: true },
+            ],
+            tiers: [
+                { price: '$399', period: '/mo', workstations: 5, note: 'Workstations' },
             ]
         },
         {
-            name: 'Silver Managed IT',
-            price: '$899',
-            highlight: true,
+            level: 'Managed IT & Cybersecurity',
+            badge: 'MOST POPULAR',
+            subtitle: 'Comprehensive Managed IT & Security',
             features: [
                 { name: '24/7 Monitoring & Alerts', included: true },
                 { name: 'Patch Management', included: true },
-                { name: 'EDR / Huntress', value: 'MDR' },
+                { name: 'EDR / Huntress: MDR', included: true },
                 { name: 'DNS Filtering', included: true },
                 { name: 'Firewall & Network Security', included: true },
-                { name: 'Microsoft 365 Security', value: 'Defender P1' },
-                { name: 'Backup & Recovery', value: 'Local Backup' },
-                { name: 'Asset Monitoring', included: true },
+                { name: 'Microsoft 365 Security: Defender P1', included: true },
+                { name: 'Server & Workstation Cloud Backup', included: true },
+                { name: 'SOC / Threat Hunting', included: true },
                 { name: 'Cybersecurity Training', included: true },
-                { name: 'Onsite Hours / Month', value: '2 hrs' },
-                { name: 'Incident Response', value: 'Priority' }
+                { name: 'Support: 1.5 hrs On-site & Remote/Month', included: true },
+                { name: 'Priority Incident Response', included: true },
+                { name: 'Dedicated Account Manager', included: true },
+            ],
+            tiers: [
+                { price: '$499', period: '/mo', workstations: 5, note: 'Workstations (New Customer Special)' },
+                { price: '$699', period: '/mo', workstations: 5, note: 'Standard Pricing' },
             ]
         },
         {
-            name: 'Gold MSSP Elite',
-            price: '$1,499',
-            highlight: false,
+            level: 'Gold MSSP Elite',
+            badge: 'GOLD LEVEL',
+            subtitle: 'Enterprise-Grade Security & Compliance',
             features: [
                 { name: '24/7 Monitoring & Alerts', included: true },
                 { name: 'Patch Management', included: true },
-                { name: 'EDR / Huntress', value: 'ITDR' },
+                { name: 'EDR / Huntress: ITDR', included: true },
                 { name: 'DNS Filtering', included: true },
-                { name: 'Firewall & Network Security', value: 'Advanced' },
-                { name: 'Microsoft 365 Security', value: 'Defender P2 + DLP' },
-                { name: 'Backup & Recovery', value: 'Axcient Cloud' },
+                { name: 'Advanced Firewall & Network Security', included: true },
+                { name: 'Microsoft 365 Security: Defender P2 + DLP', included: true },
+                { name: 'Backup & Recovery: Server Cloud Backup', included: true },
                 { name: 'Asset Monitoring', included: true },
-                { name: 'Cybersecurity Training', value: 'AI-Driven' },
-                { name: 'Onsite Hours / Month', value: '4 hrs' },
-                { name: 'Incident Response', value: '24/7' }
+                { name: 'AI-Driven Cybersecurity Training', included: true },
+                { name: 'Unlimited Remote & On-site Support', included: true },
+                { name: '24/7 Incident Response', included: true },
+            ],
+            tiers: [
+                { price: '$749', period: '/mo', workstations: 5, note: 'Workstations' },
+                { price: '$1,299', period: '/mo', workstations: 10, note: 'Workstations' },
+                { price: '$1,799', period: '/mo', workstations: 15, note: 'Workstations' },
+                { price: '$2,199', period: '/mo', workstations: 20, note: 'Workstations (price is less if under 20)' },
             ]
         }
+    ]
+
+    const supportRates = [
+        { type: 'On-Site Support (Weekday)', standard: '$140/hr', discounted: '$120/hr', hours: 'Mon–Fri, 8:30 AM–6:00 PM' },
+        { type: 'Remote Support (Weekday)', standard: '$95/hr', discounted: '$85/hr', hours: 'Mon–Fri, 8:30 AM–6:00 PM' },
+        { type: 'After-Hours / Emergency', standard: 'Custom Quote', discounted: 'Custom Quote', hours: 'Evenings, Weekends, Holidays' },
     ]
 
     const testimonials = [
@@ -267,78 +282,144 @@ const ManagedITServices = () => {
                         <h2>Choose Your Protection Plan</h2>
                         <p>Your Trusted Local Cybersecurity & Compliance Experts</p>
                     </div>
-                    <div className="pricing-cards">
-                        {pricingPlans.map((plan, idx) => (
-                            <div key={idx} className={`pricing-card glass-box ${plan.highlight ? 'highlighted' : ''}`}>
-                                {plan.highlight && <span className="popular-badge">Most Popular</span>}
-                                <h3>{plan.name}</h3>
-                                <div className="price">
-                                    <span className="amount">{plan.price}</span>
-                                    <span className="period">/month</span>
+                    <div className="dh-plan-cards">
+                        {planLevels.map((plan, idx) => (
+                            <div key={idx} className="dh-plan-card">
+                                <span className="dh-plan-badge">{plan.badge}</span>
+                                <div className="dh-plan-features">
+                                    <h3>{plan.level}</h3>
+                                    <p className="plan-subtitle">{plan.subtitle}</p>
+                                    <ul className="dh-feature-list">
+                                        {plan.features.map((feature, fidx) => (
+                                            <li key={fidx}>
+                                                {feature.included ? (
+                                                    <CheckCircle2 size={20} className="check-icon" />
+                                                ) : (
+                                                    <span className="x-icon">✘</span>
+                                                )}
+                                                <span>{feature.name}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <Link to="/contact" className="dh-plan-cta">Get In Touch</Link>
                                 </div>
-                                <ul className="pricing-features">
-                                    {plan.features.map((feature, fidx) => (
-                                        <li key={fidx}>
-                                            {feature.included === true ? (
-                                                <><CheckCircle2 size={16} className="check" /> {feature.name}</>
-                                            ) : feature.included === false ? (
-                                                <><span className="x">✘</span> {feature.name}</>
-                                            ) : (
-                                                <><CheckCircle2 size={16} className="check" /> {feature.name}: <strong>{feature.value}</strong></>
-                                            )}
-                                        </li>
+                                <div className="dh-plan-tiers">
+                                    {plan.tiers.map((tier, tidx) => (
+                                        <div key={tidx} className="dh-tier">
+                                            <div className="dh-tier-price">
+                                                {tier.price}<small>{tier.period}</small>
+                                            </div>
+                                            <div className="dh-tier-info">
+                                                <div className="dh-ws-badge">{tier.workstations}</div>
+                                                <span className="dh-ws-label">{tier.note}</span>
+                                            </div>
+                                        </div>
                                     ))}
-                                </ul>
-                                <Link to="/contact" className="btn-primary">Get Started</Link>
+                                </div>
                             </div>
                         ))}
                     </div>
+                    <p className="pricing-note">All plans include a 5-workstation minimum. Contact us for custom enterprise pricing.</p>
                 </div>
             </section>
 
-            {/* Add-Ons Section */}
+            {/* Optional Add-On Services */}
             <section className="addons-section">
-                <div className="addons-container">
+                <div className="addons-container" style={{ maxWidth: '1000px' }}>
                     <div className="addons-header">
-                        <h2>Add-Ons & Enhancements</h2>
-                        <p>Customize your IT support package with these premium add-ons</p>
+                        <h2>Optional Add-On Services</h2>
+                        <p>The following services may be added to any Select Tech Managed IT or MSSP plan.</p>
                     </div>
-                    <div className="addons-list glass-box">
+
+                    {/* Backup & Data Protection */}
+                    <h3 style={{ color: 'var(--accent-primary)', fontSize: '1.15rem', marginBottom: '16px', marginTop: '8px' }}>Backup & Data Protection</h3>
+                    <div className="addons-list glass-box" style={{ marginBottom: '32px' }}>
                         <div className="addon-row">
                             <div className="addon-info">
-                                <FileCheck size={20} />
-                                <span>HIPAA & FTC Compliance Toolkit</span>
+                                <Database size={20} />
+                                <div>
+                                    <span>PC Cloud Backup</span>
+                                    <small style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem' }}>Encrypted off-site cloud backup for workstations</small>
+                                </div>
                             </div>
-                            <span className="addon-price">$199<small>/mo</small></span>
-                        </div>
-                        <div className="addon-row">
-                            <div className="addon-info">
-                                <FileCheck size={20} />
-                                <span>Onsite Compliance Audit</span>
-                            </div>
-                            <span className="addon-price">$799<small> one-time</small></span>
+                            <span className="addon-price">$13<small>/device/mo</small></span>
                         </div>
                         <div className="addon-row">
                             <div className="addon-info">
                                 <Database size={20} />
-                                <span>Disaster Recovery Appliance</span>
+                                <div>
+                                    <span>Cloud Server Backup</span>
+                                    <small style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem' }}>Secure cloud backup for physical or virtual servers</small>
+                                </div>
                             </div>
-                            <span className="addon-price">Starting at $1,299</span>
+                            <span className="addon-price">$129<small>/server/mo</small></span>
                         </div>
+                    </div>
+
+                    {/* Microsoft 365 Protection */}
+                    <h3 style={{ color: 'var(--accent-primary)', fontSize: '1.15rem', marginBottom: '16px' }}>Microsoft 365 Protection</h3>
+                    <div className="addons-list glass-box" style={{ marginBottom: '32px' }}>
                         <div className="addon-row">
                             <div className="addon-info">
                                 <Shield size={20} />
-                                <span>Advanced Endpoint Response Team</span>
+                                <div>
+                                    <span>Microsoft 365 Outlook Protection</span>
+                                    <small style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem' }}>Enhanced Outlook email protection</small>
+                                </div>
                             </div>
-                            <span className="addon-price accent">Custom Quote</span>
+                            <span className="addon-price">$3.50<small>/user/mo</small></span>
                         </div>
                         <div className="addon-row">
                             <div className="addon-info">
                                 <Monitor size={20} />
-                                <span>Workforce Security Training Portal</span>
+                                <div>
+                                    <span>Customer-Managed Microsoft 365 Plan</span>
+                                    <small style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem' }}>Licensing and tenant owned by customer</small>
+                                </div>
                             </div>
-                            <span className="addon-price">$99<small>/mo</small></span>
+                            <span className="addon-price" style={{ color: 'var(--text-secondary)' }}>Customer Provided</span>
                         </div>
+                    </div>
+
+                    {/* Identity Threat Detection */}
+                    <h3 style={{ color: 'var(--accent-primary)', fontSize: '1.15rem', marginBottom: '16px' }}>Identity Threat Detection & Response (ITDR)</h3>
+                    <div className="addons-list glass-box">
+                        <div className="addon-row">
+                            <div className="addon-info">
+                                <Shield size={20} />
+                                <div>
+                                    <span>Advanced Identity Protection</span>
+                                    <small style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', maxWidth: '400px' }}>Helps prevent Business Email Compromise (BEC), credential theft, and unauthorized logins</small>
+                                </div>
+                            </div>
+                            <span className="addon-price accent">Contact Us</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Support Rates Section */}
+            <section className="support-rates-section">
+                <div className="rates-container">
+                    <div className="rates-header">
+                        <h2>Additional Support Rates</h2>
+                        <p>Preferential rates for managed service clients beyond included hours</p>
+                    </div>
+                    <div className="rates-table glass-box">
+                        <div className="rates-row header">
+                            <span>Service Type</span>
+                            <span>Standard Rate</span>
+                            <span>Your Rate</span>
+                            <span>Availability</span>
+                        </div>
+                        {supportRates.map((rate, idx) => (
+                            <div key={idx} className="rates-row">
+                                <span data-label="Service Type">{rate.type}</span>
+                                <span className="strikethrough" data-label="Standard Rate">{rate.standard}</span>
+                                <span className="discounted" data-label="Your Rate">{rate.discounted}</span>
+                                <span className="hours" data-label="Availability">{rate.hours}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
