@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS repair_prices (
     category VARCHAR(50) NOT NULL,  -- 'iphone', 'ipad'
     service_name VARCHAR(100) NOT NULL,  -- 'Screen', 'Battery', etc.
     model_range VARCHAR(100) NOT NULL,  -- 'iPhone 5/5S/SE/6-8+ & SE2', etc.
-    price_min DECIMAL(10,2) NOT NULL,
-    price_max DECIMAL(10,2) NOT NULL,
+    price_min TEXT NOT NULL,
+    price_max TEXT NOT NULL,
     note VARCHAR(255),  -- Optional note like '$includes new digi'
     display_order INT DEFAULT 0,
     is_active BOOLEAN DEFAULT true,
@@ -57,22 +57,22 @@ CREATE TRIGGER update_repair_prices_updated_at
 
 INSERT INTO repair_prices (category, service_name, model_range, price_min, price_max, display_order) VALUES
 -- iPhone 5/5S/SE/6-8+ & SE2
-('iphone', 'Screen', 'iPhone 5/5S/SE/6-8+ & SE2', 100, 120, 1),
-('iphone', 'Battery', 'iPhone 5/5S/SE/6-8+ & SE2', 80, 110, 2),
-('iphone', 'Charge Port', 'iPhone 5/5S/SE/6-8+ & SE2', 170, 180, 3),
-('iphone', 'Ring Spkr / Ear Spkr', 'iPhone 5/5S/SE/6-8+ & SE2', 110, 120, 4),
-('iphone', 'Prox/Frnt Camera', 'iPhone 5/5S/SE/6-8+ & SE2', 110, 120, 5),
-('iphone', 'Rear Camera', 'iPhone 5/5S/SE/6-8+ & SE2', 110, 120, 6),
-('iphone', 'Rear Cam Lens', 'iPhone 5/5S/SE/6-8+ & SE2', 110, 120, 7),
+('iphone', 'Screen', 'iPhone 5/5S/SE/6-8+ & SE2', '100', '120', 1),
+('iphone', 'Battery', 'iPhone 5/5S/SE/6-8+ & SE2', '80', '110', 2),
+('iphone', 'Charge Port', 'iPhone 5/5S/SE/6-8+ & SE2', '170', '180', 3),
+('iphone', 'Ring Spkr / Ear Spkr', 'iPhone 5/5S/SE/6-8+ & SE2', '110', '120', 4),
+('iphone', 'Prox/Frnt Camera', 'iPhone 5/5S/SE/6-8+ & SE2', '110', '120', 5),
+('iphone', 'Rear Camera', 'iPhone 5/5S/SE/6-8+ & SE2', '110', '120', 6),
+('iphone', 'Rear Cam Lens', 'iPhone 5/5S/SE/6-8+ & SE2', '110', '120', 7),
 
 -- iPhone X - iPhone 17 Pro Max / iPhone Air
-('iphone', 'Screen', 'iPhone X - 17 Pro Max / iPhone Air', 140, 525, 1),
-('iphone', 'Battery', 'iPhone X - 17 Pro Max / iPhone Air', 128, 170, 2),
-('iphone', 'Charge Port', 'iPhone X - 17 Pro Max / iPhone Air', 180, 290, 3),
-('iphone', 'Ring Spkr / Ear Spkr', 'iPhone X - 17 Pro Max / iPhone Air', 120, 130, 4),
-('iphone', 'Prox/Frnt Camera', 'iPhone X - 17 Pro Max / iPhone Air', 115, 240, 5),
-('iphone', 'Rear Camera', 'iPhone X - 17 Pro Max / iPhone Air', 115, 240, 6),
-('iphone', 'Rear Cam Lens', 'iPhone X - 17 Pro Max / iPhone Air', 115, 240, 7);
+('iphone', 'Screen', 'iPhone X - 17 Pro Max / iPhone Air', '140', '525', 1),
+('iphone', 'Battery', 'iPhone X - 17 Pro Max / iPhone Air', '128', '170', 2),
+('iphone', 'Charge Port', 'iPhone X - 17 Pro Max / iPhone Air', '180', '290', 3),
+('iphone', 'Ring Spkr / Ear Spkr', 'iPhone X - 17 Pro Max / iPhone Air', '120', '130', 4),
+('iphone', 'Prox/Frnt Camera', 'iPhone X - 17 Pro Max / iPhone Air', '115', '240', 5),
+('iphone', 'Rear Camera', 'iPhone X - 17 Pro Max / iPhone Air', '115', '240', 6),
+('iphone', 'Rear Cam Lens', 'iPhone X - 17 Pro Max / iPhone Air', '115', '240', 7);
 
 -- =====================================================
 -- IPAD PRICES DATA
@@ -80,16 +80,16 @@ INSERT INTO repair_prices (category, service_name, model_range, price_min, price
 
 INSERT INTO repair_prices (category, service_name, model_range, price_min, price_max, note, display_order) VALUES
 -- iPad Air 1 - 13th Gen
-('ipad', 'Digitizer', 'iPad Air 1 - 13th Gen', 125, 165, NULL, 1),
-('ipad', 'LCD', 'iPad Air 1 - 13th Gen', 145, 480, '$includes new digi', 2),
-('ipad', 'Battery', 'iPad Air 1 - 13th Gen', 125, 250, '$includes new digi', 3),
+('ipad', 'Digitizer', 'iPad Air 1 - 13th Gen', '125', '165', NULL, 1),
+('ipad', 'LCD', 'iPad Air 1 - 13th Gen', '145', '480', '$includes new digi', 2),
+('ipad', 'Battery', 'iPad Air 1 - 13th Gen', '125', '250', '$includes new digi', 3),
 
 -- iPad Pro 1 - 13th Gen
-('ipad', 'Digitizer', 'iPad Pro 1 - 13th Gen', 255, 135, NULL, 1),
-('ipad', 'LCD', 'iPad Pro 1 - 13th Gen', 260, 405, '$includes new digi', 2),
-('ipad', 'Battery', 'iPad Pro 1 - 13th Gen', 120, 300, '$includes new digi', 3),
+('ipad', 'Digitizer', 'iPad Pro 1 - 13th Gen', '255', '135', NULL, 1),
+('ipad', 'LCD', 'iPad Pro 1 - 13th Gen', '260', '405', '$includes new digi', 2),
+('ipad', 'Battery', 'iPad Pro 1 - 13th Gen', '120', '300', '$includes new digi', 3),
 
 -- iPad 2 - 11th Gen
-('ipad', 'Digitizer', 'iPad 2 - 11th Gen', 120, 160, NULL, 1),
-('ipad', 'LCD', 'iPad 2 - 11th Gen', 130, 235, '$includes new digi', 2),
-('ipad', 'Battery', 'iPad 2 - 11th Gen', 120, 220, '$includes new digi', 3);
+('ipad', 'Digitizer', 'iPad 2 - 11th Gen', '120', '160', NULL, 1),
+('ipad', 'LCD', 'iPad 2 - 11th Gen', '130', '235', '$includes new digi', 2),
+('ipad', 'Battery', 'iPad 2 - 11th Gen', '120', '220', '$includes new digi', 3);

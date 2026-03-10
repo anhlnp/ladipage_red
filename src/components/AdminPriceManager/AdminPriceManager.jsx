@@ -70,8 +70,8 @@ const AdminPriceManager = () => {
             const { error } = await supabase
                 .from('repair_prices')
                 .update({
-                    price_min: parseFloat(editForm.price_min),
-                    price_max: parseFloat(editForm.price_max),
+                    price_min: editForm.price_min,
+                    price_max: editForm.price_max,
                     note: editForm.note || null
                 })
                 .eq('id', id)
@@ -121,8 +121,8 @@ const AdminPriceManager = () => {
                     category: newPrice.category,
                     service_name: newPrice.service_name,
                     model_range: newPrice.model_range,
-                    price_min: parseFloat(newPrice.price_min),
-                    price_max: parseFloat(newPrice.price_max),
+                    price_min: newPrice.price_min,
+                    price_max: newPrice.price_max,
                     note: newPrice.note || null,
                     display_order: parseInt(newPrice.display_order) || 0,
                     is_active: true
@@ -221,22 +221,22 @@ const AdminPriceManager = () => {
                     </div>
                     <div className="form-row">
                         <div className="form-field">
-                            <label>Min Price ($)</label>
+                            <label>Min Price</label>
                             <input
-                                type="number"
+                                type="text"
                                 value={newPrice.price_min}
                                 onChange={(e) => setNewPrice({ ...newPrice, price_min: e.target.value })}
-                                placeholder="100"
+                                placeholder="100 or Call for price"
                                 required
                             />
                         </div>
                         <div className="form-field">
-                            <label>Max Price ($)</label>
+                            <label>Max Price</label>
                             <input
-                                type="number"
+                                type="text"
                                 value={newPrice.price_max}
                                 onChange={(e) => setNewPrice({ ...newPrice, price_max: e.target.value })}
-                                placeholder="150"
+                                placeholder="150 or varies"
                                 required
                             />
                         </div>
@@ -290,7 +290,7 @@ const AdminPriceManager = () => {
                                         <td>
                                             {editingId === price.id ? (
                                                 <input
-                                                    type="number"
+                                                    type="text"
                                                     value={editForm.price_min}
                                                     onChange={(e) => setEditForm({ ...editForm, price_min: e.target.value })}
                                                     className="edit-input"
@@ -302,7 +302,7 @@ const AdminPriceManager = () => {
                                         <td>
                                             {editingId === price.id ? (
                                                 <input
-                                                    type="number"
+                                                    type="text"
                                                     value={editForm.price_max}
                                                     onChange={(e) => setEditForm({ ...editForm, price_max: e.target.value })}
                                                     className="edit-input"
