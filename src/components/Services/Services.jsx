@@ -44,7 +44,7 @@ const services = [
                 <path d="M12 18h.01" />
             </svg>
         ),
-        title: 'Mobile Repair',
+        title: 'PC-Mac-Mobile Repair',
         description: 'Same-day repairs for phones, tablets, computers, and laptops. Screen replacements, battery swaps & more.',
         features: ['Same Day', 'All Devices', 'Warranty'],
         link: '/phone-tablet-repair'

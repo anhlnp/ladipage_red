@@ -209,12 +209,12 @@ const AdminPriceManager = () => {
                             />
                         </div>
                         <div className="form-field">
-                            <label>Model Range</label>
+                            <label>Model (e.g. iPhone 14 Pro Max) or Range</label>
                             <input
                                 type="text"
                                 value={newPrice.model_range}
                                 onChange={(e) => setNewPrice({ ...newPrice, model_range: e.target.value })}
-                                placeholder="e.g. iPhone X - 17 Pro Max"
+                                placeholder="e.g. iPhone 14 Pro Max OR iPhone X - 17 Pro Max"
                                 required
                             />
                         </div>
@@ -275,7 +275,7 @@ const AdminPriceManager = () => {
                             <thead>
                                 <tr>
                                     <th>Service</th>
-                                    <th>Model Range</th>
+                                    <th>Model / Range</th>
                                     <th>Min Price</th>
                                     <th>Max Price</th>
                                     <th>Note</th>
