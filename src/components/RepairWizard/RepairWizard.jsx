@@ -220,12 +220,22 @@ const RepairWizard = () => {
 
                 if (error) throw error
 
-                // Filter by model range if available
-                if (modelRange && data) {
-                    const filtered = data.filter(p => p.model_range === modelRange)
-                    setPrices(filtered.length > 0 ? filtered : data)
+                if (data) {
+                    const rangePrices = modelRange ? data.filter(p => p.model_range === modelRange) : data
+                    const exactPrices = data.filter(p => p.model_range.toLowerCase() === selections.model.toLowerCase())
+                    
+                    if (exactPrices.length === 0) {
+                        setPrices(rangePrices)
+                    } else {
+                        const mergedMap = new Map()
+                        rangePrices.forEach(p => mergedMap.set(p.service_name.toLowerCase(), p))
+                        exactPrices.forEach(p => mergedMap.set(p.service_name.toLowerCase(), p))
+                        
+                        const mergedPrices = Array.from(mergedMap.values()).sort((a, b) => a.display_order - b.display_order)
+                        setPrices(mergedPrices)
+                    }
                 } else {
-                    setPrices(data || [])
+                    setPrices([])
                 }
             } else {
                 // Fallback to static data
@@ -271,10 +281,22 @@ const RepairWizard = () => {
         }
 
         const categoryPrices = allPrices[category] || []
+        
+        let rangePrices = categoryPrices
         if (modelRange) {
-            return categoryPrices.filter(p => p.model_range === modelRange)
+            rangePrices = categoryPrices.filter(p => p.model_range === modelRange)
         }
-        return categoryPrices
+        
+        const exactPrices = categoryPrices.filter(p => p.model_range.toLowerCase() === selections.model.toLowerCase())
+        
+        if (exactPrices.length === 0) {
+            return rangePrices
+        }
+        
+        const mergedMap = new Map()
+        rangePrices.forEach(p => mergedMap.set(p.service_name.toLowerCase(), p))
+        exactPrices.forEach(p => mergedMap.set(p.service_name.toLowerCase(), p))
+        return Array.from(mergedMap.values())
     }
 
     const totalSteps = 5
@@ -353,12 +375,16 @@ const RepairWizard = () => {
                                     {price.service_name}
                                     {price.note && <span className="price-note">{price.note}</span>}
                                 </td>
-                                <td className="price-cell">${price.price_min} - ${price.price_max}</td>
+                                <td className="price-cell">
+                                    {price.price_min === price.price_max 
+                                        ? `$${price.price_min} and up*` 
+                                        : `$${price.price_min} - $${price.price_max}`}
+                                </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                <p className="price-disclaimer">*Prices may vary based on condition and parts availability</p>
+                <p className="price-disclaimer">*Prices may vary depending on part quality, device condition, and current availability.</p>
             </div>
         )
     }
