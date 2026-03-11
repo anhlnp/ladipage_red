@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 import './RepairWizard.css'
 
@@ -10,7 +10,7 @@ import consoleImg from '../../assets/devices/console.png'
 import wearableImg from '../../assets/devices/wearable.png'
 import otherImg from '../../assets/devices/other.png'
 
-const RepairWizard = () => {
+const RepairWizard = (props) => {
     const [step, setStep] = useState(1)
     const [selections, setSelections] = useState({
         device: '',
@@ -20,6 +20,15 @@ const RepairWizard = () => {
     })
     const [prices, setPrices] = useState([])
     const [loadingPrices, setLoadingPrices] = useState(false)
+    const [selectedIssue, setSelectedIssue] = useState('')
+    const [otherIssueText, setOtherIssueText] = useState('')
+    const [sendingEmail, setSendingEmail] = useState(false)
+
+    // Custom "Other" inputs state
+    const [showBrandInput, setShowBrandInput] = useState(false)
+    const [customBrandText, setCustomBrandText] = useState('')
+    const [showModelInput, setShowModelInput] = useState(false)
+    const [customModelText, setCustomModelText] = useState('')
 
     const repairData = {
         smartphone: {
@@ -118,33 +127,6 @@ const RepairWizard = () => {
                 'Other': ['Retro Console', 'VR Headset']
             },
             issues: ['HDMI Port Repair', 'Disc Drive Issue', 'Overheating/Cleaning', 'Controller Drift', 'No Power', 'Software Error', 'Hard Drive Upgrade']
-        },
-        wearable: {
-            image: wearableImg,
-            label: 'Wearables',
-            brands: ['Apple', 'Samsung', 'Garmin', 'Fitbit', 'Other'],
-            models: {
-                'Apple': ['Apple Watch Ultra 2', 'Apple Watch Ultra', 'Apple Watch Series 9', 'Apple Watch Series 8', 'Apple Watch SE', 'Apple Watch Series 7'],
-                'Samsung': ['Galaxy Watch 6 Classic', 'Galaxy Watch 6', 'Galaxy Watch 5 Pro', 'Galaxy Watch 5', 'Galaxy Watch 4'],
-                'Garmin': ['Fenix 7', 'Epix Gen 2', 'Forerunner', 'Venu'],
-                'Fitbit': ['Sense 2', 'Versa 4', 'Charge 6', 'Luxe'],
-                'Other': ['Smart Ring', 'Other Smartwatch']
-            },
-            issues: ['Cracked Screen', 'Battery Replacement', 'Sensor Issue', 'Strapholder Repair', 'Water Damage', 'Software Issue']
-        },
-        other: {
-            image: otherImg,
-            label: 'Other',
-            brands: ['Drone', 'Camera', 'Speaker', 'Headphones', 'MP3 Player', 'GPS'],
-            models: {
-                'Drone': ['DJI Mavic 3', 'DJI Mini 3 Pro', 'DJI Air 2S', 'Other Drone'],
-                'Camera': ['DSLR', 'Mirrorless', 'Point & Shoot', 'Action Cam (GoPro)'],
-                'Speaker': ['Bluetooth Speaker', 'Smart Speaker'],
-                'Headphones': ['Over-Ear', 'In-Ear (Earbuds)', 'Noise Cancelling'],
-                'MP3 Player': ['iPod Touch', 'iPod Classic', 'Other MP3'],
-                'GPS': ['Car GPS', 'Handheld GPS']
-            },
-            issues: ['Diagnostic', 'Physical Damage', 'Water Damage', 'Battery Issue', 'Port Repair', 'Button Repair']
         }
     }
 
@@ -223,14 +205,14 @@ const RepairWizard = () => {
                 if (data) {
                     const rangePrices = modelRange ? data.filter(p => p.model_range === modelRange) : data
                     const exactPrices = data.filter(p => p.model_range.toLowerCase() === selections.model.toLowerCase())
-                    
+
                     if (exactPrices.length === 0) {
                         setPrices(rangePrices)
                     } else {
                         const mergedMap = new Map()
                         rangePrices.forEach(p => mergedMap.set(p.service_name.toLowerCase(), p))
                         exactPrices.forEach(p => mergedMap.set(p.service_name.toLowerCase(), p))
-                        
+
                         const mergedPrices = Array.from(mergedMap.values()).sort((a, b) => a.display_order - b.display_order)
                         setPrices(mergedPrices)
                     }
@@ -281,18 +263,18 @@ const RepairWizard = () => {
         }
 
         const categoryPrices = allPrices[category] || []
-        
+
         let rangePrices = categoryPrices
         if (modelRange) {
             rangePrices = categoryPrices.filter(p => p.model_range === modelRange)
         }
-        
+
         const exactPrices = categoryPrices.filter(p => p.model_range.toLowerCase() === selections.model.toLowerCase())
-        
+
         if (exactPrices.length === 0) {
             return rangePrices
         }
-        
+
         const mergedMap = new Map()
         rangePrices.forEach(p => mergedMap.set(p.service_name.toLowerCase(), p))
         exactPrices.forEach(p => mergedMap.set(p.service_name.toLowerCase(), p))
@@ -376,8 +358,8 @@ const RepairWizard = () => {
                                     {price.note && <span className="price-note">{price.note}</span>}
                                 </td>
                                 <td className="price-cell">
-                                    {price.price_min === price.price_max 
-                                        ? `$${price.price_min} and up*` 
+                                    {price.price_min === price.price_max
+                                        ? `$${price.price_min} and up*`
                                         : `$${price.price_min} - $${price.price_max}`}
                                 </td>
                             </tr>
@@ -389,8 +371,24 @@ const RepairWizard = () => {
         )
     }
 
+    const sendEstimateEmail = async (payload) => {
+        try {
+            setSendingEmail(true)
+            await fetch('/api/send-estimate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+        } catch (err) {
+            // optionally log or handle error
+            console.error('Email send failed', err)
+        } finally {
+            setSendingEmail(false)
+        }
+    }
+
     return (
-        <div className="repair-wizard glass-box">
+        <div className="repair-wizard">
             {renderProgressBar()}
 
             <div className="wizard-content">
@@ -422,20 +420,202 @@ const RepairWizard = () => {
                                 <span className="option-label">{brand}</span>
                             </button>
                         ))}
+
+                        {/* Other brand option */}
+                        <button
+                            className="wizard-option text-option"
+                            onClick={() => {
+                                setShowBrandInput(true)
+                            }}
+                        >
+                            <span className="option-label">Other</span>
+                        </button>
+
+                        {showBrandInput && (
+                            <div
+                                className="brand-other-box"
+                                style={{
+                                    width: '100%',
+                                    maxWidth: 720,
+                                    margin: '18px auto 0',
+                                    padding: 18,
+                                    borderRadius: 10,
+                                    boxShadow: '0 6px 18px rgba(2,6,23,0.06)',
+                                    background: 'var(--card-bg, #eef6ff)', // slightly tinted to match theme
+                                    textAlign: 'center'
+                                }}
+                            >
+                                {/* stronger placeholder/text contrast for readability */}
+                                <style>{`
+                                    .brand-other-box input::placeholder { color: rgba(15,23,42,0.45); }
+                                `}</style>
+                                <h4 style={{ margin: 0, color: 'var(--text-color, #0b1220)' }}>Brand not listed?</h4>
+                                <p style={{ color: 'var(--muted-text, #475569)', marginTop: 6 }}>Type the brand name below</p>
+                                <input
+                                    type="text"
+                                    value={customBrandText}
+                                    onChange={(e) => setCustomBrandText(e.target.value)}
+                                    placeholder="Enter brand (e.g. Nothing, Realme, etc.)"
+                                    style={{
+                                        width: '100%',
+                                        maxWidth: 640,
+                                        padding: 12,
+                                        borderRadius: 8,
+                                        marginTop: 12,
+                                        background: 'var(--input-bg, #f3f9ff)', /* light themed tint */
+                                        border: '1px solid var(--input-border, #aacaf0)',
+                                        color: 'var(--text-color, #0b1220)',
+                                        fontSize: 15,
+                                        outline: 'none',
+                                        boxShadow: 'inset 0 1px 2px rgba(2,6,23,0.02)'
+                                    }}
+                                />
+                                <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginTop: 12 }}>
+                                    <button
+                                        onClick={() => {
+                                            const txt = customBrandText.trim()
+                                            if (!txt) return
+                                            setSelections(prev => ({ ...prev, brand: txt, model: '' }))
+                                            setShowBrandInput(false)
+                                            setCustomBrandText('')
+                                            // go to models step
+                                            setStep(3)
+                                        }}
+                                        disabled={!customBrandText.trim()}
+                                        style={{
+                                            padding: '8px 14px',
+                                            borderRadius: 8,
+                                            background: 'var(--primary, #1e40af)',
+                                            color: 'var(--primary-contrast, #fff)',
+                                            border: 'none',
+                                            boxShadow: '0 4px 10px rgba(30,64,175,0.12)'
+                                        }}
+                                    >
+                                        Continue
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            setShowBrandInput(false)
+                                            setCustomBrandText('')
+                                        }}
+                                        style={{
+                                            padding: '8px 14px',
+                                            borderRadius: 8,
+                                            background: 'transparent',
+                                            border: '1px solid var(--muted-border, #cbd5e1)',
+                                            color: 'var(--text-color, #0b1220)'
+                                        }}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )}
 
                 {step === 3 && selections.brand && (
                     <div className="wizard-grid text-grid">
-                        {repairData[selections.device].models[selections.brand]?.map(model => (
-                            <button
-                                key={model}
-                                className="wizard-option text-option"
-                                onClick={() => handleSelection('model', model)}
-                            >
-                                <span className="option-label">{model}</span>
-                            </button>
-                        ))}
+                        {/* If we have a models list for the brand show it, else present custom model input */}
+                        {repairData[selections.device].models[selections.brand] ? (
+                            <>
+                                {repairData[selections.device].models[selections.brand].map(model => (
+                                    <button
+                                        key={model}
+                                        className="wizard-option text-option"
+                                        onClick={() => handleSelection('model', model)}
+                                    >
+                                        <span className="option-label">{model}</span>
+                                    </button>
+                                ))}
+
+                                {/* Other model option */}
+                                <button
+                                    className="wizard-option text-option"
+                                    onClick={() => setShowModelInput(true)}
+                                >
+                                    <span className="option-label">Other</span>
+                                </button>
+                            </>
+                        ) : (
+                            // brand had no predefined models (custom brand) -> show model input
+                            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                                <div style={{ width: '100%', maxWidth: 720 }}>
+                                    <h4 style={{ marginTop: 0 }}>Model not listed?</h4>
+                                    <input
+                                        type="text"
+                                        value={customModelText}
+                                        onChange={(e) => setCustomModelText(e.target.value)}
+                                        placeholder="Enter model name (e.g. Model X)"
+                                        style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #e6e9ee' }}
+                                    />
+                                    <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 12 }}>
+                                        <button
+                                            onClick={() => {
+                                                const txt = customModelText.trim()
+                                                if (!txt) return
+                                                setSelections(prev => ({ ...prev, model: txt }))
+                                                setCustomModelText('')
+                                                setStep(4)
+                                            }}
+                                            disabled={!customModelText.trim()}
+                                            style={{ padding: '8px 14px', borderRadius: 8, background: '#2563eb', color: '#fff', border: 'none' }}
+                                        >
+                                            Continue
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setCustomModelText('')
+                                            }}
+                                            style={{ padding: '8px 14px', borderRadius: 8, background: '#fff', border: '1px solid #e5e7eb' }}
+                                        >
+                                            Clear
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* custom model input panel when user clicks Other on a predefined model list */}
+                        {showModelInput && (
+                            <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 12 }}>
+                                <div style={{ width: '100%', maxWidth: 720, textAlign: 'center', padding: 16, borderRadius: 10, background: '#fff', boxShadow: '0 6px 18px rgba(16,24,40,0.05)' }}>
+                                    <h4 style={{ margin: 0 }}>Model not listed?</h4>
+                                    <input
+                                        type="text"
+                                        value={customModelText}
+                                        onChange={(e) => setCustomModelText(e.target.value)}
+                                        placeholder="Enter model name"
+                                        style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #e6e9ee', marginTop: 8 }}
+                                    />
+                                    <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 12 }}>
+                                        <button
+                                            onClick={() => {
+                                                const txt = customModelText.trim()
+                                                if (!txt) return
+                                                setSelections(prev => ({ ...prev, model: txt }))
+                                                setShowModelInput(false)
+                                                setCustomModelText('')
+                                                setStep(4)
+                                            }}
+                                            disabled={!customModelText.trim()}
+                                            style={{ padding: '8px 14px', borderRadius: 8, background: '#2563eb', color: '#fff', border: 'none' }}
+                                        >
+                                            Continue
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setShowModelInput(false)
+                                                setCustomModelText('')
+                                            }}
+                                            style={{ padding: '8px 14px', borderRadius: 8, background: '#fff', border: '1px solid #e5e7eb' }}
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )}
 
@@ -450,6 +630,125 @@ const RepairWizard = () => {
                                 <span className="option-label">{issue}</span>
                             </button>
                         ))}
+
+                        {/* Issue Other button to focus the center textarea */}
+                        <button
+                            className="wizard-option text-option"
+                            onClick={() => {
+                                setSelectedIssue('other')
+                                // ensure the center textarea is visible (it already is) — keep cursor logic minimal
+                                const el = document.querySelector('.other-issue-input')
+                                if (el) el.focus()
+                            }}
+                        >
+                            <span className="option-label">Other</span>
+                        </button>
+
+                        <div
+                            className="issue-selection"
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: 16,
+                                padding: 24,
+                                width: '100%'
+                            }}
+                        >
+                            <div
+                                style={{
+                                    width: '100%',
+                                    maxWidth: 720,
+                                    /* use theme variables with sensible fallbacks so the card matches the app theme */
+                                    background: 'var(--card-bg, #f8fafc)',
+                                    borderRadius: 12,
+                                    padding: 20,
+                                    boxShadow: '0 8px 24px rgba(2,6,23,0.06)',
+                                    textAlign: 'center',
+                                    margin: '0 auto'
+                                }}
+                            >
+                                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#0f172a' }}>
+                                    Issue not listed?
+                                </h3>
+                                <p style={{ margin: '8px 0 14px', color: '#6b7280' }}>
+                                    Share a short description:
+                                </p>
+
+                                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <textarea
+                                        className="other-issue-input"
+                                        placeholder="Briefly describe the issue..."
+                                        value={otherIssueText}
+                                        onChange={(e) => setOtherIssueText(e.target.value)}
+                                        rows={4}
+                                        style={{
+                                            width: '100%',
+                                            maxWidth: 640,
+                                            minHeight: 96,
+                                            padding: 12,
+                                            borderRadius: 10,
+                                            /* subtle themed input background (not pure white) */
+                                            background: 'var(--input-bg, #eef2f7)',
+                                            border: '1px solid var(--input-border, #dbe7f5)',
+                                            boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.02)',
+                                            resize: 'vertical',
+                                            fontSize: 14,
+                                            color: 'var(--text-color, #0f172a)'
+                                        }}
+                                    />
+                                </div>
+
+                                <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginTop: 16 }}>
+                                    <button
+                                        type="button"
+                                        onClick={async () => {
+                                            const trimmed = otherIssueText.trim()
+                                            if (!trimmed) return
+                                            const updated = { ...selections, issue: trimmed }
+                                            setSelections(updated)
+                                            setSelectedIssue('other')
+                                            await sendEstimateEmail({
+                                                selections: updated,
+                                                source: 'repair-wizard',
+                                                timestamp: new Date().toISOString()
+                                            })
+                                            setStep((s) => s + 1)
+                                        }}
+                                        disabled={!otherIssueText.trim()}
+                                        style={{
+                                            backgroundColor: otherIssueText.trim() ? 'var(--primary, #2563eb)' : 'var(--primary-weak, #93c5fd)',
+                                            color: 'var(--primary-contrast, #fff)',
+                                            border: 'none',
+                                            padding: '10px 18px',
+                                            borderRadius: 8,
+                                            cursor: otherIssueText.trim() ? 'pointer' : 'not-allowed',
+                                            fontWeight: 700,
+                                            opacity: sendingEmail ? 0.9 : 1
+                                        }}
+                                    >
+                                        {sendingEmail ? 'Sending...' : 'Continue'}
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        onClick={() => setOtherIssueText('')}
+                                        style={{
+                                            backgroundColor: 'var(--muted-bg, transparent)',
+                                            color: 'var(--muted-text, #374151)',
+                                            border: '1px solid var(--muted-border, #e5e7eb)',
+                                            padding: '10px 14px',
+                                            borderRadius: 8,
+                                            cursor: 'pointer',
+                                            fontWeight: 600
+                                        }}
+                                    >
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )}
 

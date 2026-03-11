@@ -1,7 +1,7 @@
 import PageLayout from '../components/PageLayout/PageLayout'
 import ServiceHero from '../components/ServiceHero/ServiceHero'
 import RepairWizard from '../components/RepairWizard/RepairWizard'
-import { Smartphone, Tablet, Laptop, Gamepad2, Watch, Package, Clock, Award, Wrench, DollarSign, ShieldCheck, Stethoscope } from 'lucide-react'
+import { Smartphone, Tablet, Laptop, Gamepad2, Clock, Award, Wrench, DollarSign, ShieldCheck, Stethoscope } from 'lucide-react'
 import './ServicePage.css'
 import './RepairPricing.css'
 
@@ -11,8 +11,6 @@ const RepairPricing = () => {
         { icon: <Tablet size={24} />, label: 'Tablets', desc: 'iPad, Galaxy Tab, Surface' },
         { icon: <Laptop size={24} />, label: 'Computers', desc: 'MacBook, Dell, HP, Lenovo' },
         { icon: <Gamepad2 size={24} />, label: 'Gaming', desc: 'PlayStation, Xbox, Nintendo' },
-        { icon: <Watch size={24} />, label: 'Wearables', desc: 'Apple Watch, Galaxy Watch' },
-        { icon: <Package size={24} />, label: 'Other', desc: 'Drones, Cameras, Speakers' },
     ]
 
     const whyChooseUs = [
