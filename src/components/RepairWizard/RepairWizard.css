@@ -597,3 +597,287 @@
         font-size: 0.7rem;
     }
 }
+
+/* =============================================
+   "OTHER" INPUT BOXES (Brand / Model / Issue)
+   ============================================= */
+
+.wizard-other-box {
+    width: 100%;
+    max-width: 720px;
+    margin: 18px auto 0;
+    padding: 22px 24px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    text-align: center;
+    grid-column: 1 / -1;
+}
+
+.wizard-other-box--full {
+    /* spans all grid columns so the issue "Other" card sits alone on its row */
+    grid-column: 1 / -1;
+}
+
+.wizard-other-title {
+    margin: 0 0 4px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.wizard-other-subtitle {
+    margin: 0 0 14px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.wizard-other-input {
+    width: 100%;
+    max-width: 640px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    margin-top: 4px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 15px;
+    outline: none;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.wizard-other-input::placeholder {
+    color: var(--text-muted);
+}
+
+.wizard-other-input:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.wizard-other-textarea {
+    width: 100%;
+    max-width: 640px;
+    min-height: 96px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 14px;
+    resize: vertical;
+    outline: none;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+}
+
+.wizard-other-textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.wizard-other-textarea:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.wizard-other-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.wizard-other-btn-continue {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: var(--accent-primary);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.wizard-other-btn-continue:hover:not(:disabled) {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+
+.wizard-other-btn-continue:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.wizard-other-btn-cancel {
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.wizard-other-btn-cancel:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* =============================================
+   SECTION 5 – ADDITIONAL MESSAGE & SUBMIT
+   ============================================= */
+
+.wizard-message-section {
+    margin-top: 24px;
+    text-align: center;
+    width: 100%;
+}
+
+.wizard-message-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.wizard-message-section .wizard-other-textarea {
+    display: block;
+    margin: 0 auto;
+}
+
+.btn-submit {
+    padding: 14px 36px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    color: #fff;
+    border: none;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    letter-spacing: 0.4px;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(220, 38, 38, 0.5);
+}
+
+.btn-submit:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* =============================================
+   SUBMIT SUCCESS STATE
+   ============================================= */
+
+.wizard-success {
+    margin-top: 28px;
+    text-align: center;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.wizard-success .success-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    color: #fff;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.35);
+    animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.wizard-success h4 {
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    margin: 0 0 8px;
+}
+
+.wizard-success p {
+    color: var(--text-secondary);
+    margin: 0 0 20px;
+    font-size: 0.95rem;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.4);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* =============================================
+   LIGHT MODE – "Other" boxes
+   ============================================= */
+
+[data-theme="light"] .wizard-other-box {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .wizard-other-input,
+[data-theme="light"] .wizard-other-textarea {
+    background: #f8fafc;
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .wizard-other-btn-cancel {
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+/* =============================================
+   RESPONSIVE – "Other" boxes
+   ============================================= */
+@media (max-width: 480px) {
+    .wizard-other-box {
+        padding: 16px 14px;
+    }
+
+    .wizard-other-input {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .wizard-other-textarea {
+        min-height: 80px;
+        font-size: 13px;
+    }
+
+    .btn-submit {
+        padding: 12px 28px;
+        font-size: 0.95rem;
+    }
+}
