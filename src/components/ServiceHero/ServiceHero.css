@@ -135,3 +135,23 @@
         gap: 40px;
     }
 }
+
+/* Light theme: keep text light when hero has background image */
+[data-theme="light"] .service-hero.has-bg-image .service-hero-title {
+    color: #f8fafc;
+    -webkit-text-fill-color: #f8fafc;
+}
+
+[data-theme="light"] .service-hero.has-bg-image .service-hero-title .gradient-text {
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .service-hero.has-bg-image .service-hero-description {
+    color: #cbd5e1;
+}
+
+[data-theme="light"] .service-hero.has-bg-image .service-hero-tag {
+    color: #38bdf8;
+    background: rgba(0, 217, 255, 0.15);
+    border-color: rgba(0, 217, 255, 0.3);
+}

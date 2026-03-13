@@ -273,6 +273,187 @@
   opacity: 0.7;
 }
 
+/* ═══════════ COMPREHENSIVE LIGHT MODE FIXES ═══════════ */
+
+/* Service hero tag - darker for readability */
+[data-theme="light"] .service-hero-tag {
+  color: #0369a1;
+  background: rgba(14, 165, 233, 0.1);
+  border-color: rgba(14, 165, 233, 0.25);
+}
+
+/* Service hero description */
+[data-theme="light"] .service-hero-description {
+  color: #334155;
+}
+
+/* Section tags (HOW IT WORKS, WHAT WE FIX, WHY US, etc.) */
+[data-theme="light"] .section-tag {
+  color: #0369a1;
+  background: rgba(14, 165, 233, 0.1);
+  border-color: rgba(14, 165, 233, 0.25);
+}
+
+/* Specialty tags (Our Team page) */
+[data-theme="light"] .specialty-tag {
+  color: #0369a1;
+  background: rgba(14, 165, 233, 0.1);
+  border-color: rgba(14, 165, 233, 0.25);
+}
+
+/* Featured role text */
+[data-theme="light"] .featured-role {
+  color: #0369a1;
+}
+
+/* Featured bio text */
+[data-theme="light"] .featured-bio {
+  color: #334155;
+}
+
+/* Team intro text */
+[data-theme="light"] .team-intro p {
+  color: #334155;
+}
+
+/* Team card text */
+[data-theme="light"] .team-card-info h3 {
+  color: #0f172a;
+}
+
+/* Step cards in repair process */
+[data-theme="light"] .step-card {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .step-card:hover {
+  background: rgba(14, 165, 233, 0.05);
+  border-color: rgba(14, 165, 233, 0.2);
+}
+
+[data-theme="light"] .step-content h3 {
+  color: #0f172a;
+}
+
+[data-theme="light"] .step-content p {
+  color: #475569;
+}
+
+[data-theme="light"] .step-bullets li {
+  color: #0369a1;
+}
+
+[data-theme="light"] .step-note {
+  color: #475569;
+  background: rgba(14, 165, 233, 0.06);
+}
+
+/* Top service cards */
+[data-theme="light"] .top-service-card {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .top-service-card:hover {
+  background: rgba(14, 165, 233, 0.05);
+  border-color: rgba(14, 165, 233, 0.2);
+}
+
+[data-theme="light"] .top-service-card h3 {
+  color: #0f172a;
+}
+
+[data-theme="light"] .top-service-card ul li {
+  color: #475569;
+}
+
+[data-theme="light"] .service-highlight {
+  color: #0369a1;
+}
+
+[data-theme="light"] .special-note {
+  color: #475569;
+}
+
+/* Why Choose cards */
+[data-theme="light"] .why-choose-card {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .why-choose-card span {
+  color: #0f172a;
+}
+
+[data-theme="light"] .why-choose-tagline {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .tagline-main {
+  color: #0f172a;
+}
+
+[data-theme="light"] .tagline-sub {
+  color: #0369a1;
+}
+
+/* Repair showcase */
+[data-theme="light"] .repair-title {
+  color: #0f172a;
+}
+
+[data-theme="light"] .repair-subtitle {
+  color: #475569;
+}
+
+/* Page CTA section - make text dark */
+[data-theme="light"] .page-cta .cta-container h2 {
+  color: #0f172a;
+  -webkit-text-fill-color: #0f172a;
+  background: none;
+}
+
+[data-theme="light"] .page-cta .cta-container p {
+  color: #475569;
+}
+
+/* Team values section */
+[data-theme="light"] .team-values {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .team-values .value-item h4 {
+  color: #0f172a;
+}
+
+[data-theme="light"] .team-values .value-item p {
+  color: #475569;
+}
+
+/* Careers page tags */
+[data-theme="light"] .careers-section-tag {
+  color: #0369a1;
+}
+
+/* General paragraphs/descriptions on service pages */
+[data-theme="light"] .service-intro p,
+[data-theme="light"] .service-detail p {
+  color: #334155;
+}
+
+/* Gradient text fix - don't override gradient text fill */
+[data-theme="light"] .gradient-text {
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Fix accent-primary used as text (too light by default) */
+[data-theme="light"] .featured-badge {
+  background: linear-gradient(135deg, #0284c7, #7c3aed);
+}
+
 /* ========================================
    COLOR THEMES - Click logo to change
    ======================================== */

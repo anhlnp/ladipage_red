@@ -12,7 +12,7 @@ const ServiceHero = ({
     backgroundImage,
     variant // 'default' | 'extended' - use 'extended' for long descriptions
 }) => {
-    const heroClass = `service-hero ${variant === 'extended' ? 'service-hero--extended' : ''}`
+    const heroClass = `service-hero ${variant === 'extended' ? 'service-hero--extended' : ''} ${backgroundImage ? 'has-bg-image' : ''}`
 
     return (
         <section className={heroClass}>
