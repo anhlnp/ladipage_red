@@ -5,6 +5,9 @@ import ServiceHero from '../components/ServiceHero/ServiceHero'
 import './ServicePage.css'
 import './OurTeam.css'
 
+import chrisImage from '../assets/employee/Chris.png'
+import djImage from '../assets/employee/DJ .jpg'
+
 const OurTeam = () => {
     const teamMembers = [
         {
@@ -18,47 +21,14 @@ const OurTeam = () => {
         },
         {
             id: 2,
-            name: 'Team Member',
-            role: 'Senior Security Analyst',
-            image: null,
-            bio: 'Experienced security professional specializing in threat detection and incident response.',
-            specialties: ['Penetration Testing', 'SIEM', 'Threat Analysis'],
+            name: 'Chris',
+            image: chrisImage,
             featured: false
         },
         {
             id: 3,
-            name: 'Team Member',
-            role: 'Network Engineer',
-            image: null,
-            bio: 'Network infrastructure specialist with expertise in enterprise networking solutions.',
-            specialties: ['Network Design', 'Firewall', 'VPN'],
-            featured: false
-        },
-        {
-            id: 4,
-            name: 'Team Member',
-            role: 'IT Support Specialist',
-            image: null,
-            bio: 'Dedicated support professional committed to resolving technical issues quickly and efficiently.',
-            specialties: ['Help Desk', 'Windows', 'Mac OS'],
-            featured: false
-        },
-        {
-            id: 5,
-            name: 'Team Member',
-            role: 'Compliance Specialist',
-            image: null,
-            bio: 'Expert in regulatory compliance including HIPAA, PCI-DSS, and FTC Safeguards.',
-            specialties: ['HIPAA', 'PCI-DSS', 'FTC Compliance'],
-            featured: false
-        },
-        {
-            id: 6,
-            name: 'Team Member',
-            role: 'Systems Administrator',
-            image: null,
-            bio: 'Skilled in managing and maintaining critical IT infrastructure.',
-            specialties: ['Server Admin', 'Cloud', 'Backup'],
+            name: 'DJ',
+            image: djImage,
             featured: false
         },
     ]
@@ -129,13 +99,6 @@ const OurTeam = () => {
                                 </div>
                                 <div className="team-card-info">
                                     <h3>{member.name}</h3>
-                                    <p className="team-card-role">{member.role}</p>
-                                    <p className="team-card-bio">{member.bio}</p>
-                                    <div className="team-card-specialties">
-                                        {member.specialties.map((spec, idx) => (
-                                            <span key={idx} className="specialty-tag small">{spec}</span>
-                                        ))}
-                                    </div>
                                 </div>
                             </div>
                         ))}
@@ -182,3 +145,4 @@ const OurTeam = () => {
 }
 
 export default OurTeam
+

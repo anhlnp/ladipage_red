@@ -9,12 +9,19 @@ const ServiceHero = ({
     ctaText,
     onCtaClick,
     children,
+    backgroundImage,
     variant // 'default' | 'extended' - use 'extended' for long descriptions
 }) => {
     const heroClass = `service-hero ${variant === 'extended' ? 'service-hero--extended' : ''}`
 
     return (
         <section className={heroClass}>
+            {backgroundImage && (
+                <div className="service-hero-bg">
+                    <img src={backgroundImage} alt="" />
+                    <div className="service-hero-bg-overlay" />
+                </div>
+            )}
             <div className="service-hero-container">
                 <div className="service-hero-content">
                     {tag && <span className="service-hero-tag">{tag}</span>}

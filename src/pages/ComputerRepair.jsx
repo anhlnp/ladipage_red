@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import storeImage from '../assets/employee/Computer-repair.png'
 import {
     Search,
     HardDrive,
@@ -149,6 +150,7 @@ const ComputerRepair = () => {
                 title="PC, Mac & Mobile"
                 gradientText="Repair Services"
                 description="Fast. Professional. Transparent. We repair hundreds of PCs, Macs, and mobile devices each year with a process designed to be simple, clear, and fair."
+                backgroundImage={storeImage}
             />
 
             {/* ═══════════ 5-STEP REPAIR PROCESS ═══════════ */}
@@ -254,7 +256,7 @@ const ComputerRepair = () => {
                     >
                         <div className="image-glow"></div>
                         <img
-                            src="/unsplash-image-sMKUYIasyDM.webp"
+                            src={storeImage}
                             alt="Computer repair workspace"
                         />
                         <div className="image-overlay">
