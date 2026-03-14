@@ -3763,5 +3763,7 @@ a {
     justify-self: end;
     white-space: nowrap;
     /* Prevent button text from wrapping */
+    min-width: max-content;
+    flex-shrink: 0;
   }
 }
