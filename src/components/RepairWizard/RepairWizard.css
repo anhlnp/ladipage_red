@@ -881,3 +881,232 @@
         font-size: 0.95rem;
     }
 }
+
+/* =============================================
+   CONTACT FORM IN WIZARD (Step 5)
+   ============================================= */
+
+.wizard-contact-form {
+    width: 100%;
+    margin-bottom: 24px;
+    padding: 24px;
+    border-radius: 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.wizard-contact-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #dc2626, #f97316, #dc2626);
+    background-size: 200% 100%;
+    animation: gradientShift 3s ease infinite;
+}
+
+/* Inline contact fields inside "Other" boxes at any step */
+.wizard-contact-inline {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.wizard-contact-inline .wizard-contact-title {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.wizard-contact-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 4px;
+}
+
+.wizard-contact-title svg {
+    color: var(--accent-primary);
+    flex-shrink: 0;
+}
+
+.wizard-contact-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0 0 20px;
+}
+
+.wizard-contact-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.wizard-contact-fields .wizard-field-group:last-child {
+    grid-column: 1 / -1;
+}
+
+.wizard-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+}
+
+.wizard-field-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.wizard-optional {
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.wizard-field-input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    font-family: inherit;
+}
+
+.wizard-field-input::placeholder {
+    color: var(--text-muted);
+}
+
+.wizard-field-input:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    background: var(--bg-secondary);
+}
+
+.wizard-field-input.wizard-field-error {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.wizard-error-text {
+    font-size: 0.8rem;
+    color: #dc2626;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.wizard-error-text::before {
+    content: '⚠';
+    font-size: 0.75rem;
+}
+
+/* Button spinner */
+.btn-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+}
+
+.btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-submit svg {
+    flex-shrink: 0;
+}
+
+.btn-secondary {
+    padding: 14px 28px;
+    border-radius: 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border-color: var(--accent-primary);
+}
+
+/* =============================================
+   LIGHT MODE – Contact form
+   ============================================= */
+
+[data-theme="light"] .wizard-contact-form {
+    background: rgba(248, 250, 252, 0.9);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .wizard-field-input {
+    background: #fff;
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .wizard-field-input:focus {
+    background: #fff;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+[data-theme="light"] .btn-secondary {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* =============================================
+   RESPONSIVE – Contact form
+   ============================================= */
+@media (max-width: 768px) {
+    .wizard-contact-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .wizard-contact-form {
+        padding: 20px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wizard-contact-form {
+        padding: 16px 14px;
+    }
+
+    .wizard-contact-title {
+        font-size: 1rem;
+    }
+
+    .wizard-field-input {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+    }
+}

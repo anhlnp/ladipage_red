@@ -1,5 +1,4 @@
 import { useRef, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import PageLayout from '../components/PageLayout/PageLayout'
 import {
     ArrowRight,
@@ -44,7 +43,7 @@ const SoftwareDevelopment = () => {
             category: "EdTech Platform",
             description: "A comprehensive learning management system with role-based access for instructors and students, featuring automated content generation.",
             tags: ["Next.js", "AI Integration", "Multi-role"],
-            imageColor: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)" // Placeholder gradient
+            image: "/project/Academix.png"
         },
         {
             id: 'ecofit',
@@ -52,7 +51,23 @@ const SoftwareDevelopment = () => {
             category: "E-commerce SaaS",
             description: "Full-scale e-commerce solution with integrated inventory management and seamless payment processing via Stripe.",
             tags: ["React Native", "Stripe", "Real-time"],
-            imageColor: "linear-gradient(135deg, #10b981 0%, #3b82f6 100%)"
+            image: "/project/eco-fit.png"
+        },
+        {
+            id: 'nclake',
+            title: "NC Lake Homes",
+            category: "Real Estate Website",
+            description: "A waterfront property listing platform specializing in lakefront homes and lots in the Blue Ridge Mountain Foothills of North Carolina.",
+            tags: ["Property Listings", "MLS Integration", "Responsive"],
+            image: "/project/Nclake.png"
+        },
+        {
+            id: 'portal-learning',
+            title: "Portal Learning System",
+            category: "Enterprise Training",
+            description: "An employee training and compliance management platform with course assignment, phishing simulations, and real-time progress tracking dashboards.",
+            tags: ["Dashboard", "Compliance", "Analytics"],
+            image: "/project/portal-learning-system.png"
         },
         {
             id: 'enterprise-core',
@@ -60,7 +75,7 @@ const SoftwareDevelopment = () => {
             category: "Internal Tools",
             description: "Legacy-to-Cloud transformation for large scale organizations, moving from WinForms to modern web dashboards.",
             tags: ["Cloud Migration", "Dashboard", "Secure"],
-            imageColor: "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)"
+            image: null
         }
     ]
 
@@ -98,7 +113,7 @@ const SoftwareDevelopment = () => {
                                 <p>
                                     <strong>Select Tech Inc.</strong> has joined forces with <strong>Loopers Lab</strong> to create a powerhouse of digital transformation.
                                     While Select Tech ensures your physical and network infrastructure is rock-solid, Loopers Lab acts as the "SaaS Engine,"
-                                    building the sophisticated software layers that run on top of it. Together, we deliver end-to-end solutions from cell tower to software interface.
+                                    building the sophisticated software layers that run on top of it. Together, we deliver end-to-end solutions from server rack to software interface.
                                 </p>
                             </div>
                         </div>
@@ -116,10 +131,14 @@ const SoftwareDevelopment = () => {
                         <div className="showroom-grid">
                             {products.map((product, index) => (
                                 <div key={index} className="product-card animate-fade-up">
-                                    <div className="product-visual" style={{ background: product.imageColor }}>
-                                        <div className="product-overlay">
-                                            <Code2 size={40} className="product-icon-overlay" />
-                                        </div>
+                                    <div className="product-visual">
+                                        {product.image ? (
+                                            <img src={product.image} alt={product.title} className="product-screenshot" />
+                                        ) : (
+                                            <div className="product-gradient" style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)' }}>
+                                                <Code2 size={40} className="product-icon-overlay" />
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="product-content">
                                         <div className="product-header">
@@ -168,9 +187,9 @@ const SoftwareDevelopment = () => {
                     <div className="cta-container">
                         <h2>Bring Your Vision to Life</h2>
                         <p>Leverage the combined power of Select Tech and Loopers Lab for your next project.</p>
-                        <Link to="/contact" className="btn-primary">
-                            Partner With Us
-                        </Link>
+                        <a href="https://looperslab.com/" target="_blank" rel="noopener noreferrer" className="btn-primary">
+                            Start Your Project
+                        </a>
                     </div>
                 </section>
             </div>
