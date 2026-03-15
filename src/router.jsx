@@ -31,6 +31,7 @@ import Admin from './pages/Admin'
 // Blog pages
 import Blog from './pages/Blog'
 import BlogDetail from './pages/BlogDetail'
+import NotFound from './pages/NotFound'
 
 const RootLayout = () => {
     return (
@@ -156,6 +157,11 @@ export const router = createBrowserRouter([
             {
                 path: '/admin',
                 element: <Admin />,
+            },
+            // Catch-all route for 404 Not Found
+            {
+                path: '*',
+                element: <NotFound />,
             },
         ]
     }
