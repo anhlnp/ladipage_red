@@ -6,7 +6,6 @@ import './ServicePage.css'
 import './OurTeam.css'
 
 import chrisImage from '../assets/employee/Chris.png'
-import djImage from '../assets/employee/DJ .jpg'
 
 const OurTeam = () => {
     const teamMembers = [
@@ -21,14 +20,40 @@ const OurTeam = () => {
         },
         {
             id: 2,
+            name: 'Michael Wayne',
+            role: 'CEH - Dir of Cybersecurity',
+            image: '/Michael Wayne - CEH-Dir of Cybersecurity.png',
+            featured: false
+        },
+        {
+            id: 3,
             name: 'Chris',
             image: chrisImage,
             featured: false
         },
         {
-            id: 3,
-            name: 'DJ',
-            image: djImage,
+            id: 4,
+            name: 'Ryan',
+            role: 'OpSec Master',
+            image: '/Ryan - OpSec Master.png',
+            featured: false
+        },
+        {
+            id: 5,
+            name: 'Marie',
+            image: '/Marie.jpg',
+            featured: false
+        },
+        {
+            id: 6,
+            name: 'Alan',
+            image: '/Alan.jpg',
+            featured: false
+        },
+        {
+            id: 7,
+            name: 'Ringo',
+            image: '/Ringo.png',
             featured: false
         },
     ]
@@ -99,6 +124,7 @@ const OurTeam = () => {
                                 </div>
                                 <div className="team-card-info">
                                     <h3>{member.name}</h3>
+                                    {member.role && <p className="team-card-role">{member.role}</p>}
                                 </div>
                             </div>
                         ))}
