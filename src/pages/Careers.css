@@ -124,8 +124,8 @@
 }
 
 .careers-hero-btn--primary:hover {
-    transform: translateY(-3px);
     box-shadow: 0 8px 32px rgba(56, 189, 248, 0.5);
+    opacity: 0.92;
 }
 
 .careers-hero-btn--secondary {
@@ -137,7 +137,6 @@
 
 .careers-hero-btn--secondary:hover {
     background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-3px);
     border-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -714,19 +713,22 @@
     text-decoration: none;
     transition: all 0.3s ease;
     flex-shrink: 0;
+    position: relative;
+    z-index: 50;
 }
 
 .careers-ai-cta:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5);
+    opacity: 0.9;
 }
 
 .careers-ai-cta svg {
     transition: transform 0.3s ease;
+    pointer-events: none;
 }
 
 .careers-ai-cta:hover svg {
-    transform: translateX(4px);
+    opacity: 0.7;
 }
 
 /* ---- Open Positions ---- */
@@ -771,7 +773,6 @@
     background: rgba(255, 255, 255, 0.07);
     border-color: rgba(56, 189, 248, 0.15);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    transform: translateX(4px);
 }
 
 .careers-position-card:hover::before {
@@ -881,19 +882,23 @@
     text-decoration: none;
     transition: all 0.3s ease;
     white-space: nowrap;
+    position: relative;
+    z-index: 50;
 }
 
 .position-apply-btn:hover {
     background: rgba(56, 189, 248, 0.1);
-    border-color: rgba(56, 189, 248, 0.4);
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);
 }
 
 .position-apply-btn:hover svg {
-    transform: translateX(3px);
+    opacity: 0.7;
 }
 
 .position-apply-btn svg {
     transition: transform 0.3s ease;
+    pointer-events: none;
 }
 
 /* ---- Apply CTA Section ---- */

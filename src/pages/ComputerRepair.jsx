@@ -135,7 +135,7 @@ const ComputerRepair = () => {
     ]
 
     const whyChoose = [
-        { icon: <Wrench size={20} />, text: 'Repairing 800+ devices per year' },
+        { icon: <Wrench size={20} />, text: 'Repairing 1000+ devices per year' },
         { icon: <Users size={20} />, text: 'Experienced technicians & cybersecurity experts' },
         { icon: <DollarSign size={20} />, text: 'Honest, upfront pricing' },
         { icon: <Clock size={20} />, text: 'Fast turnaround times' },

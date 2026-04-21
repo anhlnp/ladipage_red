@@ -251,8 +251,8 @@ const Navbar = () => {
             <div ref={navInnerRef} className="nav-inner">
                 <div className="nav-container">
                     <Link to="/" className={`nav-logo icon-bounce theme-trigger color-theme-${colorTheme}`} onClick={handleLogoClick}>
-                        <span className="logo-icon">◆</span>
-                        SELECT<span className="accent">TECH</span>
+                        <img src="/Select Tech inc.svg" alt="Select Tech" className="logo-svg" />
+                        SELECT<span className="accent">TECH</span> <span className="logo-inc">Inc.</span>
                     </Link>
 
                     <div className="nav-links">

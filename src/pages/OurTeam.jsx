@@ -5,7 +5,6 @@ import ServiceHero from '../components/ServiceHero/ServiceHero'
 import './ServicePage.css'
 import './OurTeam.css'
 
-import chrisImage from '../assets/employee/Chris.png'
 
 const OurTeam = () => {
     const teamMembers = [
@@ -22,32 +21,32 @@ const OurTeam = () => {
             id: 2,
             name: 'Michael Wayne',
             role: 'CEH - Dir of Cybersecurity',
-            image: '/Michael Wayne - CEH-Dir of Cybersecurity.png',
+            image: '/Michael Wayne - CEH-Dir of Cybersecurity (1).png',
             featured: false
         },
         {
             id: 3,
             name: 'Chris',
-            image: chrisImage,
+            image: '/Chris.png',
             featured: false
         },
         {
             id: 4,
             name: 'Ryan',
             role: 'OpSec Master',
-            image: '/Ryan - OpSec Master.png',
+            image: '/Ryan - OpSec Master (1).png',
             featured: false
         },
         {
             id: 5,
             name: 'Marie',
-            image: '/Marie.jpg',
+            image: '/Marie.png',
             featured: false
         },
         {
             id: 6,
             name: 'Alan',
-            image: '/Alan.jpg',
+            image: '/Alan.png',
             featured: false
         },
         {

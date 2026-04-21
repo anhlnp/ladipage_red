@@ -169,10 +169,10 @@ const Careers = () => {
                         community that truly makes a difference – welcome to Select Tech.
                     </p>
                     <div className="careers-hero-actions">
-                        <Link to="/contact" className="careers-hero-btn careers-hero-btn--primary">
+                        <a href="#positions" className="careers-hero-btn careers-hero-btn--primary">
                             <Briefcase size={18} />
                             View Open Positions
-                        </Link>
+                        </a>
                         <Link to="/about" className="careers-hero-btn careers-hero-btn--secondary">
                             Learn About Our Values
                             <ChevronRight size={18} />
@@ -325,7 +325,7 @@ const Careers = () => {
                                 <strong> we're actively looking for talent like you.</strong>
                             </p>
                         </div>
-                        <Link to="/contact" className="careers-ai-cta">
+                        <Link to="/contact?service=careers" className="careers-ai-cta">
                             Apply for AI Roles
                             <ChevronRight size={20} />
                         </Link>
@@ -334,7 +334,7 @@ const Careers = () => {
             </section>
 
             {/* Open Positions */}
-            <section className="careers-positions">
+            <section id="positions" className="careers-positions">
                 <div className="careers-positions-container">
                     <div className="careers-section-header">
                         <span className="careers-section-tag">OPPORTUNITIES</span>
@@ -371,7 +371,7 @@ const Careers = () => {
                                                 <span key={tidx} className="position-tag">{tag}</span>
                                             ))}
                                         </div>
-                                        <Link to="/contact" className="position-apply-btn">
+                                        <Link to="/contact?service=careers" className="position-apply-btn">
                                             Apply Now
                                             <ChevronRight size={16} />
                                         </Link>
@@ -395,7 +395,7 @@ const Careers = () => {
                                 We're always looking for highly motivated individuals with unique skills and perspectives.
                             </p>
                             <div className="careers-apply-actions">
-                                <Link to="/contact" className="careers-hero-btn careers-hero-btn--primary">
+                                <Link to="/contact?service=careers" className="careers-hero-btn careers-hero-btn--primary">
                                     <Briefcase size={18} />
                                     Get in Touch
                                 </Link>
