@@ -890,10 +890,20 @@ a {
 }
 
 .nav-logo .logo-svg {
-  height: 40px;
-  width: auto;
-  object-fit: contain;
+  height: 44px;
+  width: 44px;
+  object-fit: cover;
   display: block;
+  border-radius: 50%;
+  border: 2.5px solid var(--accent-primary);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.35), 0 0 4px rgba(56, 189, 248, 0.15);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.nav-logo:hover .logo-svg {
+  box-shadow: 0 0 28px rgba(56, 189, 248, 0.55), 0 0 8px rgba(56, 189, 248, 0.3);
+  transform: scale(1.1);
 }
 
 .logo-icon {
@@ -2766,9 +2776,13 @@ a {
 
 .footer-logo .logo-svg {
   height: 64px;
-  width: auto;
-  object-fit: contain;
+  width: 64px;
+  object-fit: cover;
   display: block;
+  border-radius: 50%;
+  border: 2.5px solid var(--accent-primary);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.3), 0 0 5px rgba(56, 189, 248, 0.15);
+  flex-shrink: 0;
 }
 
 .footer-brand p {
