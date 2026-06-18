@@ -128,13 +128,6 @@ const Careers = () => {
             description: "Monitor, analyze, and respond to security incidents across our client environments."
         },
         {
-            title: "Penetration Tester",
-            type: "Full-time",
-            location: "Hickory, NC / Remote",
-            tags: ["Ethical Hacking", "OSCP", "Security"],
-            description: "Identify vulnerabilities in client systems through authorized penetration testing."
-        },
-        {
             title: "IT Support Technician",
             type: "Full-time",
             location: "Hickory, NC",
