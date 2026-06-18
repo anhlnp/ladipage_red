@@ -11,7 +11,7 @@ const Contact = () => {
         name: '',
         email: '',
         phone: '',
-        service: '',
+        service: new URLSearchParams(window.location.search).get('service') || '',
         message: ''
     })
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -77,6 +77,7 @@ const Contact = () => {
             'managed-it': 'Managed IT Services',
             'repair': 'Mobile Repair',
             'infrastructure': 'Infrastructure',
+            'careers': 'Careers / Job Application',
             'other': 'Other'
         }[formData.service] || formData.service || 'General Inquiry'
 
@@ -334,6 +335,7 @@ const Contact = () => {
                                     <option value="managed-it">Managed IT Services</option>
                                     <option value="repair">Mobile Repair</option>
                                     <option value="infrastructure">Infrastructure</option>
+                                    <option value="careers">Careers / Job Application</option>
                                     <option value="other">Other</option>
                                 </select>
                                 <label htmlFor="service">Service Needed</label>

@@ -14,15 +14,19 @@ const Loader = ({ progress }) => {
         >
             <div className="loader-content">
                 <div className="loader-logo">
-                    <span
-                        className="logo-text"
-                        style={{
-                            fontSize: '2.8rem',
-                            color: isDark ? '#f8fafc' : '#0f172a'
-                        }}
-                    >
-                        SELECT<span className="accent">TECH</span>
-                    </span>
+                    <img
+                        src="/Select Tech inc.svg"
+                        alt="Select Tech"
+                        style={{ height: '60px', width: 'auto', marginBottom: '12px' }}
+                    />
+                    <div>
+                        <span
+                            className="logo-text"
+                            style={{ fontSize: '2.8rem', color: isDark ? '#f8fafc' : '#0f172a' }}
+                        >
+                            SELECT<span className="accent">TECH</span> <span style={{ fontSize: '1.4rem', opacity: 0.7 }}>Inc.</span>
+                        </span>
+                    </div>
                 </div>
                 <div className="loader-bar" style={{
                     width: '240px',

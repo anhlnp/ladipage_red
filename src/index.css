@@ -889,10 +889,36 @@ a {
   cursor: pointer;
 }
 
+.nav-logo .logo-svg {
+  height: 44px;
+  width: 44px;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+  border: 2.5px solid var(--accent-primary);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.35), 0 0 4px rgba(56, 189, 248, 0.15);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.nav-logo:hover .logo-svg {
+  box-shadow: 0 0 28px rgba(56, 189, 248, 0.55), 0 0 8px rgba(56, 189, 248, 0.3);
+  transform: scale(1.1);
+}
+
 .logo-icon {
   color: var(--accent-primary);
   animation: pulse 2s infinite;
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
+}
+
+.logo-inc {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  align-self: flex-end;
+  margin-bottom: 3px;
 }
 
 /* Theme trigger logo animation */
@@ -2746,6 +2772,17 @@ a {
   gap: 10px;
   margin-bottom: 20px;
   cursor: pointer;
+}
+
+.footer-logo .logo-svg {
+  height: 64px;
+  width: 64px;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+  border: 2.5px solid var(--accent-primary);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.3), 0 0 5px rgba(56, 189, 248, 0.15);
+  flex-shrink: 0;
 }
 
 .footer-brand p {

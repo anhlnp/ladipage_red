@@ -71,7 +71,7 @@ const About = () => {
                         <h3>Comprehensive IT Services</h3>
                         <p>
                             On-site services range from enterprise IT support for our small and medium businesses, non-profit, local, and residential to federal government clients.
-                            We are experts at implementing Microsoft 2008-2012 active directory roll outs, disaster and recovery, firewall and security configuration & updates, and businesses continuity management.
+                            We are experts at implementing Microsoft 2008-2015 active directory roll outs, disaster and recovery, firewall and security configuration & updates, and businesses continuity management.
                         </p>
                         <p style={{ marginTop: '15px' }}>
                             Additionally, we provide IT support to the Veterans Administration's Visual Impairment Services Team (VIST).

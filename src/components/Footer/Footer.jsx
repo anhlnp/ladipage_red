@@ -11,8 +11,8 @@ const Footer = () => {
                 <div className="footer-main">
                     <div className="footer-brand">
                         <div className="footer-logo" onClick={scrollToTop}>
-                            <span className="logo-icon">◆</span>
-                            SELECT<span className="accent">TECH</span>
+                            <img src="/Select Tech inc.svg" alt="Select Tech" className="logo-svg" />
+                            SELECT<span className="accent">TECH</span> <span className="logo-inc">Inc.</span>
                         </div>
                         <p>
                             Award-winning IT solutions and cybersecurity services. Protecting businesses in Hickory, NC and beyond for 23+ years.

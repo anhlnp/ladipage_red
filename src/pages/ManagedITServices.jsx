@@ -91,65 +91,90 @@ const ManagedITServices = () => {
         {
             level: 'Office Protect',
             badge: 'ESSENTIALS',
+            badgeGradient: 'linear-gradient(135deg, #67e8f9, #a78bfa)',
             subtitle: 'Basic Protection for Small Offices',
             features: [
-                { name: '24/7 Monitoring & Alerts', included: true },
-                { name: 'Patch Management', included: true },
-                { name: 'EDR / Huntress: Basic', included: true },
-                { name: 'Asset Monitoring', included: true },
-                { name: 'Support: 2 hrs Remote/Month', included: true },
-                { name: 'Emergency Incident Response', included: true },
+                '24/7 Monitoring & Alerts',
+                'Patch Management',
+                'EDR / Huntress: Basic',
+                'Asset Monitoring',
+                'Support: 2 hrs Remote/Month',
+                'Emergency Incident Response',
             ],
-            tiers: [
-                { price: '$399', period: '/mo', workstations: 5, note: 'Workstations' },
-            ]
+            twoColumns: false,
+            pricing: {
+                label: 'Starting At',
+                price: '$79',
+                unit: '/ user / mo',
+            },
+            pricingNote: {
+                icon: 'plus',
+                text: 'Pay only for the endpoints\nyou actually need.',
+            },
+            isPopular: false,
         },
         {
             level: 'Managed IT & Cybersecurity',
             badge: 'MOST POPULAR',
+            badgeGradient: 'linear-gradient(135deg, #22d3ee, #fb923c)',
             subtitle: 'Comprehensive Managed IT & Security',
             features: [
-                { name: '24/7 Monitoring & Alerts', included: true },
-                { name: 'Patch Management', included: true },
-                { name: 'EDR / Huntress: MDR', included: true },
-                { name: 'DNS Filtering', included: true },
-                { name: 'Firewall & Network Security', included: true },
-                { name: 'Microsoft 365 Security: Defender P1', included: true },
-                { name: 'Server & Workstation Cloud Backup', included: true },
-                { name: 'SOC / Threat Hunting', included: true },
-                { name: 'Cybersecurity Training', included: true },
-                { name: 'Support: 1.5 hrs On-site & Remote/Month', included: true },
-                { name: 'Priority Incident Response', included: true },
-                { name: 'Dedicated Account Manager', included: true },
+                '24/7 Monitoring & Alerts',
+                'Server & Workstation Cloud Backup',
+                'Patch Management',
+                'SOC / Threat Hunting',
+                'EDR / Huntress: MDR',
+                'Cybersecurity Training',
+                'DNS Filtering',
+                'Support: 1.5 hrs On-site & Remote',
+                'Firewall & Network Security',
+                'Priority Incident Response',
+                'Microsoft 365 Security: Defender P1',
+                'Dedicated Account Manager',
             ],
-            tiers: [
-                { price: '$499', period: '/mo', workstations: 5, note: 'Workstations (New Customer Special)' },
-                { price: '$699', period: '/mo', workstations: 5, note: 'Standard Pricing' },
-            ]
+            twoColumns: true,
+            pricing: {
+                label: 'Dynamic Range',
+                price: '$100',
+                priceTo: '$140',
+                unit: '/ user / mo',
+            },
+            pricingNote: {
+                icon: 'scale',
+                text: 'Scales dynamically based\non your security stack.',
+            },
+            isPopular: true,
         },
         {
             level: 'Gold MSSP Elite',
             badge: 'GOLD LEVEL',
+            badgeGradient: 'linear-gradient(135deg, #67e8f9, #3b82f6)',
             subtitle: 'Enterprise-Grade Security & Compliance',
             features: [
-                { name: '24/7 Monitoring & Alerts', included: true },
-                { name: 'Patch Management', included: true },
-                { name: 'EDR / Huntress: ITDR', included: true },
-                { name: 'DNS Filtering', included: true },
-                { name: 'Advanced Firewall & Network Security', included: true },
-                { name: 'Microsoft 365 Security: Defender P2 + DLP', included: true },
-                { name: 'Backup & Recovery: Server Cloud Backup', included: true },
-                { name: 'Asset Monitoring', included: true },
-                { name: 'AI-Driven Cybersecurity Training', included: true },
-                { name: 'Unlimited Remote & On-site Support', included: true },
-                { name: '24/7 Incident Response', included: true },
+                '24/7 Monitoring & Alerts',
+                'Patch Management',
+                'EDR / Huntress: ITDR',
+                'DNS Filtering',
+                'Advanced Firewall & Network Security',
+                'Microsoft 365 Security: Defender P2 + DLP',
+                'Backup & Recovery: Server Cloud Backup',
+                'Asset Monitoring',
+                'AI-Driven Cybersecurity Training',
+                'Unlimited Remote & On-site Support',
+                '24/7 Incident Response',
             ],
-            tiers: [
-                { price: '$749', period: '/mo', workstations: 5, note: 'Workstations' },
-                { price: '$1,299', period: '/mo', workstations: 10, note: 'Workstations' },
-                { price: '$1,799', period: '/mo', workstations: 15, note: 'Workstations' },
-                { price: '$2,199', period: '/mo', workstations: 20, note: 'Workstations (price is less if under 20)' },
-            ]
+            twoColumns: false,
+            pricing: {
+                label: 'Enterprise Pricing',
+                prefix: 'From',
+                price: '$150',
+                unit: '/ user / mo',
+            },
+            pricingNotes: [
+                { icon: 'shield', text: 'Volume discounts applied automatically.' },
+                { icon: 'bolt', text: 'Customized for strict compliance needs.' },
+            ],
+            isPopular: false,
         }
     ]
 
@@ -183,6 +208,22 @@ const ManagedITServices = () => {
         'Veteran-Owned, 20+ Years Experience',
         'Local Support + National-Level Cybersecurity Stack'
     ]
+
+    /* SVG icon helpers for pricing notes */
+    const noteIcons = {
+        plus: (
+            <svg className="pn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" /></svg>
+        ),
+        scale: (
+            <svg className="pn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
+        ),
+        shield: (
+            <svg className="pn-icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+        ),
+        bolt: (
+            <svg className="pn-icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+        ),
+    }
 
     return (
         <PageLayout>
@@ -282,44 +323,85 @@ const ManagedITServices = () => {
                         <h2>Choose Your Protection Plan</h2>
                         <p>Your Trusted Local Cybersecurity & Compliance Experts</p>
                     </div>
+
+                    {/* Micro-Business Banner */}
+                    <div className="micro-banner">
+                        <div className="micro-banner-glow" />
+                        <div className="micro-banner-content">
+                            <div className="micro-banner-labels">
+                                <span className="micro-badge">Solo & Micro Teams</span>
+                                <h3>Have 1 to 4 workstations?</h3>
+                            </div>
+                            <p>Don't let the 5-seat standard packages turn you away. We believe everyone deserves enterprise-grade security. <strong>Get a custom, scaled-down quote</strong> tailored exactly to your smaller footprint.</p>
+                        </div>
+                        <div className="micro-banner-cta">
+                            <Link to="/contact" className="micro-cta-btn">GET A CUSTOM QUOTE</Link>
+                        </div>
+                    </div>
+
+                    {/* Plan Cards */}
                     <div className="dh-plan-cards">
                         {planLevels.map((plan, idx) => (
-                            <div key={idx} className="dh-plan-card">
-                                <span className="dh-plan-badge">{plan.badge}</span>
+                            <div key={idx} className={`dh-plan-card ${plan.isPopular ? 'popular' : ''}`}>
+                                <span className="dh-plan-badge" style={{ background: plan.badgeGradient }}>
+                                    {plan.badge}
+                                </span>
+
+                                {/* Left: Features */}
                                 <div className="dh-plan-features">
                                     <h3>{plan.level}</h3>
                                     <p className="plan-subtitle">{plan.subtitle}</p>
-                                    <ul className="dh-feature-list">
+                                    <ul className={`dh-feature-list ${plan.twoColumns ? 'two-cols' : ''}`}>
                                         {plan.features.map((feature, fidx) => (
                                             <li key={fidx}>
-                                                {feature.included ? (
-                                                    <CheckCircle2 size={20} className="check-icon" />
-                                                ) : (
-                                                    <span className="x-icon">✘</span>
-                                                )}
-                                                <span>{feature.name}</span>
+                                                <CheckCircle2 size={20} className="check-icon" />
+                                                <span>{feature}</span>
                                             </li>
                                         ))}
                                     </ul>
-                                    <Link to="/contact" className="dh-plan-cta">Get In Touch</Link>
+                                    <Link to="/contact" className="dh-plan-cta">GET IN TOUCH</Link>
                                 </div>
-                                <div className="dh-plan-tiers">
-                                    {plan.tiers.map((tier, tidx) => (
-                                        <div key={tidx} className="dh-tier">
-                                            <div className="dh-tier-price">
-                                                {tier.price}<small>{tier.period}</small>
-                                            </div>
-                                            <div className="dh-tier-info">
-                                                <div className="dh-ws-badge">{tier.workstations}</div>
-                                                <span className="dh-ws-label">{tier.note}</span>
-                                            </div>
+
+                                {/* Right: Pricing */}
+                                <div className="dh-plan-pricing">
+                                    <div className="dh-pricing-label">{plan.pricing.label}</div>
+                                    <div className="dh-pricing-amount">
+                                        {plan.pricing.prefix && (
+                                            <span className="dh-pricing-prefix">{plan.pricing.prefix}</span>
+                                        )}
+                                        <span className="dh-price-value">{plan.pricing.price}</span>
+                                        {plan.pricing.priceTo && (
+                                            <>
+                                                <span className="dh-price-dash">-</span>
+                                                <span className="dh-price-value">{plan.pricing.priceTo}</span>
+                                            </>
+                                        )}
+                                    </div>
+                                    <div className="dh-pricing-unit">{plan.pricing.unit}</div>
+
+                                    {/* Single pricing note */}
+                                    {plan.pricingNote && (
+                                        <div className="dh-pricing-note-box">
+                                            {noteIcons[plan.pricingNote.icon]}
+                                            <span>{plan.pricingNote.text}</span>
                                         </div>
-                                    ))}
+                                    )}
+
+                                    {/* Multiple pricing notes (Gold) */}
+                                    {plan.pricingNotes && (
+                                        <div className="dh-pricing-notes-box">
+                                            {plan.pricingNotes.map((note, nidx) => (
+                                                <div key={nidx} className="dh-pricing-note-item">
+                                                    {noteIcons[note.icon]}
+                                                    <span>{note.text}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <p className="pricing-note">All plans include a 5-workstation minimum. Contact us for custom enterprise pricing.</p>
                 </div>
             </section>
 
