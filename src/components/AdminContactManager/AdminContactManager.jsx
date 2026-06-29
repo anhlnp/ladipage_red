@@ -131,7 +131,7 @@ const AdminContactManager = () => {
             <div className="manager-header">
                 <div className="header-info">
                     <h2>📬 Contact Management</h2>
-                    <p>View and manage customer inquiries from the contact form.</p>
+                    <p>View and manage customer inquiries from the contact form. </p>
                 </div>
                 <button className="refresh-btn" onClick={fetchContacts}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
